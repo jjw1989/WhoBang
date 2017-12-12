@@ -53,6 +53,12 @@ public class RegisterActivity extends BaseActivity {
         fragmentList.add(new GoodsDetailFragment());
         tabStrip.setTabTitles(new String[]{"密码登录", "验证码登录"});
         tabStrip.setViewPage(viewPager,new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList, new String[]{"密码登录", "验证码登录"}));
+        tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
+            @Override
+            public void onTabClick(String title, int position) {
+
+            }
+        });
     }
 
     @Override

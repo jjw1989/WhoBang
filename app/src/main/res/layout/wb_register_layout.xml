@@ -16,18 +16,20 @@
     <com.whombang.app.common.view.EasyIndicator
         android:layout_gravity="center_horizontal"
         android:id="@+id/easy_indicator"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         app:indicator_bottom_height="3dp"
         app:indicator_bottom_line_color="@color/transparent"
         app:indicator_bottom_line_height="1dp"
         app:indicator_height="42dp"
         app:indicator_isBottom_line="true"
         app:indicator_line_color="@color/transparent"
-        app:indicator_normal_color="@color/orange1"
-        app:indicator_select_textSize="14sp"
-        app:indicator_selected_color="@color/grey"
-        app:indicator_textSize="14sp"
+        app:indicator_normal_color="@color/grey"
+        app:indicator_select_textSize="18sp"
+        app:indicator_selected_color="@color/orange1"
+        app:indicator_textSize="18sp"
 
         app:indicator_width="0dp" />
 

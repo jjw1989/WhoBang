@@ -10,9 +10,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.whombang.app.common.base.BaseActivity;
-import com.whombang.app.common.net.BaseSubscriber;
-import com.whombang.app.common.net.ExceptionHandle;
-import com.whombang.app.common.net.RetrofitClient;
+
 import com.whombang.app.mvp.component.DaggerLauncherActivityComponent;
 import com.whombang.app.mvp.module.LauncherActivityModule;
 import com.whombang.app.mvp.presenter.LauncherPresenter;

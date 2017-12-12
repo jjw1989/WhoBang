@@ -9,10 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
-import com.whombang.app.common.net.BaseResponse;
-import com.whombang.app.common.net.BaseSubscriber;
-import com.whombang.app.common.net.ExceptionHandle;
-import com.whombang.app.common.net.RetrofitClient;
+
 import com.whombang.app.entity.UserInfoEntity;
 
 import java.util.HashMap;
@@ -60,20 +57,20 @@ public class LoginActivity extends BaseActivity {
         params.put("userTel","15011112111");
         params.put("userPassword","111111");
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(params));
-        RetrofitClient.getInstance(this)
-                .createBaseApi()
-                .json("userLoginByPassword",body)
-                .subscribe(new BaseSubscriber<BaseResponse>(this) {
-                    @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse baseResponse) {
-                        Log.d("wwww", "onNext: 11111111111111111111111");
-                    }
-                });
+//        RetrofitClient.getInstance(this)
+//                .createBaseApi()
+//                .json("userLoginByPassword",body)
+//                .subscribe(new BaseSubscriber<BaseResponse>(this) {
+//                    @Override
+//                    public void onError(ExceptionHandle.ResponeThrowable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(BaseResponse baseResponse) {
+//                        Log.d("wwww", "onNext: 11111111111111111111111");
+//                    }
+//                });
 
         ARouter.getInstance().build("/main/tab").navigation();
     }
