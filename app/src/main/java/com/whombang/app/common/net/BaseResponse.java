@@ -8,16 +8,16 @@ package com.whombang.app.common.net;
  */
 public class BaseResponse<T> {
 
-    private int code;
+    private int resultCode;
     private String msg;
     private T data;
 
-    public int getCode() {
-        return code;
+    public int getResultCode() {
+        return resultCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
     }
 
     public String getMsg() {
@@ -37,13 +37,13 @@ public class BaseResponse<T> {
     }
 
     public boolean isOk() {
-        return code == 0;
+        return resultCode == 0;
     }
 
     @Override
     public String toString() {
         return "BaseResponse{" +
-                "code=" + code +
+                "code=" + resultCode +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
                 '}';

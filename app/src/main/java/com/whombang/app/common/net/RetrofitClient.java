@@ -38,7 +38,7 @@ public class RetrofitClient {
     private static final int DEFAULT_TIMEOUT = 20;
     private BaseApiService apiService;
     private static OkHttpClient okHttpClient;
-    public static final String Base_URL = "http://47.104.105.135:8080/";
+    public static final String Base_URL = "http://47.104.105.135:8080/WhomBangServer/";
     public static String baseUrl = Base_URL;
     private static Context mContext;
     private static RetrofitClient sNewInstance;
@@ -303,7 +303,7 @@ public class RetrofitClient {
         @Override
         public T apply(@NonNull BaseResponse<T> response) throws Exception {
             if (!response.isOk())
-                throw new RuntimeException(response.getCode() + "" + response.getMsg() != null ? response.getMsg() : "");
+                throw new RuntimeException(response.getResultCode() + "" + response.getMsg() != null ? response.getMsg() : "");
             return response.getData();
         }
     }

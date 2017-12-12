@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -12,4 +13,27 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/logo" />
 
+    <com.whombang.app.common.view.EasyIndicator
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/easy_indicator"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:indicator_bottom_height="3dp"
+        app:indicator_bottom_line_color="@color/transparent"
+        app:indicator_bottom_line_height="1dp"
+        app:indicator_height="42dp"
+        app:indicator_isBottom_line="true"
+        app:indicator_line_color="@color/transparent"
+        app:indicator_normal_color="@color/orange1"
+        app:indicator_select_textSize="14sp"
+        app:indicator_selected_color="@color/grey"
+        app:indicator_textSize="14sp"
+
+        app:indicator_width="0dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
 </LinearLayout>

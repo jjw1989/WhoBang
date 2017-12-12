@@ -51,4 +51,5 @@
         android:textSize="20sp"
         android:visibility="gone"
         tools:visibility="visible" />
+    <include layout="@layout/wb_titlebar_layout"/>
 </RelativeLayout>

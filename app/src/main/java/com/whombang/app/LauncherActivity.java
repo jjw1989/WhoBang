@@ -26,6 +26,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
+import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -62,7 +63,6 @@ public class LauncherActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
 
-
     }
 
     @Override
@@ -77,27 +77,27 @@ public class LauncherActivity extends BaseActivity {
 //            }
 //        });
       //  Log.i("wwww", "sha1: ="+sHA1());
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), "");
-
-        RetrofitClient.getInstance(this)
-                .createBaseApi()
-                .json("WhomBangServer/getFirstPageParam", body)
-                .subscribe(new BaseSubscriber<ResponseBody>(LauncherActivity.this) {
-
-
-                    @Override
-                    public void onError(ExceptionHandle.ResponeThrowable e) {
-                        Log.e("Lyk", e.getMessage());
-                        Toast.makeText(LauncherActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-Log.i("wwww","res="+responseBody);
-                        Toast.makeText(LauncherActivity.this, responseBody.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+//        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), "");
+//
+//        RetrofitClient.getInstance(this)
+//                .createBaseApi()
+//                .json("getFirstPageParam", body)
+//                .subscribe(new BaseSubscriber<ResponseBody>(LauncherActivity.this) {
+//
+//
+//                    @Override
+//                    public void onError(ExceptionHandle.ResponeThrowable e) {
+//                        Log.e("Lyk", e.getMessage());
+//                        Toast.makeText(LauncherActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(ResponseBody responseBody) {
+//Log.i("wwww","res="+responseBody);
+//                        Toast.makeText(LauncherActivity.this, responseBody.toString(), Toast.LENGTH_LONG).show();
+//                    }
+//                });
     }
 
     public String sHA1() {
