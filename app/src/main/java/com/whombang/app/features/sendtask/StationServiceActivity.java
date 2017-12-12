@@ -73,6 +73,13 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             setUpMap();
         }
     }
+
+    private void setUpMap() {
+
+        aMap.getUiSettings().setZoomControlsEnabled(false);
+        aMap.getUiSettings().setTiltGesturesEnabled(false);
+        aMap.getUiSettings().setRotateGesturesEnabled(false);
+    }
     /**
      * 获取定位坐标
      */
@@ -100,12 +107,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
         //启动定位
         mlocationClient.startLocation();
     }
-    private void setUpMap() {
 
-        aMap.getUiSettings().setZoomControlsEnabled(false);
-        aMap.getUiSettings().setTiltGesturesEnabled(false);
-        aMap.getUiSettings().setRotateGesturesEnabled(false);
-    }
 
 
     @Override
@@ -155,7 +157,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                     //首次定位,选择移动到地图中心点并修改级别到15级
                     aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 }
+
         }
     }
-
 }
