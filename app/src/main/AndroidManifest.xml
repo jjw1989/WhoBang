@@ -71,11 +71,17 @@
         <activity android:name=".features.mycenter.activity.UserInformationActivity" />
         <activity android:name=".features.mycenter.activity.AboutActivity" />
         <activity android:name=".features.mycenter.activity.CommonSettingActivity" />
-        <activity android:name=".features.login.LoginActivity" />
-        <activity android:name=".features.login.RegisterActivity" />
+        <activity android:name=".features.login.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity android:name=".features.login.RegisterActivity"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity android:name=".features.sendtask.ServicePhoneActivity" />
         <activity android:name=".features.GuideActivity" />
-        <activity android:name=".features.login.ForgetActivity"></activity>
+        <activity android:name=".features.login.ForgetActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
     </application>
 
 </manifest>

@@ -9,20 +9,14 @@ import javax.inject.Inject;
  */
 
 public class LoginPresenter {
-
     private LoginActivity loginActivity;
+
     @Inject
     public LoginPresenter(LoginActivity loginActivity){
-      this.loginActivity=loginActivity;
+        this.loginActivity=loginActivity;
     }
 
-    /**
-     * 密码登录
-     */
-    public void onPasswordLogin(String account,String passWord){
-
+    public void onPassWordLogin(String account,String passWord){
 
     }
-
-
 }

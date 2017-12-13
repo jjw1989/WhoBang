@@ -12,6 +12,8 @@ import com.whombang.app.adapter.ItemTitlePagerAdapter;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.view.EasyIndicator;
 import com.whombang.app.common.view.NoScrollViewPager;
+import com.whombang.app.features.login.fragment.PassWordLoginFragment;
+import com.whombang.app.features.login.fragment.SMSLoginFragment;
 import com.whombang.app.features.shop.fragment.GoodsCommentFragment;
 import com.whombang.app.features.shop.fragment.GoodsDetailFragment;
 import com.whombang.app.features.shop.fragment.GoodsInfoFragment;
@@ -26,11 +28,7 @@ import butterknife.BindView;
  */
 @Route(path = "/user/register")
 public class RegisterActivity extends BaseActivity {
-    @BindView(R.id.easy_indicator)
-    EasyIndicator tabStrip;
-    @BindView(R.id.vp_content)
-    NoScrollViewPager viewPager;
-    private List<Fragment> fragmentList;
+
     @Override
     public void initData(Bundle bundle) {
 
@@ -49,18 +47,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("注册");
-        fragmentList = new ArrayList<>();
-        fragmentList.add(new GoodsInfoFragment());
-        fragmentList.add(new GoodsDetailFragment());
-        viewPager.setNoScroll(true);
-        tabStrip.setTabTitles(new String[]{"密码登录", "验证码登录"});
-        tabStrip.setViewPage(viewPager,new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList, new String[]{"密码登录", "验证码登录"}));
-        tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
-            @Override
-            public void onTabClick(String title, int position) {
 
-            }
-        });
     }
 
     @Override

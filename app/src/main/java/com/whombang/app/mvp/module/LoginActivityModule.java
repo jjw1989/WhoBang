@@ -16,7 +16,7 @@ public class LoginActivityModule {
     }
 
     @Provides
-    LoginActivity provideTrailActivity(){
+    LoginActivity provideLoginActivity(){
         return loginActivity;
     }
 }

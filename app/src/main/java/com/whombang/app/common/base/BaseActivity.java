@@ -61,7 +61,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
             }
         });
         titleBar.setTitleColor(Color.BLACK);
-        titleBar.setDividerColor(Color.WHITE);
+        titleBar.setDividerColor(getResources().getColor(R.color.bg));
         titleBar.setActionTextColor(Color.WHITE);
     }
 
