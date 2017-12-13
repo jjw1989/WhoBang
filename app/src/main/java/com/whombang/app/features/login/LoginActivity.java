@@ -1,7 +1,6 @@
 package com.whombang.app.features.login;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -9,14 +8,15 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
-
-import com.whombang.app.entity.UserInfoEntity;
+import com.whombang.app.mvp.module.LoginActivityModule;
+import com.whombang.app.mvp.presenter.LoginPresenter;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 import okhttp3.RequestBody;
 
 /**
@@ -24,7 +24,8 @@ import okhttp3.RequestBody;
  */
 @Route(path = "/user/login")
 public class LoginActivity extends BaseActivity {
-
+    @Inject
+    private LoginPresenter presenter;
     @Override
     public void initData(Bundle bundle) {
 
@@ -37,6 +38,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initInjector() {
+
+       // DaggerLoginActivityComponent.builder().launcherActivityModule(new LoginActivityModule(this)).build().inject(this);
 
     }
 

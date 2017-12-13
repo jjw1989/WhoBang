@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.whombang.app.common.base.BaseActivity;
-
 import com.whombang.app.mvp.component.DaggerLauncherActivityComponent;
 import com.whombang.app.mvp.module.LauncherActivityModule;
 import com.whombang.app.mvp.presenter.LauncherPresenter;
@@ -24,13 +21,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
-import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 /**
  * 启动页

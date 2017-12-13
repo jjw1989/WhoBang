@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.view.View;
 import com.githang.statusbar.StatusBarCompat;
 import com.whombang.app.R;
 import com.whombang.app.common.view.TitleBar;
-import com.whombang.app.mvp.component.ApplicationComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

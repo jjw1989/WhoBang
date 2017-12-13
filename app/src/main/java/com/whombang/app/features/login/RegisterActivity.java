@@ -11,6 +11,7 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.ItemTitlePagerAdapter;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.view.EasyIndicator;
+import com.whombang.app.common.view.NoScrollViewPager;
 import com.whombang.app.features.shop.fragment.GoodsCommentFragment;
 import com.whombang.app.features.shop.fragment.GoodsDetailFragment;
 import com.whombang.app.features.shop.fragment.GoodsInfoFragment;
@@ -28,7 +29,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.easy_indicator)
     EasyIndicator tabStrip;
     @BindView(R.id.vp_content)
-    ViewPager viewPager;
+    NoScrollViewPager viewPager;
     private List<Fragment> fragmentList;
     @Override
     public void initData(Bundle bundle) {
@@ -51,6 +52,7 @@ public class RegisterActivity extends BaseActivity {
         fragmentList = new ArrayList<>();
         fragmentList.add(new GoodsInfoFragment());
         fragmentList.add(new GoodsDetailFragment());
+        viewPager.setNoScroll(true);
         tabStrip.setTabTitles(new String[]{"密码登录", "验证码登录"});
         tabStrip.setViewPage(viewPager,new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList, new String[]{"密码登录", "验证码登录"}));
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {

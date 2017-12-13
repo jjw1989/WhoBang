@@ -8,7 +8,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.cache.converter.SerializableDiskConverter;
 import com.whombang.app.common.net.interceptor.CustomSignInterceptor;
-import com.whombang.app.common.net.model.HttpHeaders;
 import com.whombang.app.common.net.utils.HttpLog;
 import com.whombang.app.mvp.component.ApplicationComponent;
 import com.whombang.app.mvp.component.DaggerApplicationComponent;
