@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftK
         fragmentList.add(new PassWordLoginFragment());
         fragmentList.add(new SMSLoginFragment());
         viewPager.setNoScroll(true);
-        tabStrip.setTabTitles(new String[]{getString(R.string.login_password), getString(R.string.login_password)});
+        tabStrip.setTabTitles(new String[]{getString(R.string.login_password), getString(R.string.login_sms)});
         tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
             @Override
