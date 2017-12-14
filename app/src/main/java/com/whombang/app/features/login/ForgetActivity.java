@@ -38,8 +38,9 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
     @BindView(R.id.body)
     View body;
     private float scale = 0.2f; //logo缩放比例
-    private KeyboardWatcher keyboardWatcher;
     private int screenHeight = 0;//屏幕高度
+    private KeyboardWatcher keyboardWatcher;
+
     @Override
     protected int bindLayout() {
         return R.layout.wb_forget_layout;

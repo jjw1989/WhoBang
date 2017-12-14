@@ -2,13 +2,11 @@ package com.whombang.app.features.login;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.adapter.ItemTitlePagerAdapter;
 import com.whombang.app.common.base.BaseActivity;
@@ -23,29 +21,32 @@ import com.whombang.app.mvp.module.LoginActivityModule;
 import com.whombang.app.mvp.presenter.LoginPresenter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import okhttp3.RequestBody;
 
 /**
  * 登陆页面
  */
 @Route(path = "/user/login")
-public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftKeyboardStateListener{
+public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftKeyboardStateListener {
+    @BindView(R.id.img_logo_login)
+    ImageView imgLogo;
     @BindView(R.id.easy_indicator)
     EasyIndicator tabStrip;
     @BindView(R.id.vp_content)
     NoScrollViewPager viewPager;
     private List<Fragment> fragmentList;
+    @BindView(R.id.llt_body)
+    View body;
     @Inject
     LoginPresenter presenter;
     private KeyboardWatcher keyboardWatcher;
+
+    private int screenHeight = 0;//屏幕高度
+
     @Override
     public void initData(Bundle bundle) {
 
@@ -63,13 +64,14 @@ public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftK
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        titleBar.setTitle("登陆");
+        titleBar.setTitle(getString(R.string.login));
+        screenHeight = this.getResources().getDisplayMetrics().heightPixels; //获取屏幕高度
         fragmentList = new ArrayList<>();
         fragmentList.add(new PassWordLoginFragment());
         fragmentList.add(new SMSLoginFragment());
         viewPager.setNoScroll(true);
-        tabStrip.setTabTitles(new String[]{"密码登录", "验证码登录"});
-        tabStrip.setViewPage(viewPager,new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList, new String[]{"密码登录", "验证码登录"}));
+        tabStrip.setTabTitles(new String[]{getString(R.string.login_password), getString(R.string.login_password)});
+        tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
             @Override
             public void onTabClick(String title, int position) {
@@ -89,12 +91,13 @@ public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftK
 
 
     @Override
-    public void onSoftKeyboardOpened(int keyboardHeightInPx) {
-        Log.i("wwww","11111111111111111111");
+    public void onSoftKeyboardOpened(int keyboardSize) {
+        presenter.onSoftKeyboardOpened(keyboardSize, body, imgLogo, screenHeight);
     }
 
     @Override
     public void onSoftKeyboardClosed() {
-        Log.i("wwww","2222222222222222222222222");
+        presenter.onSoftKeyboardClosed(body, imgLogo);
     }
+
 }

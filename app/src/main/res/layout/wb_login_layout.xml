@@ -12,7 +12,7 @@
         layout="@layout/wb_titlebar_layout" />
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/img_logo_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/include2"
@@ -20,33 +20,40 @@
         android:layout_marginTop="10dp"
         android:background="@mipmap/logo" />
 
-    <com.whombang.app.common.view.EasyIndicator
-        android:id="@+id/easy_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
-        app:indicator_bottom_height="3dp"
-        app:indicator_bottom_line_color="@color/transparent"
-        app:indicator_bottom_line_height="1dp"
-        app:indicator_height="42dp"
-        app:indicator_isBottom_line="true"
-        app:indicator_line_color="@color/transparent"
-        app:indicator_normal_color="@color/grey"
-        app:indicator_select_textSize="20sp"
-        app:indicator_selected_color="@color/orange1"
-        app:indicator_textSize="20sp"
-        app:indicator_width="0dp" />
-
-    <com.whombang.app.common.view.NoScrollViewPager
-        android:id="@+id/vp_content"
+    <LinearLayout
+        android:id="@+id/llt_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/easy_indicator" />
+        android:layout_below="@+id/img_logo_login"
+        android:orientation="vertical">
 
+        <com.whombang.app.common.view.EasyIndicator
+            android:id="@+id/easy_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            app:indicator_bottom_height="3dp"
+            app:indicator_bottom_line_color="@color/transparent"
+            app:indicator_bottom_line_height="1dp"
+            app:indicator_height="42dp"
+            app:indicator_isBottom_line="true"
+            app:indicator_line_color="@color/transparent"
+            app:indicator_normal_color="@color/grey"
+            app:indicator_select_textSize="20sp"
+            app:indicator_selected_color="@color/orange1"
+            app:indicator_textSize="20sp"
+            app:indicator_width="0dp" />
+
+        <com.whombang.app.common.view.NoScrollViewPager
+            android:id="@+id/vp_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/easy_indicator" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

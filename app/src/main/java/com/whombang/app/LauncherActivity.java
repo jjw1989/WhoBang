@@ -49,7 +49,6 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void initInjector() {
         DaggerLauncherActivityComponent.builder().launcherActivityModule(new LauncherActivityModule(this)).build().inject(this);
-
     }
 
     @Override
@@ -69,27 +68,6 @@ public class LauncherActivity extends BaseActivity {
 //            }
 //        });
       //  Log.i("wwww", "sha1: ="+sHA1());
-//        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), "");
-//
-//        RetrofitClient.getInstance(this)
-//                .createBaseApi()
-//                .json("getFirstPageParam", body)
-//                .subscribe(new BaseSubscriber<ResponseBody>(LauncherActivity.this) {
-//
-//
-//                    @Override
-//                    public void onError(ExceptionHandle.ResponeThrowable e) {
-//                        Log.e("Lyk", e.getMessage());
-//                        Toast.makeText(LauncherActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(ResponseBody responseBody) {
-//Log.i("wwww","res="+responseBody);
-//                        Toast.makeText(LauncherActivity.this, responseBody.toString(), Toast.LENGTH_LONG).show();
-//                    }
-//                });
     }
 
     public String sHA1() {

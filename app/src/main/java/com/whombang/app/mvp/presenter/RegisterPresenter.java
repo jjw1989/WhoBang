@@ -2,29 +2,28 @@ package com.whombang.app.mvp.presenter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.whombang.app.features.login.LoginActivity;
+import com.whombang.app.features.login.RegisterActivity;
 
 import javax.inject.Inject;
 
 /**
- * Created by sundy.jiang on 2017/12/13.
+ * Created by sundy.jiang on 2017/12/14.
  */
 
-public class LoginPresenter {
-    private LoginActivity loginActivity;
+public class RegisterPresenter {
     private float scale = 0.2f; //logo缩放比例
+    private RegisterActivity registerActivity;
+
     @Inject
-    public LoginPresenter(LoginActivity loginActivity){
-        this.loginActivity=loginActivity;
+    public RegisterPresenter(RegisterActivity registerActivity){
+        this.registerActivity=registerActivity;
     }
 
-
-    public void onSoftKeyboardOpened(int keyboardSize,View body, ImageView imgLogo,int screenHeight){
+    public void onSoftKeyboardOpened(int keyboardSize, View body, ImageView imgLogo, int screenHeight){
         keyboardSize+=100;
         int[] location = new int[2];
         body.getLocationOnScreen(location); //获取body在屏幕中的坐标,控件左上角
@@ -40,13 +39,13 @@ public class LoginPresenter {
 
         }
     }
-   public void onSoftKeyboardClosed(View body, ImageView imgLogo){
-       ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(body, "translationY", body.getTranslationY(), 0);
-       mAnimatorTranslateY.setDuration(300);
-       mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
-       mAnimatorTranslateY.start();
-       zoomOut(imgLogo);
-   }
+    public void onSoftKeyboardClosed(View body, ImageView imgLogo){
+        ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(body, "translationY", body.getTranslationY(), 0);
+        mAnimatorTranslateY.setDuration(300);
+        mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
+        mAnimatorTranslateY.start();
+        zoomOut(imgLogo);
+    }
     /**
      * 缩小
      *

@@ -1,41 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.whombang.app.features.login.ForgetActivity">
 
-    <include layout="@layout/wb_titlebar_layout" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/logo" />
-
-    <com.whombang.app.common.view.EasyIndicator
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/easy_indicator"
+    <include layout="@layout/wb_titlebar_layout"
+        android:id="@+id/top"/>
+    <RelativeLayout
+        android:id="@+id/register_body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        app:indicator_bottom_height="3dp"
-        app:indicator_bottom_line_color="@color/transparent"
-        app:indicator_bottom_line_height="1dp"
-        app:indicator_height="42dp"
-        app:indicator_isBottom_line="true"
-        app:indicator_line_color="@color/transparent"
-        app:indicator_normal_color="@color/grey"
-        app:indicator_select_textSize="18sp"
-        app:indicator_selected_color="@color/orange1"
-        app:indicator_textSize="18sp"
-
-        app:indicator_width="0dp" />
-
-    <com.whombang.app.common.view.NoScrollViewPager
-        android:id="@+id/vp_content"
-        android:layout_width="match_parent"
+        android:layout_below="@+id/top"
         android:layout_height="match_parent"
-         />
-</LinearLayout>
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+        <ImageView
+            android:id="@+id/img_logo_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@mipmap/logo" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/img_logo_register"
+            android:layout_marginTop="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:cardBackgroundColor="@color/bg"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+            <EditText
+                android:id="@+id/et_new_password1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:hint="输入新密码"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textColorHint="@color/color_999999"
+                android:paddingLeft="20dp"
+                />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+
+            android:id="@+id/cardview2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/cardview1"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/bg"
+            app:cardCornerRadius="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/et_new_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textColorHint="@color/color_999999"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:hint="输入新密码"
+                android:paddingLeft="20dp"
+                />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/button_bg"
+                android:layout_height="wrap_content"
+                android:text="获取验证码" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+
+            android:id="@+id/cardview3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/cardview2"
+            android:layout_marginTop="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:cardBackgroundColor="@color/bg"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/et_affirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textColorHint="@color/color_999999"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:hint="邀请码"
+                android:paddingLeft="20dp" />
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_affirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardview3"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_bg"
+            android:text="确认"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</RelativeLayout>

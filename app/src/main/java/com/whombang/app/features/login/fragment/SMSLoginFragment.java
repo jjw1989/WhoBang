@@ -3,23 +3,32 @@ package com.whombang.app.features.login.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
+import com.whombang.app.common.utils.RxJavaUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import okhttp3.RequestBody;
 
 /**
  * 短信登录
  */
 public class SMSLoginFragment extends BaseFragment {
-
+    @BindView(R.id.btn_sms_code)
+    Button btnCode;
     @Override
     protected int bindLayout() {
         return R.layout.wb_smslogin_layout;
@@ -49,32 +58,33 @@ public class SMSLoginFragment extends BaseFragment {
         Map<String,String> params=new HashMap<>();
         params.put("userTel","15011112111");
         params.put("userPassword","111111");
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(params));
-//        RetrofitClient.getInstance(this)
-//                .createBaseApi()
-//                .json("userLoginByPassword",body)
-//                .subscribe(new BaseSubscriber<BaseResponse>(this) {
-//                    @Override
-//                    public void onError(ExceptionHandle.ResponeThrowable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResponse baseResponse) {
-//                        Log.d("wwww", "onNext: 11111111111111111111111");
-//                    }
-//                });
 
-        ARouter.getInstance().build("/main/tab").navigation();
     }
 
-    @OnClick(R.id.tv_register)
-    public void registerUser(){
-        ARouter.getInstance().build("/user/register").navigation();
+    @OnClick({R.id.tv_register,R.id.tv_forget,R.id.btn_sms_code})
+    public void onAllClick(View v){
+        switch (v.getId()){
+            case R.id.tv_register:
+                ARouter.getInstance().build("/user/register").navigation();
+                break;
+            case R.id.tv_forget:
+                ARouter.getInstance().build("/user/forget").navigation();
+                break;
+            case R.id.btn_sms_code:
+                onSmsCode();
+                break;
+
+        }
     }
 
-    @OnClick(R.id.tv_forget)
-    public void forgetPassWord(){
-        ARouter.getInstance().build("/user/forget").navigation();
+    private void onSmsCode() {
+       RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                btnCode.setText("还剩余" +aLong+" 秒");
+            }
+        });
     }
+
+
 }

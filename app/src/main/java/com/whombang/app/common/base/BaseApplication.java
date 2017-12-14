@@ -41,7 +41,7 @@ public class BaseApplication extends MultiDexApplication {
         EasyHttp.init(this);
 
         //这里涉及到安全我把url去掉了，demo都是调试通的
-        String Url = "http://47.104.105.135:8080";
+        String Url = "http://47.104.105.135:8080/WhomBangServer/";
 
 
         //设置请求头

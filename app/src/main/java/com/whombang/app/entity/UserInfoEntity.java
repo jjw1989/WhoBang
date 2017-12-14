@@ -274,5 +274,36 @@ public class UserInfoEntity {
         public void setUserStationId(Object userStationId) {
             this.userStationId = userStationId;
         }
+
+        @Override
+        public String toString() {
+            return "UserInfoBean{" +
+                    "userId='" + userId + '\'' +
+                    ", userRealName=" + userRealName +
+                    ", userAge=" + userAge +
+                    ", userAgeScope=" + userAgeScope +
+                    ", userHeadImgUrl=" + userHeadImgUrl +
+                    ", userNickName=" + userNickName +
+                    ", userTel='" + userTel + '\'' +
+                    ", userSex=" + userSex +
+                    ", userIdentityNumber=" + userIdentityNumber +
+                    ", userIdentityType=" + userIdentityType +
+                    ", userAddress=" + userAddress +
+                    ", userPassword='" + userPassword + '\'' +
+                    ", userEmail=" + userEmail +
+                    ", userRegistTime=" + userRegistTime +
+                    ", userCurrentDevice=" + userCurrentDevice +
+                    ", userType=" + userType +
+                    ", userLastLoginTime=" + userLastLoginTime +
+                    ", userLastLogoutTime=" + userLastLogoutTime +
+                    ", userLevel=" + userLevel +
+                    ", userScore=" + userScore +
+                    ", userStatus=" + userStatus +
+                    ", userDeadTimes=" + userDeadTimes +
+                    ", userInvitationCode='" + userInvitationCode + '\'' +
+                    ", userInvitationUserId=" + userInvitationUserId +
+                    ", userStationId=" + userStationId +
+                    '}';
+        }
     }
 }
