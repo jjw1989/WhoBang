@@ -87,12 +87,11 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
      * 弹出软键盘时将SVContainer滑到底
      */
     private void scrollToBottom() {
-
         scrollView.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                scrollView.smoothScrollTo(0, 300);//scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mContext)
+                scrollView.smoothScrollTo(0, 0);//scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mContext)
             }
         }, 100);
 
@@ -121,10 +120,7 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
 
                 break;
         }
-
-
     }
-
     private void onSmsCode() {
         RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override

@@ -19,12 +19,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@mipmap/logo" />
-
     <LinearLayout
         android:id="@+id/llt_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/img_logo_login"
+        android:layout_marginTop="@dimen/dp_10"
         android:orientation="vertical">
 
         <com.whombang.app.common.view.EasyIndicator
@@ -34,7 +34,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
             app:indicator_bottom_height="3dp"
             app:indicator_bottom_line_color="@color/transparent"
             app:indicator_bottom_line_height="1dp"

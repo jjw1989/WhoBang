@@ -67,6 +67,12 @@ public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftK
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle(getString(R.string.login));
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askExit();
+            }
+        });
         screenHeight = this.getResources().getDisplayMetrics().heightPixels; //获取屏幕高度
         fragmentList = new ArrayList<>();
         fragmentList.add(new PassWordLoginFragment());
