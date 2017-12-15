@@ -26,6 +26,7 @@ import com.iflytek.sunflower.FlowerCollector;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.utils.JsonParser;
+import com.whombang.app.common.view.TitleBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +59,7 @@ public class VoiceActivity extends BaseActivity {
 
     private boolean mTranslateEnable = false;
     int ret = 0; // 函数调用返回值
+
     @Override
     public void initData(Bundle bundle) {
 
@@ -75,7 +77,13 @@ public class VoiceActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-
+        titleBar.setTitle(getString(R.string.issue_service));
+        titleBar.addAction(new TitleBar.TextAction(getString(R.string.issue)) {
+            @Override
+            public void performAction(View view) {
+                Toast.makeText(mContext, "发布", Toast.LENGTH_SHORT).show();
+            }
+        });
         initVoice();
 
     }
@@ -101,32 +109,33 @@ public class VoiceActivity extends BaseActivity {
     public void doBusiness() {
 
     }
-@OnClick(R.id.img_voice)
-public void speackToText(){
-    // 移动数据分析，收集开始听写事件
-    FlowerCollector.onEvent(VoiceActivity.this, "iat_recognize");
 
-    mResultText.setText(null);// 清空显示内容
-    mIatResults.clear();
-    // 设置参数
-    setParam();
-    boolean isShowDialog = mSharedPreferences.getBoolean(
-            getString(R.string.pref_key_iat_show), true);
-    if (isShowDialog) {
-        // 显示听写对话框
-        mIatDialog.setListener(mRecognizerDialogListener);
-        mIatDialog.show();
-        showTip(getString(R.string.text_begin));
-    } else {
-        // 不显示听写对话框
-        ret = mIat.startListening(mRecognizerListener);
-        if (ret != ErrorCode.SUCCESS) {
-            showTip("听写失败,错误码：" + ret);
-        } else {
+    @OnClick(R.id.img_voice)
+    public void speackToText() {
+        // 移动数据分析，收集开始听写事件
+        FlowerCollector.onEvent(VoiceActivity.this, "iat_recognize");
+
+        mResultText.setText(null);// 清空显示内容
+        mIatResults.clear();
+        // 设置参数
+        setParam();
+        boolean isShowDialog = mSharedPreferences.getBoolean(
+                getString(R.string.pref_key_iat_show), true);
+        if (isShowDialog) {
+            // 显示听写对话框
+            mIatDialog.setListener(mRecognizerDialogListener);
+            mIatDialog.show();
             showTip(getString(R.string.text_begin));
+        } else {
+            // 不显示听写对话框
+            ret = mIat.startListening(mRecognizerListener);
+            if (ret != ErrorCode.SUCCESS) {
+                showTip("听写失败,错误码：" + ret);
+            } else {
+                showTip(getString(R.string.text_begin));
+            }
         }
     }
-}
 
     /**
      * 初始化监听器。
@@ -142,20 +151,6 @@ public void speackToText(){
         }
     };
 
-    /**
-     * 上传联系人/词表监听器。
-     */
-    private LexiconListener mLexiconListener = new LexiconListener() {
-
-        @Override
-        public void onLexiconUpdated(String lexiconId, SpeechError error) {
-            if (error != null) {
-                showTip(error.toString());
-            } else {
-                showTip(getString(R.string.text_upload_success));
-            }
-        }
-    };
 
     /**
      * 听写监听器。
@@ -173,8 +168,8 @@ public void speackToText(){
             // Tips：
             // 错误码：10118(您没有说话)，可能是录音机权限被禁，需要提示用户打开应用的录音权限。
             // 如果使用本地功能（语记）需要提示用户开启语记的录音权限。
-            if(mTranslateEnable && error.getErrorCode() == 14002) {
-                showTip( error.getPlainDescription(true)+"\n请确认是否已开通翻译功能" );
+            if (mTranslateEnable && error.getErrorCode() == 14002) {
+                showTip(error.getPlainDescription(true) + "\n请确认是否已开通翻译功能");
             } else {
                 showTip(error.getPlainDescription(true));
             }
@@ -189,9 +184,9 @@ public void speackToText(){
         @Override
         public void onResult(RecognizerResult results, boolean isLast) {
             Log.d(TAG, results.getResultString());
-            if( mTranslateEnable ){
-                printTransResult( results );
-            }else{
+            if (mTranslateEnable) {
+                printTransResult(results);
+            } else {
                 printResult(results);
             }
 
@@ -203,7 +198,7 @@ public void speackToText(){
         @Override
         public void onVolumeChanged(int volume, byte[] data) {
             showTip("当前正在说话，音量大小：" + volume);
-            Log.d(TAG, "返回音频数据："+data.length);
+            Log.d(TAG, "返回音频数据：" + data.length);
         }
 
         @Override
@@ -245,9 +240,9 @@ public void speackToText(){
      */
     private RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
         public void onResult(RecognizerResult results, boolean isLast) {
-            if( mTranslateEnable ){
-                printTransResult( results );
-            }else{
+            if (mTranslateEnable) {
+                printTransResult(results);
+            } else {
                 printResult(results);
             }
 
@@ -257,15 +252,14 @@ public void speackToText(){
          * 识别回调错误.
          */
         public void onError(SpeechError error) {
-            if(mTranslateEnable && error.getErrorCode() == 14002) {
-                showTip( error.getPlainDescription(true)+"\n请确认是否已开通翻译功能" );
+            if (mTranslateEnable && error.getErrorCode() == 14002) {
+                showTip(error.getPlainDescription(true) + "\n请确认是否已开通翻译功能");
             } else {
                 showTip(error.getPlainDescription(true));
             }
         }
 
     };
-
 
 
     private void showTip(final String str) {
@@ -287,12 +281,12 @@ public void speackToText(){
         // 设置返回结果格式
         mIat.setParameter(SpeechConstant.RESULT_TYPE, "json");
 
-        this.mTranslateEnable = mSharedPreferences.getBoolean( this.getString(R.string.pref_key_translate), false );
-        if( mTranslateEnable ){
-            Log.i( TAG, "translate enable" );
-            mIat.setParameter( SpeechConstant.ASR_SCH, "1" );
-            mIat.setParameter( SpeechConstant.ADD_CAP, "translate" );
-            mIat.setParameter( SpeechConstant.TRS_SRC, "its" );
+        this.mTranslateEnable = mSharedPreferences.getBoolean(this.getString(R.string.pref_key_translate), false);
+        if (mTranslateEnable) {
+            Log.i(TAG, "translate enable");
+            mIat.setParameter(SpeechConstant.ASR_SCH, "1");
+            mIat.setParameter(SpeechConstant.ADD_CAP, "translate");
+            mIat.setParameter(SpeechConstant.TRS_SRC, "its");
         }
 
         String lag = mSharedPreferences.getString("iat_language_preference",
@@ -302,9 +296,9 @@ public void speackToText(){
             mIat.setParameter(SpeechConstant.LANGUAGE, "en_us");
             mIat.setParameter(SpeechConstant.ACCENT, null);
 
-            if( mTranslateEnable ){
-                mIat.setParameter( SpeechConstant.ORI_LANG, "en" );
-                mIat.setParameter( SpeechConstant.TRANS_LANG, "cn" );
+            if (mTranslateEnable) {
+                mIat.setParameter(SpeechConstant.ORI_LANG, "en");
+                mIat.setParameter(SpeechConstant.TRANS_LANG, "cn");
             }
         } else {
             // 设置语言
@@ -312,9 +306,9 @@ public void speackToText(){
             // 设置语言区域
             mIat.setParameter(SpeechConstant.ACCENT, lag);
 
-            if( mTranslateEnable ){
-                mIat.setParameter( SpeechConstant.ORI_LANG, "cn" );
-                mIat.setParameter( SpeechConstant.TRANS_LANG, "en" );
+            if (mTranslateEnable) {
+                mIat.setParameter(SpeechConstant.ORI_LANG, "cn");
+                mIat.setParameter(SpeechConstant.TRANS_LANG, "en");
             }
         }
 
@@ -329,18 +323,18 @@ public void speackToText(){
 
         // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
         // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
-        mIat.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
-        mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/iat.wav");
+        mIat.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
+        mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory() + "/msc/iat.wav");
     }
 
-    private void printTransResult (RecognizerResult results) {
-        String trans  = JsonParser.parseTransResult(results.getResultString(),"dst");
-        String oris = JsonParser.parseTransResult(results.getResultString(),"src");
+    private void printTransResult(RecognizerResult results) {
+        String trans = JsonParser.parseTransResult(results.getResultString(), "dst");
+        String oris = JsonParser.parseTransResult(results.getResultString(), "src");
 
-        if( TextUtils.isEmpty(trans)||TextUtils.isEmpty(oris) ){
-            showTip( "解析结果失败，请确认是否已开通翻译功能。" );
-        }else{
-            mResultText.setText( "原始语言:\n"+oris+"\n目标语言:\n"+trans );
+        if (TextUtils.isEmpty(trans) || TextUtils.isEmpty(oris)) {
+            showTip("解析结果失败，请确认是否已开通翻译功能。");
+        } else {
+            mResultText.setText("原始语言:\n" + oris + "\n目标语言:\n" + trans);
         }
 
     }
@@ -349,7 +343,7 @@ public void speackToText(){
     protected void onDestroy() {
         super.onDestroy();
 
-        if( null != mIat ){
+        if (null != mIat) {
             // 退出时释放连接
             mIat.cancel();
             mIat.destroy();

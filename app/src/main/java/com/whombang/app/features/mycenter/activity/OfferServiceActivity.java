@@ -8,10 +8,10 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 
 /**
- * 商品订单
+ * 提供服务列表
  */
-@Route(path = "/order/shop")
-public class ShopOrderActivity extends BaseActivity {
+@Route(path = "/my/offer")
+public class OfferServiceActivity extends BaseActivity {
     @Override
     public void initData(Bundle bundle) {
 
@@ -29,7 +29,7 @@ public class ShopOrderActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        titleBar.setTitle("商品订单");
+        titleBar.setTitle("提供服务列表");
     }
 
     @Override

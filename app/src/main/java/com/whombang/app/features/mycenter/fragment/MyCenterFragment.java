@@ -33,7 +33,7 @@ public class MyCenterFragment extends BaseFragment {
     List<CenterEntity> entityList;
     private List<DelegateAdapter.Adapter> mAdapters; //存放各个模块的适配器
     private int count = 0;
-
+    private int userType=0;
     @Override
     public void initData(Bundle bundle) {
         initData();
@@ -105,33 +105,74 @@ public class MyCenterFragment extends BaseFragment {
                  holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View v) {
-                         switch (position){
-                             case 0:
-                                 ARouter.getInstance().build("/my/groud").navigation();
-                                 break;
-                             case 1:
-                                 ARouter.getInstance().build("/order/shop").navigation();
-                                 break;
-                             case 2:
-                                 ARouter.getInstance().build("/my/evaluate").navigation();
-                                 break;
+                         if(userType==0){
+                             switch (position){
+                                 case 0:
+                                     ARouter.getInstance().build("/my/groud").navigation();
+                                     break;
+                                 case 1:
+                                     ARouter.getInstance().build("/my/service").navigation();
+                                     break;
+                                 case 2:
+                                     ARouter.getInstance().build("/my/setting").navigation();
+                                     break;
+                                 case 3:
+                                     ARouter.getInstance().build("/my/about").navigation();
+                                     break;
+                             }
+                         }else if(userType==1){
+                             switch (position){
+                                 case 0:
+                                     ARouter.getInstance().build("/my/groud").navigation();
+                                     break;
+                                 case 1:
+                                     ARouter.getInstance().build("/my/service").navigation();
+                                     break;
+                                 case 2:
+                                     ARouter.getInstance().build("/my/server").navigation();
+                                     break;
 
-                             case 3:
-                                 ARouter.getInstance().build("/my/station").navigation();
-                                 break;
+                                 case 3:
+                                     ARouter.getInstance().build("/my/offer").navigation();
+                                     break;
 
-                             case 4:
-                                 ARouter.getInstance().build("/my/userinformation").navigation();
-                                 break;
+                                 case 4:
+                                     ARouter.getInstance().build("/my/goods").navigation();
+                                     break;
 
-                             case 5:
-                                 ARouter.getInstance().build("/my/setting").navigation();
-                                 break;
+                                 case 5:
+                                     ARouter.getInstance().build("/my/info").navigation();
+                                     break;
 
-                             case 6:
-                                 ARouter.getInstance().build("/my/about").navigation();
-                                 break;
+                                 case 6:
+                                     ARouter.getInstance().build("/my/setting").navigation();
+                                     break;
+                                 case 7:
+                                     ARouter.getInstance().build("/my/about").navigation();
+                                     break;
+                             }
+                         }else{
+                             switch (position){
+                                 case 0:
+                                     ARouter.getInstance().build("/my/groud").navigation();
+                                     break;
+                                 case 1:
+                                     ARouter.getInstance().build("/my/service").navigation();
+                                     break;
+
+                                 case 2:
+                                     ARouter.getInstance().build("/my/offer").navigation();
+                                     break;
+
+                                 case 3:
+                                     ARouter.getInstance().build("/my/setting").navigation();
+                                     break;
+                                 case 4:
+                                     ARouter.getInstance().build("/my/about").navigation();
+                                     break;
+                             }
                          }
+
                      }
                  });
 
@@ -153,10 +194,11 @@ public class MyCenterFragment extends BaseFragment {
      */
     private void initData() {
         UserInfoEntity item = UserLocalData.getUserInfo(mActivity);
+        userType=item.getUserInfo().getUserType();
         /**
          *   0:普通用户   1：站主   2：服务者
          */
-        if (item.getUserInfo().getUserType() == 0) {
+        if (userType == 0) {
             count = 4;
             entityList = new LinkedList<>();
             CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
@@ -167,7 +209,7 @@ public class MyCenterFragment extends BaseFragment {
             entityList.add(entity1);
             entityList.add(entity2);
             entityList.add(entity3);
-        } else if (item.getUserInfo().getUserType() == 1) {
+        } else if (userType == 1) {
             count = 8;
             entityList = new LinkedList<>();
             CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);

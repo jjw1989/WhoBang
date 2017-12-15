@@ -58,7 +58,7 @@
     <string name="my_setting">通用设置</string>
     <string name="my_about">关于我们</string>
     <string name="img_deta">图文详情</string>
-
+    <string name="pass_again_exti">"再按一次退出程序"</string>
 
     <string name="login">登录</string>
     <string name="register">注册</string>
@@ -68,10 +68,15 @@
     <string name="input_code">请输入验证码</string>
     <string name="input_password">请输入密码</string>
     <string name="input_new_password">输入新密码</string>
+    <string name="input_affirm_pwd">确认密码</string>
     <string name="tv_register">立即注册</string>
     <string name="tv_forget">忘记密码？</string>
     <string name="btn_code">获取验证码</string>
     <string name="tv_title">忘记密码</string>
     <string name="et_invitation_code">邀请码</string>
     <string name="residue">还剩余%d秒</string>
+    <string name="btn_affirm">确认</string>
+    <string name="issue">发布</string>
+    <string name="issue_service">发布服务</string>
+
 </resources>

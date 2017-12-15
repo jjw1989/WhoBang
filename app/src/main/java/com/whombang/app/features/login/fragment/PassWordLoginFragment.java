@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
@@ -92,7 +93,7 @@ public class PassWordLoginFragment extends BaseFragment {
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
-                        Log.i("wwww","error="+e.getCode());
+                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
 

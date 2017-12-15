@@ -7,6 +7,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.whombang.app.R;
@@ -14,6 +15,8 @@ import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.utils.RxJavaUtil;
 import com.whombang.app.common.view.KeyboardWatcher;
 import com.whombang.app.common.view.hideime.HideIMEUtil;
+import com.whombang.app.common.view.keyboard.KeyboardLayout;
+import com.whombang.app.common.view.keyboard.SoftKeyInputHidWidget;
 import com.whombang.app.mvp.component.DaggerForgetActivityComponent;
 import com.whombang.app.mvp.module.ForgetActivityModule;
 import com.whombang.app.mvp.presenter.ForgetPresenter;
@@ -39,6 +42,10 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
     View body;
     @BindView(R.id.btn_forget_code)
     Button btnCode;
+    @BindView(R.id.login_ll)
+    ScrollView scrollView;
+    @BindView(R.id.main_ll)
+    KeyboardLayout keyboardLayout;
     @Inject
     ForgetPresenter presenter;
     private float scale = 0.2f; //logo缩放比例
@@ -67,8 +74,29 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
         keyboardWatcher = new KeyboardWatcher(findViewById(Window.ID_ANDROID_CONTENT));
         keyboardWatcher.addSoftKeyboardStateListener(this);
         HideIMEUtil.wrap(this);
+        keyboardLayout.setKeyboardListener(new KeyboardLayout.KeyboardLayoutListener() {
+            @Override
+            public void onKeyboardStateChanged(boolean isActive, int keyboardHeight) {
+                if (isActive) {
+                    scrollToBottom();
+                }
+            }
+        });
     }
+    /**
+     * 弹出软键盘时将SVContainer滑到底
+     */
+    private void scrollToBottom() {
 
+        scrollView.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                scrollView.smoothScrollTo(0, 300);//scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mContext)
+            }
+        }, 100);
+
+    }
     @Override
     public void doBusiness() {
 

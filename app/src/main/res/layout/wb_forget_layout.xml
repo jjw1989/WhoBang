@@ -1,135 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.whombang.app.common.view.keyboard.KeyboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    tools:context="com.whombang.app.features.login.ForgetActivity">
+    android:orientation="vertical">
 
-    <include layout="@layout/wb_titlebar_layout"
-        android:id="@+id/top"/>
-    <RelativeLayout
-        android:id="@+id/body"
+    <ScrollView
+        android:id="@+id/login_ll"
         android:layout_width="match_parent"
-        android:layout_below="@+id/top"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_logo_forget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@mipmap/logo" />
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview1"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/img_logo_forget"
-            android:layout_marginTop="20dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:cardBackgroundColor="@color/bg"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp">
-            <EditText
-                android:id="@+id/et_new_password1"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/top"
+                layout="@layout/wb_titlebar_layout" />
+
+            <RelativeLayout
+                android:id="@+id/body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
-                android:maxLength="30"
-                android:singleLine="true"
-                android:gravity="center_vertical"
-                android:hint="输入新密码"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:textColorHint="@color/color_999999"
-                android:paddingLeft="20dp"
-                />
-        </android.support.v7.widget.CardView>
+                android:layout_below="@+id/top"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp">
 
-        <android.support.v7.widget.CardView
+                <ImageView
+                    android:id="@+id/img_logo_forget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@mipmap/logo" />
 
-            android:id="@+id/cardview2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/cardview1"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg"
-            app:cardCornerRadius="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:cardElevation="0dp">
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/img_logo_forget"
+                    android:layout_marginTop="20dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:cardBackgroundColor="@color/bg"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
 
-            <EditText
-                android:id="@+id/et_new_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:gravity="center_vertical"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:textColorHint="@color/color_999999"
-                android:maxLength="30"
-                android:singleLine="true"
-                android:hint="输入新密码"
-                android:paddingLeft="20dp"
-               />
+                    <EditText
+                        android:id="@+id/et_forget_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="@string/input_phone"
+                        android:inputType="textPassword"
+                        android:maxLength="30"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/color_999999"
+                        android:textCursorDrawable="@drawable/color_cursor" />
+                </android.support.v7.widget.CardView>
 
-            <Button
-                android:id="@+id/btn_forget_code"
-                android:layout_width="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="@dimen/dp_10"
-                android:background="@drawable/button_bg"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/input_code" />
-        </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
 
-        <android.support.v7.widget.CardView
+                    android:id="@+id/cardview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/cardview1"
+                    android:layout_marginTop="20dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:cardBackgroundColor="@color/bg"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
 
-            android:id="@+id/cardview3"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/cardview2"
-            android:layout_marginTop="20dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:cardBackgroundColor="@color/bg"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp">
+                    <EditText
+                        android:id="@+id/et_forget_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="@string/input_code"
+                        android:inputType="textPassword"
+                        android:maxLength="30"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/color_999999"
+                        android:textCursorDrawable="@drawable/color_cursor" />
 
-            <EditText
-                android:id="@+id/et_affirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:gravity="center_vertical"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:textColorHint="@color/color_999999"
-                android:maxLength="30"
-                android:singleLine="true"
-                android:hint="确认密码"
-                android:paddingLeft="20dp" />
-        </android.support.v7.widget.CardView>
+                    <Button
+                        android:id="@+id/btn_forget_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_bg"
+                        android:text="@string/btn_code"
+                        android:textColor="@color/white" />
+                </android.support.v7.widget.CardView>
 
-        <Button
-            android:id="@+id/btn_affirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cardview3"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/button_bg"
-            android:text="确认"
-            android:textColor="@color/white" />
-    </RelativeLayout>
-</RelativeLayout>
+                <android.support.v7.widget.CardView
+
+                    android:id="@+id/cardview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/cardview2"
+                    android:layout_marginTop="20dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:cardBackgroundColor="@color/bg"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
+
+                    <EditText
+                        android:id="@+id/et_new_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="@string/input_new_password"
+                        android:inputType="textPassword"
+                        android:maxLength="30"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/color_999999"
+                        android:textCursorDrawable="@drawable/color_cursor" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+
+                    android:id="@+id/cardview4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/cardview3"
+                    android:layout_marginTop="20dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:cardBackgroundColor="@color/bg"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
+
+                    <EditText
+                        android:id="@+id/et_affirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="@string/input_affirm_pwd"
+                        android:inputType="textPassword"
+                        android:maxLength="30"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/color_999999"
+                        android:textCursorDrawable="@drawable/color_cursor" />
+                </android.support.v7.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_affirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview4"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/button_bg"
+                    android:text="@string/btn_affirm"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</com.whombang.app.common.view.keyboard.KeyboardLayout>

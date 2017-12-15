@@ -2,9 +2,11 @@ package com.whombang.app.features.login;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.whombang.app.R;
@@ -99,5 +101,32 @@ public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftK
     public void onSoftKeyboardClosed() {
         presenter.onSoftKeyboardClosed(body, imgLogo);
     }
-
+    /***
+     * 监听用户点击事件
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            askExit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private long exitTime = 0;
+    /**
+     * 退出程序询问
+     */
+    private void askExit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), getString(R.string.pass_again_exti), Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
 }

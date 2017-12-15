@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -137,6 +139,34 @@ public class MainActivity extends BaseActivity {
     @PermissionYes(REQUEST_CODE_PERMISSION_MULTI)
     private void getSingleNo(@NonNull List<String> deniedPermissions) {
 
+    }
+    /***
+     * 监听用户点击事件
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            askExit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private long exitTime = 0;
+    /**
+     * 退出程序询问
+     */
+    private void askExit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), getString(R.string.pass_again_exti), Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 
 }
