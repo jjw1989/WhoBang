@@ -28,7 +28,7 @@
                 android:maxLength="30"
                 android:singleLine="true"
                 android:gravity="center_vertical"
-                android:hint="请输入手机号码"
+                android:hint="@string/input_phone"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textColorHint="@color/color_999999"
                 android:paddingLeft="20dp"
@@ -58,7 +58,7 @@
                 android:textColorHint="@color/color_999999"
                 android:maxLength="30"
                 android:singleLine="true"
-                android:hint="请输入密码"
+                android:hint="@string/input_password"
                 android:paddingLeft="20dp"
                 />
 
@@ -71,7 +71,7 @@
             android:layout_below="@+id/cardview2"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_bg"
-            android:text="登录"
+            android:text="@string/login"
             android:textColor="@color/white" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_alignStart="@+id/btn_login"
             android:layout_below="@+id/btn_login"
             android:layout_marginTop="19dp"
-            android:text="立即注册" />
+            android:text="@string/tv_register" />
 
         <TextView
             android:id="@+id/tv_forget"
@@ -91,7 +91,7 @@
             android:layout_alignEnd="@+id/btn_login"
             android:layout_alignRight="@+id/btn_login"
             android:layout_alignTop="@+id/tv_register"
-            android:text="忘记密码？" />
+            android:text="@string/tv_forget" />
     </RelativeLayout>
 
 </RelativeLayout>

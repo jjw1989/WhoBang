@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -12,6 +14,7 @@ import com.gxz.PagerSlidingTabStrip;
 import com.whombang.app.R;
 import com.whombang.app.adapter.ItemTitlePagerAdapter;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.utils.RxJavaUtil;
 import com.whombang.app.common.view.EasyIndicator;
 import com.whombang.app.common.view.KeyboardWatcher;
 import com.whombang.app.common.view.NoScrollViewPager;
@@ -31,6 +34,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 /**
  * 用户注册
@@ -41,6 +46,15 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
     ImageView imgLogo;
     @BindView(R.id.register_body)
     View body;
+    @BindView(R.id.btn_register_code)
+    Button btnCode;
+    @BindView(R.id.et_register_password)
+    EditText etPassWord;
+    @BindView(R.id.et_register_new_password)
+    EditText etNewPassword;
+    @BindView(R.id.et_invitation_code)
+    EditText etInvitationCode;
+
     @Inject
     RegisterPresenter presenter;
     private KeyboardWatcher keyboardWatcher;
@@ -82,8 +96,31 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
 
     @Override
     public void onSoftKeyboardClosed() {
-        {
-            presenter.onSoftKeyboardClosed(body, imgLogo);
-        }
+        presenter.onSoftKeyboardClosed(body, imgLogo);
     }
+
+    @OnClick({R.id.btn_register_code,R.id.btn_register})
+    public void onClickView(View v) {
+        switch (v.getId()){
+            case R.id.btn_register_code:
+                onSmsCode();
+                break;
+            case R.id.btn_register:
+                presenter.registerUser(etPassWord.getText().toString(),etNewPassword.getText().toString(),etInvitationCode.getText().toString());
+                break;
+        }
+
+    }
+
+    private void onSmsCode() {
+        RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                String content=String.format(getString(R.string.residue),aLong);
+                btnCode.setText(content);
+            }
+        });
+    }
+
+
 }

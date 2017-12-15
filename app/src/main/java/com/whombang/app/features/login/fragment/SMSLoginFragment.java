@@ -81,7 +81,8 @@ public class SMSLoginFragment extends BaseFragment {
        RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                btnCode.setText("还剩余" +aLong+" 秒");
+                String content=String.format(getString(R.string.residue),aLong);
+                btnCode.setText(content);
             }
         });
     }

@@ -1,41 +1,27 @@
 package com.whombang.app.features.mycenter.fragment;
-
-
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import com.bumptech.glide.Glide;
-import com.sunfusheng.marqueeview.MarqueeView;
 import com.whombang.app.R;
 import com.whombang.app.adapter.BaseDelegateAdapter;
-import com.whombang.app.adapter.MyCenterAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.baseadapter.BaseViewHolder;
 import com.whombang.app.common.config.ViewType;
-import com.whombang.app.common.entity.MyCenterEntity;
 import com.whombang.app.entity.CenterEntity;
-import com.whombang.app.listener.BannerClickListener;
-import com.whombang.app.listener.ItemOnClickListener;
+import com.whombang.app.entity.UserInfoEntity;
+import com.whombang.app.entity.UserLocalData;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
-
-import static com.whombang.app.features.home.fragment.HomeFragment.Config.NEWS_VIEW_TYPE;
-import static com.whombang.app.features.shop.fragment.ShopFragment.Config.GRID_VIEW_TYPE;
 
 
 /**
@@ -45,8 +31,8 @@ public class MyCenterFragment extends BaseFragment {
     @BindView(R.id.work_recyclerview)
     RecyclerView mRecyclerView;
     List<CenterEntity> entityList;
-    private VirtualLayoutManager layoutManager;
     private List<DelegateAdapter.Adapter> mAdapters; //存放各个模块的适配器
+    private int count = 0;
 
     @Override
     public void initData(Bundle bundle) {
@@ -66,7 +52,7 @@ public class MyCenterFragment extends BaseFragment {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         mAdapters = new LinkedList<>();
-        layoutManager = new VirtualLayoutManager(mActivity);
+        VirtualLayoutManager  layoutManager = new VirtualLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(layoutManager);
 
         //步骤2：设置组件复用回收池
@@ -83,8 +69,7 @@ public class MyCenterFragment extends BaseFragment {
                 ARouter.getInstance().build("/user/login").navigation();
             }
         };
-        BaseDelegateAdapter headAdapter = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper()
-                , R.layout.item_work_banner, 1, ViewType.VIEW_TYPE_HEAD) {
+        BaseDelegateAdapter headAdapter = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper() , R.layout.item_work_banner, 1, ViewType.VIEW_TYPE_HEAD) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -96,9 +81,10 @@ public class MyCenterFragment extends BaseFragment {
         };
 
         mAdapters.add(headAdapter);
+
+      //  viewPool.setMaxRecycledViews(1, 8);
         //2功能列表
-        BaseDelegateAdapter functionAdapter = new BaseDelegateAdapter(mActivity,  new LinearLayoutHelper(), R.layout.item_work_func
-                , 7, ViewType.VIEW_TYPE_LIST) {
+        BaseDelegateAdapter functionAdapter = new BaseDelegateAdapter(mActivity,  new LinearLayoutHelper(), R.layout.item_work_func ,count, ViewType.VIEW_TYPE_LIST) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -121,8 +107,7 @@ public class MyCenterFragment extends BaseFragment {
                      public void onClick(View v) {
                          switch (position){
                              case 0:
-                                // ARouter.getInstance().build("/order/service").navigation();
-                                 ARouter.getInstance().build("/address/manager").navigation();
+                                 ARouter.getInstance().build("/my/groud").navigation();
                                  break;
                              case 1:
                                  ARouter.getInstance().build("/order/shop").navigation();
@@ -162,25 +147,59 @@ public class MyCenterFragment extends BaseFragment {
     public void doBusiness() {
 
     }
+
     /**
      * 添加本地数据
      */
     private void initData() {
-        entityList=new LinkedList<>();
-        CenterEntity entity0=new CenterEntity(getString(R.string.my_service_order),true,false);
-        CenterEntity entity1=new CenterEntity(getString(R.string.my_shop_order),false,false);
-        CenterEntity entity2=new CenterEntity(getString(R.string.my_evaluate),false,false);
-        CenterEntity entity3=new CenterEntity(getString(R.string.my_station),true,true);
-        CenterEntity entity4=new CenterEntity(getString(R.string.my_user_information),false,false);
-        CenterEntity entity5=new CenterEntity(getString(R.string.my_setting),false,false);
-        CenterEntity entity6=new CenterEntity(getString(R.string.my_about),false,false);
-         entityList.add(entity0);
-         entityList.add(entity1);
-         entityList.add(entity2);
-         entityList.add(entity3);
-         entityList.add(entity4);
-         entityList.add(entity5);
-         entityList.add(entity6);
+        UserInfoEntity item = UserLocalData.getUserInfo(mActivity);
+        /**
+         *   0:普通用户   1：站主   2：服务者
+         */
+        if (item.getUserInfo().getUserType() == 0) {
+            count = 4;
+            entityList = new LinkedList<>();
+            CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
+            CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), true, false);
+            CenterEntity entity2 = new CenterEntity(getString(R.string.my_setting), true, false);
+            CenterEntity entity3 = new CenterEntity(getString(R.string.my_about), true, true);
+            entityList.add(entity0);
+            entityList.add(entity1);
+            entityList.add(entity2);
+            entityList.add(entity3);
+        } else if (item.getUserInfo().getUserType() == 1) {
+            count = 8;
+            entityList = new LinkedList<>();
+            CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
+            CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), false, false);
+            CenterEntity entity2 = new CenterEntity(getString(R.string.my_add_service), true, false);
+            CenterEntity entity3 = new CenterEntity(getString(R.string.my_offer_service_list), false, false);
+            CenterEntity entity4 = new CenterEntity(getString(R.string.my_goods_list), false, false);
+            CenterEntity entity5 = new CenterEntity(getString(R.string.my_service_info_list), false, false);
+            CenterEntity entity6 = new CenterEntity(getString(R.string.my_setting), true, false);
+            CenterEntity entity7 = new CenterEntity(getString(R.string.my_about), false, false);
+            entityList.add(entity0);
+            entityList.add(entity1);
+            entityList.add(entity2);
+            entityList.add(entity3);
+            entityList.add(entity4);
+            entityList.add(entity5);
+            entityList.add(entity6);
+            entityList.add(entity7);
+        } else {
+            count = 5;
+            entityList = new LinkedList<>();
+            CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
+            CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), false, false);
+            CenterEntity entity2 = new CenterEntity(getString(R.string.my_offer_service_list), true, true);
+            CenterEntity entity3 = new CenterEntity(getString(R.string.my_setting), true, false);
+            CenterEntity entity4 = new CenterEntity(getString(R.string.my_about), false, true);
+            entityList.add(entity0);
+            entityList.add(entity1);
+            entityList.add(entity2);
+            entityList.add(entity3);
+            entityList.add(entity4);
+        }
     }
 
 }

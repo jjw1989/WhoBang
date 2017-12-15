@@ -2,28 +2,11 @@ package com.whombang.app.mvp.presenter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.whombang.app.common.constants.Contents;
-import com.whombang.app.common.net.EasyHttp;
-import com.whombang.app.common.net.callback.ProgressDialogCallBack;
-import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.common.net.subsciber.IProgressDialog;
-import com.whombang.app.common.utils.PreferenceUtil;
-import com.whombang.app.entity.UserInfoEntity;
-import com.whombang.app.entity.UserLocalData;
-import com.whombang.app.features.login.RegisterActivity;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.whombang.app.features.login.ForgetActivity;
 
 import javax.inject.Inject;
 
@@ -31,52 +14,12 @@ import javax.inject.Inject;
  * Created by sundy.jiang on 2017/12/14.
  */
 
-public class RegisterPresenter {
+public class ForgetPresenter {
+    private ForgetActivity forgetActivity;
     private float scale = 0.2f; //logo缩放比例
-    private RegisterActivity registerActivity;
-
     @Inject
-    public RegisterPresenter(RegisterActivity registerActivity){
-        this.registerActivity=registerActivity;
-    }
-
-    /**
-     * 注册用户
-     * @param password
-     * @param newPassword
-     * @param invitation
-     */
-    public void registerUser(String password,String newPassword,String invitation){
-        IProgressDialog mProgressDialog = new IProgressDialog() {
-            @Override
-            public Dialog getDialog() {
-                ProgressDialog dialog = new ProgressDialog(registerActivity);
-                dialog.setMessage("注册中...");
-                return dialog;
-            }
-        };
-        Map<String,String> params=new HashMap<>();
-        params.put("userTel",password);
-        params.put("smsCode",newPassword);
-        params.put("invitationCode",invitation);
-        EasyHttp.post("userRegist")
-                .upJson(new JSONObject(params).toString())
-                .execute(new ProgressDialogCallBack<UserInfoEntity>(mProgressDialog,true,true) {
-
-                    @Override
-                    public void onSuccess(UserInfoEntity userInfoEntity) {
-                       // Log.i("wwww","userInfoEntity="+userInfoEntity.getUserInfo().toString());
-                        UserLocalData.putUser(registerActivity,userInfoEntity);
-                        PreferenceUtil.putBoolean(registerActivity, Contents.LOGIN,true);
-                        ARouter.getInstance().build("/main/tab").navigation();
-                    }
-
-                    @Override
-                    public void onError(ApiException e) {
-                        super.onError(e);
-                        Log.i("wwww","error="+e.getCode());
-                    }
-                });
+    public ForgetPresenter(ForgetActivity forgetActivity){
+        this.forgetActivity=forgetActivity;
     }
 
     public void onSoftKeyboardOpened(int keyboardSize, View body, ImageView imgLogo, int screenHeight){

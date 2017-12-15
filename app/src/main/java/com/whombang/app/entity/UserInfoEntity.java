@@ -6,8 +6,9 @@ package com.whombang.app.entity;
 
 public class UserInfoEntity {
 
+
     /**
-     * userInfo : {"userId":"4fef5d95513344788cf6837ec73625be","userRealName":null,"userAge":null,"userAgeScope":null,"userHeadImgUrl":null,"userNickName":null,"userTel":"15011112111","userSex":null,"userIdentityNumber":null,"userIdentityType":null,"userAddress":null,"userPassword":"lueSGJZetyySpUndWjMBEg==","userEmail":null,"userRegistTime":null,"userCurrentDevice":null,"userType":null,"userLastLoginTime":null,"userLastLogoutTime":null,"userLevel":null,"userScore":null,"userStatus":null,"userDeadTimes":null,"userInvitationCode":"12313","userInvitationUserId":null,"userStationId":null}
+     * userInfo : {"userId":"fa1630990cfa4bdb8b774af437c6de6c","userRealName":null,"userAge":null,"userAgeScope":null,"userHeadImgUrl":null,"userNickName":null,"userTel":"18611766105","userSex":null,"userIdentityNumber":null,"userIdentityType":null,"userAddress":null,"userPassword":"lueSGJZetyySpUndWjMBEg==","userEmail":null,"userRegistTime":null,"userCurrentDevice":null,"userType":0,"userLastLoginTime":null,"userLastLogoutTime":null,"userLevel":null,"userScore":null,"userStatus":0,"userDeadTimes":null,"userInvitationCode":null,"userInvitationUserId":"0074cae4f31f4d159d2399cb2c6405ad","userStationId":1}
      */
 
     private UserInfoBean userInfo;
@@ -22,13 +23,13 @@ public class UserInfoEntity {
 
     public static class UserInfoBean {
         /**
-         * userId : 4fef5d95513344788cf6837ec73625be
+         * userId : fa1630990cfa4bdb8b774af437c6de6c
          * userRealName : null
          * userAge : null
          * userAgeScope : null
          * userHeadImgUrl : null
          * userNickName : null
-         * userTel : 15011112111
+         * userTel : 18611766105
          * userSex : null
          * userIdentityNumber : null
          * userIdentityType : null
@@ -37,16 +38,16 @@ public class UserInfoEntity {
          * userEmail : null
          * userRegistTime : null
          * userCurrentDevice : null
-         * userType : null
+         * userType : 0
          * userLastLoginTime : null
          * userLastLogoutTime : null
          * userLevel : null
          * userScore : null
-         * userStatus : null
+         * userStatus : 0
          * userDeadTimes : null
-         * userInvitationCode : 12313
-         * userInvitationUserId : null
-         * userStationId : null
+         * userInvitationCode : null
+         * userInvitationUserId : 0074cae4f31f4d159d2399cb2c6405ad
+         * userStationId : 1
          */
 
         private String userId;
@@ -64,16 +65,16 @@ public class UserInfoEntity {
         private Object userEmail;
         private Object userRegistTime;
         private Object userCurrentDevice;
-        private Object userType;
+        private int userType;
         private Object userLastLoginTime;
         private Object userLastLogoutTime;
         private Object userLevel;
         private Object userScore;
-        private Object userStatus;
+        private int userStatus;
         private Object userDeadTimes;
-        private String userInvitationCode;
-        private Object userInvitationUserId;
-        private Object userStationId;
+        private Object userInvitationCode;
+        private String userInvitationUserId;
+        private int userStationId;
 
         public String getUserId() {
             return userId;
@@ -195,11 +196,11 @@ public class UserInfoEntity {
             this.userCurrentDevice = userCurrentDevice;
         }
 
-        public Object getUserType() {
+        public int getUserType() {
             return userType;
         }
 
-        public void setUserType(Object userType) {
+        public void setUserType(int userType) {
             this.userType = userType;
         }
 
@@ -235,11 +236,11 @@ public class UserInfoEntity {
             this.userScore = userScore;
         }
 
-        public Object getUserStatus() {
+        public int getUserStatus() {
             return userStatus;
         }
 
-        public void setUserStatus(Object userStatus) {
+        public void setUserStatus(int userStatus) {
             this.userStatus = userStatus;
         }
 
@@ -251,59 +252,28 @@ public class UserInfoEntity {
             this.userDeadTimes = userDeadTimes;
         }
 
-        public String getUserInvitationCode() {
+        public Object getUserInvitationCode() {
             return userInvitationCode;
         }
 
-        public void setUserInvitationCode(String userInvitationCode) {
+        public void setUserInvitationCode(Object userInvitationCode) {
             this.userInvitationCode = userInvitationCode;
         }
 
-        public Object getUserInvitationUserId() {
+        public String getUserInvitationUserId() {
             return userInvitationUserId;
         }
 
-        public void setUserInvitationUserId(Object userInvitationUserId) {
+        public void setUserInvitationUserId(String userInvitationUserId) {
             this.userInvitationUserId = userInvitationUserId;
         }
 
-        public Object getUserStationId() {
+        public int getUserStationId() {
             return userStationId;
         }
 
-        public void setUserStationId(Object userStationId) {
+        public void setUserStationId(int userStationId) {
             this.userStationId = userStationId;
-        }
-
-        @Override
-        public String toString() {
-            return "UserInfoBean{" +
-                    "userId='" + userId + '\'' +
-                    ", userRealName=" + userRealName +
-                    ", userAge=" + userAge +
-                    ", userAgeScope=" + userAgeScope +
-                    ", userHeadImgUrl=" + userHeadImgUrl +
-                    ", userNickName=" + userNickName +
-                    ", userTel='" + userTel + '\'' +
-                    ", userSex=" + userSex +
-                    ", userIdentityNumber=" + userIdentityNumber +
-                    ", userIdentityType=" + userIdentityType +
-                    ", userAddress=" + userAddress +
-                    ", userPassword='" + userPassword + '\'' +
-                    ", userEmail=" + userEmail +
-                    ", userRegistTime=" + userRegistTime +
-                    ", userCurrentDevice=" + userCurrentDevice +
-                    ", userType=" + userType +
-                    ", userLastLoginTime=" + userLastLoginTime +
-                    ", userLastLogoutTime=" + userLastLogoutTime +
-                    ", userLevel=" + userLevel +
-                    ", userScore=" + userScore +
-                    ", userStatus=" + userStatus +
-                    ", userDeadTimes=" + userDeadTimes +
-                    ", userInvitationCode='" + userInvitationCode + '\'' +
-                    ", userInvitationUserId=" + userInvitationUserId +
-                    ", userStationId=" + userStationId +
-                    '}';
         }
     }
 }

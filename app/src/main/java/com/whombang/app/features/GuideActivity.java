@@ -8,8 +8,9 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.systembar.SystemBarManager;
-
+import com.whombang.app.common.utils.PreferenceUtil;
 
 
 import butterknife.BindView;
@@ -53,6 +54,7 @@ public class GuideActivity extends BaseActivity {
         mBackgroundBanner.setEnterSkipViewIdAndDelegate(R.id.btn_guide_enter, R.id.tv_guide_skip, new BGABanner.GuideDelegate() {
             @Override
             public void onClickEnterOrSkip() {
+                PreferenceUtil.putBoolean(mContext, Contents.GUIDE,false);
                 ARouter.getInstance().build("/user/login").navigation();
                 finish();
             }

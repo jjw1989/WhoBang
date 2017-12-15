@@ -12,13 +12,16 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.ProgressDialogCallBack;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.net.subsciber.IProgressDialog;
+import com.whombang.app.common.utils.PreferenceUtil;
 import com.whombang.app.common.utils.Validator;
 import com.whombang.app.entity.UserInfoEntity;
+import com.whombang.app.entity.UserLocalData;
 
 import org.json.JSONObject;
 
@@ -72,14 +75,17 @@ public class PassWordLoginFragment extends BaseFragment {
             }
         };
         Map<String,String> params=new HashMap<>();
-        params.put("userTel",etPhone.getText().toString());//15011112111
-        params.put("userPassword",etPassWord.getText().toString());//111111
+        params.put("userTel",etPhone.getText().toString());
+        params.put("userPassword",etPassWord.getText().toString());
         EasyHttp.post("userLoginByPassword")
                 .upJson(new JSONObject(params).toString())
                 .execute(new ProgressDialogCallBack<UserInfoEntity>(mProgressDialog,true,true) {
 
                     @Override
                     public void onSuccess(UserInfoEntity userInfoEntity) {
+                        //保存用户信息
+                        UserLocalData.putUser(mActivity,userInfoEntity);
+                        PreferenceUtil.putBoolean(mActivity, Contents.LOGIN,true);
                         ARouter.getInstance().build("/main/tab").navigation();
                     }
 
@@ -93,13 +99,17 @@ public class PassWordLoginFragment extends BaseFragment {
       //
     }
 
-    private void login(String phone,String password) {
+    private boolean login(String phone,String password) {
         if (!Validator.isMobile(phone)){
 
+            return false;
         }
         if (!Validator.isPassword(password)){
 
+            return false;
         }
+
+        return true;
     }
 
     @OnClick(R.id.tv_register)
