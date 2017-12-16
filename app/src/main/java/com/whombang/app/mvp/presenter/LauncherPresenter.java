@@ -7,6 +7,8 @@ import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.LauncherActivity;
+import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.utils.PreferenceUtil;
 
 import javax.inject.Inject;
 
@@ -42,7 +44,17 @@ public class LauncherPresenter {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                ARouter.getInstance().build("/main/guide").navigation();
+                if (PreferenceUtil.getBoolean(mActivity, Contents.GUIDE,true)){
+                    ARouter.getInstance().build("/main/guide").navigation();
+                }else{
+                    if(PreferenceUtil.getBoolean(mActivity,Contents.LOGIN,false)){
+                        ARouter.getInstance().build("/main/tab").navigation();
+                    }else {
+                        ARouter.getInstance().build("/user/login").navigation();
+                    }
+
+                }
+
                 mActivity.finish();
             }
 

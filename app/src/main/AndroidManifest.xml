@@ -64,18 +64,25 @@
         <activity android:name=".features.shop.activity.CommodityDetailsActivity" />
         <activity android:name=".features.mycenter.activity.NewlyAddressActivity" />
         <activity android:name=".features.mycenter.activity.AddressManagerActivity" />
-        <activity android:name=".features.mycenter.activity.MyOrderActivity" />
-        <activity android:name=".features.mycenter.activity.ShopOrderActivity" />
-        <activity android:name=".features.mycenter.activity.MyEvaluateActivity" />
-        <activity android:name=".features.mycenter.activity.StationActivity" />
-        <activity android:name=".features.mycenter.activity.UserInformationActivity" />
+        <activity android:name=".features.mycenter.activity.AddServerActivity" />
+        <activity android:name=".features.mycenter.activity.MyServiceActivity" />
+        <activity android:name=".features.mycenter.activity.GroudBookActivity" />
+        <activity android:name=".features.mycenter.activity.OfferGoodsActivity" />
+        <activity android:name=".features.mycenter.activity.OfferServiceActivity" />
         <activity android:name=".features.mycenter.activity.AboutActivity" />
         <activity android:name=".features.mycenter.activity.CommonSettingActivity" />
-        <activity android:name=".features.login.LoginActivity" />
-        <activity android:name=".features.login.RegisterActivity" />
+        <activity
+            android:name=".features.login.LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".features.login.RegisterActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".features.sendtask.ServicePhoneActivity" />
         <activity android:name=".features.GuideActivity" />
-        <activity android:name=".features.login.ForgetActivity"></activity>
+        <activity
+            android:name=".features.login.ForgetActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".features.mycenter.activity.ServerInfoActivity"></activity>
     </application>
 
 </manifest>

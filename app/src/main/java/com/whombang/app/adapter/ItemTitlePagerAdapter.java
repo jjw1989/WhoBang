@@ -12,7 +12,10 @@ import java.util.List;
 public class ItemTitlePagerAdapter extends FragmentPagerAdapter {
     private String[] titleArray;
     private List<Fragment> fragmentList;
-
+    public ItemTitlePagerAdapter(FragmentManager fm, List<Fragment> fragmentList){
+        super(fm);
+        this.fragmentList = fragmentList;
+    }
     public ItemTitlePagerAdapter(FragmentManager fm, List<Fragment> fragmentList, String[] titleArray) {
         super(fm);
         this.fragmentList = fragmentList;
@@ -29,14 +32,14 @@ public class ItemTitlePagerAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titleArray[position];
-    }
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        return titleArray[position];
+//    }
 
     @Override
     public int getCount() {
-        return titleArray.length;
+        return fragmentList.size();
     }
 
     @Override

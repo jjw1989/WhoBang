@@ -8,19 +8,13 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 
 /**
- * 用户信息
+ * 服务提供者信息列表
  */
-@Route(path = "/my/userinformation")
-public class UserInformationActivity extends BaseActivity {
-
+@Route(path = "/my/info")
+public class ServerInfoActivity extends BaseActivity {
     @Override
-    public void initData(Bundle bundle) {
-
-    }
-
-    @Override
-    public int bindLayout() {
-        return R.layout.wb_user_information_layout;
+    protected int bindLayout() {
+        return R.layout.wb_server_info_layout;
     }
 
     @Override
@@ -29,8 +23,13 @@ public class UserInformationActivity extends BaseActivity {
     }
 
     @Override
+    public void initData(Bundle bundle) {
+
+    }
+
+    @Override
     public void initView(Bundle savedInstanceState, View view) {
-        titleBar.setTitle("用户信息");
+      titleBar.setTitle("服务提供者信息列表");
     }
 
     @Override

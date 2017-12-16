@@ -59,7 +59,7 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
     @Override
     public ApiResult<T> apply(@NonNull ResponseBody responseBody) throws Exception {
         ApiResult<T> apiResult = new ApiResult<>();
-        apiResult.setCode(-1);
+        apiResult.setResultCode(-1);
         if (type instanceof ParameterizedType) {//自定义ApiResult
             final Class<T> cls = (Class) ((ParameterizedType) type).getRawType();
             if (ApiResult.class.isAssignableFrom(cls)) {
@@ -71,7 +71,7 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
                     //增加是List<String>判断错误的问题
                     if (!List.class.isAssignableFrom(rawType) && clazz.equals(String.class)) {
                         apiResult.setData((T) json);
-                        apiResult.setCode(0);
+                        apiResult.setResultCode(0);
                        /* final Type type = Utils.getType(cls, 0);
                         ApiResult result = gson.fromJson(json, type);
                         if (result != null) {
@@ -143,7 +143,7 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
             return null;
         JSONObject jsonObject = new JSONObject(json);
         if (jsonObject.has("code")) {
-            apiResult.setCode(jsonObject.getInt("code"));
+            apiResult.setResultCode(jsonObject.getInt("code"));
         }
         if (jsonObject.has("data")) {
             apiResult.setData(jsonObject.getString("data"));

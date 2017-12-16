@@ -1,29 +1,53 @@
 package com.whombang.app.features.login;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.google.gson.Gson;
 import com.whombang.app.R;
+import com.whombang.app.adapter.ItemTitlePagerAdapter;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.view.EasyIndicator;
+import com.whombang.app.common.view.KeyboardWatcher;
+import com.whombang.app.common.view.NoScrollViewPager;
+import com.whombang.app.common.view.hideime.HideIMEUtil;
+import com.whombang.app.features.login.fragment.PassWordLoginFragment;
+import com.whombang.app.features.login.fragment.SMSLoginFragment;
+import com.whombang.app.mvp.component.DaggerLoginActivityComponent;
+import com.whombang.app.mvp.module.LoginActivityModule;
+import com.whombang.app.mvp.presenter.LoginPresenter;
 
-import com.whombang.app.entity.UserInfoEntity;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.inject.Inject;
 
-import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
-import okhttp3.RequestBody;
+import butterknife.BindView;
 
 /**
  * 登陆页面
  */
 @Route(path = "/user/login")
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftKeyboardStateListener {
+    @BindView(R.id.img_logo_login)
+    ImageView imgLogo;
+    @BindView(R.id.easy_indicator)
+    EasyIndicator tabStrip;
+    @BindView(R.id.vp_content)
+    NoScrollViewPager viewPager;
+    private List<Fragment> fragmentList;
+    @BindView(R.id.llt_body)
+    View body;
+    @Inject
+    LoginPresenter presenter;
+    private KeyboardWatcher keyboardWatcher;
+
+    private int screenHeight = 0;//屏幕高度
 
     @Override
     public void initData(Bundle bundle) {
@@ -37,12 +61,34 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initInjector() {
-
+        DaggerLoginActivityComponent.builder().loginActivityModule(new LoginActivityModule(this)).build().inject(this);
     }
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        titleBar.setTitle("登陆");
+        titleBar.setTitle(getString(R.string.login));
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askExit();
+            }
+        });
+        screenHeight = this.getResources().getDisplayMetrics().heightPixels; //获取屏幕高度
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new PassWordLoginFragment());
+        fragmentList.add(new SMSLoginFragment());
+        viewPager.setNoScroll(true);
+        tabStrip.setTabTitles(new String[]{getString(R.string.login_password), getString(R.string.login_sms)});
+        tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
+        tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
+            @Override
+            public void onTabClick(String title, int position) {
+
+            }
+        });
+        HideIMEUtil.wrap(this);
+        keyboardWatcher = new KeyboardWatcher(findViewById(Window.ID_ANDROID_CONTENT));
+        keyboardWatcher.addSoftKeyboardStateListener(this);
     }
 
 
@@ -51,37 +97,42 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.btn_login)
-    public void onStartLogin(View v){
-        Map<String,String> params=new HashMap<>();
-        params.put("userTel","15011112111");
-        params.put("userPassword","111111");
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(params));
-//        RetrofitClient.getInstance(this)
-//                .createBaseApi()
-//                .json("userLoginByPassword",body)
-//                .subscribe(new BaseSubscriber<BaseResponse>(this) {
-//                    @Override
-//                    public void onError(ExceptionHandle.ResponeThrowable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(BaseResponse baseResponse) {
-//                        Log.d("wwww", "onNext: 11111111111111111111111");
-//                    }
-//                });
 
-        ARouter.getInstance().build("/main/tab").navigation();
+    @Override
+    public void onSoftKeyboardOpened(int keyboardSize) {
+        presenter.onSoftKeyboardOpened(keyboardSize, body, imgLogo, screenHeight);
     }
 
-    @OnClick(R.id.tv_register)
-    public void registerUser(){
-        ARouter.getInstance().build("/user/register").navigation();
+    @Override
+    public void onSoftKeyboardClosed() {
+        presenter.onSoftKeyboardClosed(body, imgLogo);
     }
-
-    @OnClick(R.id.tv_forget)
-    public void forgetPassWord(){
-        ARouter.getInstance().build("/user/forget").navigation();
+    /***
+     * 监听用户点击事件
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            askExit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private long exitTime = 0;
+    /**
+     * 退出程序询问
+     */
+    private void askExit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), getString(R.string.pass_again_exti), Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 }

@@ -8,10 +8,11 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 
 /**
- * 申请为站主
+ * 提供商品列表
  */
-@Route(path = "/my/station")
-public class StationActivity extends BaseActivity {
+@Route(path = "/my/goods")
+public class OfferGoodsActivity extends BaseActivity {
+
     @Override
     public void initData(Bundle bundle) {
 
@@ -19,7 +20,7 @@ public class StationActivity extends BaseActivity {
 
     @Override
     public int bindLayout() {
-        return R.layout.wb_station_layout;
+        return R.layout.wb_user_information_layout;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class StationActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        titleBar.setTitle("申请为站主");
+        titleBar.setTitle("提供商品列表");
     }
 
     @Override

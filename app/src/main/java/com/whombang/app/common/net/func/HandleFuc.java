@@ -37,7 +37,7 @@ public class HandleFuc<T> implements Function<ApiResult<T>, T> {
         if (ApiException.isOk(tApiResult)) {
             return tApiResult.getData();// == null ? Optional.ofNullable(tApiResult.getData()).orElse(null) : tApiResult.getData();
         } else {
-            throw new ServerException(tApiResult.getCode(), tApiResult.getMsg());
+            throw new ServerException(tApiResult.getResultCode(), tApiResult.getMsg());
         }
     }
 }

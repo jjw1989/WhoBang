@@ -126,7 +126,7 @@ public class MyCenterAdapter extends VirtualLayoutAdapter{
             super(view);
 
            // tv = (TextView) view.findViewById(R.id.login_out);
-            iv = (ImageView) view.findViewById(R.id.banner_image);
+         //   iv = (ImageView) view.findViewById(R.id.banner_image);
 //            tv.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {

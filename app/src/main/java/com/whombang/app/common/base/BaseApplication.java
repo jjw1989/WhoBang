@@ -7,8 +7,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.cache.converter.SerializableDiskConverter;
-import com.whombang.app.common.net.interceptor.CustomSignInterceptor;
-import com.whombang.app.common.net.model.HttpHeaders;
 import com.whombang.app.common.net.utils.HttpLog;
 import com.whombang.app.mvp.component.ApplicationComponent;
 import com.whombang.app.mvp.component.DaggerApplicationComponent;
@@ -43,7 +41,7 @@ public class BaseApplication extends MultiDexApplication {
         EasyHttp.init(this);
 
         //这里涉及到安全我把url去掉了，demo都是调试通的
-        String Url = "http://47.104.105.135:8080";
+        String Url = "http://47.104.105.135:8080/WhomBangServer/";
 
 
         //设置请求头
@@ -65,11 +63,11 @@ public class BaseApplication extends MultiDexApplication {
                 .setCacheMaxSize(50 * 1024 * 1024)//设置缓存大小为50M
                 .setCacheVersion(1)//缓存版本为1
                 .setHostnameVerifier(new UnSafeHostnameVerifier(Url))//全局访问规则
-                .setCertificates()//信任所有证书
+                .setCertificates();//信任所有证书
                 //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
                // .addCommonHeaders(headers)//设置全局公共头
                // .addCommonParams(params)//设置全局公共参数
-                .addInterceptor(new CustomSignInterceptor());//添加参数签名拦截器
+               // .addInterceptor(new CustomSignInterceptor());//添加参数签名拦截器
         //.addInterceptor(new HeTInterceptor());//处理自己业务的拦截器
     }
     public class UnSafeHostnameVerifier implements HostnameVerifier {
