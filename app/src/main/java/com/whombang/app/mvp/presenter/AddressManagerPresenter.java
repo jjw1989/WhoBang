@@ -1,21 +1,11 @@
 package com.whombang.app.mvp.presenter;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
-import com.whombang.app.common.net.callback.ProgressDialogCallBack;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.common.net.subsciber.IProgressDialog;
-import com.whombang.app.common.utils.PreferenceUtil;
 import com.whombang.app.entity.ConsigneeEntity;
-import com.whombang.app.entity.UserInfoEntity;
-import com.whombang.app.entity.UserLocalData;
 import com.whombang.app.features.mycenter.activity.AddressManagerActivity;
 
 import org.json.JSONObject;
@@ -51,7 +41,7 @@ public class AddressManagerPresenter {
 
                     @Override
                     public void onError(ApiException e) {
-
+                        Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

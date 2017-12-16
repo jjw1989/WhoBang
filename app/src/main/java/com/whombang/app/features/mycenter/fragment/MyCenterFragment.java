@@ -76,6 +76,7 @@ public class MyCenterFragment extends BaseFragment {
                 ImageView imgSet=holder.getView(R.id.img_user_set);
                  ImageView imgHead=holder.getView(R.id.avatar);
                  TextView tvLogin=holder.getView(R.id.tv_user_tip);
+                 //tvLogin.setText(UserLocalData.getUserInfo(mActivity).getUserInfo().);
                  imgHead.setOnClickListener(listener);
                  tvLogin.setOnClickListener(listener);
                  imgSet.setOnClickListener(new View.OnClickListener() {
@@ -206,18 +207,18 @@ public class MyCenterFragment extends BaseFragment {
          *   0:普通用户   1：站主   2：服务者
          */
         if (userType == 0) {
-            count = 4;
+            count = 3;
             entityList = new LinkedList<>();
             CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
             CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), true, false);
-            CenterEntity entity2 = new CenterEntity(getString(R.string.my_setting), true, false);
+           // CenterEntity entity2 = new CenterEntity(getString(R.string.my_setting), true, false);
             CenterEntity entity3 = new CenterEntity(getString(R.string.my_about), true, true);
             entityList.add(entity0);
             entityList.add(entity1);
-            entityList.add(entity2);
+           // entityList.add(entity2);
             entityList.add(entity3);
         } else if (userType == 1) {
-            count = 8;
+            count = 7;
             entityList = new LinkedList<>();
             CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
             CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), false, false);
@@ -225,7 +226,7 @@ public class MyCenterFragment extends BaseFragment {
             CenterEntity entity3 = new CenterEntity(getString(R.string.my_offer_service_list), false, false);
             CenterEntity entity4 = new CenterEntity(getString(R.string.my_goods_list), false, false);
             CenterEntity entity5 = new CenterEntity(getString(R.string.my_service_info_list), false, false);
-            CenterEntity entity6 = new CenterEntity(getString(R.string.my_setting), true, false);
+          //  CenterEntity entity6 = new CenterEntity(getString(R.string.my_setting), true, false);
             CenterEntity entity7 = new CenterEntity(getString(R.string.my_about), false, false);
             entityList.add(entity0);
             entityList.add(entity1);
@@ -233,20 +234,20 @@ public class MyCenterFragment extends BaseFragment {
             entityList.add(entity3);
             entityList.add(entity4);
             entityList.add(entity5);
-            entityList.add(entity6);
+           // entityList.add(entity6);
             entityList.add(entity7);
         } else {
-            count = 5;
+            count = 4;
             entityList = new LinkedList<>();
             CenterEntity entity0 = new CenterEntity(getString(R.string.my_group_booking), true, false);
             CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), false, false);
             CenterEntity entity2 = new CenterEntity(getString(R.string.my_offer_service_list), true, true);
-            CenterEntity entity3 = new CenterEntity(getString(R.string.my_setting), true, false);
+           // CenterEntity entity3 = new CenterEntity(getString(R.string.my_setting), true, false);
             CenterEntity entity4 = new CenterEntity(getString(R.string.my_about), false, true);
             entityList.add(entity0);
             entityList.add(entity1);
             entityList.add(entity2);
-            entityList.add(entity3);
+           // entityList.add(entity3);
             entityList.add(entity4);
         }
     }
