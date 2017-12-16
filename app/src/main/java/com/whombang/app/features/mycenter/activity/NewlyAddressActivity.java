@@ -3,12 +3,14 @@ package com.whombang.app.features.mycenter.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 
 /**
  * 新增地址
  */
+@Route(path = "/address/newly")
 public class NewlyAddressActivity extends BaseActivity {
 
     @Override

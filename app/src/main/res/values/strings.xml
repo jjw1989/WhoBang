@@ -78,5 +78,6 @@
     <string name="btn_affirm">确认</string>
     <string name="issue">发布</string>
     <string name="issue_service">发布服务</string>
+    <string name="my_addrss">我的地址</string>
 
 </resources>

@@ -73,10 +73,17 @@ public class MyCenterFragment extends BaseFragment {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+                ImageView imgSet=holder.getView(R.id.img_user_set);
                  ImageView imgHead=holder.getView(R.id.avatar);
                  TextView tvLogin=holder.getView(R.id.tv_user_tip);
                  imgHead.setOnClickListener(listener);
                  tvLogin.setOnClickListener(listener);
+                 imgSet.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View view) {
+                         ARouter.getInstance().build("/my/userset").navigation();
+                     }
+                 });
             }
         };
 

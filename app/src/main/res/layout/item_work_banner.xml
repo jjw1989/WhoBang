@@ -10,17 +10,14 @@
         android:layout_height="150dp"
         android:background="@android:color/white">
 
-        <TextView
-            android:id="@+id/login_out"
+        <ImageView
+            android:id="@+id/img_user_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:drawablePadding="5dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="设置"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/font_middle" />
+            android:layout_margin="15dp"
+            android:background="@mipmap/shezhi"
+           />
 
         <TextView
             android:id="@+id/tv_user_tip"

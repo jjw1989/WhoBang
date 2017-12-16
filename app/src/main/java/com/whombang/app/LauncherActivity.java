@@ -21,10 +21,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * 启动页

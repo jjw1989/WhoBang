@@ -15,7 +15,7 @@ import java.util.List;
  * Created by sundy.jiang on 2017/12/11.
  */
 
-public class ConsigneeAddressAdapter extends SimpleAdapter<ConsigneeEntity>{
+public class ConsigneeAddressAdapter extends SimpleAdapter<ConsigneeEntity.UserAddressInfosBean>{
     private TextView consigneeName ;
     private TextView consigneePhone ;
     private TextView consigneeAddress ;
@@ -23,12 +23,12 @@ public class ConsigneeAddressAdapter extends SimpleAdapter<ConsigneeEntity>{
     private RadioButton isCheck ;
     private TextView edit ;
     private TextView delete ;
-    public ConsigneeAddressAdapter(Context context, List<ConsigneeEntity> mDatas, int resId) {
+    public ConsigneeAddressAdapter(Context context, List<ConsigneeEntity.UserAddressInfosBean> mDatas, int resId) {
         super(context, mDatas, resId);
     }
 
     @Override
-    public void bindData(BaseViewHolder holder, ConsigneeEntity consigneeMsg, int position) {
+    public void bindData(BaseViewHolder holder, ConsigneeEntity.UserAddressInfosBean consigneeMsg, int position) {
         consigneeName = holder.findTextView(R.id.consignee_name) ;
         consigneePhone = holder.findTextView(R.id.consignee_phone) ;
         consigneeAddress = holder.findTextView(R.id.consignee_address) ;
@@ -37,11 +37,11 @@ public class ConsigneeAddressAdapter extends SimpleAdapter<ConsigneeEntity>{
         edit = holder.findTextView(R.id.edite_address) ;
         delete = holder.findTextView(R.id.delete_address) ;
 
-        isCheck.setChecked(consigneeMsg.isDefault());
-        consigneeName.setText(consigneeMsg.getConsignee());
-        consigneePhone.setText(showPhone(consigneeMsg.getPhone()));
-        consigneeAddress.setText(consigneeMsg.getAddr());
-        checkText.setText(consigneeMsg.isDefault() ? "默认地址" : "设为默认");
+        isCheck.setChecked(consigneeMsg.getUserAddressDefault()==1?true:false);
+        consigneeName.setText(consigneeMsg.getUserAddressContactPeople());
+        consigneePhone.setText(showPhone(consigneeMsg.getUserAddressContactTel()));
+        consigneeAddress.setText(consigneeMsg.getUserAddressDetail());
+        checkText.setText((consigneeMsg.getUserAddressDefault()==1?true:false) ? "默认地址" : "设为默认");
     }
     private String showPhone(String phone){
         return phone.substring(0 ,3) + "*****" + phone.substring(phone.length()-3) ;

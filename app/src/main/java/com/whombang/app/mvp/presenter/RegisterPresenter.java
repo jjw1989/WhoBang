@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.common.constants.Contents;
@@ -74,7 +75,7 @@ public class RegisterPresenter {
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
-                        Log.i("wwww","error="+e.getCode());
+                        Toast.makeText(registerActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
     }
