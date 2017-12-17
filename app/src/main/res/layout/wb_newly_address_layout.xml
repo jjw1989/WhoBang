@@ -1,9 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
     tools:context="com.whombang.app.features.mycenter.activity.NewlyAddressActivity">
     <include layout="@layout/wb_titlebar_layout"/>
-</android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rlt_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:textSize="18sp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
+                android:text="收件人" />
+
+            <EditText
+                android:id="@+id/et_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginStart="43dp"
+                android:layout_toEndOf="@+id/textView14"
+                android:layout_toRightOf="@+id/textView14"
+                android:hint="姓名"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                android:theme="@style/MyEditText" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlt_center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/rlt_top"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:textSize="18sp"
+                android:layout_marginStart="23dp"
+                android:text="联系方式" />
+
+            <EditText
+                android:id="@+id/et_add_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_alignBaseline="@+id/textView15"
+                android:layout_alignBottom="@+id/textView15"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_toEndOf="@+id/textView15"
+                android:layout_toRightOf="@+id/textView15"
+                android:hint="手机号码"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                android:theme="@style/MyEditText" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/rlt_center"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:textSize="18sp"
+                android:layout_marginStart="23dp"
+                android:text="详细地址" />
+
+            <EditText
+                android:id="@+id/et_detail_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="27dp"
+                android:layout_marginStart="27dp"
+                android:layout_toEndOf="@+id/textView16"
+                android:layout_toRightOf="@+id/textView16"
+                android:hint="详细地址需填写楼栋楼层和房间号"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                android:theme="@style/MyEditText" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

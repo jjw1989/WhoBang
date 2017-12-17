@@ -85,5 +85,7 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
     //状态栏
     implementation 'com.githang:status-bar-compat:0.7'
+    //圆角textview
+    compile 'com.ruffian.library:RTextView:1.0.3'
 
 }

@@ -84,7 +84,8 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".features.mycenter.activity.ServerInfoActivity" />
         <activity android:name=".features.mycenter.activity.SettingActivity" />
-        <activity android:name=".features.mycenter.activity.SetNameActivity"></activity>
+        <activity android:name=".features.mycenter.activity.SetNameActivity" />
+        <activity android:name=".features.mycenter.activity.EvaluateActivity"></activity>
     </application>
 
 </manifest>

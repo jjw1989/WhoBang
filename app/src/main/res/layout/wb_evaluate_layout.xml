@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/bg"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.whombang.app.features.mycenter.activity.EvaluateActivity">
+
+    <include layout="@layout/wb_titlebar_layout"
+        android:id="@+id/top"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_below="@+id/top"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_below="@+id/ratingBar"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
+        android:hint="说说你的感受！"
+        android:background="@drawable/edittext_bg"
+        android:minHeight="200dp"
+        android:gravity="top|left"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -55,56 +55,56 @@ public class UserInfoEntity {
 
     public static class UserInfoBean {
         /**
-         * userId : 907da6c5fa1841ada22cb1227b157c51
-         * userRealName : 测试者
-         * userAge : null
-         * userAgeScope : null
-         * userHeadImgUrl : null
-         * userNickName : null
-         * userTel : 15712848950
-         * userSex : null
-         * userIdentityNumber : null
-         * userIdentityType : null
-         * userAddress : null
+         * userId : 07079157402541abacfb34aab42d80e2
+         * userRealName : 站主张丹枫
+         * userAge : 0
+         * userAgeScope : 1
+         * userHeadImgUrl :
+         * userNickName :
+         * userTel : 15011465513
+         * userSex : 0
+         * userIdentityNumber :
+         * userIdentityType : 1
+         * userAddress :
          * userPassword : lueSGJZetyySpUndWjMBEg==
-         * userEmail : null
-         * userRegistTime : null
-         * userCurrentDevice : null
-         * userType : 0
-         * userLastLoginTime : null
-         * userLastLogoutTime : null
-         * userLevel : null
-         * userScore : null
+         * userEmail :
+         * userRegistTime :
+         * userCurrentDevice : 1
+         * userType : 1
+         * userLastLoginTime : 2017-12-16 16:46:43
+         * userLastLogoutTime : 2017-12-15 16:41:08
+         * userLevel : 1
+         * userScore : 0
          * userStatus : 0
-         * userDeadTimes : null
-         * userInvitationCode : null
-         * userInvitationUserId : f941eb2b9ea64506bca0c6eda08c7428
-         * userStationId : 2
+         * userDeadTimes : 0
+         * userInvitationCode : 11086570
+         * userInvitationUserId :
+         * userStationId : 0
          */
 
         private String userId;
         private String userRealName;
-        private Object userAge;
-        private Object userAgeScope;
-        private Object userHeadImgUrl;
-        private Object userNickName;
+        private int userAge;
+        private int userAgeScope;
+        private String userHeadImgUrl;
+        private String userNickName;
         private String userTel;
-        private Object userSex;
-        private Object userIdentityNumber;
-        private Object userIdentityType;
-        private Object userAddress;
+        private int userSex;
+        private String userIdentityNumber;
+        private int userIdentityType;
+        private String userAddress;
         private String userPassword;
-        private Object userEmail;
-        private Object userRegistTime;
-        private Object userCurrentDevice;
+        private String userEmail;
+        private String userRegistTime;
+        private int userCurrentDevice;
         private int userType;
-        private Object userLastLoginTime;
-        private Object userLastLogoutTime;
-        private Object userLevel;
-        private Object userScore;
+        private String userLastLoginTime;
+        private String userLastLogoutTime;
+        private int userLevel;
+        private int userScore;
         private int userStatus;
-        private Object userDeadTimes;
-        private Object userInvitationCode;
+        private int userDeadTimes;
+        private String userInvitationCode;
         private String userInvitationUserId;
         private int userStationId;
 
@@ -124,35 +124,35 @@ public class UserInfoEntity {
             this.userRealName = userRealName;
         }
 
-        public Object getUserAge() {
+        public int getUserAge() {
             return userAge;
         }
 
-        public void setUserAge(Object userAge) {
+        public void setUserAge(int userAge) {
             this.userAge = userAge;
         }
 
-        public Object getUserAgeScope() {
+        public int getUserAgeScope() {
             return userAgeScope;
         }
 
-        public void setUserAgeScope(Object userAgeScope) {
+        public void setUserAgeScope(int userAgeScope) {
             this.userAgeScope = userAgeScope;
         }
 
-        public Object getUserHeadImgUrl() {
+        public String getUserHeadImgUrl() {
             return userHeadImgUrl;
         }
 
-        public void setUserHeadImgUrl(Object userHeadImgUrl) {
+        public void setUserHeadImgUrl(String userHeadImgUrl) {
             this.userHeadImgUrl = userHeadImgUrl;
         }
 
-        public Object getUserNickName() {
+        public String getUserNickName() {
             return userNickName;
         }
 
-        public void setUserNickName(Object userNickName) {
+        public void setUserNickName(String userNickName) {
             this.userNickName = userNickName;
         }
 
@@ -164,35 +164,35 @@ public class UserInfoEntity {
             this.userTel = userTel;
         }
 
-        public Object getUserSex() {
+        public int getUserSex() {
             return userSex;
         }
 
-        public void setUserSex(Object userSex) {
+        public void setUserSex(int userSex) {
             this.userSex = userSex;
         }
 
-        public Object getUserIdentityNumber() {
+        public String getUserIdentityNumber() {
             return userIdentityNumber;
         }
 
-        public void setUserIdentityNumber(Object userIdentityNumber) {
+        public void setUserIdentityNumber(String userIdentityNumber) {
             this.userIdentityNumber = userIdentityNumber;
         }
 
-        public Object getUserIdentityType() {
+        public int getUserIdentityType() {
             return userIdentityType;
         }
 
-        public void setUserIdentityType(Object userIdentityType) {
+        public void setUserIdentityType(int userIdentityType) {
             this.userIdentityType = userIdentityType;
         }
 
-        public Object getUserAddress() {
+        public String getUserAddress() {
             return userAddress;
         }
 
-        public void setUserAddress(Object userAddress) {
+        public void setUserAddress(String userAddress) {
             this.userAddress = userAddress;
         }
 
@@ -204,27 +204,27 @@ public class UserInfoEntity {
             this.userPassword = userPassword;
         }
 
-        public Object getUserEmail() {
+        public String getUserEmail() {
             return userEmail;
         }
 
-        public void setUserEmail(Object userEmail) {
+        public void setUserEmail(String userEmail) {
             this.userEmail = userEmail;
         }
 
-        public Object getUserRegistTime() {
+        public String getUserRegistTime() {
             return userRegistTime;
         }
 
-        public void setUserRegistTime(Object userRegistTime) {
+        public void setUserRegistTime(String userRegistTime) {
             this.userRegistTime = userRegistTime;
         }
 
-        public Object getUserCurrentDevice() {
+        public int getUserCurrentDevice() {
             return userCurrentDevice;
         }
 
-        public void setUserCurrentDevice(Object userCurrentDevice) {
+        public void setUserCurrentDevice(int userCurrentDevice) {
             this.userCurrentDevice = userCurrentDevice;
         }
 
@@ -236,35 +236,35 @@ public class UserInfoEntity {
             this.userType = userType;
         }
 
-        public Object getUserLastLoginTime() {
+        public String getUserLastLoginTime() {
             return userLastLoginTime;
         }
 
-        public void setUserLastLoginTime(Object userLastLoginTime) {
+        public void setUserLastLoginTime(String userLastLoginTime) {
             this.userLastLoginTime = userLastLoginTime;
         }
 
-        public Object getUserLastLogoutTime() {
+        public String getUserLastLogoutTime() {
             return userLastLogoutTime;
         }
 
-        public void setUserLastLogoutTime(Object userLastLogoutTime) {
+        public void setUserLastLogoutTime(String userLastLogoutTime) {
             this.userLastLogoutTime = userLastLogoutTime;
         }
 
-        public Object getUserLevel() {
+        public int getUserLevel() {
             return userLevel;
         }
 
-        public void setUserLevel(Object userLevel) {
+        public void setUserLevel(int userLevel) {
             this.userLevel = userLevel;
         }
 
-        public Object getUserScore() {
+        public int getUserScore() {
             return userScore;
         }
 
-        public void setUserScore(Object userScore) {
+        public void setUserScore(int userScore) {
             this.userScore = userScore;
         }
 
@@ -276,19 +276,19 @@ public class UserInfoEntity {
             this.userStatus = userStatus;
         }
 
-        public Object getUserDeadTimes() {
+        public int getUserDeadTimes() {
             return userDeadTimes;
         }
 
-        public void setUserDeadTimes(Object userDeadTimes) {
+        public void setUserDeadTimes(int userDeadTimes) {
             this.userDeadTimes = userDeadTimes;
         }
 
-        public Object getUserInvitationCode() {
+        public String getUserInvitationCode() {
             return userInvitationCode;
         }
 
-        public void setUserInvitationCode(Object userInvitationCode) {
+        public void setUserInvitationCode(String userInvitationCode) {
             this.userInvitationCode = userInvitationCode;
         }
 
@@ -505,11 +505,12 @@ public class UserInfoEntity {
         }
     }
 
+
     public static class StationManagerInfoBean {
         /**
-         * stationManagerId : 2
+         * stationManagerId : 1
          * stationManagerName : 张丹枫
-         * stationManagerTel : 15011465514
+         * stationManagerTel : 15011465513
          * stationManagerAddress : 四川省绵阳
          * stationManagerAge : 0
          * stationManagerComment : 莫道萍踪随逝水
@@ -521,8 +522,8 @@ public class UserInfoEntity {
          * stationManagerBonusMoney : 0.05
          * stationManagerSaleRate : 0.04
          * stationManagerStatus : 0
-         * userId : f941eb2b9ea64506bca0c6eda08c7428
-         * stationId : 2
+         * userId : 07079157402541abacfb34aab42d80e2
+         * stationId : 1
          */
 
         private int stationManagerId;

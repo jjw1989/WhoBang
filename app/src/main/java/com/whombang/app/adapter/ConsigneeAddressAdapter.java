@@ -37,11 +37,11 @@ public class ConsigneeAddressAdapter extends SimpleAdapter<ConsigneeEntity.UserA
         edit = holder.findTextView(R.id.edite_address) ;
         delete = holder.findTextView(R.id.delete_address) ;
 
-        isCheck.setChecked(consigneeMsg.getUserAddressDefault()==1?true:false);
+        isCheck.setChecked(consigneeMsg.getUserAddressDefault());
         consigneeName.setText(consigneeMsg.getUserAddressContactPeople());
         consigneePhone.setText(showPhone(consigneeMsg.getUserAddressContactTel()));
         consigneeAddress.setText(consigneeMsg.getUserAddressDetail());
-        checkText.setText((consigneeMsg.getUserAddressDefault()==1?true:false) ? "默认地址" : "设为默认");
+        checkText.setText(consigneeMsg.getUserAddressDefault()? "默认地址" : "设为默认");
     }
     private String showPhone(String phone){
         return phone.substring(0 ,3) + "*****" + phone.substring(phone.length()-3) ;

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@color/white"
+    android:layout_height="120dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="@color/blue"
+    android:layout_height="wrap_content"
+    android:id="@+id/rlt_top">
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        app:srcCompat="@mipmap/icon_check_true" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView11"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/imageView11"
+        android:layout_toRightOf="@+id/imageView11"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView18"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:text="TextView" />
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@+id/rlt_top"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        app:srcCompat="@mipmap/banner" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_toLeftOf="@+id/textView21"
+        android:layout_toStartOf="@+id/textView21"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:textSize="12sp"
+        android:layout_toEndOf="@+id/imageButton"
+        android:layout_toRightOf="@+id/imageButton"
+        android:text="TextView1111111111111111111111111" />
+    <!---->
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView20"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView20"
+        android:layout_alignStart="@+id/textView20"
+        android:layout_below="@+id/textView20"
+        android:layout_toLeftOf="@+id/textView21"
+        android:layout_toStartOf="@+id/textView21"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:text="TextView111111111111111111111111111111111111" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView21"
+        android:layout_alignStart="@+id/textView21"
+        android:layout_alignTop="@+id/textView22"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButton"
+        android:layout_toEndOf="@+id/textView22"
+        android:layout_toRightOf="@+id/textView22"
+        android:text="TextView" />
+</RelativeLayout>
+
+
+</RelativeLayout>
+</LinearLayout>
