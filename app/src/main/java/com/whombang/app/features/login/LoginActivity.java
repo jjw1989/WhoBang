@@ -66,6 +66,7 @@ public class LoginActivity extends BaseActivity implements KeyboardWatcher.SoftK
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        titleBar.setVisibility(View.GONE);
         titleBar.setTitle(getString(R.string.login));
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override

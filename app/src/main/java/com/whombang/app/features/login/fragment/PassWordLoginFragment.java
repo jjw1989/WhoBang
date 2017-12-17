@@ -41,6 +41,7 @@ public class PassWordLoginFragment extends BaseFragment {
     EditText etPhone;
     @BindView(R.id.et_password_one)
     EditText etPassWord;
+
     @Override
     protected int bindLayout() {
         return R.layout.wb_pass_word_login_layout;
@@ -65,48 +66,58 @@ public class PassWordLoginFragment extends BaseFragment {
     public void doBusiness() {
 
     }
+
     @OnClick(R.id.btn_login)
-    public void onStartLogin(){
-        IProgressDialog mProgressDialog = new IProgressDialog() {
-            @Override
-            public Dialog getDialog() {
-                ProgressDialog dialog = new ProgressDialog(mActivity);
-                dialog.setMessage("登录中...");
-                return dialog;
-            }
-        };
-        Map<String,String> params=new HashMap<>();
-        params.put("userTel",etPhone.getText().toString());
-        params.put("userPassword",etPassWord.getText().toString());
-        EasyHttp.post("userLoginByPassword")
-                .upJson(new JSONObject(params).toString())
-                .execute(new ProgressDialogCallBack<UserInfoEntity>(mProgressDialog,true,true) {
+    public void onStartLogin() {
+        String phone = etPhone.getText().toString();
+        String password = etPassWord.getText().toString();
+        if (login(phone, password)) {
+            IProgressDialog mProgressDialog = new IProgressDialog() {
+                @Override
+                public Dialog getDialog() {
+                    ProgressDialog dialog = new ProgressDialog(mActivity);
+                    dialog.setMessage("登录中...");
+                    return dialog;
+                }
+            };
+            Map<String, String> params = new HashMap<>();
+            params.put("userTel", etPhone.getText().toString());
+            params.put("userPassword", etPassWord.getText().toString());
+            EasyHttp.post("userLoginByPassword")
+                    .upJson(new JSONObject(params).toString())
+                    .execute(new ProgressDialogCallBack<UserInfoEntity>(mProgressDialog, true, true) {
 
-                    @Override
-                    public void onSuccess(UserInfoEntity userInfoEntity) {
-                        //保存用户信息
-                        UserLocalData.putUser(mActivity,userInfoEntity);
-                        PreferenceUtil.putBoolean(mActivity, Contents.LOGIN,true);
-                        ARouter.getInstance().build("/main/tab").navigation();
-                    }
+                        @Override
+                        public void onSuccess(UserInfoEntity userInfoEntity) {
+                            //保存用户信息
+                            UserLocalData.putUser(mActivity, userInfoEntity);
+                            PreferenceUtil.putBoolean(mActivity, Contents.LOGIN, true);
+                            ARouter.getInstance().build("/main/tab").navigation();
+                        }
 
-                    @Override
-                    public void onError(ApiException e) {
-                        super.onError(e);
-                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onError(ApiException e) {
+                            super.onError(e);
+                            Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
 
-      //
     }
 
-    private boolean login(String phone,String password) {
-        if (!Validator.isMobile(phone)){
-
+    /**
+     * 登录校验
+     * @param phone
+     * @param password
+     * @return
+     */
+    private boolean login(String phone, String password) {
+        if (!Validator.isMobile(phone)) {
+            Toast.makeText(mActivity, "请输入正确格式的手机号", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!Validator.isPassword(password)){
-
+        if (!Validator.isPassword(password)) {
+            Toast.makeText(mActivity, "请设置为6~16位数字和字母", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -114,12 +125,12 @@ public class PassWordLoginFragment extends BaseFragment {
     }
 
     @OnClick(R.id.tv_register)
-    public void registerUser(){
+    public void registerUser() {
         ARouter.getInstance().build("/user/register").navigation();
     }
 
     @OnClick(R.id.tv_forget)
-    public void forgetPassWord(){
+    public void forgetPassWord() {
         ARouter.getInstance().build("/user/forget").navigation();
     }
 }

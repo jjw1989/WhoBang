@@ -58,39 +58,6 @@ public class LauncherActivity extends BaseActivity {
     public void doBusiness() {
         titleBar.setVisibility(View.GONE);
         presenter.onStartAnimAndJump(imgLogo);
-//        arouterJump();
-//        countdown(4).subscribe(new Consumer<Long>() {
-//            @Override
-//            public void accept(Long aLong) throws Exception {
-//                Log.i("www", "accept: 倒计时： " + aLong);
-//            }
-//        });
-      //  Log.i("wwww", "sha1: ="+sHA1());
-    }
-
-    public String sHA1() {
-        try {
-            PackageInfo info = this.getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-            byte[] cert = info.signatures[0].toByteArray();
-            MessageDigest md = MessageDigest.getInstance("SHA1");
-            byte[] publicKey = md.digest(cert);
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < publicKey.length; i++) {
-                String appendString = Integer.toHexString(0xFF & publicKey[i])
-                        .toUpperCase(Locale.US);
-                if (appendString.length() == 1)
-                    hexString.append("0");
-                hexString.append(appendString);
-                hexString.append(":");
-            }
-            String result = hexString.toString();
-            return result.substring(0, result.length() - 1);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**

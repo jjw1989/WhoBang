@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/include2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@mipmap/logo" />
     <LinearLayout
         android:id="@+id/llt_body"
