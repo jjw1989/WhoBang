@@ -87,5 +87,8 @@ dependencies {
     implementation 'com.githang:status-bar-compat:0.7'
     //圆角textview
     compile 'com.ruffian.library:RTextView:1.0.3'
+    //刷新
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
 
 }
