@@ -27,10 +27,9 @@
         android:text="姓名" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_demanderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_centerVertical="true"
         android:layout_marginLeft="87dp"
         android:layout_marginStart="87dp"

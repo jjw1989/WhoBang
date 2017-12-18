@@ -7,20 +7,21 @@
     android:background="@color/bg"
     android:orientation="vertical"
     tools:context="com.whombang.app.features.mycenter.activity.NewlyAddressActivity">
-    <include layout="@layout/wb_titlebar_layout"/>
+
+    <include layout="@layout/wb_titlebar_layout" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:padding="@dimen/dp_10">
 
         <RelativeLayout
             android:id="@+id/rlt_top"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -30,22 +31,21 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
-                android:layout_marginLeft="23dp"
-                android:layout_marginStart="23dp"
-                android:text="收件人" />
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:text="收件人"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="43dp"
                 android:layout_marginStart="43dp"
                 android:layout_toEndOf="@+id/textView14"
                 android:layout_toRightOf="@+id/textView14"
-                android:hint="姓名"
+                android:hint="请输入收件人姓名"
                 android:inputType="textPersonName"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText" />
@@ -68,30 +68,31 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="23dp"
-                android:textSize="18sp"
-                android:layout_marginStart="23dp"
-                android:text="联系方式" />
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:text="联系方式"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_add_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_alignBaseline="@+id/textView15"
                 android:layout_alignBottom="@+id/textView15"
                 android:layout_marginLeft="25dp"
                 android:layout_marginStart="25dp"
                 android:layout_toEndOf="@+id/textView15"
                 android:layout_toRightOf="@+id/textView15"
-                android:hint="手机号码"
+                android:hint="请输入收件人电话"
                 android:inputType="textPersonName"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText" />
 
 
         </RelativeLayout>
+
         <RelativeLayout
+            android:id="@+id/rlt_contact_address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@+id/rlt_center"
@@ -105,28 +106,65 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="23dp"
-                android:textSize="18sp"
-                android:layout_marginStart="23dp"
-                android:text="详细地址" />
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:text="联系地址"
+                android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/et_detail_address"
+            <TextView
+                android:id="@+id/et_contact_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="27dp"
                 android:layout_marginStart="27dp"
                 android:layout_toEndOf="@+id/textView16"
                 android:layout_toRightOf="@+id/textView16"
-                android:hint="详细地址需填写楼栋楼层和房间号"
-                android:inputType="textPersonName"
+                android:hint="请选择收件人地址"
                 android:textSize="16sp"
                 android:theme="@style/MyEditText" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignLeft="@+id/et_contact_address"
+                android:layout_alignStart="@+id/et_contact_address"
+                android:layout_below="@id/et_contact_address"
+                android:background="@color/bg" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/rlt_contact_address"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical">
 
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:text="详细地址"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_detail_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="27dp"
+                android:layout_marginStart="27dp"
+                android:layout_toEndOf="@+id/textView17"
+                android:layout_toRightOf="@+id/textView17"
+                android:hint="请填写收件人详细地址"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                android:theme="@style/MyEditText" />
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

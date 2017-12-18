@@ -41,15 +41,15 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rlt_address,R.id.rlt_name,R.id.rlt_nickname})
+    @OnClick({R.id.rlt_address,R.id.rlt_nickname})
     public void onClickView(View v){
         switch (v.getId()){
             case R.id.rlt_address:
                 ARouter.getInstance().build("/address/manager").navigation();
                 break;
-            case R.id.rlt_name:
-                ARouter.getInstance().build("/set/name").withInt("type",1).navigation();
-                break;
+//            case R.id.rlt_name:
+//                ARouter.getInstance().build("/set/name").withInt("type",1).navigation();
+//                break;
             case R.id.rlt_nickname:
                 ARouter.getInstance().build("/set/name").withInt("type",0).navigation();
                 break;

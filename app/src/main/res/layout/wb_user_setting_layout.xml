@@ -97,8 +97,9 @@
         android:background="@color/bg"
         />
     <RelativeLayout
-        android:id="@+id/rlt_name"
+        android:id="@+id/rlt_address"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:layout_height="50dp">
 
@@ -111,7 +112,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
-            android:text="姓名" />
+            android:text="@string/my_addrss" />
 
         <ImageView
             android:id="@+id/imageView9"
@@ -123,23 +124,50 @@
             android:layout_marginRight="@dimen/dp_10"
             app:srcCompat="@mipmap/path" />
 
-        <TextView
-            android:id="@+id/tv_real_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:text="李三"
-            android:layout_toLeftOf="@+id/imageView9"
-            android:layout_toStartOf="@+id/imageView9"
-            app:srcCompat="@mipmap/default_head" />
+      />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg"
+        />
     <RelativeLayout
-        android:id="@+id/rlt_address"
+        android:id="@+id/rlt_cache"
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:text="清除缓存" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            app:srcCompat="@mipmap/path" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg"
+        />
+    <RelativeLayout
+        android:id="@+id/rlt_feedback"
+        android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="50dp">
 
         <TextView
@@ -151,7 +179,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
-            android:text="@string/my_addrss" />
+            android:text="反馈" />
 
         <ImageView
             android:id="@+id/imageView10"

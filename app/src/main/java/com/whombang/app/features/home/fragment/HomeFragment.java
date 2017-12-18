@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,18 +21,26 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.BaseDelegateAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.baseadapter.BaseViewHolder;
+import com.whombang.app.common.net.EasyHttp;
+import com.whombang.app.common.net.callback.SimpleCallBack;
+import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.pulltorefresh.PtrFrameLayout;
 import com.whombang.app.common.pulltorefresh.PtrHandler;
 import com.whombang.app.common.utils.GlideImageLoader;
 import com.whombang.app.common.view.WBHeaderView;
+import com.whombang.app.entity.UserLocalData;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -271,7 +280,25 @@ public class HomeFragment extends BaseFragment implements WBHeaderView.RefreshDi
 
     @Override
     public void doBusiness() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("pageSize", "1");
+        params.put("currentPageNum", 1);
 
+        EasyHttp.post("goodsList")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<String>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(String entity) {
+                        Log.i("www","data="+entity);
+
+                    }
+                });
     }
 
     @Override

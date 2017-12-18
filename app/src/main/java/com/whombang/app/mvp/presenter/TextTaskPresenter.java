@@ -54,6 +54,7 @@ public class TextTaskPresenter {
                     @Override
                     public void onSuccess(String entity) {
                         Log.i("www","data="+entity);
+                        activity.finish();
                     }
                 });
     }

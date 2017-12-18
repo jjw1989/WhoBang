@@ -7,19 +7,118 @@
     android:background="@color/snow"
     tools:context="com.whombang.app.features.sendtask.TextTaskActivity"
     android:orientation="vertical">
-   <include layout="@layout/wb_titlebar_layout"/>
+   <include layout="@layout/wb_titlebar_layout"
+       android:id="@+id/include"/>
     <RelativeLayout
-        android:id="@+id/rlt"
+        android:id="@+id/address1"
+        android:layout_below="@+id/include"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/common_titleBar"
-        android:layout_height="200dp">
+        android:layout_height="80dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView3" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@mipmap/icon_check_true" />
+
+        <TextView
+            android:id="@+id/tv_consignee_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toEndOf="@+id/imageView3"
+            android:layout_toLeftOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView3"
+            android:layout_toStartOf="@+id/imageView2"
+            android:text="详情地址： 北京市昌平区回龙观龙禧苑三区北店嘉园1000楼五单元303室" />
+
+        <TextView
+            android:id="@+id/tv_consignee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_consignee_address"
+            android:layout_alignStart="@+id/tv_consignee_address"
+            android:layout_below="@+id/imageView2"
+            android:text="收货人：超跑" />
+
+        <TextView
+            android:id="@+id/tv_consignee_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/imageView2"
+            android:layout_toStartOf="@+id/imageView2"
+            android:text="18611766104" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/address2"
+        android:layout_below="@+id/address1"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView5" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@mipmap/icon_check_true" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toEndOf="@+id/imageView5"
+            android:layout_toLeftOf="@+id/imageView4"
+            android:layout_toRightOf="@+id/imageView5"
+            android:layout_toStartOf="@+id/imageView4"
+            android:text="详情地址： 北京市昌平区回龙观龙禧苑三区北店嘉园1000楼五单元303室" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_below="@+id/imageView4"
+            android:text="收货人：超跑" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView4"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/imageView4"
+            android:layout_toStartOf="@+id/imageView4"
+            android:text="18611766104" />
     </RelativeLayout>
 
     <EditText
         android:id="@+id/et_text_content"
-        android:layout_below="@+id/rlt"
+        android:layout_below="@+id/address2"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/dp_10"
         android:hint="输入文字"

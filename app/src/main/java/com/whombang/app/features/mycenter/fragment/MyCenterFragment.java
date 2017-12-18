@@ -121,10 +121,10 @@ public class MyCenterFragment extends BaseFragment {
                                  case 1:
                                      ARouter.getInstance().build("/my/service").navigation();
                                      break;
+//                                 case 2:
+//                                     ARouter.getInstance().build("/my/setting").navigation();
+//                                     break;
                                  case 2:
-                                     ARouter.getInstance().build("/my/setting").navigation();
-                                     break;
-                                 case 3:
                                      ARouter.getInstance().build("/my/about").navigation();
                                      break;
                              }
@@ -152,10 +152,10 @@ public class MyCenterFragment extends BaseFragment {
                                      ARouter.getInstance().build("/my/info").navigation();
                                      break;
 
+//                                 case 6:
+//                                     ARouter.getInstance().build("/my/setting").navigation();
+//                                     break;
                                  case 6:
-                                     ARouter.getInstance().build("/my/setting").navigation();
-                                     break;
-                                 case 7:
                                      ARouter.getInstance().build("/my/about").navigation();
                                      break;
                              }
@@ -172,10 +172,10 @@ public class MyCenterFragment extends BaseFragment {
                                      ARouter.getInstance().build("/my/offer").navigation();
                                      break;
 
+//                                 case 3:
+//                                     ARouter.getInstance().build("/my/setting").navigation();
+//                                     break;
                                  case 3:
-                                     ARouter.getInstance().build("/my/setting").navigation();
-                                     break;
-                                 case 4:
                                      ARouter.getInstance().build("/my/about").navigation();
                                      break;
                              }
@@ -227,7 +227,7 @@ public class MyCenterFragment extends BaseFragment {
             CenterEntity entity4 = new CenterEntity(getString(R.string.my_goods_list), false, false);
             CenterEntity entity5 = new CenterEntity(getString(R.string.my_service_info_list), false, false);
           //  CenterEntity entity6 = new CenterEntity(getString(R.string.my_setting), true, false);
-            CenterEntity entity7 = new CenterEntity(getString(R.string.my_about), false, false);
+            CenterEntity entity7 = new CenterEntity(getString(R.string.my_about), true, false);
             entityList.add(entity0);
             entityList.add(entity1);
             entityList.add(entity2);
@@ -243,7 +243,7 @@ public class MyCenterFragment extends BaseFragment {
             CenterEntity entity1 = new CenterEntity(getString(R.string.my_service), false, false);
             CenterEntity entity2 = new CenterEntity(getString(R.string.my_offer_service_list), true, true);
            // CenterEntity entity3 = new CenterEntity(getString(R.string.my_setting), true, false);
-            CenterEntity entity4 = new CenterEntity(getString(R.string.my_about), false, true);
+            CenterEntity entity4 = new CenterEntity(getString(R.string.my_about), true, true);
             entityList.add(entity0);
             entityList.add(entity1);
             entityList.add(entity2);

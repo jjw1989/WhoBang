@@ -1,5 +1,6 @@
 package com.whombang.app.features.mycenter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.adapter.ConsigneeAddressAdapter;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.view.MyDivider;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.entity.ConsigneeEntity;
@@ -57,7 +59,7 @@ public class AddressManagerActivity extends BaseActivity {
         titleBar.addAction(new TitleBar.ImageAction(R.mipmap.add) {
             @Override
             public void performAction(View view) {
-                ARouter.getInstance().build("/address/newly").navigation();
+                ARouter.getInstance().build("/address/newly").withBoolean("isEdite",false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
             }
         });
 
@@ -67,6 +69,16 @@ public class AddressManagerActivity extends BaseActivity {
     @Override
     public void doBusiness() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==Contents.REQUEST_CONSIGNEE_ADR){
+            if(resultCode==RESULT_OK){
+                presenter.requestAddressList(UserLocalData.getUserInfo(this).getUserInfo().getUserId());
+            }
+        }
     }
 
     /**
@@ -79,21 +91,4 @@ public class AddressManagerActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(new MyDivider());
         mRecyclerView.setAdapter(adapter);
     }
-//    private List<ConsigneeEntity> getDatas(){
-//        List<ConsigneeEntity> items=new ArrayList<>();
-//        ConsigneeEntity entity=new ConsigneeEntity();
-//        entity.setAddr("昌平区回龙观");
-//        entity.setDefault(true);
-//        entity.setPhone("18611766105");
-//        entity.setConsignee("张三");
-//
-//        ConsigneeEntity entity2=new ConsigneeEntity();
-//        entity2.setAddr("昌平区回龙观问问");
-//        entity2.setDefault(false);
-//        entity2.setPhone("18611766105");
-//        entity2.setConsignee("张三1");
-//        items.add(entity);
-//        items.add(entity2);
-//        return items;
-//    }
 }

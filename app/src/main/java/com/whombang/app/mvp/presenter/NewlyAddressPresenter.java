@@ -1,5 +1,6 @@
 package com.whombang.app.mvp.presenter;
 
+import android.app.Activity;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -35,10 +36,10 @@ public class NewlyAddressPresenter {
      * @param userAddressContactTel
      * @param userAddressDetail
      */
-    public void addAddress(String userAddressContactPeople,String userAddressContactTel,String userAddressDetail){
+    public void addAddress(String userAddressContactPeople,String userAddressContactTel,String contactAddress,String userAddressDetail){
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(activity).getUserInfo().getUserId());
-        params.put("userAddressDetail", userAddressDetail);
+        params.put("userAddressDetail", contactAddress+userAddressDetail);
         params.put("userAddressContactTel", userAddressContactTel);
         params.put("userAddressContactPeople", userAddressContactPeople);
         params.put("userAddressDefault", "false");
@@ -53,6 +54,7 @@ public class NewlyAddressPresenter {
 
                     @Override
                     public void onSuccess(ConsigneeEntity entity) {
+                        activity.setResult(Activity.RESULT_OK);
                         activity.finish();
                     }
                 });

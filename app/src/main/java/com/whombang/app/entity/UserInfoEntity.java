@@ -686,7 +686,7 @@ public class UserInfoEntity {
         private String userAddressInfoId;
         private String userId;
         private String userAddressDetail;
-        private int userAddressDefault;
+        private boolean userAddressDefault;
         private int userAddressStatus;
         private String userAddressContactPeople;
         private String userAddressContactTel;
@@ -715,11 +715,11 @@ public class UserInfoEntity {
             this.userAddressDetail = userAddressDetail;
         }
 
-        public int getUserAddressDefault() {
+        public boolean getUserAddressDefault() {
             return userAddressDefault;
         }
 
-        public void setUserAddressDefault(int userAddressDefault) {
+        public void setUserAddressDefault(boolean userAddressDefault) {
             this.userAddressDefault = userAddressDefault;
         }
 

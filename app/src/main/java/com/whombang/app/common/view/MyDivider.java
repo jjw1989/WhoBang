@@ -25,6 +25,6 @@ public class MyDivider extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.top = 5 ;
         outRect.left = 5 ;
-        outRect.bottom=40;
+        outRect.bottom=10;
     }
 }
