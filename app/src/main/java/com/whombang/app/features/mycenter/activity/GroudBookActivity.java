@@ -13,9 +13,13 @@ import com.whombang.app.common.view.EasyIndicator;
 import com.whombang.app.common.view.NoScrollViewPager;
 import com.whombang.app.features.login.fragment.PassWordLoginFragment;
 import com.whombang.app.features.login.fragment.SMSLoginFragment;
+import com.whombang.app.features.mycenter.fragment.AwaitHarvestFragment;
 import com.whombang.app.features.mycenter.fragment.AwaitServiceFragment;
 import com.whombang.app.features.mycenter.fragment.EvaluatedFragment;
 import com.whombang.app.features.mycenter.fragment.FinishFragment;
+import com.whombang.app.features.mycenter.fragment.GoodsFinishFragment;
+import com.whombang.app.features.mycenter.fragment.GoodsListFragment;
+import com.whombang.app.features.mycenter.fragment.GroupBookingFragment;
 import com.whombang.app.features.mycenter.fragment.InServiceFragment;
 
 import java.util.ArrayList;
@@ -52,10 +56,10 @@ public class GroudBookActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("我的拼团");
         fragmentList = new ArrayList<>();
-        fragmentList.add(new AwaitServiceFragment());
-        fragmentList.add(new InServiceFragment());
-        fragmentList.add(new EvaluatedFragment());
-        fragmentList.add(new FinishFragment());
+        fragmentList.add(new GoodsListFragment());
+        fragmentList.add(new GroupBookingFragment());
+        fragmentList.add(new AwaitHarvestFragment());
+        fragmentList.add(new GoodsFinishFragment());
         tabStrip.setTabTitles(new String[]{"全部","拼团中","待收货","已完成"});
         tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
