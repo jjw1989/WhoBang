@@ -18,6 +18,10 @@
     <color name="colorGray">#ccc</color>
     <color name="bg">#f7f7f7</color>
     <color name="color_999999">#999999</color>
+    <color name="textColor">#333333</color>
+    <color name="backGroundColor">#F5F5F5</color>
+    <color name="clickTextColor">#FFFFFF</color>
+    <color name="clickBackGroundColor">#FF5000</color>
     <color name="white">#ffffff</color>
     <!-- 白色 -->
     <color name="ivory">#fffff0</color>
