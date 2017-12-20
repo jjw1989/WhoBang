@@ -44,6 +44,7 @@
 
         <activity
             android:name=".LauncherActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +52,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.MainActivity" />
+        <activity android:name=".features.MainActivity"
+            android:launchMode="singleTask"
+            />
         <activity android:name=".features.sendtask.VoiceActivity" />
         <activity android:name=".features.sendtask.TextTaskActivity" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
