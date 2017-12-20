@@ -11,22 +11,59 @@ import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.common.tabGround.TagBean;
+import com.whombang.app.common.tabGround.TagContainerLayout;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.entity.UserLocalData;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import butterknife.BindView;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 
 /**
  * 添加服务者
  */
 @Route(path = "/my/server")
 public class AddServerActivity extends BaseActivity {
+    /**
+     * 标签集合
+     */
+    private List<TagBean> mTagBean;
+    @BindView(R.id.tag_service_type)
+    TagContainerLayout  tagSetviceType;
     @Override
     public void initData(Bundle bundle) {
+         initTagData();
+    }
 
+    /**
+     * 初始化标签数据
+     */
+    private void initTagData() {
+       mTagBean=new ArrayList<>();
+       TagBean tagBean1=new TagBean();
+       tagBean1.setTitle("家政");
+       TagBean tagBean2=new TagBean();
+       tagBean2.setTitle("保洁");
+       TagBean tagBean3=new TagBean();
+       tagBean3.setTitle("法律咨询");
+       TagBean tagBean4=new TagBean();
+       tagBean4.setTitle("维修");
+       TagBean tagBean5=new TagBean();
+       tagBean5.setTitle("其他");
+       mTagBean.add(tagBean1);
+       mTagBean.add(tagBean2);
+       mTagBean.add(tagBean3);
+       mTagBean.add(tagBean4);
+       mTagBean.add(tagBean5);
     }
 
     @Override
@@ -48,6 +85,14 @@ public class AddServerActivity extends BaseActivity {
                 addServer();
             }
         });
+        initTagView();
+    }
+
+    /**
+     * 初始化标签控件
+     */
+    private void initTagView() {
+
     }
 
     /**

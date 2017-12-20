@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="50dp">
+
+      <ImageView
+          android:id="@+id/img_head"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_centerVertical="true"
+          android:layout_marginLeft="20dp"
+          android:layout_marginStart="20dp"
+          app:srcCompat="@mipmap/icon_check_true" />
+
+      <TextView
+          android:id="@+id/tv_station_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/img_head"
+          android:layout_marginLeft="16dp"
+          android:layout_marginStart="16dp"
+          android:layout_toEndOf="@+id/img_head"
+          android:layout_toRightOf="@+id/img_head"
+          android:text="TextView" />
+
+      <TextView
+          android:id="@+id/tv_service_status"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:layout_alignTop="@+id/tv_station_name"
+          android:layout_marginEnd="20dp"
+          android:textColor="@color/orange1"
+          android:layout_marginRight="20dp"
+          android:text="TextView" />
+   </RelativeLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="100dp">
+      <ImageView
+          android:layout_width="100dp"
+          android:background="@mipmap/ic_launcher"
+          android:layout_height="100dp"
+          android:id="@+id/imageView13" />
+
+      <TextView
+          android:id="@+id/tv_service_type"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_marginLeft="23dp"
+          android:layout_marginStart="23dp"
+          android:layout_marginTop="13dp"
+          android:layout_toEndOf="@+id/imageView13"
+          android:layout_toRightOf="@+id/imageView13"
+          android:text="TextView" />
+
+      <TextView
+          android:id="@+id/tv_num"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentEnd="true"
+          android:layout_marginLeft="@dimen/dp_10"
+          android:layout_alignParentRight="true"
+          android:layout_marginBottom="28dp"
+          android:layout_marginEnd="11dp"
+          android:layout_marginRight="11dp"
+          android:text="TextView" />
+
+      <TextView
+          android:id="@+id/tv_service_brief"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_toLeftOf="@+id/tv_num"
+          android:layout_alignTop="@+id/tv_num"
+          android:layout_alignLeft="@+id/tv_service_type"
+          android:layout_alignStart="@+id/tv_service_type"
+          android:text="TextView1111111111111111111111111111111" />
+   </RelativeLayout>
+</LinearLayout>
