@@ -190,7 +190,7 @@
         android:textSize="@dimen/sp_14" />
   </RelativeLayout>
   <com.whombang.app.common.tabGround.TagContainerLayout
-      android:id="@+id/color_tag_container"
+      android:id="@+id/tag_service_type"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:container_background_color="#00000000"

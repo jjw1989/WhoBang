@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 
 /**
@@ -19,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by 蒋建伟 on 2017/11/10.
  */
 
-public abstract class BaseFragment extends Fragment implements IBaseView{
+public abstract class BaseFragment <T extends IBasePresenter> extends Fragment implements IBaseView{
     private String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     /**
      * 当前Fragment渲染的视图View
@@ -27,6 +29,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
     protected View contentView;
 
     protected Activity mActivity;
+
+    @Inject
+    protected T mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

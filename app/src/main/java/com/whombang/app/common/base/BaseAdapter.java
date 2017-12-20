@@ -35,9 +35,12 @@ public abstract class BaseAdapter<T , H extends BaseViewHolder> extends Recycler
     }
 
     public BaseAdapter(Context context , List<T> mDatas , int resId) {
-
+        if (mDatas==null){
+           this.mDatas=new ArrayList<>();
+        }else{
+            this.mDatas=mDatas;
+        }
         this.context = context ;
-        this.mDatas = mDatas ;
         this.inflater = LayoutInflater.from(context) ;
         this.resId = resId ;
         this.isSelecterd = new ArrayList<Boolean>() ;
