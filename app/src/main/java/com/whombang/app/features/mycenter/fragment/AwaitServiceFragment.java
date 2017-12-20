@@ -73,7 +73,7 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        adapter=new AwaitServiceAdapter(mActivity,null);
+        adapter=new AwaitServiceAdapter();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, VERTICAL));
@@ -125,7 +125,8 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
 
                     @Override
                     public void onSuccess(MyServiceEntity entity) {
-                        adapter.addData(entity.getServiceOrderList());
+                        //adapter.addData(entity.getServiceOrderList());
+                        adapter.setNewData(entity.getServiceOrderList());
                         mRefreshLayout.finishRefresh();
                         pageNum++;
                     }

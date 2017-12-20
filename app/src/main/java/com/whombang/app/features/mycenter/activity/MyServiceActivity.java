@@ -53,6 +53,7 @@ public class MyServiceActivity extends BaseActivity {
         fragmentList.add(new InServiceFragment());
         fragmentList.add(new EvaluatedFragment());
         fragmentList.add(new FinishFragment());
+        viewPager.setOffscreenPageLimit(4);
         tabStrip.setTabTitles(new String[]{"待服务","服务中","待评价","已完成"});
         tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
