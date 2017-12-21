@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.whombang.app.features.mycenter.fragment.EvaluatedFragment">
+    tools:context="com.whombang.app.features.mycenter.fragment.OfferFinishFragment">
     <include layout="@layout/wb_common_refresh_layout"/>
-
 </FrameLayout>

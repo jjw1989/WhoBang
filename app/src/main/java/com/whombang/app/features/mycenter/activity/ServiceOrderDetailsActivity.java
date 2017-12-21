@@ -1,23 +1,20 @@
-package com.whombang.app.features.mycenter.fragment;
+package com.whombang.app.features.mycenter.activity;
 
-
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.whombang.app.R;
-import com.whombang.app.common.base.BaseFragment;
+import com.whombang.app.common.base.BaseActivity;
 
 /**
- * 我的拼团：拼团中
+ * 服务订单详情
  */
-public class GroupBookingFragment extends BaseFragment {
+public class ServiceOrderDetailsActivity extends BaseActivity {
 
     @Override
     protected int bindLayout() {
-        return R.layout.wb_group_booking_layout;
+        return R.layout.wb_service_order_details_layout;
     }
 
     @Override

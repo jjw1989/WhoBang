@@ -11,7 +11,7 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 
 /**
- * 全部商品列表
+ * 我的拼团：全部商品列表
  */
 public class GoodsListFragment extends BaseFragment {
 

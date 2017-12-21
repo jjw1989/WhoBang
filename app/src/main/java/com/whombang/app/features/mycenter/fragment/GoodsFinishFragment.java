@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 商品完成
+ * 我的拼团：已完成
  */
 public class GoodsFinishFragment extends BaseFragment {
 

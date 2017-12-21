@@ -2,22 +2,19 @@ package com.whombang.app.features.mycenter.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 
 /**
- * 我的拼团：拼团中
+ * 提供服务列表：等待服务
  */
-public class GroupBookingFragment extends BaseFragment {
+public class OfferAwaitServiceFragment extends BaseFragment {
 
     @Override
     protected int bindLayout() {
-        return R.layout.wb_group_booking_layout;
+        return R.layout.wb_offer_await_layout;
     }
 
     @Override

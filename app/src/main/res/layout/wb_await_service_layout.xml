@@ -4,5 +4,5 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.whombang.app.features.mycenter.fragment.AwaitServiceFragment">
-   <include layout="@layout/wb_common_service_layout"/>
+   <include layout="@layout/wb_common_refresh_layout"/>
 </LinearLayout>

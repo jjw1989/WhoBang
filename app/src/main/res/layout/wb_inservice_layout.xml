@@ -4,6 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.whombang.app.features.mycenter.fragment.InServiceFragment">
 
-    <include layout="@layout/wb_common_service_layout"/>
+    <include layout="@layout/wb_common_refresh_layout"/>
 
 </FrameLayout>

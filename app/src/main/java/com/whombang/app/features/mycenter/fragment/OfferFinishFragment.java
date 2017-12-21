@@ -11,13 +11,13 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 
 /**
- * 我的拼团：拼团中
+ * 公共服务列表：已完成
  */
-public class GroupBookingFragment extends BaseFragment {
+public class OfferFinishFragment extends BaseFragment {
 
     @Override
     protected int bindLayout() {
-        return R.layout.wb_group_booking_layout;
+        return R.layout.wb_offer_finish_layout;
     }
 
     @Override

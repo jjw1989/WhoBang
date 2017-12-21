@@ -8,7 +8,7 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 
 /**
- * 服务提供者信息列表
+ * 服务者列表
  */
 @Route(path = "/my/info")
 public class ServerInfoActivity extends BaseActivity {

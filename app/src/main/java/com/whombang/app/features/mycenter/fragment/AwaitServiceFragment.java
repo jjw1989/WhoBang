@@ -24,6 +24,7 @@ import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.base.IBasePresenter;
 import com.whombang.app.common.base.ILoadDataView;
+import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
@@ -49,7 +50,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 /**
  * 等待服务
  */
-public class AwaitServiceFragment extends BaseFragment implements OnRefreshListener,OnLoadmoreListener{
+public class AwaitServiceFragment extends BaseFragment implements OnRefreshListener,OnLoadmoreListener,BaseQuickAdapter.OnItemClickListener{
    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
@@ -74,7 +75,7 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         adapter=new AwaitServiceAdapter();
-
+        adapter.setOnItemClickListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -97,6 +98,7 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
          mRefreshLayout.autoRefresh();
          mRefreshLayout.setOnRefreshListener(this);
          mRefreshLayout.setOnLoadmoreListener(this);
+
     }
 
     @Override
@@ -160,4 +162,8 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
     }
 
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+    }
 }

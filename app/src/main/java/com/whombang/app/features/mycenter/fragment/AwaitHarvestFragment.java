@@ -11,7 +11,7 @@ import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 
 /**
- * 等待收获
+ * 我的拼团：等待收货
  */
 public class AwaitHarvestFragment extends BaseFragment {
 
