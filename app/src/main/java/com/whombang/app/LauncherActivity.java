@@ -3,10 +3,12 @@ package com.whombang.app;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.mvp.component.DaggerLauncherActivityComponent;
 import com.whombang.app.mvp.module.LauncherActivityModule;

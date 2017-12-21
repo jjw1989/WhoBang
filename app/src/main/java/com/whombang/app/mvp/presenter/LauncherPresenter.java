@@ -50,17 +50,13 @@ public class LauncherPresenter {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-
                 if (PreferenceUtil.getBoolean(mActivity, Contents.GUIDE, true)) {
                     ARouter.getInstance().build("/main/guide").withTransition(R.anim.push_right_in, R.anim.push_left_out).navigation(mActivity);
-
                 } else {
                     if (PreferenceUtil.getBoolean(mActivity, Contents.LOGIN, false)) {
                         ARouter.getInstance().build("/main/tab").withTransition(R.anim.push_right_in, R.anim.push_left_out).navigation(mActivity);
-
                     } else {
                         ARouter.getInstance().build("/user/login").withTransition(R.anim.push_right_in, R.anim.push_left_out).navigation(mActivity);
-
                     }
 
                 }
