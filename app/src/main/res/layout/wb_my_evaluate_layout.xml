@@ -6,28 +6,5 @@
     android:layout_height="match_parent"
     >
    <include layout="@layout/wb_titlebar_layout"/>
-   <com.whombang.app.common.view.EasyIndicator
-       android:id="@+id/groud_indicator"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_gravity="center_horizontal"
-       android:layout_marginTop="10dp"
-       app:indicator_bottom_height="3dp"
-       app:indicator_bottom_line_color="@color/transparent"
-       app:indicator_bottom_line_height="1dp"
-       app:indicator_height="42dp"
-       app:indicator_isBottom_line="true"
-       app:indicator_line_color="@color/orange1"
-       app:indicator_normal_color="@color/grey"
-       app:indicator_select_textSize="16sp"
-       app:indicator_selected_color="@color/orange1"
-       app:indicator_textSize="16sp"
-       app:indicator_width="0dp" />
-
-   <android.support.v4.view.ViewPager
-       android:id="@+id/vp_status"
-       android:layout_marginTop="@dimen/dp_10"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_below="@+id/easy_indicator" />
+   <include layout="@layout/wb_common_indicator_layout" />
 </LinearLayout>

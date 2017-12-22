@@ -26,12 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 import butterknife.BindView;
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 
 /**
  * 添加服务者
@@ -54,7 +50,6 @@ public class AddServerActivity extends BaseActivity {
         mBanViewColor = new TagContainerLayout.ViewColor();
         mDefaultViewColor = new TagContainerLayout.ViewColor(ContextCompat.getColor(this, R.color.backGroundColor), 0, ContextCompat.getColor(this, R.color.textColor));
         mClickViewColor = new TagContainerLayout.ViewColor(ContextCompat.getColor(this, R.color.clickBackGroundColor), 0, ContextCompat.getColor(this, R.color.clickTextColor));
-
         initTagData();
     }
 
@@ -63,7 +58,6 @@ public class AddServerActivity extends BaseActivity {
      */
     private void initTagData() {
         mTagBean = new ArrayList<>();
-
         mTagBean.add(new TagBean("家政", 222, 1000));
         mTagBean.add(new TagBean("保洁", 10, 1));
         mTagBean.add(new TagBean("法律咨询", 20, 555));
