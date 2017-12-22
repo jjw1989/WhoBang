@@ -86,9 +86,25 @@ public class AddressManagerActivity extends BaseActivity {
      * @param addressList
      */
     public void loadAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
+        if(addressList!=null && addressList.size()>0){
+            orderItem(addressList);
+        }
         adapter=new ConsigneeAddressAdapter(this,addressList,R.layout.wb_adress_item_layout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new MyDivider());
         mRecyclerView.setAdapter(adapter);
+    }
+
+    private void orderItem(List<ConsigneeEntity.UserAddressInfosBean> addressList) {
+        for (int i = 0; i < addressList.size() ; i++) {
+            if (addressList.get(i).getUserAddressDefault()){
+               // MyApplication.getInstance().getUser().setDefauteConsigen(consigneeMsgs.get(i));
+                ConsigneeEntity.UserAddressInfosBean tmp = addressList.get(i) ;
+                addressList.remove(i) ;
+                addressList.add(0 , tmp);
+                return;
+            }
+        }
+
     }
 }
