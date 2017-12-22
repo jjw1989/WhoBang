@@ -21,6 +21,7 @@ import com.whombang.app.adapter.BaseDelegateAdapter;
 import com.whombang.app.adapter.SpikeContentAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.baseadapter.BaseViewHolder;
+import com.whombang.app.common.config.ViewType;
 import com.whombang.app.common.utils.GlideImageLoader;
 import com.whombang.app.entity.ServiceEntity;
 import com.whombang.app.entity.TitleEntity;
@@ -38,8 +39,7 @@ import butterknife.BindView;
 import static com.whombang.app.adapter.MyCenterAdapter.BANNER_VIEW_TYPE;
 import static com.whombang.app.adapter.MyCenterAdapter.DIVIDER_VIEW_TYPE;
 import static com.whombang.app.adapter.MyCenterAdapter.FUN_VIEW_TYPE;
-import static com.whombang.app.features.home.fragment.HomeFragment.Config.GRID_URL;
-import static com.whombang.app.features.home.fragment.HomeFragment.Config.GRID_VIEW_TYPE;
+
 
 /**
  * 服务首页
@@ -154,20 +154,20 @@ public class ServiceFragment extends BaseFragment {
         mAdapters.add(serviceAdapter);
         //服务列表
         BaseDelegateAdapter serviceListAdapter = new BaseDelegateAdapter(mActivity,  new LinearLayoutHelper(), R.layout.vlayout_grid
-                , 12, GRID_VIEW_TYPE) {
+                , 12, ViewType.VIEW_TYPE_HEAD) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
-                int item = GRID_URL[position];
-                ImageView iv = holder.getView(R.id.iv);
-                Glide.with(mActivity).load(item).into(iv);
-
-                iv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mActivity, "item" + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                int item = GRID_URL[position];
+//                ImageView iv = holder.getView(R.id.iv);
+//                Glide.with(mActivity).load(item).into(iv);
+//
+//                iv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(mActivity, "item" + position, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         };
         mAdapters.add(serviceListAdapter);

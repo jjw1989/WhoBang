@@ -49,7 +49,7 @@ public class AddServerActivity extends BaseActivity {
     public void initData(Bundle bundle) {
         mBanViewColor = new TagContainerLayout.ViewColor();
         mDefaultViewColor = new TagContainerLayout.ViewColor(ContextCompat.getColor(this, R.color.backGroundColor), 0, ContextCompat.getColor(this, R.color.textColor));
-        mClickViewColor = new TagContainerLayout.ViewColor(ContextCompat.getColor(this, R.color.clickBackGroundColor), 0, ContextCompat.getColor(this, R.color.clickTextColor));
+        mClickViewColor = new TagContainerLayout.ViewColor(ContextCompat.getColor(this, R.color.orange1), 0, ContextCompat.getColor(this, R.color.clickTextColor));
         initTagData();
     }
 
