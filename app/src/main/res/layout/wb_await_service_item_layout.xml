@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
    <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="50dp">
+       android:layout_height="wrap_content">
 
       <ImageView
           android:id="@+id/img_head"
@@ -44,46 +44,89 @@
    </RelativeLayout>
    <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="100dp">
-      <ImageView
-          android:layout_width="100dp"
-          android:background="@mipmap/ic_launcher"
-          android:layout_height="100dp"
-          android:id="@+id/imageView13" />
+       android:layout_height="200dp">
+
 
       <TextView
-          android:id="@+id/tv_service_type"
-          android:layout_width="wrap_content"
+          android:id="@+id/tv_service_brief"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_alignParentTop="true"
           android:layout_marginLeft="23dp"
           android:layout_marginStart="23dp"
           android:layout_marginTop="13dp"
-          android:layout_toEndOf="@+id/imageView13"
-          android:layout_toRightOf="@+id/imageView13"
-          android:text="TextView" />
+          android:text="服务简介" />
+
+      <RelativeLayout
+          android:id="@+id/rlt_station"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_below="@+id/tv_service_brief"
+          android:layout_marginTop="@dimen/dp_10"
+          android:layout_centerVertical="true">
+
+         <TextView
+             android:id="@+id/tv_station_owner_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="26dp"
+             android:layout_marginStart="26dp"
+             android:text="站主名字" />
+
+         <TextView
+             android:id="@+id/tv_station_owner_phone"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentEnd="true"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:layout_marginEnd="15dp"
+             android:layout_marginRight="15dp"
+             android:text="站主电话" />
+      </RelativeLayout>
+      <RelativeLayout
+          android:id="@+id/rlt_service"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_below="@+id/rlt_station"
+          android:layout_marginTop="@dimen/dp_10"
+          android:layout_centerVertical="true">
+
+         <TextView
+             android:id="@+id/tv_server_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="26dp"
+             android:layout_marginStart="26dp"
+             android:text="服务者名字" />
+
+         <TextView
+             android:id="@+id/tv_server_phone"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentEnd="true"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:layout_marginEnd="15dp"
+             android:layout_marginRight="15dp"
+             android:text="服务者电话" />
+
+      </RelativeLayout>
 
       <TextView
-          android:id="@+id/tv_num"
+          android:id="@+id/tv_order_time"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_alignParentEnd="true"
-          android:layout_marginLeft="@dimen/dp_10"
-          android:layout_alignParentRight="true"
-          android:layout_marginBottom="28dp"
-          android:layout_marginEnd="11dp"
-          android:layout_marginRight="11dp"
-          android:text="TextView" />
-
-      <TextView
-          android:id="@+id/tv_service_brief"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toLeftOf="@+id/tv_num"
-          android:layout_alignTop="@+id/tv_num"
-          android:layout_alignLeft="@+id/tv_service_type"
-          android:layout_alignStart="@+id/tv_service_type"
-          android:text="TextView1111111111111111111111111111111" />
+          android:layout_alignLeft="@+id/tv_service_brief"
+          android:layout_alignStart="@+id/tv_service_brief"
+          android:layout_below="@+id/rlt_service"
+          android:layout_marginTop="11dp"
+          android:text="下单时间" />
    </RelativeLayout>
 </LinearLayout>

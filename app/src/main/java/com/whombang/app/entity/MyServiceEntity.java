@@ -65,9 +65,9 @@ public class MyServiceEntity {
         private String stationManagerTel;
         private String stationName;
         private String inuserId;
-        private Object phone;
-        private Object userRealName;
-        private Object userSex;
+        private String phone;
+        private String userRealName;
+        private String userSex;
 
         public int getStationId() {
             return stationId;
@@ -229,27 +229,27 @@ public class MyServiceEntity {
             this.inuserId = inuserId;
         }
 
-        public Object getPhone() {
+        public String getPhone() {
             return phone;
         }
 
-        public void setPhone(Object phone) {
+        public void setPhone(String phone) {
             this.phone = phone;
         }
 
-        public Object getUserRealName() {
+        public String getUserRealName() {
             return userRealName;
         }
 
-        public void setUserRealName(Object userRealName) {
+        public void setUserRealName(String userRealName) {
             this.userRealName = userRealName;
         }
 
-        public Object getUserSex() {
+        public String getUserSex() {
             return userSex;
         }
 
-        public void setUserSex(Object userSex) {
+        public void setUserSex(String userSex) {
             this.userSex = userSex;
         }
     }

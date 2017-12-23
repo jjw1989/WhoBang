@@ -111,7 +111,7 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
         pageNum=1;
         final Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(mActivity).getUserInfo().getUserId());
-        params.put("orderStatus","1");
+        params.put("orderStatus",1);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 

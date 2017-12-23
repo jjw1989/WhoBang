@@ -21,9 +21,13 @@ public class AwaitServiceAdapter extends BaseQuickAdapter<MyServiceEntity.Servic
     @Override
     protected void convert(BaseViewHolder helper, MyServiceEntity.ServiceOrderListBean item, int position) {
         helper.setText(R.id.tv_station_name,item.getStationName());
-      //  helper.setText(R.id.tv_service_status,item.getServiceOrderStatus());
-      //  helper.setText(R.id.tv_service_type,item.getType());
+        helper.setText(R.id.tv_service_status,item.getServiceOrderStatus());
+        helper.setText(R.id.tv_station_owner_name,item.getStationManagerName());
+        helper.setText(R.id.tv_station_owner_phone,item.getStationManagerTel());
         helper.setText(R.id.tv_service_brief,item.getIndividuationServiceDesc());
+        helper.setText(R.id.tv_server_name,item.getUserRealName());
+        helper.setText(R.id.tv_server_phone,item.getPhone());
+        helper.setText(R.id.tv_order_time,item.getTakeTime());
        // TextView tvNum=holder.findTextView(R.id.tv_num);
 
     }
