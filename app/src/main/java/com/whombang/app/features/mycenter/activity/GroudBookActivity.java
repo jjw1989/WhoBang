@@ -32,9 +32,9 @@ import butterknife.BindView;
  */
 @Route(path = "/my/groud")
 public class GroudBookActivity extends BaseActivity {
-    @BindView(R.id.groud_indicator)
+    @BindView(R.id.common_indicator)
     EasyIndicator tabStrip;
-    @BindView(R.id.vp_status)
+    @BindView(R.id.vp_common)
     ViewPager viewPager;
     private List<Fragment> fragmentList;
     @Override

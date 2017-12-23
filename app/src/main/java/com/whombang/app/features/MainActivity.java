@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
      */
     @BindView(R.id.fab_call)
     ImageView fabCall;
+
     @Override
     public void initData(Bundle bundle) {
 
@@ -57,13 +58,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-       // SystemBarManager.translucentStatusBar(this,false);
+        // SystemBarManager.translucentStatusBar(this,false);
         titleBar.setVisibility(View.GONE);
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
         mNavigateTabBar.addTab(HomeFragment.class, new NavigateTabBar.TabParam(R.mipmap.navigate_tab_home, R.mipmap.navigate_tab_home_selected, getString(R.string.tab_txt_home)));
-       // mNavigateTabBar.addTab(ShopFragment.class, new NavigateTabBar.TabParam(R.mipmap.navigate_tab_shop, R.mipmap.navigate_tab_shop_selected, getString(R.string.tab_txt_shop)));
+        // mNavigateTabBar.addTab(ShopFragment.class, new NavigateTabBar.TabParam(R.mipmap.navigate_tab_shop, R.mipmap.navigate_tab_shop_selected, getString(R.string.tab_txt_shop)));
         mNavigateTabBar.addTab(null, new NavigateTabBar.TabParam(0, 0, ""));
-      //  mNavigateTabBar.addTab(ServiceFragment.class, new NavigateTabBar.TabParam(R.mipmap.navigate_tab_service, R.mipmap.navigate_tab_service_selected, getString(R.string.tab_txt_service)));
+        //  mNavigateTabBar.addTab(ServiceFragment.class, new NavigateTabBar.TabParam(R.mipmap.navigate_tab_service, R.mipmap.navigate_tab_service_selected, getString(R.string.tab_txt_service)));
         mNavigateTabBar.addTab(MyCenterFragment.class, new NavigateTabBar.TabParam(R.mipmap.navigate_tab_my, R.mipmap.navigate_tab_my_selected, getString(R.string.tab_txt_my)));
 
     }
@@ -77,24 +78,24 @@ public class MainActivity extends BaseActivity {
             public void onPopupMenu(int position) {
                 switch (position) {
                     case 1:
-//                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:10010"));
-//                        startActivity(intent);
                         ARouter.getInstance().build("/task/phone").navigation();
-                      break;
-                  case 2:
-                      ARouter.getInstance().build("/task/voice").navigation();
-                      break;
-                  case 3:
-                      ARouter.getInstance().build("/task/text").navigation();
-                      break;
+                        break;
+                    case 2:
+                        ARouter.getInstance().build("/task/voice").navigation();
+                        break;
+                    case 3:
+                        ARouter.getInstance().build("/task/text").navigation();
+                        break;
                     default:
-              }
+                }
+                PopMenuView.getInstance().closePopupWindowAction();
             }
         });
     }
+
     @Override
     public void doBusiness() {
-      requestPermission();
+        requestPermission();
     }
 
     /**
@@ -102,26 +103,17 @@ public class MainActivity extends BaseActivity {
      */
     private void requestPermission() {
         AndPermission.with(this)
-           .requestCode(REQUEST_CODE_PERMISSION_MULTI)
-                .permission(Permission.PHONE,Permission.STORAGE,Permission.MICROPHONE,Permission.LOCATION)
+                .requestCode(REQUEST_CODE_PERMISSION_MULTI)
+                .permission(Permission.PHONE, Permission.STORAGE, Permission.MICROPHONE, Permission.LOCATION)
                 .callback(this)
                 .start();
 
     }
 
-    @Override
-    public void onBackPressed() {
-        // 当popupWindow 正在展示的时候 按下返回键 关闭popupWindow 否则关闭activity
-        if (PopMenuView.getInstance().isShowing()) {
-            PopMenuView.getInstance().closePopupWindowAction();
-        }
-        else {
-            super.onBackPressed();
-        }
-    }
 
     /**
      * 保存状态
+     *
      * @param outState
      * @param outPersistentState
      */
@@ -140,6 +132,7 @@ public class MainActivity extends BaseActivity {
     private void getSingleNo(@NonNull List<String> deniedPermissions) {
 
     }
+
     /***
      * 监听用户点击事件
      *
@@ -150,12 +143,18 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            askExit();
+            if (PopMenuView.getInstance().isShowing()) {
+                PopMenuView.getInstance().closePopupWindowAction();
+            } else {
+                askExit();
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
+
     private long exitTime = 0;
+
     /**
      * 退出程序询问
      */

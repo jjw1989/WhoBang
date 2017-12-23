@@ -25,9 +25,9 @@ import butterknife.BindView;
  */
 @Route(path = "/my/service")
 public class MyServiceActivity extends BaseActivity {
-    @BindView(R.id.service_indicator)
+    @BindView(R.id.common_indicator)
     EasyIndicator tabStrip;
-    @BindView(R.id.vp_service)
+    @BindView(R.id.vp_common)
     ViewPager viewPager;
     private List<Fragment> fragmentList;
     @Override

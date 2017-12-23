@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -11,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.adapter.ConsigneeAddressAdapter;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.base.BaseAdapter;
 import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.view.MyDivider;
 import com.whombang.app.common.view.TitleBar;
@@ -35,7 +37,7 @@ public class AddressManagerActivity extends BaseActivity {
     @BindView(R.id.rv_common_view)
     RecyclerView mRecyclerView;
     ConsigneeAddressAdapter adapter;
-
+    List<ConsigneeEntity.UserAddressInfosBean> addressAll;
     @Inject
     AddressManagerPresenter presenter;
     @Override
@@ -86,9 +88,53 @@ public class AddressManagerActivity extends BaseActivity {
      * @param addressList
      */
     public void loadAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
-        adapter=new ConsigneeAddressAdapter(this,addressList,R.layout.wb_adress_item_layout);
+        this.addressAll.addAll(addressList);
+        if(addressList!=null && addressList.size()>0){
+            orderItem(addressAll);
+        }
+        adapter=new ConsigneeAddressAdapter(this,addressAll,R.layout.wb_adress_item_layout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new MyDivider());
         mRecyclerView.setAdapter(adapter);
+        addConsigneeAddressAdapterListener() ;
+    }
+
+    private void addConsigneeAddressAdapterListener() {
+        adapter.setOnItemClickListener(new BaseAdapter.onItemClickListener() {
+            @Override
+            public void onClick(View view, int position) throws Exception {
+                if (view.getId() == R.id.radio_selected && !addressAll.get(position).getUserAddressDefault()) {
+                    for (int i = 0; i < addressAll.size() ; i++) {
+                        if (addressAll.get(i).getUserAddressDefault()){
+                             //设置默认地址
+                             //刷数据
+                            return;
+                        }
+                    }
+                    //
+                }else if(view.getId()==R.id.delete_address){
+                    Log.i("qwert","delete_address..............");
+                }else if(view.getId()==R.id.edite_address){
+                    Log.i("qwert","edite_address.................");
+                }
+            }
+        });
+    }
+
+    /**
+     * 将默认地址排序到第一个位置
+     * @param addressList
+     */
+    private void orderItem(List<ConsigneeEntity.UserAddressInfosBean> addressList) {
+        for (int i = 0; i < addressList.size() ; i++) {
+            if (addressList.get(i).getUserAddressDefault()){
+               // MyApplication.getInstance().getUser().setDefauteConsigen(consigneeMsgs.get(i));
+                ConsigneeEntity.UserAddressInfosBean tmp = addressList.get(i) ;
+                addressList.remove(i) ;
+                addressList.add(0 , tmp);
+                return;
+            }
+        }
+
     }
 }

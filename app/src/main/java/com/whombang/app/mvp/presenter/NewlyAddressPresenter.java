@@ -36,13 +36,13 @@ public class NewlyAddressPresenter {
      * @param userAddressContactTel
      * @param userAddressDetail
      */
-    public void addAddress(String userAddressContactPeople,String userAddressContactTel,String contactAddress,String userAddressDetail){
-        Map<String, String> params = new HashMap<>();
+    public void addAddress(String userAddressContactPeople,String userAddressContactTel,String contactAddress,String userAddressDetail,boolean defaultAddress){
+        Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(activity).getUserInfo().getUserId());
         params.put("userAddressDetail", contactAddress+userAddressDetail);
         params.put("userAddressContactTel", userAddressContactTel);
         params.put("userAddressContactPeople", userAddressContactPeople);
-        params.put("userAddressDefault", "false");
+        params.put("userAddressDefault", defaultAddress);
         EasyHttp.post("addNewAddress")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<ConsigneeEntity>() {

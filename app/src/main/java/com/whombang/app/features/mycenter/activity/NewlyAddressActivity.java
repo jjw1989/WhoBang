@@ -3,7 +3,10 @@ package com.whombang.app.features.mycenter.activity;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -47,6 +50,8 @@ public class NewlyAddressActivity extends BaseActivity {
     TextView etContactAddress;
     @BindView(R.id.et_detail_address)
     EditText etAddress;
+    @BindView(R.id.checkBox)
+    CheckBox checkBox;
     @Inject
     NewlyAddressPresenter presenter;
     private List<String> province;
@@ -54,7 +59,7 @@ public class NewlyAddressActivity extends BaseActivity {
     private List<List<List<String>>> county;
     private List<List<List<String>>> zip_codes;
     private String zip_code;
-
+    private boolean defaultAddress=false;
     @Override
     public void initData(Bundle bundle) {
 
@@ -76,14 +81,19 @@ public class NewlyAddressActivity extends BaseActivity {
         titleBar.addAction(new TitleBar.TextAction("完成") {
             @Override
             public void performAction(View view) {
-                presenter.addAddress(etName.getText().toString(), etPhone.getText().toString(), etContactAddress.getText().toString(), etAddress.getText().toString());
+                presenter.addAddress(etName.getText().toString(), etPhone.getText().toString(), etContactAddress.getText().toString(), etAddress.getText().toString(),defaultAddress);
             }
         });
     }
 
     @Override
     public void doBusiness() {
-
+         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+             @Override
+             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                 defaultAddress=isChecked;
+             }
+         });
     }
 
     @OnClick(R.id.et_contact_address)
