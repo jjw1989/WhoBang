@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -84,15 +85,6 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
 
     }
 
-    private List<MyServiceEntity.ServiceOrderListBean> getData() {
-        List<MyServiceEntity.ServiceOrderListBean> list=new ArrayList<>();
-
-        for (int i = 0; i <30 ; i++) {
-            MyServiceEntity.ServiceOrderListBean bean=new MyServiceEntity.ServiceOrderListBean();
-            list.add(bean);
-        }
-        return list;
-    }
 
     private void initRefreshView() {
          mRefreshLayout.autoRefresh();
@@ -164,6 +156,6 @@ public class AwaitServiceFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ARouter.getInstance().build("/myservice/orderdetails").navigation();
     }
 }

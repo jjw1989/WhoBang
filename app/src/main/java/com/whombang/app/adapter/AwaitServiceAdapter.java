@@ -21,15 +21,39 @@ public class AwaitServiceAdapter extends BaseQuickAdapter<MyServiceEntity.Servic
     @Override
     protected void convert(BaseViewHolder helper, MyServiceEntity.ServiceOrderListBean item, int position) {
         helper.setText(R.id.tv_station_name,item.getStationName());
-        helper.setText(R.id.tv_service_status,item.getServiceOrderStatus());
+        helper.setText(R.id.tv_service_status,getServiceStation(item.getServiceOrderStatus()));
         helper.setText(R.id.tv_station_owner_name,item.getStationManagerName());
         helper.setText(R.id.tv_station_owner_phone,item.getStationManagerTel());
         helper.setText(R.id.tv_service_brief,item.getIndividuationServiceDesc());
         helper.setText(R.id.tv_server_name,item.getUserRealName());
         helper.setText(R.id.tv_server_phone,item.getPhone());
-        helper.setText(R.id.tv_order_time,item.getTakeTime());
-       // TextView tvNum=holder.findTextView(R.id.tv_num);
+        helper.setText(R.id.tv_order_time,item.getIndividuationServiceAddTime());
+        if(item.getServiceOrderStatus()==1){
+             helper.setVisible(R.id.rlt_service, false);
 
+        }else{
+            helper.setVisible(R.id.rlt_service, true);
+            helper.setText(R.id.tv_server_name,item.getUserRealName());
+            helper.setText(R.id.tv_server_phone,item.getPhone());
+        }
+    }
+
+    /**
+     * 订单状态含义转化
+     * @param station
+     * @return
+     */
+    private String getServiceStation(int station){
+        if(station==1){
+            return "等待接单";
+        }else if (station==2){
+            return "服务中";
+        }else if(station==3){
+            return "带评价";
+        }else if(station==4){
+            return "已完成";
+        }
+        return "";
     }
 }
 

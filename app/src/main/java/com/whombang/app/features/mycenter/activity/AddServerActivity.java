@@ -101,6 +101,7 @@ public class AddServerActivity extends BaseActivity {
             @Override
             public void onTagClick(TagView view, int position, String text) {
                 tagFactory.onColorTagClick(position);
+                Log.i("wwww", "onTagClick: "+text+"position="+position);
             }
 
             @Override
@@ -120,18 +121,15 @@ public class AddServerActivity extends BaseActivity {
      */
     private void addServer() {
         Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(this).getUserInfo().getUserId());
         params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
-        params.put("individuationServiceDesc", "");
-        params.put("contact", UserLocalData.getUserInfo(this).getUserInfo().getUserTel());
-        params.put("userInvitationUserId", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationId());
-        params.put("type", 3);
-        params.put("longitude", "114.00000");
-        params.put("latitude", "32.000000");
-        params.put("currentLocation", "中国");
-        params.put("demanderName", "张三");
+        params.put("userAddress", "中国1222");
+        params.put("userRealName", "张三");
+        params.put("userTel", "18611766105");
+        params.put("serviceSkillsDesc", "修水管我是专业的");
+        params.put("userIdentityNumber", "11111111111111111");
+        params.put("serviceType", 1);
 
-        EasyHttp.post("startAService")
+        EasyHttp.post("addServiceProviderUserInfo")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<String>() {
 

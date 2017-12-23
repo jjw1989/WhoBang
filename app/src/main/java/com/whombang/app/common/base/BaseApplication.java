@@ -43,7 +43,7 @@ public class BaseApplication extends MultiDexApplication {
         //这里涉及到安全我把url去掉了，demo都是调试通的
         String Url = "http://47.104.105.135:8080/WhomBangServer/";
 
-
+       // String Url = "http://192.168.1.162:8080/WhomBangServer/";
         //设置请求头
        // HttpHeaders headers = new HttpHeaders();
        // headers.put("User-Agent", SystemInfoUtils.getUserAgent(this, AppConstant.APPID));
