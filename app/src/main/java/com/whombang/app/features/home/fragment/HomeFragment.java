@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.whombang.app.R;
+import com.whombang.app.adapter.HomeMultipleRecycleAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
@@ -17,6 +18,8 @@ import java.util.Map;
  * 首页
  */
 public class HomeFragment extends BaseFragment implements WBHeaderView.RefreshDistanceListener {
+
+    HomeMultipleRecycleAdapter adapter;
 
     @Override
     public void initData(Bundle bundle) {

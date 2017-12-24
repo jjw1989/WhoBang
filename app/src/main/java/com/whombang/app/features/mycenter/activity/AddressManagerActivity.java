@@ -88,6 +88,7 @@ public class AddressManagerActivity extends BaseActivity {
      * @param addressList
      */
     public void loadAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
+        addressList=new ArrayList<>();
         this.addressAll.addAll(addressList);
         if(addressList!=null && addressList.size()>0){
             orderItem(addressAll);
