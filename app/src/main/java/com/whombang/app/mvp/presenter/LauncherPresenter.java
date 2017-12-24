@@ -51,12 +51,21 @@ public class LauncherPresenter {
             @Override
             public void onAnimationEnd(Animator animation) {
                 if (PreferenceUtil.getBoolean(mActivity, Contents.GUIDE, true)) {
-                    ARouter.getInstance().build("/main/guide").navigation(mActivity);//.withTransition(R.anim.push_right_in, R.anim.push_left_out)
+                    //ARouter.getInstance().build("/main/guide").navigation(mActivity);//.withTransition(R.anim.push_right_in, R.anim.push_left_out)
+                    Intent intent=new Intent(mActivity,GuideActivity.class);
+                    mActivity.startActivity(intent);
+                    mActivity.overridePendingTransition(R.anim.push_right_in, R.anim.push_left_out);
                 } else {
                     if (PreferenceUtil.getBoolean(mActivity, Contents.LOGIN, false)) {
-                        ARouter.getInstance().build("/main/tab").navigation(mActivity);
+                       // ARouter.getInstance().build("/main/tab").navigation(mActivity);
+                        Intent intent=new Intent(mActivity,MainActivity.class);
+                        mActivity.startActivity(intent);
+                        mActivity.overridePendingTransition(R.anim.push_right_in, R.anim.push_left_out);
                     } else {
-                        ARouter.getInstance().build("/user/login").navigation(mActivity);
+                        //ARouter.getInstance().build("/user/login").navigation(mActivity);
+                        Intent intent=new Intent(mActivity,LoginActivity.class);
+                        mActivity.startActivity(intent);
+                        mActivity.overridePendingTransition(R.anim.push_right_in, R.anim.push_left_out);
                     }
 
                 }

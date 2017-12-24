@@ -1,24 +1,52 @@
 package com.whombang.app.features.home.fragment;
+
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whombang.app.R;
+import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.adapter.HomeMultipleRecycleAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.view.WBHeaderView;
+import com.whombang.app.entity.GoodsEntity;
+import com.whombang.app.entity.Test;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import butterknife.BindView;
+
+import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
+
 /**
  * HomeFragment
  * 首页
  */
-public class HomeFragment extends BaseFragment implements WBHeaderView.RefreshDistanceListener {
-
+public class HomeFragment extends BaseFragment implements OnRefreshListener, OnLoadmoreListener {
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
     HomeMultipleRecycleAdapter adapter;
 
     @Override
@@ -38,34 +66,56 @@ public class HomeFragment extends BaseFragment implements WBHeaderView.RefreshDi
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        adapter = new HomeMultipleRecycleAdapter();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, VERTICAL));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setAdapter(adapter);
+        initRefreshView();
+    }
+
+    private void initRefreshView() {
+        mRefreshLayout.autoRefresh();
+        mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setOnLoadmoreListener(this);
 
     }
 
     @Override
     public void doBusiness() {
+
+
         Map<String, Object> params = new HashMap<>();
-        params.put("pageSize",20);
+        params.put("pageSize", 20);
         params.put("currentPageNum", 1);
 
-        EasyHttp.post("goodsList")
+        EasyHttp.post("goodsListNew")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<String>() {
 
                     @Override
                     public void onError(ApiException e) {
-                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onSuccess(String entity) {
-                        Log.i("www","data="+entity);
+                        //数据结构不一样需要特别处理
+                        GoodsEntity goodsEntity = JSON.parseObject(entity, GoodsEntity.class);
+                        adapter.resetMaxHasLoadPosition();
+                        adapter.setNewData(goodsEntity.getData());
 
                     }
                 });
     }
 
     @Override
-    public void onPositionChange(int currentPosY) {
+    public void onLoadmore(RefreshLayout refreshlayout) {
+
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
 
     }
 }

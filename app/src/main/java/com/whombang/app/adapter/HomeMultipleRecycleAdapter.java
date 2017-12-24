@@ -8,6 +8,7 @@ import com.whombang.app.R;
 import com.whombang.app.common.baseadapter.BaseMultiItemQuickAdapter;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.baseadapter.BaseViewHolder;
+import com.whombang.app.common.config.ViewType;
 import com.whombang.app.entity.GoodsEntity;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -16,7 +17,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 /**
  * @author admin 数据绑定未进行详细的数据验证，再实际使用中不可取
  */
-public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsEntity, BaseViewHolder> implements BaseQuickAdapter.SpanSizeLookup, BaseQuickAdapter.OnItemChildClickListener {
+public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsEntity.DataBean, BaseViewHolder> implements BaseQuickAdapter.SpanSizeLookup, BaseQuickAdapter.OnItemChildClickListener {
 
     private CountDownTimer timer;
     private int maxHasLoadPosition;
@@ -35,9 +36,9 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
 
     public HomeMultipleRecycleAdapter() {
         setSpanSizeLookup(this);
-//        addItemType(Constant.TYPE_TOP_BANNER, R.layout.homerecycle_item_top_banner);
-//        addItemType(Constant.TYPE_ICON_LIST, R.layout.homerecycle_item_icon_list);
-//        addItemType(Constant.TYPE_NEW_USER, R.layout.homerecycle_item_new_user);
+        addItemType(ViewType.VIEW_TYPE_BANNER, R.layout.vlayout_banner);
+        addItemType(ViewType.VIEW_TYPE_ANNOUNCEMENT, R.layout.vlayout_news);
+        addItemType(ViewType.VIEW_TYPE_GOODSINFO, R.layout.vlayout_grid);
     }
 
     /**
@@ -47,7 +48,7 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
      * @param position
      */
     @Override
-    protected void convert(BaseViewHolder helper,GoodsEntity item, int position) {
+    protected void convert(BaseViewHolder helper,GoodsEntity.DataBean item, int position) {
         if (listener != null) {
             listener.currentPosition(position);
         }
@@ -55,44 +56,19 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
             maxHasLoadPosition = position;
         }
 
-//        if ("topBanner".equals(item.itemType) && maxHasLoadPosition <= position) {
-//            bindTopBannerData(helper, item, position);
-//        } else if ("iconList".equals(item.itemType) && maxHasLoadPosition <= position) {
-//            bindIconListData(helper, item, position);
-//        } else if ("newUser".equals(item.itemType)) {
-//            bindNewUserData(helper, item, position);
-//        }
-    }
-
-
-    /**
-     * 填充下标 或 推荐 内容
-     *
-     * @param helper
-     * @param item
-     * @param id
-     * @param index
-     */
-    private void setRecommendedLanguage(BaseViewHolder helper,GoodsEntity item, int id, int index) {
-//        String itemRecommendedLanguage = item.itemContentList.get(index).itemRecommendedLanguage;
-//        if (TextUtils.isEmpty(itemRecommendedLanguage)) {
-//            helper.getView(id).setVisibility(View.GONE);
-//        } else {
-//            helper.getView(id).setVisibility(View.VISIBLE);
-//            helper.setText(id, itemRecommendedLanguage);
-//            if ("loveLife".equals(item.module)) {
-//                helper.getView(id).setBackgroundResource(R.drawable.home_love_life_subscript_gradient_bg);
-//            } else if ("enjoyQuality".equals(item.module)) {
-//                helper.getView(id).setBackgroundResource(R.drawable.home_enjoy_quality_subscript_gradient_bg);
-//            } else if ("buyFeatures".equals(item.module)) {
-//                helper.getView(id).setBackgroundResource(R.drawable.home_buy_feature_subscript_gradient_bg);
-//            }
-//        }
+        if ("banner".equals(item.itemType) && maxHasLoadPosition <= position) {
+            bindTopBannerData(helper, item, position);
+        } else if ("announcement".equals(item.itemType) && maxHasLoadPosition <= position) {
+            bindAnnouncementData(helper, item, position);
+        } else if ("goodsInfo".equals(item.itemType)) {
+            bindNewUserData(helper, item, position);
+        }
     }
 
 
 
-    private void bindNewUserData(BaseViewHolder helper, GoodsEntity item, int position) {
+
+    private void bindNewUserData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
 
 //        ((ExpandImageView) helper.getView(R.id.new_user_bg_img)).setImageURI(item.itemContentList.get(0).imageUrl);
 //        ((ExpandImageView) helper.getView(R.id.new_user_red_envelopes)).setImageURI(item.itemContentList.get(1).imageUrl);
@@ -101,7 +77,7 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
 //        ((ExpandImageView) helper.getView(R.id.new_user_packs)).setImageURI(item.itemContentList.get(4).imageUrl);
     }
 
-    private void bindIconListData(BaseViewHolder helper, GoodsEntity item, int position) {
+    private void bindAnnouncementData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
 
     }
 
@@ -112,8 +88,8 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
      * @param item
      * @param position
      */
-    private void bindTopBannerData(BaseViewHolder helper, final GoodsEntity item, int position) {
-        BGABanner banner = helper.getView(R.id.banner);
+    private void bindTopBannerData(BaseViewHolder helper, final GoodsEntity.DataBean item, int position) {
+       // BGABanner banner = helper.getView(R.id.banner);
 //        banner.setDelegate(new BGABanner.Delegate<View, HomeIndex.ItemInfoListBean.ItemContentListBean>() {
 //            @Override
 //            public void onBannerItemClick(BGABanner banner, View itemView, HomeIndex.ItemInfoListBean.ItemContentListBean model, int position) {

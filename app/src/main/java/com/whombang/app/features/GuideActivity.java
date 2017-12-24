@@ -1,5 +1,6 @@
 package com.whombang.app.features;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.systembar.SystemBarManager;
 import com.whombang.app.common.utils.PreferenceUtil;
+import com.whombang.app.features.login.LoginActivity;
 
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -52,7 +54,10 @@ public class GuideActivity extends BaseActivity {
             @Override
             public void onClickEnterOrSkip() {
                 PreferenceUtil.putBoolean(mContext, Contents.GUIDE, false);
-                ARouter.getInstance().build("/user/login").withTransition(R.anim.push_left_in, R.anim.push_left_out).navigation(mActivity);
+                ARouter.getInstance().build("/user/login").withTransition(R.anim.push_left_in, R.anim.push_right_out).navigation(mActivity);
+//                Intent intent=new Intent(GuideActivity.this, LoginActivity.class);
+//                   startActivity(intent);
+//                   overridePendingTransition();
                 finish();
             }
         });

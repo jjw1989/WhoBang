@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_marginTop="@dimen/dp_10"
+        android:visibility="gone"
         android:layout_height="80dp">
 
         <TextView
@@ -50,11 +51,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="@color/bg"
         />
     <RelativeLayout
         android:id="@+id/rlt_nickname"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:layout_height="50dp">
 
