@@ -1,48 +1,31 @@
 package com.whombang.app.features.mycenter.fragment;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
+
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whombang.app.R;
 import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.common.base.BaseFragment;
-import com.whombang.app.common.base.IBasePresenter;
-import com.whombang.app.common.base.ILoadDataView;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.common.view.WBHeaderView;
 import com.whombang.app.entity.MyServiceEntity;
 import com.whombang.app.entity.UserLocalData;
 
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.BindView;
 
