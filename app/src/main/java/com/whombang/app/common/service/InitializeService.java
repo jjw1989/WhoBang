@@ -1,60 +1,62 @@
-package com.whombang.app.common.base;
+package com.whombang.app.common.service;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.cache.converter.SerializableDiskConverter;
 import com.whombang.app.common.net.utils.HttpLog;
-import com.whombang.app.common.service.InitializeService;
-import com.whombang.app.mvp.component.ApplicationComponent;
-import com.whombang.app.mvp.component.DaggerApplicationComponent;
-import com.whombang.app.mvp.module.ApplicationModule;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
 /**
- * Description:全局初始化和属性在此定义
- * Company:
- * Created by 蒋建伟 on 2017/11/10.
+ * Created by sundy.jiang on 2017/12/25.
  */
 
-public class BaseApplication extends MultiDexApplication {
-    private boolean isDebug=true;
-    private BaseApplication baseApplication;
-    private  ApplicationComponent appComponent;
+public class InitializeService extends IntentService {
+    private static final String ACTION_INIT_WHEN_APP_CREATE = "com.anly.githubapp.service.action.INIT";
 
-    private static Context mContext;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        baseApplication=this;
-      //  InitializeService.start(this);
-
-        Fresco.initialize(this);
-        initArouter();
-//        initInjector();
-        initHttp();
+    public InitializeService() {
+        super("InitializeService");
     }
 
+    public static void start(Context context) {
+        Intent intent = new Intent(context, InitializeService.class);
+        intent.setAction(ACTION_INIT_WHEN_APP_CREATE);
+        context.startService(intent);
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        if (intent != null) {
+            final String action = intent.getAction();
+            if (ACTION_INIT_WHEN_APP_CREATE.equals(action)) {
+                performInit();
+            }
+        }
+    }
+
+    private void performInit() {
+        Fresco.initialize(this);
+        initArouter();
+     //   initHttp();
+    }
     private void initHttp() {
-        EasyHttp.init(this);
+        EasyHttp.init(this.getApplication());
 
         //这里涉及到安全我把url去掉了，demo都是调试通的
         String Url = "http://47.104.105.135:8080/WhomBangServer/";
 
-       // String Url = "http://192.168.1.162:8080/WhomBangServer/";
+        // String Url = "http://192.168.1.162:8080/WhomBangServer/";
         //设置请求头
-       // HttpHeaders headers = new HttpHeaders();
-       // headers.put("User-Agent", SystemInfoUtils.getUserAgent(this, AppConstant.APPID));
+        // HttpHeaders headers = new HttpHeaders();
+        // headers.put("User-Agent", SystemInfoUtils.getUserAgent(this, AppConstant.APPID));
         //设置请求参数
-       // HttpParams params = new HttpParams();
+        // HttpParams params = new HttpParams();
         //params.put("appId", AppConstant.APPID);
         EasyHttp.getInstance()
                 .debug("whombang", true)
@@ -70,10 +72,10 @@ public class BaseApplication extends MultiDexApplication {
                 .setCacheVersion(1)//缓存版本为1
                 .setHostnameVerifier(new UnSafeHostnameVerifier(Url))//全局访问规则
                 .setCertificates();//信任所有证书
-                //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
-               // .addCommonHeaders(headers)//设置全局公共头
-               // .addCommonParams(params)//设置全局公共参数
-               // .addInterceptor(new CustomSignInterceptor());//添加参数签名拦截器
+        //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
+        // .addCommonHeaders(headers)//设置全局公共头
+        // .addCommonParams(params)//设置全局公共参数
+        // .addInterceptor(new CustomSignInterceptor());//添加参数签名拦截器
         //.addInterceptor(new HeTInterceptor());//处理自己业务的拦截器
     }
     public class UnSafeHostnameVerifier implements HostnameVerifier {
@@ -94,28 +96,13 @@ public class BaseApplication extends MultiDexApplication {
     }
 
     /**
-     * 初始化注射器
-     */
-    private void initInjector() {
-        appComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
-    }
-
-    /**
      * 初始化路由管理
      */
     private void initArouter() {
-        if (isDebug) {                  // 这两行必须写在init之前，否则这些配置在init过程中将无效
+        if (true) {                  // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();          // 打印日志
             ARouter.openDebug();        // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
-        ARouter.init(this); // 尽可能早，推荐在Application中初始化
-    }
-
-    public ApplicationComponent getAppComponent() {
-        return appComponent;
-    }
-
-    public BaseApplication getBaseApplication() {
-        return baseApplication;
+        ARouter.init(this.getApplication()); // 尽可能早，推荐在Application中初始化
     }
 }

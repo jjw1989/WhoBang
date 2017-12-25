@@ -2,12 +2,9 @@ package com.whombang.app.features.service.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +12,6 @@ import android.widget.Toast;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.bumptech.glide.Glide;
 import com.whombang.app.R;
 import com.whombang.app.adapter.BaseDelegateAdapter;
 import com.whombang.app.adapter.SpikeContentAdapter;
@@ -80,7 +76,7 @@ public class ServiceFragment extends BaseFragment {
 
         //banner
         BaseDelegateAdapter bannerAdapter = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper()
-                , R.layout.vlayout_banner, 1, BANNER_VIEW_TYPE) {
+                , R.layout.wb_goods_banner, 1, BANNER_VIEW_TYPE) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);

@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 public class BaseLazyFragment extends Fragment {
 	protected LayoutInflater inflater;
 	private View contentView;
-	private Context context;
+	public Context context;
 	private ViewGroup container;
 
 	@Override

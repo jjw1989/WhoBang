@@ -103,8 +103,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
                         //数据结构不一样需要特别处理
                         GoodsEntity goodsEntity = JSON.parseObject(entity, GoodsEntity.class);
                         adapter.resetMaxHasLoadPosition();
-                        adapter.setNewData(goodsEntity.getData());
-
+                        adapter.setNewData(goodsEntity.data);
                     }
                 });
     }

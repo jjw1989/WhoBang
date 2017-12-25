@@ -6,7 +6,7 @@ import com.whombang.app.common.baseadapter.BaseViewHolder;
 import com.whombang.app.entity.OfferServiceEntity;
 
 /**
- * 提供服务者密码
+ * 提供服务者适配器
  * Created by David on 2017/12/23.
  */
 

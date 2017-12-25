@@ -3,19 +3,25 @@ package com.whombang.app.adapter;
 import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.whombang.app.R;
 import com.whombang.app.common.baseadapter.BaseMultiItemQuickAdapter;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.baseadapter.BaseViewHolder;
 import com.whombang.app.common.config.ViewType;
+import com.whombang.app.common.utils.GlideImageLoader;
 import com.whombang.app.entity.GoodsEntity;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
-import cn.bingoogolapple.bgabanner.BGABanner;
+import java.util.ArrayList;
 
 
 /**
- * @author admin 数据绑定未进行详细的数据验证，再实际使用中不可取
+ * 首页:商品列表适配器
  */
 public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsEntity.DataBean, BaseViewHolder> implements BaseQuickAdapter.SpanSizeLookup, BaseQuickAdapter.OnItemChildClickListener {
 
@@ -36,7 +42,7 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
 
     public HomeMultipleRecycleAdapter() {
         setSpanSizeLookup(this);
-        addItemType(ViewType.VIEW_TYPE_BANNER, R.layout.vlayout_banner);
+        addItemType(ViewType.VIEW_TYPE_BANNER, R.layout.wb_goods_banner);
         addItemType(ViewType.VIEW_TYPE_ANNOUNCEMENT, R.layout.vlayout_news);
         addItemType(ViewType.VIEW_TYPE_GOODSINFO, R.layout.vlayout_grid);
     }
@@ -89,22 +95,37 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
      * @param position
      */
     private void bindTopBannerData(BaseViewHolder helper, final GoodsEntity.DataBean item, int position) {
-       // BGABanner banner = helper.getView(R.id.banner);
-//        banner.setDelegate(new BGABanner.Delegate<View, HomeIndex.ItemInfoListBean.ItemContentListBean>() {
-//            @Override
-//            public void onBannerItemClick(BGABanner banner, View itemView, HomeIndex.ItemInfoListBean.ItemContentListBean model, int position) {
-//                Toast.makeText(itemView.getContext(), "" + item.itemContentList.get(position).clickUrl, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        banner.setAdapter(new BGABanner.Adapter<View, HomeIndex.ItemInfoListBean.ItemContentListBean>() {
-//            @Override
-//            public void fillBannerItem(BGABanner banner, View itemView, HomeIndex.ItemInfoListBean.ItemContentListBean model, int position) {
-//                SimpleDraweeView simpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.sdv_item_fresco_content);
-//                simpleDraweeView.setImageURI(Uri.parse(model.imageUrl));
-//            }
-//        });
-//
-//        banner.setData(R.layout.homerecycle_top_banner_content, item.itemContentList, null);
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i <item.itemContentList.size() ; i++) {
+            arrayList.add(item.itemContentList.get(i).imageUrl);
+        }
+        // 绑定数据
+        Banner mBanner = helper.getView(R.id.banner);
+        //设置banner样式
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置图片加载器
+        mBanner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        mBanner.setImages(arrayList);
+        //设置banner动画效果
+        mBanner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+        //        mBanner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        mBanner.isAutoPlay(true);
+        //设置轮播时间
+        mBanner.setDelayTime(5000);
+        //设置指示器位置（当banner模式中有指示器时）
+        mBanner.setIndicatorGravity(BannerConfig.CENTER);
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.start();
+
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(mContext, "banner点击了" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

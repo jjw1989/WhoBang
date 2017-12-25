@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -15,7 +14,6 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bumptech.glide.Glide;
-import com.sunfusheng.marqueeview.MarqueeView;
 import com.whombang.app.R;
 import com.whombang.app.adapter.BaseDelegateAdapter;
 import com.whombang.app.common.base.BaseFragment;
@@ -85,7 +83,7 @@ public class ShopFragment extends BaseFragment {
 
         //banner
         BaseDelegateAdapter bannerAdapter = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper()
-                , R.layout.vlayout_banner, 1, BANNER_VIEW_TYPE) {
+                , R.layout.wb_goods_banner, 1, BANNER_VIEW_TYPE) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);

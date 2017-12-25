@@ -56,11 +56,11 @@ public class GroudBookActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("我的拼团");
         fragmentList = new ArrayList<>();
-        fragmentList.add(new GoodsListFragment());
+      //  fragmentList.add(new GoodsListFragment());
         fragmentList.add(new GroupBookingFragment());
         fragmentList.add(new AwaitHarvestFragment());
         fragmentList.add(new GoodsFinishFragment());
-        tabStrip.setTabTitles(new String[]{"全部","拼团中","待收货","已完成"});
+        tabStrip.setTabTitles(new String[]{"拼团中","待收货","已完成"});//"全部",
         tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
             @Override
