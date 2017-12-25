@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gxz.PagerSlidingTabStrip;
 import com.whombang.app.R;
 import com.whombang.app.adapter.ItemTitlePagerAdapter;
+import com.whombang.app.adapter.ItemTitlePagerAdapter1;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.features.shop.fragment.GoodsCommentFragment;
 import com.whombang.app.features.shop.fragment.GoodsDetailFragment;
@@ -53,7 +54,7 @@ public class CommodityDetailsActivity extends BaseActivity {
         fragmentList.add(new GoodsInfoFragment());
         fragmentList.add(new GoodsDetailFragment());
         fragmentList.add(new GoodsCommentFragment());
-        viewPager.setAdapter(new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList, new String[]{"商品", "详情", "评价"}));
+        viewPager.setAdapter(new ItemTitlePagerAdapter1(getSupportFragmentManager(), fragmentList, new String[]{"商品", "详情", "评价"}));
         viewPager.setOffscreenPageLimit(3);
         tabStrip.setViewPager(viewPager);
 

@@ -3,23 +3,73 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <ImageView
-        android:id="@+id/iv"
+    <com.whombang.app.common.view.imageview.ExpandImageView
+        android:id="@+id/img_goods_head"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:paddingBottom="1px"
         android:paddingRight="1px"
         android:scaleType="fitXY"/>
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:text="商品名字"
-        android:gravity="center"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="match_parent"
-        android:text="商品的描述"
-        android:gravity="center"
-        android:layout_height="wrap_content" />
+        android:background="@color/bg"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/tv_goods_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="22dp"
+            android:text="商品的名名字" />
+
+        <TextView
+            android:id="@+id/tv_sell_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_goods_name"
+            android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
+            android:layout_toEndOf="@+id/tv_goods_name"
+            android:layout_toRightOf="@+id/tv_goods_name"
+            android:text="商品的规格" />
+
+        <TextView
+            android:id="@+id/tv_sell_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_goods_name"
+            android:layout_alignStart="@+id/tv_goods_name"
+            android:layout_below="@+id/tv_goods_name"
+            android:layout_marginTop="19dp"
+            android:text="团购的价格" />
+
+        <TextView
+            android:id="@+id/tv_original_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_sell_unit"
+            android:layout_alignStart="@+id/tv_sell_unit"
+            android:layout_alignTop="@+id/tv_sell_price"
+            android:text="原价" />
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_original_price"
+            android:layout_marginEnd="11dp"
+            android:textSize="16sp"
+            android:textColor="@color/red"
+            android:layout_marginRight="11dp"
+            android:text="团购倒计时" />
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

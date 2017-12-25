@@ -183,16 +183,16 @@ public class ShopFragment extends BaseFragment {
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
                 int item = GRID_URL[position];
-                ImageView iv = holder.getView(R.id.iv);
-                Glide.with(mActivity).load(item).into(iv);
-
-                iv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mActivity, "item" + position, Toast.LENGTH_SHORT).show();
-                        ARouter.getInstance().build("/shop/details").navigation();
-                    }
-                });
+//                ImageView iv = holder.getView(R.id.iv);
+//                Glide.with(mActivity).load(item).into(iv);
+//
+//                iv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(mActivity, "item" + position, Toast.LENGTH_SHORT).show();
+//                        ARouter.getInstance().build("/shop/details").navigation();
+//                    }
+//                });
             }
         };
         mAdapters.add(girdAdapter);

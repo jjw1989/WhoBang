@@ -1,8 +1,10 @@
 package com.whombang.app.adapter;
 
+import android.graphics.Paint;
 import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.whombang.app.R;
@@ -11,6 +13,7 @@ import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.baseadapter.BaseViewHolder;
 import com.whombang.app.common.config.ViewType;
 import com.whombang.app.common.utils.GlideImageLoader;
+import com.whombang.app.common.view.imageview.ExpandImageView;
 import com.whombang.app.entity.GoodsEntity;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -49,12 +52,13 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
 
     /**
      * 数据绑定未进行详细的数据验证，在实际使用中不可取
-     * @param helper A fully initialized helper.
-     * @param item   The item that needs to be displayed.
+     *
+     * @param helper   A fully initialized helper.
+     * @param item     The item that needs to be displayed.
      * @param position
      */
     @Override
-    protected void convert(BaseViewHolder helper,GoodsEntity.DataBean item, int position) {
+    protected void convert(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
         if (listener != null) {
             listener.currentPosition(position);
         }
@@ -67,20 +71,22 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
         } else if ("announcement".equals(item.itemType) && maxHasLoadPosition <= position) {
             bindAnnouncementData(helper, item, position);
         } else if ("goodsInfo".equals(item.itemType)) {
-            bindNewUserData(helper, item, position);
+            bindGoodsInfoData(helper, item, position);
         }
     }
 
 
+    private void bindGoodsInfoData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
+
+        ((ExpandImageView) helper.getView(R.id.img_goods_head)).setImageURI(item.itemContentList.get(0).imageUrl);
+        helper.setText(R.id.tv_goods_name, item.itemContentList.get(0).goodsName);
+        helper.setText(R.id.tv_sell_unit, item.itemContentList.get(0).sellUnit);
+        ((TextView) helper.getView(R.id.tv_original_price)).getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        helper.setText(R.id.tv_original_price, "原价："+item.itemContentList.get(0).originalPrice );
+        helper.setText(R.id.tv_sell_price, "团购价格："+item.itemContentList.get(0).sellPrice );
+        helper.setText(R.id.tv_end_time, "倒计时："+item.itemContentList.get(0).endTime);
 
 
-    private void bindNewUserData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
-
-//        ((ExpandImageView) helper.getView(R.id.new_user_bg_img)).setImageURI(item.itemContentList.get(0).imageUrl);
-//        ((ExpandImageView) helper.getView(R.id.new_user_red_envelopes)).setImageURI(item.itemContentList.get(1).imageUrl);
-//        ((ExpandImageView) helper.getView(R.id.new_uer_free_postage)).setImageURI(item.itemContentList.get(2).imageUrl);
-//        ((ExpandImageView) helper.getView(R.id.new_user_basic_necessities_of_life)).setImageURI(item.itemContentList.get(3).imageUrl);
-//        ((ExpandImageView) helper.getView(R.id.new_user_packs)).setImageURI(item.itemContentList.get(4).imageUrl);
     }
 
     private void bindAnnouncementData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
@@ -96,7 +102,7 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
      */
     private void bindTopBannerData(BaseViewHolder helper, final GoodsEntity.DataBean item, int position) {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i <item.itemContentList.size() ; i++) {
+        for (int i = 0; i < item.itemContentList.size(); i++) {
             arrayList.add(item.itemContentList.get(i).imageUrl);
         }
         // 绑定数据

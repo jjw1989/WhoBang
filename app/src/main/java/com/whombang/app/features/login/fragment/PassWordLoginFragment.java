@@ -93,6 +93,7 @@ public class PassWordLoginFragment extends BaseFragment {
                             UserLocalData.putUser(mActivity, userInfoEntity);
                             PreferenceUtil.putBoolean(mActivity, Contents.LOGIN, true);
                             ARouter.getInstance().build("/main/tab").navigation();
+                            mActivity.finish();
                         }
 
                         @Override

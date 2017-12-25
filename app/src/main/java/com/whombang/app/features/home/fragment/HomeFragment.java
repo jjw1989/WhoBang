@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +20,7 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.adapter.HomeMultipleRecycleAdapter;
 import com.whombang.app.common.base.BaseFragment;
+import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
@@ -48,6 +50,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     HomeMultipleRecycleAdapter adapter;
+    private int pageNum=1;
 
     @Override
     public void initData(Bundle bundle) {
@@ -83,11 +86,33 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
 
     @Override
     public void doBusiness() {
+      adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+          @Override
+          public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+              ARouter.getInstance().build("/shop/details").navigation();
+          }
+      });
 
+    }
 
-        Map<String, Object> params = new HashMap<>();
+    @Override
+    public void onLoadmore(RefreshLayout refreshlayout) {
+     requestNetMoreData();
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
+      requestNetData();
+    }
+
+    /**
+     * 请求网络数据
+     */
+    private void requestNetData(){
+       pageNum=1;
+        final Map<String, Object> params = new HashMap<>();
         params.put("pageSize", 20);
-        params.put("currentPageNum", 1);
+        params.put("currentPageNum", pageNum);
 
         EasyHttp.post("goodsListNew")
                 .upJson(new JSONObject(params).toString())
@@ -96,6 +121,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
                     @Override
                     public void onError(ApiException e) {
                         Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        mRefreshLayout.finishRefresh();
                     }
 
                     @Override
@@ -104,17 +130,36 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
                         GoodsEntity goodsEntity = JSON.parseObject(entity, GoodsEntity.class);
                         adapter.resetMaxHasLoadPosition();
                         adapter.setNewData(goodsEntity.data);
+                        mRefreshLayout.finishRefresh();
+                        pageNum++;
                     }
                 });
     }
 
-    @Override
-    public void onLoadmore(RefreshLayout refreshlayout) {
+    private void requestNetMoreData(){
 
-    }
+        Map<String, Object> params = new HashMap<>();
+        params.put("pageSize", 20);
+        params.put("currentPageNum", pageNum);
 
-    @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
+        EasyHttp.post("goodsListNew")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<String>() {
 
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        mRefreshLayout.finishLoadmore();
+                    }
+
+                    @Override
+                    public void onSuccess(String entity) {
+                        //数据结构不一样需要特别处理
+                        GoodsEntity goodsEntity = JSON.parseObject(entity, GoodsEntity.class);
+                        adapter.addData(goodsEntity.data);
+                        mRefreshLayout.finishLoadmore();
+                        pageNum++;
+                    }
+                });
     }
 }
