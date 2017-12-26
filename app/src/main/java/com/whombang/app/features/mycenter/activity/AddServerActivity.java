@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -40,6 +41,15 @@ public class AddServerActivity extends BaseActivity {
     private List<TagBean> mTagBean;
     @BindView(R.id.tag_service_type)
     TagContainerLayout tagSetviceType;
+    EditText etName;
+    @BindView(R.id.et_server_phone)
+    EditText etPhone;
+    @BindView(R.id.et_server_address)
+    EditText etAddress;
+    @BindView(R.id.et_certificate)
+    EditText etCertificate;
+    @BindView(R.id.et_service_describe)
+    EditText etDescribe;
     private TagContainerLayout.ViewColor mBanViewColor;
     private TagContainerLayout.ViewColor mDefaultViewColor;
     private TagContainerLayout.ViewColor mClickViewColor;
@@ -122,11 +132,11 @@ public class AddServerActivity extends BaseActivity {
     private void addServer() {
         Map<String, Object> params = new HashMap<>();
         params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
-        params.put("userAddress", "中国1222");
-        params.put("userRealName", "张三");
-        params.put("userTel", "18611766105");
-        params.put("serviceSkillsDesc", "修水管我是专业的");
-        params.put("userIdentityNumber", "11111111111111111");
+        params.put("userAddress", etAddress.getText().toString());
+        params.put("userRealName", etName.getText().toString());
+        params.put("userTel", etPhone.getText().toString());
+        params.put("serviceSkillsDesc", etDescribe.getText().toString());
+        params.put("userIdentityNumber", etCertificate.getText().toString());
         params.put("serviceType", 1);
 
         EasyHttp.post("addServiceProviderUserInfo")

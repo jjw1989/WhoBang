@@ -55,6 +55,7 @@ public class GroudBookActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("我的拼团");
+        viewPager.setOffscreenPageLimit(3);
         fragmentList = new ArrayList<>();
       //  fragmentList.add(new GoodsListFragment());
         fragmentList.add(new GroupBookingFragment());
