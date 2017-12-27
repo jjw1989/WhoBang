@@ -40,7 +40,6 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
-    @BindView(R.id.et_demanderName)
     HomeMultipleRecycleAdapter adapter;
     private int pageNum = 1;
 

@@ -41,6 +41,7 @@ public class AddServerActivity extends BaseActivity {
     private List<TagBean> mTagBean;
     @BindView(R.id.tag_service_type)
     TagContainerLayout tagSetviceType;
+    @BindView(R.id.et_demanderName)
     EditText etName;
     @BindView(R.id.et_server_phone)
     EditText etPhone;
@@ -50,6 +51,7 @@ public class AddServerActivity extends BaseActivity {
     EditText etCertificate;
     @BindView(R.id.et_service_describe)
     EditText etDescribe;
+    int serviceType;
     private TagContainerLayout.ViewColor mBanViewColor;
     private TagContainerLayout.ViewColor mDefaultViewColor;
     private TagContainerLayout.ViewColor mClickViewColor;
@@ -111,7 +113,7 @@ public class AddServerActivity extends BaseActivity {
             @Override
             public void onTagClick(TagView view, int position, String text) {
                 tagFactory.onColorTagClick(position);
-                Log.i("wwww", "onTagClick: "+text+"position="+position);
+                serviceType=position+1;
             }
 
             @Override
@@ -137,7 +139,7 @@ public class AddServerActivity extends BaseActivity {
         params.put("userTel", etPhone.getText().toString());
         params.put("serviceSkillsDesc", etDescribe.getText().toString());
         params.put("userIdentityNumber", etCertificate.getText().toString());
-        params.put("serviceType", 1);
+        params.put("serviceType", serviceType);
 
         EasyHttp.post("addServiceProviderUserInfo")
                 .upJson(new JSONObject(params).toString())
@@ -151,6 +153,7 @@ public class AddServerActivity extends BaseActivity {
                     @Override
                     public void onSuccess(String entity) {
                         Log.i("www", "data=" + entity);
+                      //  finish();
                     }
                 });
     }
