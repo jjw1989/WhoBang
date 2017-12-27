@@ -137,7 +137,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     }
 
     private void requestNetMoreData(){
-
+        Log.i("wwww", "requestNetMoreData:= "+pageNum);
         Map<String, Object> params = new HashMap<>();
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);

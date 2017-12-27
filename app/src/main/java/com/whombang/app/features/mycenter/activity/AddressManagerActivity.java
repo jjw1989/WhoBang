@@ -88,7 +88,7 @@ public class AddressManagerActivity extends BaseActivity {
      * @param addressList
      */
     public void loadAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
-        addressList=new ArrayList<>();
+        addressAll=new ArrayList<>();
         this.addressAll.addAll(addressList);
         if(addressList!=null && addressList.size()>0){
             orderItem(addressAll);
@@ -109,11 +109,13 @@ public class AddressManagerActivity extends BaseActivity {
                         if (addressAll.get(i).getUserAddressDefault()){
                              //设置默认地址
                              //刷数据
+                             presenter.setDefaultAddress(addressAll.get(i));
                             return;
                         }
                     }
                     //
                 }else if(view.getId()==R.id.delete_address){
+                    presenter.deleteAddress(addressAll.get(position).getUserAddressInfoId());
                     Log.i("qwert","delete_address..............");
                 }else if(view.getId()==R.id.edite_address){
                     Log.i("qwert","edite_address.................");
@@ -137,5 +139,20 @@ public class AddressManagerActivity extends BaseActivity {
             }
         }
 
+    }
+
+    /**
+     * 删除地址
+     */
+    public void deleteAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
+        presenter.requestAddressList(UserLocalData.getUserInfo(this).getUserInfo().getUserId());
+    }
+
+    public void setDefaultAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
+        if(addressList!=null && addressList.size()>0){
+            orderItem(addressList);
+        }
+        adapter.cleanData();
+        adapter.addData(addressList);
     }
 }
