@@ -5,35 +5,26 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whombang.app.R;
-import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.adapter.HomeMultipleRecycleAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.common.view.WBHeaderView;
 import com.whombang.app.entity.GoodsEntity;
-import com.whombang.app.entity.Test;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -49,8 +40,9 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
+    @BindView(R.id.et_demanderName)
     HomeMultipleRecycleAdapter adapter;
-    private int pageNum=1;
+    private int pageNum = 1;
 
     @Override
     public void initData(Bundle bundle) {
@@ -86,30 +78,30 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
 
     @Override
     public void doBusiness() {
-      adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-          @Override
-          public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-              ARouter.getInstance().build("/shop/details").navigation();
-          }
-      });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build("/shop/details").navigation();
+            }
+        });
 
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-     requestNetMoreData();
+        requestNetMoreData();
     }
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-      requestNetData();
+        requestNetData();
     }
 
     /**
      * 请求网络数据
      */
-    private void requestNetData(){
-       pageNum=1;
+    private void requestNetData() {
+        pageNum = 1;
         final Map<String, Object> params = new HashMap<>();
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);
@@ -136,8 +128,8 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
                 });
     }
 
-    private void requestNetMoreData(){
-        Log.i("wwww", "requestNetMoreData:= "+pageNum);
+    private void requestNetMoreData() {
+
         Map<String, Object> params = new HashMap<>();
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);

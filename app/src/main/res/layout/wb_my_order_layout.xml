@@ -65,7 +65,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/et_server_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -103,7 +103,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_server_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -141,7 +141,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/et_certificate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
