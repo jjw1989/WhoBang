@@ -27,7 +27,7 @@ import java.util.Map;
 import butterknife.BindView;
 
 /**
- * 修改昵称
+ * 修改昵称（完成）
  */
 @Route(path = "/set/name")
 public class SetNameActivity extends BaseActivity {

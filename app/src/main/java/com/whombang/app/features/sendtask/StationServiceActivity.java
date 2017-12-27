@@ -1,15 +1,10 @@
 package com.whombang.app.features.sendtask;
 
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.amap.api.location.AMapLocation;
@@ -18,16 +13,22 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.Projection;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.MyLocationStyle;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.net.EasyHttp;
+import com.whombang.app.common.net.callback.SimpleCallBack;
+import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.entity.UserLocalData;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -65,6 +66,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     public void initView(Bundle savedInstanceState, View view) {
          mapView.onCreate(savedInstanceState);
          initMapView();
+        requestStationData();
     }
 
     private void initMapView() {
@@ -159,5 +161,23 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                 }
 
         }
+    }
+
+    private void requestStationData(){
+
+        EasyHttp.post("getAllStationAndManagerInfo")
+                .execute(new SimpleCallBack<String>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(String entity) {
+                        Log.i("www","data="+entity);
+
+                    }
+                });
     }
 }

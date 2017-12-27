@@ -17,6 +17,7 @@ import com.whombang.app.mvp.presenter.TextTaskPresenter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 发布文本任务
@@ -59,5 +60,10 @@ public class TextTaskActivity extends BaseActivity {
     @Override
     public void doBusiness() {
 
+    }
+
+    @OnClick(R.id.address2)
+    public void jumpMap(){
+        ARouter.getInstance().build("/service/map").navigation();
     }
 }
