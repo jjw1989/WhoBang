@@ -9,7 +9,7 @@
     tools:context="com.whombang.app.features.mycenter.activity.FeedbackActivity">
     <include layout="@layout/wb_titlebar_layout"/>
     <EditText
-        android:id="@+id/et_text_content"
+        android:id="@+id/et_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/address2"
