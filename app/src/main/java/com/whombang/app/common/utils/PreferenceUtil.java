@@ -55,4 +55,24 @@ public class PreferenceUtil {
         }
         return sharedPreferences.getBoolean(key,defautBoolean);
     }
+    /**
+     * SP 中清除所有数据
+     */
+    public static void clear() {
+        clear(false);
+    }
+
+    /**
+     * SP 中清除所有数据
+     *
+     * @param isCommit {@code true}: {@link SharedPreferences.Editor#commit()}<br>
+     *                 {@code false}: {@link SharedPreferences.Editor#apply()}
+     */
+    public static  void clear(final boolean isCommit) {
+        if (isCommit) {
+            sharedPreferences.edit().clear().commit();
+        } else {
+            sharedPreferences.edit().clear().apply();
+        }
+    }
 }

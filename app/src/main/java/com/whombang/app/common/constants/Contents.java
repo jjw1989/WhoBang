@@ -10,4 +10,5 @@ public class Contents {
     public static final String LOGIN="is_login";
 
     public static final int REQUEST_CONSIGNEE_ADR = 3 ;
+    public static final int SET_NICKNAME = 4 ;
 }

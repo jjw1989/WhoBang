@@ -14,7 +14,6 @@ import dagger.Provides;
 public class EvaluateModule {
     private EvaluateActivity activity;
 
-    @Inject
     public EvaluateModule(EvaluateActivity activity){
         this.activity=activity;
     }

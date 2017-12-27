@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="13dp"
                 android:layout_marginStart="13dp"
-                app:srcCompat="@mipmap/icon_check_true" />
+                app:srcCompat="@mipmap/tubiao" />
 
             <TextView
                 android:id="@+id/tv_station_name"

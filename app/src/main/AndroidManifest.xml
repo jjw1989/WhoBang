@@ -90,7 +90,8 @@
         <activity android:name=".features.mycenter.activity.SettingActivity" />
         <activity android:name=".features.mycenter.activity.SetNameActivity" />
         <activity android:name=".features.mycenter.activity.EvaluateActivity" />
-        <activity android:name=".features.mycenter.activity.ServiceOrderDetailsActivity"></activity>
+        <activity android:name=".features.mycenter.activity.ServiceOrderDetailsActivity" />
+        <activity android:name=".features.mycenter.activity.FeedbackActivity"></activity>
     </application>
 
 </manifest>

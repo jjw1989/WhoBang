@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
     android:layout_height="match_parent">
+  <RelativeLayout
+      android:background="@color/white"
+      android:layout_width="match_parent"
+      android:layout_marginBottom="@dimen/dp_10"
+      android:layout_height="50dp">
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        cube_ptr:srcCompat="@mipmap/positionicon" />
+
+    <TextView
+        android:id="@+id/tv_location_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView12"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/imageView12"
+        android:layout_toRightOf="@+id/imageView12"
+        android:text="北京" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_location_address"
+        android:layout_toRightOf="@+id/tv_location_address"
+        cube_ptr:srcCompat="@mipmap/drop_downbutton" />
+
+  </RelativeLayout>
   <include layout="@layout/wb_common_refresh_layout"/>
-</FrameLayout>
+</LinearLayout>

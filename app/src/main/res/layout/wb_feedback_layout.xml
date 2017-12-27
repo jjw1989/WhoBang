@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg"
+    android:layout_height="match_parent"
+    tools:context="com.whombang.app.features.mycenter.activity.FeedbackActivity">
+    <include layout="@layout/wb_titlebar_layout"/>
+    <EditText
+        android:id="@+id/et_text_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address2"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/edittext_bg"
+        android:gravity="top|left"
+        android:hint="输入文字"
+        android:minHeight="200dp" />
+</LinearLayout>

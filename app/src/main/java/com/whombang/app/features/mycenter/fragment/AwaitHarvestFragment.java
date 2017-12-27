@@ -50,6 +50,7 @@ public class AwaitHarvestFragment extends LazyFragment implements OnRefreshListe
         setContentView(R.layout.wb_await_harvest_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRefreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
+
         adapter = new GroudBookAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(context, VERTICAL));

@@ -5,30 +5,23 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whombang.app.R;
-import com.whombang.app.adapter.AwaitServiceAdapter;
-import com.whombang.app.adapter.GroudBookAdapter;
 import com.whombang.app.adapter.ServerInfoAdapter;
 import com.whombang.app.common.base.BaseActivity;
-import com.whombang.app.common.net.EasyHttp;
-import com.whombang.app.common.net.callback.SimpleCallBack;
-import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.entity.ServiceEntity;
 import com.whombang.app.entity.ServiceInfoEntity;
-import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.mvp.component.DaggerServerInfoComponent;
+import com.whombang.app.mvp.module.ServerInfoModule;
+import com.whombang.app.mvp.presenter.ServerInfoPresenter;
 
-import org.json.JSONObject;
+import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -42,9 +35,10 @@ public class ServerInfoActivity extends BaseActivity implements OnRefreshListene
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
-    RefreshLayout mRefreshLayout;
-    private int pageNum = 1;
+    public RefreshLayout mRefreshLayout;
     private ServerInfoAdapter adapter;
+    @Inject
+    ServerInfoPresenter presenter;
 
     @Override
     protected int bindLayout() {
@@ -53,7 +47,7 @@ public class ServerInfoActivity extends BaseActivity implements OnRefreshListene
 
     @Override
     protected void initInjector() {
-
+        DaggerServerInfoComponent.builder().serverInfoModule(new ServerInfoModule(this)).build().inject(this);
     }
 
     @Override
@@ -64,13 +58,16 @@ public class ServerInfoActivity extends BaseActivity implements OnRefreshListene
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("服务提供者信息列表");
+        initRecyclerView();
+        initRefreshView();
+    }
+
+    private void initRecyclerView() {
         adapter = new ServerInfoAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
-
-        initRefreshView();
     }
 
     private void initRefreshView() {
@@ -87,64 +84,20 @@ public class ServerInfoActivity extends BaseActivity implements OnRefreshListene
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        requestNetMoreData();
+        presenter.requestNetMoreData();
     }
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        requestNetData();
+        presenter.requestNetData();
     }
 
-    private void requestNetData() {
-        pageNum = 1;
-        final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mContext).getStationInfo().getStationId());
-        params.put("status", 1);
-        params.put("pageSize", 20);
-        params.put("currentPageNum", 1);
+    public void requestNetData(List<ServiceInfoEntity.ProviderUserInfoListBean> listBeans) {
+        adapter.setNewData(listBeans);
 
-        EasyHttp.post("getStationProviderUserInfoList")
-                .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<ServiceInfoEntity>() {
-
-                    @Override
-                    public void onError(ApiException e) {
-                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        mRefreshLayout.finishRefresh();
-                    }
-
-                    @Override
-                    public void onSuccess(ServiceInfoEntity entity) {
-                        adapter.setNewData(entity.getProviderUserInfoList());
-                        mRefreshLayout.finishRefresh();
-                        pageNum++;
-                    }
-                });
     }
 
-    private void requestNetMoreData() {
-        final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mContext).getStationInfo().getStationId());
-        params.put("status", 1);
-        params.put("pageSize", 20);
-        params.put("currentPageNum", pageNum);
-
-        EasyHttp.post("getStationProviderUserInfoList")
-                .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<ServiceInfoEntity>() {
-
-                    @Override
-                    public void onError(ApiException e) {
-                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        mRefreshLayout.finishLoadmore();
-                    }
-
-                    @Override
-                    public void onSuccess(ServiceInfoEntity entity) {
-                        adapter.addData(entity.getProviderUserInfoList());
-                        mRefreshLayout.finishLoadmore();
-                        pageNum++;
-                    }
-                });
+    public void requestNetMoreData(List<ServiceInfoEntity.ProviderUserInfoListBean> listBeans) {
+        adapter.addData(listBeans);
     }
 }
