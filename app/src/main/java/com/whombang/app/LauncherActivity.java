@@ -48,7 +48,4 @@ public class LauncherActivity extends BaseActivity {
         titleBar.setVisibility(View.GONE);
         presenter.onStartAnimAndJump(imgLogo);
     }
-
-
-
 }
