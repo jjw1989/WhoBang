@@ -76,7 +76,7 @@ public class MyCenterFragment extends BaseFragment {
                 ImageView imgSet=holder.getView(R.id.img_user_set);
                  ImageView imgHead=holder.getView(R.id.avatar);
                  TextView tvLogin=holder.getView(R.id.tv_user_tip);
-                 //tvLogin.setText(UserLocalData.getUserInfo(mActivity).getUserInfo().);
+                 tvLogin.setText(UserLocalData.getUserInfo(mActivity).getUserInfo().getUserNickName());
                  imgHead.setOnClickListener(listener);
                  tvLogin.setOnClickListener(listener);
                  imgSet.setOnClickListener(new View.OnClickListener() {

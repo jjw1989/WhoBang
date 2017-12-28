@@ -52,7 +52,7 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rlt_address,R.id.rlt_nickname,R.id.rlt_feedback,R.id.btn_logout})
+    @OnClick({R.id.rlt_address,R.id.rlt_nickname,R.id.rlt_feedback,R.id.btn_logout,R.id.rlt_modify_pwd})
     public void onClickView(View v){
         switch (v.getId()){
             case R.id.rlt_address:
@@ -68,6 +68,9 @@ public class SettingActivity extends BaseActivity {
                 PreferenceUtil.clear();
                 ARouter.getInstance().build("/user/login").navigation();
                 finish();
+                break;
+            case R.id.rlt_modify_pwd:
+                ARouter.getInstance().build("/set/modifypwd").navigation();
                 break;
         }
 

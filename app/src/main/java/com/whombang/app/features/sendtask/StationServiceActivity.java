@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 站点显示和选择
@@ -164,8 +166,10 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     }
 
     private void requestStationData(){
-
+        final Map<String, Object> params = new HashMap<>();
+        params.put("userId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
         EasyHttp.post("getAllStationAndManagerInfo")
+                .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<String>() {
 
                     @Override
