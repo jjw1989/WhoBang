@@ -25,7 +25,6 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle bundle) {
-
     }
 
     @Override
