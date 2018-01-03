@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -51,11 +53,14 @@ public class AddServerActivity extends BaseActivity {
     EditText etCertificate;
     @BindView(R.id.et_service_describe)
     EditText etDescribe;
+    @BindView(R.id.cbx_show_phone)
+    CheckBox checkBox;
     int serviceType;
     private TagContainerLayout.ViewColor mBanViewColor;
     private TagContainerLayout.ViewColor mDefaultViewColor;
     private TagContainerLayout.ViewColor mClickViewColor;
     private TagFactory tagFactory;
+    private int showPhone = 2;
 
     @Override
     public void initData(Bundle bundle) {
@@ -97,6 +102,16 @@ public class AddServerActivity extends BaseActivity {
             }
         });
         initTagView();
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    showPhone = 1;
+                } else {
+                    showPhone = 2;
+                }
+            }
+        });
     }
 
     /**
@@ -113,7 +128,7 @@ public class AddServerActivity extends BaseActivity {
             @Override
             public void onTagClick(TagView view, int position, String text) {
                 tagFactory.onColorTagClick(position);
-                serviceType=position+1;
+                serviceType = position + 1;
             }
 
             @Override
@@ -140,7 +155,7 @@ public class AddServerActivity extends BaseActivity {
         params.put("serviceSkillsDesc", etDescribe.getText().toString());
         params.put("userIdentityNumber", etCertificate.getText().toString());
         params.put("serviceType", serviceType);
-
+        params.put("withinPhoneList", showPhone);
         EasyHttp.post("addServiceProviderUserInfo")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<String>() {
@@ -153,7 +168,7 @@ public class AddServerActivity extends BaseActivity {
                     @Override
                     public void onSuccess(String entity) {
                         Log.i("www", "data=" + entity);
-                      //  finish();
+                        finish();
                     }
                 });
     }

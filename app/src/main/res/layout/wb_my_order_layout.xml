@@ -178,6 +178,18 @@
             android:text="请选择服务类型"
             android:textSize="16sp" />
 
+        <CheckBox
+            android:id="@+id/cbx_show_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="18dp"
+            android:theme="@style/My_CheckBox"
+            android:layout_marginRight="18dp"
+            android:text="是否显示手机号" />
+
     </RelativeLayout>
 
     <RelativeLayout
