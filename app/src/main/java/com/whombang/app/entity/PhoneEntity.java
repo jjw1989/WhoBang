@@ -29,6 +29,8 @@ public class PhoneEntity {
          * addTime : 2017-12-26 22:48:32
          * serviceCount : 0
          * userStationId : 1
+         * serviceSkillsTypeName : 家政
+         * serviceSkillsSesc : 修水管我是专业的
          */
 
         private int id;
@@ -39,6 +41,8 @@ public class PhoneEntity {
         private String addTime;
         private int serviceCount;
         private int userStationId;
+        private String serviceSkillsTypeName;
+        private String serviceSkillsSesc;
 
         public int getId() {
             return id;
@@ -102,6 +106,22 @@ public class PhoneEntity {
 
         public void setUserStationId(int userStationId) {
             this.userStationId = userStationId;
+        }
+
+        public String getServiceSkillsTypeName() {
+            return serviceSkillsTypeName;
+        }
+
+        public void setServiceSkillsTypeName(String serviceSkillsTypeName) {
+            this.serviceSkillsTypeName = serviceSkillsTypeName;
+        }
+
+        public String getServiceSkillsSesc() {
+            return serviceSkillsSesc;
+        }
+
+        public void setServiceSkillsSesc(String serviceSkillsSesc) {
+            this.serviceSkillsSesc = serviceSkillsSesc;
         }
     }
 }

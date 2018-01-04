@@ -60,9 +60,10 @@ public class NewlyAddressActivity extends BaseActivity {
     private List<List<List<String>>> zip_codes;
     private String zip_code;
     private boolean defaultAddress=false;
+    boolean isEdit=false;
     @Override
     public void initData(Bundle bundle) {
-
+        isEdit=bundle.getBoolean("isEdite",false);
     }
 
     @Override
@@ -94,6 +95,9 @@ public class NewlyAddressActivity extends BaseActivity {
                  defaultAddress=isChecked;
              }
          });
+         if (isEdit){
+
+         }
     }
 
     @OnClick(R.id.et_contact_address)

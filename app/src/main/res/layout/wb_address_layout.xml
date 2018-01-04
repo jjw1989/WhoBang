@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="请添加地址" />
 
         <ImageView
@@ -90,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView23"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
             app:srcCompat="@mipmap/tianjia" />
     </RelativeLayout>
    <View
@@ -102,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@+id/address1"
-        android:layout_marginTop="@dimen/dp_10">
+       >
 
         <ImageView
             android:id="@+id/imageView5"

@@ -7,10 +7,9 @@ import android.widget.Toast;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.entity.ConsigneeEntity;
 import com.whombang.app.entity.DefaultAddressEntity;
 import com.whombang.app.entity.UserLocalData;
-import com.whombang.app.features.sendtask.TextTaskActivity;
+import com.whombang.app.features.sendtask.VoiceActivity;
 
 import org.json.JSONObject;
 
@@ -20,14 +19,14 @@ import java.util.Map;
 import javax.inject.Inject;
 
 /**
- * Created by David on 2017/12/17.
+ * Created by sundy.jiang on 2018/1/4.
  */
 
-public class TextTaskPresenter {
-    private TextTaskActivity activity;
+public class VoicePresenter {
+    private VoiceActivity activity;
 
     @Inject
-    public TextTaskPresenter(TextTaskActivity activity){
+    public VoicePresenter(VoiceActivity activity){
         this.activity=activity;
     }
 
@@ -80,7 +79,7 @@ public class TextTaskPresenter {
                     @Override
                     public void onSuccess(DefaultAddressEntity entity) {
                         if (!TextUtils.isEmpty(entity.getUserDefaultAddress().getUserAddressContactPeople()))
-                           activity.updataAddress(entity);
+                            activity.updataAddress(entity);
                     }
                 });
     }

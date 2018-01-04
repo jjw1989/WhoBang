@@ -29,7 +29,7 @@ public class ServicePhonePresenter {
 
     public void requestNetData(int pageSize,int currentPageNum){
         Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(activity).getUserInfo().getUserId());
+        params.put("stationId", UserLocalData.getUserInfo(activity).getStationInfo().getStationId());
         params.put("pageSize", pageSize);
         params.put("currentPageNum", currentPageNum);
         EasyHttp.post("getProviderUserPhoneInfoList")
@@ -50,9 +50,9 @@ public class ServicePhonePresenter {
 
     public void requestNetMoreData(int pageSize,int currentPageNum){
         Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(activity).getUserInfo().getUserId());
-        params.put("pageSize", pageSize);
-        params.put("currentPageNum", currentPageNum);
+        params.put("stationId",UserLocalData.getUserInfo(activity).getStationInfo().getStationId());
+        params.put("pageSize",pageSize);
+        params.put("currentPageNum",currentPageNum);
         EasyHttp.post("getProviderUserPhoneInfoList")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<PhoneEntity>() {

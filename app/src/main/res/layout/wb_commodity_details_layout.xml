@@ -55,4 +55,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+   <TextView
+       android:id="@+id/tv_submit"
+       android:layout_width="match_parent"
+       android:gravity="center"
+       android:background="@color/orange1"
+       android:text="去拼单"
+       android:textColor="@color/white"
+       android:layout_height="50dp" />
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.whombang.app.features.sendtask;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -49,6 +50,8 @@ public class TextTaskActivity extends BaseActivity {
     RelativeLayout rltAddress;
     @BindView(R.id.no_address)
     RelativeLayout rltNoAddress;
+
+    String address="";
     @Override
     public void initData(Bundle bundle) {
 
@@ -70,7 +73,15 @@ public class TextTaskActivity extends BaseActivity {
         titleBar.addAction(new TitleBar.TextAction(getString(R.string.issue)) {
             @Override
             public void performAction(View view) {
-                presenter.sendTaskSerivce(etContent.getText().toString());
+                if (!TextUtils.isEmpty(address)) {
+                    if (!TextUtils.isEmpty(etContent.getText().toString())) {
+                        presenter.sendTaskSerivce(etContent.getText().toString(), address);
+                    }else{
+                        Toast.makeText(mContext,"请添加内容",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(mContext,"请添加地址",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         presenter.getUserDefaultAddress();
@@ -94,6 +105,7 @@ public class TextTaskActivity extends BaseActivity {
     }
 
     public void updataAddress(DefaultAddressEntity entity) {
+        address=entity.getUserDefaultAddress().getUserAddressContactPeople();
         rltNoAddress.setVisibility(View.GONE);
         rltAddress.setVisibility(View.VISIBLE);
         tvConsignee.setText("收货人："+entity.getUserDefaultAddress().getUserAddressContactPeople());

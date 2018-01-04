@@ -1,6 +1,7 @@
 package com.whombang.app.features.sendtask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
@@ -8,9 +9,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.LexiconListener;
@@ -25,14 +29,22 @@ import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.iflytek.sunflower.FlowerCollector;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.utils.JsonParser;
 import com.whombang.app.common.view.TitleBar;
+import com.whombang.app.entity.DefaultAddressEntity;
+import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.mvp.component.DaggerVoiceComponent;
+import com.whombang.app.mvp.module.VoiceModule;
+import com.whombang.app.mvp.presenter.VoicePresenter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,6 +64,26 @@ public class VoiceActivity extends BaseActivity {
     private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
     @BindView(R.id.iat_text)
     EditText mResultText;
+    @BindView(R.id.tv_consignee)
+    TextView tvConsignee;
+    @BindView(R.id.tv_consignee_address)
+    TextView tvConsigneeAddress;
+    @BindView(R.id.tv_consignee_phone)
+    TextView tvConsigneePhone;
+
+    @BindView(R.id.tv_station_name)
+    TextView tvStationName;
+    @BindView(R.id.tv_station_address)
+    TextView tvStationAddress;
+    @BindView(R.id.tv_station_phone)
+    TextView tvStationPhone;
+    @BindView(R.id.address1)
+    RelativeLayout rltAddress;
+    @BindView(R.id.no_address)
+    RelativeLayout rltNoAddress;
+
+    @Inject
+    VoicePresenter presenter;
     private Toast mToast;
     private SharedPreferences mSharedPreferences;
     // 引擎类型
@@ -59,7 +91,7 @@ public class VoiceActivity extends BaseActivity {
 
     private boolean mTranslateEnable = false;
     int ret = 0; // 函数调用返回值
-
+    String address="";
     @Override
     public void initData(Bundle bundle) {
 
@@ -72,7 +104,7 @@ public class VoiceActivity extends BaseActivity {
 
     @Override
     protected void initInjector() {
-
+        DaggerVoiceComponent.builder().voiceModule(new VoiceModule(this)).build().inject(this);
     }
 
     @Override
@@ -81,9 +113,18 @@ public class VoiceActivity extends BaseActivity {
         titleBar.addAction(new TitleBar.TextAction(getString(R.string.issue)) {
             @Override
             public void performAction(View view) {
-                Toast.makeText(mContext, "发布", Toast.LENGTH_SHORT).show();
+                if (!TextUtils.isEmpty(address)) {
+                    if (!TextUtils.isEmpty(mResultText.getText().toString())) {
+                        presenter.sendTaskSerivce(mResultText.getText().toString(), address);
+                    }else{
+                        Toast.makeText(mContext,"请添加内容",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(mContext,"请添加地址",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        presenter.getUserDefaultAddress();
         initVoice();
 
     }
@@ -108,6 +149,14 @@ public class VoiceActivity extends BaseActivity {
     @Override
     public void doBusiness() {
 
+    }
+    @OnClick(R.id.no_address)
+    public void addAddress(){
+        ARouter.getInstance().build("/address/newly").withBoolean("isEdite",false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+    }
+    @OnClick(R.id.address2)
+    public void jumpMap(){
+        ARouter.getInstance().build("/service/map").navigation();
     }
 
     @OnClick(R.id.img_voice)
@@ -136,7 +185,19 @@ public class VoiceActivity extends BaseActivity {
             }
         }
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode== Contents.REQUEST_CONSIGNEE_ADR){
+            if(resultCode==RESULT_OK){
+                presenter.getUserDefaultAddress();
+            }
+        }else if(requestCode==Contents.REQUEST_STATION_ADDRESS){
+            if(resultCode==RESULT_OK){
+                Log.i("wwww", "onActivityResult: 22222222222222222222222222");
+            }
+        }
+    }
     /**
      * 初始化监听器。
      */
@@ -351,4 +412,12 @@ public class VoiceActivity extends BaseActivity {
     }
 
 
+    public void updataAddress(DefaultAddressEntity entity) {
+        address=entity.getUserDefaultAddress().getUserAddressContactPeople();
+        rltNoAddress.setVisibility(View.GONE);
+        rltAddress.setVisibility(View.VISIBLE);
+        tvConsignee.setText("收货人："+entity.getUserDefaultAddress().getUserAddressContactPeople());
+        tvConsigneeAddress.setText("收货地址："+entity.getUserDefaultAddress().getUserAddressDetail());
+        tvConsigneePhone.setText(entity.getUserDefaultAddress().getUserAddressContactTel());
+    }
 }

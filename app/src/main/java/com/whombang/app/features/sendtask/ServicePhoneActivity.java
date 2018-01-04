@@ -1,13 +1,13 @@
 package com.whombang.app.features.sendtask;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -17,21 +17,12 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.ServicePhoneAdapter;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
-import com.whombang.app.common.net.EasyHttp;
-import com.whombang.app.common.net.callback.SimpleCallBack;
-import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.entity.ConsigneeEntity;
 import com.whombang.app.entity.PhoneEntity;
-import com.whombang.app.entity.UserLocalData;
 import com.whombang.app.mvp.component.DaggerServicePhoneComponent;
 import com.whombang.app.mvp.module.ServicePhoneModule;
 import com.whombang.app.mvp.presenter.ServicePhonePresenter;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -40,7 +31,7 @@ import butterknife.BindView;
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
 /**
- * 电话服务列表
+ * 电话服务列表(完成)
  */
 @Route(path = "/task/phone")
 public class ServicePhoneActivity extends BaseActivity implements OnRefreshListener, OnLoadmoreListener, BaseQuickAdapter.OnItemClickListener {
@@ -71,16 +62,21 @@ public class ServicePhoneActivity extends BaseActivity implements OnRefreshListe
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("电话列表");
-        adapter = new ServicePhoneAdapter();
-        adapter.setOnItemClickListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, VERTICAL));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(adapter);
+        initRecyclerView();
         initRefreshView();
 
     }
 
+    private void initRecyclerView() {
+        adapter = new ServicePhoneAdapter();
+        adapter.setOnItemClickListener(this);
+        View view = getLayoutInflater().inflate(R.layout.wb_phone_list_head_layout, null);
+        adapter.addHeaderView(view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, VERTICAL));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setAdapter(adapter);
+    }
 
     private void initRefreshView() {
         mRefreshLayout.autoRefresh();
@@ -108,17 +104,20 @@ public class ServicePhoneActivity extends BaseActivity implements OnRefreshListe
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         pageNum++;
-        presenter.requestNetMoreData(pageNum, 20);
+        presenter.requestNetMoreData(20, pageNum);
     }
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pageNum = 1;
-        presenter.requestNetData(pageNum, 20);
+        presenter.requestNetData(20, pageNum);
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        PhoneEntity.GetProviderUserPhoneInfoListBean item= (PhoneEntity.GetProviderUserPhoneInfoListBean) adapter.getData().get(position);
+        Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+item.getPhone()));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.whombang.app.features.home.fragment.HomeFragment;
 import com.whombang.app.features.mycenter.fragment.MyCenterFragment;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.yanzhenjie.permission.PermissionYes;
 
 import java.util.List;
@@ -104,8 +106,8 @@ public class MainActivity extends BaseActivity {
     private void requestPermission() {
         AndPermission.with(this)
                 .requestCode(REQUEST_CODE_PERMISSION_MULTI)
-                .permission(Permission.PHONE, Permission.STORAGE, Permission.MICROPHONE, Permission.LOCATION)
-                .callback(this)
+                .permission( Permission.STORAGE, Permission.MICROPHONE, Permission.LOCATION)
+                .callback(listener)
                 .start();
 
     }
@@ -122,16 +124,23 @@ public class MainActivity extends BaseActivity {
         super.onSaveInstanceState(outState, outPersistentState);
         mNavigateTabBar.onSaveInstanceState(outState);
     }
+    private PermissionListener listener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            // Successfully.
+            if(requestCode == REQUEST_CODE_PERMISSION_MULTI) {
+                Log.i("wwww", "getSingleYes: 111111111111111"+grantedPermissions.toString());
+            }
+        }
 
-    @PermissionYes(REQUEST_CODE_PERMISSION_MULTI)
-    private void getSingleYes(@NonNull List<String> grantedPermissions) {
-
-    }
-
-    @PermissionYes(REQUEST_CODE_PERMISSION_MULTI)
-    private void getSingleNo(@NonNull List<String> deniedPermissions) {
-
-    }
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // Failure.
+            if(requestCode == REQUEST_CODE_PERMISSION_MULTI) {
+                Log.i("wwww", "getSingleNo: 222222222222222222222"+deniedPermissions.toString());
+            }
+        }
+    };
 
     /***
      * 监听用户点击事件
