@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
         app:indicator_bottom_height="3dp"
         app:indicator_bottom_line_color="@color/transparent"
         app:indicator_bottom_line_height="1dp"
@@ -27,5 +26,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/easy_indicator"
-        android:layout_marginTop="@dimen/dp_10" />
+        />
 </LinearLayout>

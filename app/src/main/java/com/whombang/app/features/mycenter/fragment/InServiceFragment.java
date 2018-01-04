@@ -19,6 +19,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whombang.app.R;
 import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.common.base.BaseFragment;
+import com.whombang.app.common.base.LazyFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
@@ -38,39 +39,25 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 /**
  * 服务中
  */
-public class InServiceFragment extends BaseFragment implements OnRefreshListener,OnLoadmoreListener,BaseQuickAdapter.OnItemClickListener{
-    @BindView(R.id.recyclerView)
+public class InServiceFragment extends LazyFragment implements OnRefreshListener,OnLoadmoreListener,BaseQuickAdapter.OnItemClickListener{
     RecyclerView mRecyclerView;
-    @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     private int pageNum=1;
     private AwaitServiceAdapter adapter;
-    @Override
-    protected int bindLayout() {
-        return R.layout.wb_inservice_layout;
-    }
 
     @Override
-    protected void initInjector() {
+    protected void onCreateViewLazy(Bundle savedInstanceState) {
+        super.onCreateViewLazy(savedInstanceState);
+        setContentView(R.layout.wb_inservice_layout);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRefreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
 
-    }
-
-    @Override
-    public void initData(Bundle bundle) {
-
-    }
-
-
-    @Override
-    public void initView(Bundle savedInstanceState, View view) {
-        adapter=new AwaitServiceAdapter();
-        adapter.setOnItemClickListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, VERTICAL));
+        adapter = new AwaitServiceAdapter();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(context, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
         initRefreshView();
-
     }
 
 
@@ -82,15 +69,10 @@ public class InServiceFragment extends BaseFragment implements OnRefreshListener
     }
 
     @Override
-    public void doBusiness() {
-
-    }
-
-    @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pageNum=1;
         final Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(mActivity).getUserInfo().getUserId());
+        params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
         params.put("orderStatus",2);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
@@ -101,7 +83,7 @@ public class InServiceFragment extends BaseFragment implements OnRefreshListener
 
                     @Override
                     public void onError(ApiException e) {
-                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                         mRefreshLayout.finishRefresh();
                     }
 
@@ -118,7 +100,7 @@ public class InServiceFragment extends BaseFragment implements OnRefreshListener
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(mActivity).getUserInfo().getUserId());
+        params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
         params.put("orderStatus",2);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
@@ -128,7 +110,7 @@ public class InServiceFragment extends BaseFragment implements OnRefreshListener
 
                     @Override
                     public void onError(ApiException e) {
-                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                         mRefreshLayout.finishLoadmore();
                     }
 

@@ -106,5 +106,9 @@
         </RelativeLayout>
     </LinearLayout>
 
-
+   <Button
+       android:layout_width="match_parent"
+       android:id="@+id/btn_submit"
+       android:text="提交订单"
+       android:layout_height="wrap_content" />
 </LinearLayout>

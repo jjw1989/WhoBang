@@ -1,21 +1,35 @@
 package com.whombang.app.features.home.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.net.EasyHttp;
+import com.whombang.app.common.net.callback.SimpleCallBack;
+import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.view.spinner.NiceSpinner;
+import com.whombang.app.entity.UserLocalData;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  *
@@ -34,7 +48,8 @@ public class ShopOrderActivity extends BaseActivity {
     ImageView imgPresent;
     @BindView(R.id.tv_present)
     TextView tvPresent;
-
+    @BindView(R.id.btn_submit)
+    Button btnSubmit;
     @Override
     protected int bindLayout() {
         return R.layout.wb_shoporder_layout;
@@ -100,5 +115,47 @@ public class ShopOrderActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @OnClick(R.id.no_address)
+    public void addAddress(){
+        ARouter.getInstance().build("/address/newly").withBoolean("isEdite",false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+    }
+
+    @OnClick(R.id.address2)
+    public void jumpMap(){
+        ARouter.getInstance().build("/service/map").navigation();
+    }
+
+    @OnClick(R.id.btn_submit)
+    public void onSubmit(){
+        Map<String, Object> params = new HashMap<>();
+        params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
+        params.put("userId",UserLocalData.getUserInfo(this).getUserInfo().getUserId() );
+        params.put("goodsGroupSellId", 1);
+        params.put("goodsGroupSellOrderAmount",5);
+        params.put("goodsGroupSellOrderDeliverMode", 1);
+        params.put("goodsGroupSellPayMode", 1);
+        params.put("goodsGroupSellReceiverTel","18611766105" );
+        params.put("goodsGroupSellReceiverAddress","18611766105" );
+        params.put("goodsGroupSellReceiverName","张三" );
+        params.put("goodsGroupSellStationMasterName","牛魔王" );
+        params.put("goodsGroupSellStationTel","13126556729" );
+        EasyHttp.post("createNewGoodsGroupSellOrder")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<String>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(String entity) {
+                        Log.i("www", "data=" + entity);
+                        finish();
+                    }
+                });
+
     }
 }
