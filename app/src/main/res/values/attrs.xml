@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="NavigateTabBar">
-        <attr format="color|reference" name="navigateTabTextColor"/>
-        <attr format="color|reference" name="navigateTabSelectedTextColor"/>
-        <attr format="integer|reference" name="containerId"/>
-        <attr format="dimension|reference" name="navigateTabTextSize"/>
+        <attr name="navigateTabTextColor" format="color|reference" />
+        <attr name="navigateTabSelectedTextColor" format="color|reference" />
+        <attr name="containerId" format="integer|reference" />
+        <attr name="navigateTabTextSize" format="dimension|reference" />
     </declare-styleable>
 
     // pull to refresh =================
@@ -60,13 +60,13 @@
 
     <declare-styleable name="NumControlerView">
 
-        <attr name="value" format="reference|integer"/>
-        <attr name="minValue" format="reference|integer"/>
-        <attr name="maxValue" format="reference|integer"/>
+        <attr name="value" format="reference|integer" />
+        <attr name="minValue" format="reference|integer" />
+        <attr name="maxValue" format="reference|integer" />
 
-        <attr name="subButtonBackground" format="reference"/>
-        <attr name="addButtonBackground" format="reference"/>
-        <attr name="numTextBackGround" format="reference"/>
+        <attr name="subButtonBackground" format="reference" />
+        <attr name="addButtonBackground" format="reference" />
+        <attr name="numTextBackGround" format="reference" />
 
     </declare-styleable>
     <declare-styleable name="MyIndicator">
@@ -129,7 +129,7 @@
             <enum name="pure_cyan" value="1" />
             <enum name="pure_teal" value="2" />
         </attr>
-        <attr name="tag_text_direction" format="enum" >
+        <attr name="tag_text_direction" format="enum">
             <enum name="ltr" value="3" />
             <enum name="rtl" value="4" />
         </attr>
@@ -152,9 +152,18 @@
     <declare-styleable name="NiceSpinner">
         <attr name="arrowTint" format="color" />
         <attr name="hideArrow" format="boolean" />
-        <attr name="arrowDrawable" format="reference|color"/>
-        <attr name="dropDownListPaddingBottom" format="dimension"/>
-        <attr name="backgroundSelector" format="integer"/>
-        <attr name="textTint" format="color"/>
+        <attr name="arrowDrawable" format="reference|color" />
+        <attr name="dropDownListPaddingBottom" format="dimension" />
+        <attr name="backgroundSelector" format="integer" />
+        <attr name="textTint" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SlideDetailsLayout">
+        <attr name="percent" format="float" />
+        <attr name="duration" format="integer" />
+        <attr name="default_panel" format="enum">
+            <enum name="front" value="0" />
+            <enum name="behind" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

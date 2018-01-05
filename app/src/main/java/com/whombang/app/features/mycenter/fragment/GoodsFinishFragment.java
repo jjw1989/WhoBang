@@ -74,7 +74,7 @@ public class GoodsFinishFragment extends LazyFragment implements OnRefreshListen
         pageNum = 1;
         final Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
-        params.put("orderStatus", 2);
+        params.put("goodOrderStatus", 3);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 
@@ -100,7 +100,7 @@ public class GoodsFinishFragment extends LazyFragment implements OnRefreshListen
     private void requestNetMoreData() {
         final Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
-        params.put("orderStatus", 2);
+        params.put("goodOrderStatus", 3);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 

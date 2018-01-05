@@ -73,7 +73,7 @@ public class GroupBookingFragment extends LazyFragment implements OnRefreshListe
         pageNum = 1;
         final Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
-        params.put("orderStatus", 1);
+        params.put("goodOrderStatus", 1);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 
@@ -99,7 +99,7 @@ public class GroupBookingFragment extends LazyFragment implements OnRefreshListe
     private void requestNetMoreData() {
         final Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
-        params.put("orderStatus", 1);
+        params.put("goodOrderStatus", 1);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 

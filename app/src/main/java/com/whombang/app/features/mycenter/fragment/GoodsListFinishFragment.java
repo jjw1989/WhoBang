@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,12 +15,14 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whombang.app.R;
 import com.whombang.app.adapter.GroudBookAdapter;
+import com.whombang.app.adapter.OfferGoodsAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.base.LazyFragment;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.entity.GroudBookEntity;
+import com.whombang.app.entity.OfferGoodsEntity;
 import com.whombang.app.entity.UserLocalData;
 
 import org.json.JSONObject;
@@ -35,6 +38,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 public class GoodsListFinishFragment extends LazyFragment implements OnRefreshListener, OnLoadmoreListener {
     RecyclerView mRecyclerView;
     RefreshLayout mRefreshLayout;
+    OfferGoodsAdapter adapter;
     private int pageNum = 1;
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {
@@ -43,11 +47,11 @@ public class GoodsListFinishFragment extends LazyFragment implements OnRefreshLi
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRefreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
 
-
+        adapter=new OfferGoodsAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(context, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-       // mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
         initRefreshView();
     }
 
@@ -59,24 +63,24 @@ public class GoodsListFinishFragment extends LazyFragment implements OnRefreshLi
     }
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-
+     requestNetMoreData();
     }
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-
+         requestNetData();
     }
     private void requestNetData() {
         pageNum = 1;
         final Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
-        params.put("orderStatus", 2);
+        params.put("stationId", UserLocalData.getUserInfo(context).getStationInfo().getStationId());
+        params.put("goodOrderStatus", 3);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 
-        EasyHttp.post("getGoodsListByUser")
+        EasyHttp.post("getGoodsOrdersByStation")
                 .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<GroudBookEntity>() {
+                .execute(new SimpleCallBack<OfferGoodsEntity>() {
 
                     @Override
                     public void onError(ApiException e) {
@@ -85,8 +89,9 @@ public class GoodsListFinishFragment extends LazyFragment implements OnRefreshLi
                     }
 
                     @Override
-                    public void onSuccess(GroudBookEntity entity) {
-                      //  adapter.setNewData(entity.getGoodsInfoList());
+                    public void onSuccess(OfferGoodsEntity entity) {
+                        adapter.setNewData(entity.getGoodsInfoList());
+                        Log.i("qaz","data="+entity.getGoodsInfoList().size());
                         mRefreshLayout.finishRefresh();
                         pageNum++;
                     }
@@ -95,14 +100,14 @@ public class GoodsListFinishFragment extends LazyFragment implements OnRefreshLi
 
     private void requestNetMoreData() {
         final Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(context).getUserInfo().getUserId());
-        params.put("orderStatus", 2);
+        params.put("stationId", UserLocalData.getUserInfo(context).getStationInfo().getStationId());
+        params.put("goodOrderStatus", 3);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 
-        EasyHttp.post("getGoodsListByUser")
+        EasyHttp.post("getGoodsOrdersByStation")
                 .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<GroudBookEntity>() {
+                .execute(new SimpleCallBack<OfferGoodsEntity>() {
 
                     @Override
                     public void onError(ApiException e) {
@@ -111,8 +116,8 @@ public class GoodsListFinishFragment extends LazyFragment implements OnRefreshLi
                     }
 
                     @Override
-                    public void onSuccess(GroudBookEntity entity) {
-                       // adapter.addData(entity.getGoodsInfoList());
+                    public void onSuccess(OfferGoodsEntity entity) {
+                        adapter.addData(entity.getGoodsInfoList());
                         mRefreshLayout.finishLoadmore();
                         pageNum++;
                     }
