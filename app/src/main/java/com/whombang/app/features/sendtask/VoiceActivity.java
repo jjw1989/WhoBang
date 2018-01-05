@@ -154,6 +154,7 @@ public class VoiceActivity extends BaseActivity {
     public void addAddress(){
         ARouter.getInstance().build("/address/newly").withBoolean("isEdite",false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
     }
+
     @OnClick(R.id.address2)
     public void jumpMap(){
         ARouter.getInstance().build("/service/map").navigation();

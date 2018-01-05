@@ -10,7 +10,7 @@ public class GoodsDetailEntity {
 
     /**
      * goodsDetailImgInfos : [{"goodsDetailImgId":1,"goodsId":10,"goodsDetailImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","goodsDetailImgAddTime":"2017-01-01","goodsDetailImgStatus":0},{"goodsDetailImgId":2,"goodsId":10,"goodsDetailImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","goodsDetailImgAddTime":"2017-01-01","goodsDetailImgStatus":0},{"goodsDetailImgId":3,"goodsId":10,"goodsDetailImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","goodsDetailImgAddTime":"2017-01-01","goodsDetailImgStatus":0}]
-     * goodsImgInfos : []
+     * goodsImgInfos : [{"goodsImgId":10,"goodsId":10,"goodsImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","goodsImgAddTime":"2017-01-01 00:00:00","goodsImgStatus":0},{"goodsImgId":11,"goodsId":10,"goodsImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","goodsImgAddTime":"2017-01-01 00:00:00","goodsImgStatus":0},{"goodsImgId":12,"goodsId":10,"goodsImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","goodsImgAddTime":"2017-01-01 00:00:00","goodsImgStatus":0}]
      * goodsGroupSellInfo : {"goodsGroupSellId":1,"goodsId":10,"goodsGroupSellPrice":80.5,"goodsGroupOriginalCount":8,"goodsGroupCurrentSoldCount":0,"goodsGroupLastPurchaserId":"","goodsGroupSellBeginTime":"2017-12-24","goodsGroupSellDeadlineTime":"2017-12-26","goodsGroupSellStatus":0,"goodsGroupSellOrigPrice":0,"goodsGroupSellUnit":"整箱（x20)","goodsGroupSellName":"康帅傅羊肉泡馍","goodsGroupSellTitleImgUrl":"http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg","checkOutFinalTime":0}
      * goodsInfo : {"goodsId":10,"goodsName":"康帅傅方便面","goodsFullName":"康帅傅方便面","goodsOriginalPrice":0,"goodsSuggestPrice":0,"goodsAgentPrice":0,"goodsSellPrice":0,"goodsDiscountPrice":0,"goodsPlatformRevenueRate":0,"goodsCommonwealRate":0,"goodsBrief":"","goodsDetails":"","goodsSellUnitId":0,"goodsProviderId":1,"goodsRecordCode":"","goodsDefaultImgUrl":"","goodsStatus":0,"goodsStock":0,"goodsShelvingTime":"","goodsPublishTime":"","goodsLevel":0,"goodsScore":0,"goodsStyleId":0,"goodsTypeId":0,"goodsSelf":1}
      */
@@ -18,7 +18,7 @@ public class GoodsDetailEntity {
     private GoodsGroupSellInfoBean goodsGroupSellInfo;
     private GoodsInfoBean goodsInfo;
     private List<GoodsDetailImgInfosBean> goodsDetailImgInfos;
-    private List<?> goodsImgInfos;
+    private List<GoodsImgInfosBean> goodsImgInfos;
 
     public GoodsGroupSellInfoBean getGoodsGroupSellInfo() {
         return goodsGroupSellInfo;
@@ -44,11 +44,11 @@ public class GoodsDetailEntity {
         this.goodsDetailImgInfos = goodsDetailImgInfos;
     }
 
-    public List<?> getGoodsImgInfos() {
+    public List<GoodsImgInfosBean> getGoodsImgInfos() {
         return goodsImgInfos;
     }
 
-    public void setGoodsImgInfos(List<?> goodsImgInfos) {
+    public void setGoodsImgInfos(List<GoodsImgInfosBean> goodsImgInfos) {
         this.goodsImgInfos = goodsImgInfos;
     }
 
@@ -507,6 +507,62 @@ public class GoodsDetailEntity {
 
         public void setGoodsDetailImgStatus(int goodsDetailImgStatus) {
             this.goodsDetailImgStatus = goodsDetailImgStatus;
+        }
+    }
+
+    public static class GoodsImgInfosBean {
+        /**
+         * goodsImgId : 10
+         * goodsId : 10
+         * goodsImgUrl : http://47.104.105.135:8080/WhomBangServer/static/goods_imgs/hengda.jpg
+         * goodsImgAddTime : 2017-01-01 00:00:00
+         * goodsImgStatus : 0
+         */
+
+        private int goodsImgId;
+        private int goodsId;
+        private String goodsImgUrl;
+        private String goodsImgAddTime;
+        private int goodsImgStatus;
+
+        public int getGoodsImgId() {
+            return goodsImgId;
+        }
+
+        public void setGoodsImgId(int goodsImgId) {
+            this.goodsImgId = goodsImgId;
+        }
+
+        public int getGoodsId() {
+            return goodsId;
+        }
+
+        public void setGoodsId(int goodsId) {
+            this.goodsId = goodsId;
+        }
+
+        public String getGoodsImgUrl() {
+            return goodsImgUrl;
+        }
+
+        public void setGoodsImgUrl(String goodsImgUrl) {
+            this.goodsImgUrl = goodsImgUrl;
+        }
+
+        public String getGoodsImgAddTime() {
+            return goodsImgAddTime;
+        }
+
+        public void setGoodsImgAddTime(String goodsImgAddTime) {
+            this.goodsImgAddTime = goodsImgAddTime;
+        }
+
+        public int getGoodsImgStatus() {
+            return goodsImgStatus;
+        }
+
+        public void setGoodsImgStatus(int goodsImgStatus) {
+            this.goodsImgStatus = goodsImgStatus;
         }
     }
 }
