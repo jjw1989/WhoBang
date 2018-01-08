@@ -14,7 +14,6 @@ import dagger.Provides;
 public class ServiceOrderDetailsModule {
     private ServiceOrderDetailsActivity activity;
 
-    @Inject
     public ServiceOrderDetailsModule(ServiceOrderDetailsActivity activity){
         this.activity=activity;
     }

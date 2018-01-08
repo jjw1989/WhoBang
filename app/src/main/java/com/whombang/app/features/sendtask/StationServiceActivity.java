@@ -14,21 +14,40 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.services.core.LatLonSharePoint;
+import com.bumptech.glide.Glide;
+import com.whombang.amaplibrary.clustering.Cluster;
+import com.whombang.amaplibrary.clustering.ClusterItem;
+import com.whombang.amaplibrary.clustering.ClusterManager;
+import com.whombang.amaplibrary.model.MarkerInfo;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.entity.StationEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.mvp.component.DaggerServicePhoneComponent;
+import com.whombang.app.mvp.component.DaggerStationServiceComponent;
+import com.whombang.app.mvp.module.ServicePhoneModule;
+import com.whombang.app.mvp.module.StationServiceModule;
+import com.whombang.app.mvp.presenter.StationServicePresenter;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import okhttp3.MediaType;
@@ -48,7 +67,14 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
 
     //自定义定位小蓝点的Marker
     Marker locationMarker;
+    @Inject
+    StationServicePresenter presenter;
 
+    private List<MarkerInfo> markerInfoList;
+    private ClusterManager<MarkerItem> mClusterManager;
+    //地图热点和热点列表同时存在的情况下和列表联动的MarkerItemMap
+    private Map<Integer, MarkerItem> mMarkerItemMap = new HashMap<>();
+    private int mLastClickPosition = -1;
     @Override
     public void initData(Bundle bundle) {
 
@@ -61,14 +87,15 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
 
     @Override
     protected void initInjector() {
-
+        DaggerStationServiceComponent.builder().stationServiceModule(new StationServiceModule(this)).build().inject(this);
     }
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        titleBar.setTitle("选择站主");
          mapView.onCreate(savedInstanceState);
          initMapView();
-        requestStationData();
+         presenter.requestStationInfo();
     }
 
     private void initMapView() {
@@ -79,7 +106,12 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     }
 
     private void setUpMap() {
-
+        // 定义点聚合管理类ClusterManager
+        mClusterManager = new ClusterManager<>(mContext, aMap);
+        // 设置地图监听，当地图状态发生改变时，进行点聚合运算
+        aMap.setOnCameraChangeListener(mClusterManager);
+        // 设置maker点击时的响应
+        aMap.setOnMarkerClickListener(mClusterManager);
         aMap.getUiSettings().setZoomControlsEnabled(false);
         aMap.getUiSettings().setTiltGesturesEnabled(false);
         aMap.getUiSettings().setRotateGesturesEnabled(false);
@@ -116,7 +148,41 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
 
     @Override
     public void doBusiness() {
-
+        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MarkerItem>() {
+            @Override
+            public boolean onClusterClick(Cluster<MarkerItem> cluster) {
+                ClusterOnClick(cluster);
+                return true;
+            }
+        });
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<MarkerItem>() {
+            @Override
+            public boolean onClusterItemClick(MarkerItem item) {
+                for (Integer getKey : mMarkerItemMap.keySet()) {
+                    if (mMarkerItemMap.get(getKey).equals(item)) {
+                        mLastClickPosition = getKey;
+                        MarkerItem markerItem = mMarkerItemMap.get(mLastClickPosition);
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+    /**
+     * 聚合点击
+     */
+    private void ClusterOnClick(Cluster<MarkerItem> markerItemCluster) {
+        if (aMap == null) {
+            return;
+        }
+        if (markerItemCluster.getItems().size() > 0) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (MarkerItem markerItem : markerItemCluster.getItems()) {
+                builder.include(markerItem.getPosition());
+            }
+            aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 15));
+        }
     }
 
     @Override
@@ -164,24 +230,109 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
 
         }
     }
-
-    private void requestStationData(){
-        final Map<String, Object> params = new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
-        EasyHttp.post("getAllStationAndManagerInfo")
-                .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<String>() {
-
-                    @Override
-                    public void onError(ApiException e) {
-                        Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onSuccess(String entity) {
-                        Log.i("www","data="+entity);
-
-                    }
-                });
+    public void refreshStationToMap(List<StationEntity.StationInfoBean> entitys){
+        markerInfoList = new ArrayList<>();
+        for (StationEntity.StationInfoBean item:entitys){
+            String iconPath = "http://47.104.105.135:8080/WhomBangServer/static/station/station-icon.png";
+            MarkerInfo markerInfo = new MarkerInfo();
+            markerInfo.setMarkerIcon(iconPath);
+            markerInfo.setMarkerLat(Double.parseDouble(item.getStationLatitude()));
+            markerInfo.setMarkerLon(Double.parseDouble(item.getStationLongitude()));
+            markerInfo.setMarkerId(item.getStationId()+"");
+            markerInfo.setMarkerName(item.getStationName());
+        }
+        List<MarkerItem> markerItemLists = markerItemLogic(markerInfoList);
+        mClusterManager.addItems(markerItemLists);
     }
+    /**
+     * 组装高德需要的item
+     */
+    private List<MarkerItem> markerItemLogic(List<MarkerInfo> list) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        List<MarkerItem> items = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            MarkerInfo markerInfo = list.get(i);
+            LatLng latLng = new LatLng(markerInfo.getMarkerLat(), markerInfo.getMarkerLon());
+            MarkerItem markerItem = new MarkerItem(latLng);
+            markerItem.setMarkerIconUrl(markerInfo.getMarkerIcon());
+            markerItem.setTitle(markerInfo.getMarkerName());
+            items.add(markerItem);
+            mMarkerItemMap.put(i, markerItem);
+            builder.include(markerItem.getPosition());
+        }
+        aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100));
+        return items;
+    }
+
+    /**
+     * 每个Marker点，包含Marker点坐标以及图标,infowindow数据
+     */
+    public class MarkerItem implements ClusterItem {
+        private final LatLng mPosition;
+        private String markerIconUrl;
+        private int markerIconResource=-1;
+        private float markerIconDefault=0.0F;
+        private String title;
+        private String snippet;
+
+        public MarkerItem(LatLng latLng) {
+            mPosition = latLng;
+        }
+
+        public void setMarkerIconUrl(String markerIconUrl) {
+            this.markerIconUrl = markerIconUrl;
+        }
+
+        public void setMarkerIconResource(int markerIconResource) {
+            this.markerIconResource = markerIconResource;
+        }
+
+        public void setMarkerIconDefault(float markerIconDefault) {
+            this.markerIconDefault = markerIconDefault;
+        }
+
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setSnippet(String snippet) {
+            this.snippet = snippet;
+        }
+
+        @Override
+        public LatLng getPosition() {
+            return mPosition;
+        }
+
+        @Override
+        public BitmapDescriptor getBitmapDescriptor() {
+            if (markerIconUrl != null) {
+                try {
+                    return BitmapDescriptorFactory.fromBitmap(Glide.with(StationServiceActivity.this)
+                            .load(markerIconUrl).asBitmap().centerCrop().into(50,50).get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            } else if (markerIconResource != -1) {
+                return BitmapDescriptorFactory
+                        .fromResource(markerIconResource);
+            }
+            return BitmapDescriptorFactory
+                    .defaultMarker(markerIconDefault);
+        }
+
+        @Override
+        public String getTitle() {
+            return title;
+        }
+
+        @Override
+        public String getSnippet() {
+            return snippet;
+        }
+    }
+
 }

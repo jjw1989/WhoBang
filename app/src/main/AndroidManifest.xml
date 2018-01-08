@@ -93,7 +93,8 @@
         <activity android:name=".features.mycenter.activity.ServiceOrderDetailsActivity" />
         <activity android:name=".features.mycenter.activity.FeedbackActivity" />
         <activity android:name=".features.mycenter.activity.ModifyPwdActivity" />
-        <activity android:name=".features.home.activity.ShopOrderActivity"></activity>
+        <activity android:name=".features.home.activity.ShopOrderActivity" />
+        <activity android:name=".features.mycenter.activity.SetSexActivity"></activity>
     </application>
 
 </manifest>

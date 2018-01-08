@@ -13,8 +13,6 @@ import dagger.Provides;
 @Module
 public class ServicePhoneModule {
     private ServicePhoneActivity activity;
-
-    @Inject
     public ServicePhoneModule(ServicePhoneActivity activity){
         this.activity=activity;
     }

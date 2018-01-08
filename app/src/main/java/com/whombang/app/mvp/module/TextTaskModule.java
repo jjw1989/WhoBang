@@ -14,7 +14,6 @@ import dagger.Provides;
 public class TextTaskModule {
     private TextTaskActivity activity;
 
-    @Inject
     public TextTaskModule(TextTaskActivity activity){
         this.activity=activity;
     }

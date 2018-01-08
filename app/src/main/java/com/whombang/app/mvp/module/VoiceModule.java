@@ -14,7 +14,6 @@ import dagger.Provides;
 public class VoiceModule {
     private VoiceActivity activity;
 
-    @Inject
     public VoiceModule(VoiceActivity activity){
         this.activity=activity;
     }
