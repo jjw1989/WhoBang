@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.rootcloud.saas.utils.markercluster.ui.RotationLayout
+    <com.whombang.amaplibrary.ui.RotationLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -23,6 +23,6 @@
             android:paddingRight="10dp"
             android:paddingTop="5dp"/>
 
-    </com.rootcloud.saas.utils.markercluster.ui.RotationLayout>
+    </com.whombang.amaplibrary.ui.RotationLayout>
 
 </LinearLayout>
