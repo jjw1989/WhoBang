@@ -14,6 +14,7 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -94,4 +95,5 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.5'
 
     compile 'com.alibaba:fastjson:1.2.44'
+
 }

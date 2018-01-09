@@ -32,7 +32,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
+ *团购下单
  */
 @Route(path = "/shop/order")
 public class ShopOrderActivity extends BaseActivity {
@@ -106,11 +106,11 @@ public class ShopOrderActivity extends BaseActivity {
                 switch (position) {
                     case 0:
                         imgPresent.setImageResource(R.mipmap.peisongdianji);
-                        tvPresent.setText("银联支付");
+                        tvPresent.setText("站主配送");
                         break;
                     case 1:
                         imgPresent.setImageResource(R.mipmap.ziquyidianji);
-                        tvPresent.setText("银联支付");
+                        tvPresent.setText("到站自提");
                         break;
                 }
             }

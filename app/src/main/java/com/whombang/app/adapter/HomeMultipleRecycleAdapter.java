@@ -84,7 +84,7 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
         ((TextView) helper.getView(R.id.tv_original_price)).getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         helper.setText(R.id.tv_original_price, "原价："+item.itemContentList.get(0).originalPrice );
         helper.setText(R.id.tv_sell_price, "团购价格："+item.itemContentList.get(0).sellPrice );
-        helper.setText(R.id.tv_end_time, "倒计时："+item.itemContentList.get(0).endTime);
+        helper.setText(R.id.tv_end_time, "截止日期："+item.itemContentList.get(0).endTime);
 
 
     }

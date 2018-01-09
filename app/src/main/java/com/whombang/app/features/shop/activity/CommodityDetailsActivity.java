@@ -18,6 +18,7 @@ import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.common.view.NoScrollViewPager;
 import com.whombang.app.entity.GoodsEntity;
 import com.whombang.app.features.shop.fragment.GoodsCommentFragment;
 import com.whombang.app.features.shop.fragment.GoodsDetailFragment;
@@ -41,7 +42,7 @@ public class CommodityDetailsActivity extends BaseActivity {
     @BindView(R.id.psts_tabs)
     PagerSlidingTabStrip tabStrip;
     @BindView(R.id.vp_content)
-    ViewPager viewPager;
+ public    NoScrollViewPager viewPager;
     private List<Fragment> fragmentList;
 
     Bundle bundle;

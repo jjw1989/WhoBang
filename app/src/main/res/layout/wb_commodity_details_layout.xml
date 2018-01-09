@@ -50,7 +50,7 @@
               android:visibility="gone"
               />
       </RelativeLayout>
-    <android.support.v4.view.ViewPager
+    <com.whombang.app.common.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
