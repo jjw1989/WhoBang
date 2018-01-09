@@ -43,11 +43,11 @@ public class CommodityDetailsActivity extends BaseActivity {
     @BindView(R.id.vp_content)
     ViewPager viewPager;
     private List<Fragment> fragmentList;
-    private int goodsSellId;
+
+    Bundle bundle;
     @Override
     public void initData(Bundle bundle) {
-        goodsSellId=bundle.getInt("goodsSellId",0);
-        Log.i("qaz", "initData: "+goodsSellId);
+        this.bundle=bundle;
     }
 
     @Override
@@ -64,39 +64,17 @@ public class CommodityDetailsActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setVisibility(View.GONE);
         fragmentList = new ArrayList<>();
-        fragmentList.add(new GoodsInfoFragment());
+        GoodsInfoFragment goodsInfoFragment=new GoodsInfoFragment();
+        goodsInfoFragment.setArguments(bundle);
+        fragmentList.add(goodsInfoFragment);
         fragmentList.add(new GoodsDetailFragment());
         fragmentList.add(new GoodsCommentFragment());
         viewPager.setAdapter(new ItemTitlePagerAdapter1(getSupportFragmentManager(), fragmentList, new String[]{"商品", "详情", "评价"}));
         viewPager.setOffscreenPageLimit(3);
         tabStrip.setViewPager(viewPager);
-        requestNetData();
     }
 
-    /**
-     * 请求网络数据
-     */
-    private void requestNetData() {
-        final Map<String, Object> params = new HashMap<>();
-        params.put("goodsGroupSellId", goodsSellId);
 
-        EasyHttp.post("initGroupGoodsDetail")
-                .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<String>() {
-
-                    @Override
-                    public void onError(ApiException e) {
-                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onSuccess(String entity) {
-                        //数据结构不一样需要特别处理
-                        Log.i("qaz", "onSuccess: "+entity);
-                    }
-                });
-    }
     @OnClick(R.id.imgBack)
     public void onImageViewBack(){
         finish();

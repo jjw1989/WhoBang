@@ -90,7 +90,37 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
     }
 
     private void bindAnnouncementData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < item.itemContentList.size(); i++) {
+            arrayList.add(item.itemContentList.get(i).imageUrl);
+        }
+        // 绑定数据
+        Banner mBanner = helper.getView(R.id.banner);
+        //设置banner样式
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置图片加载器
+        mBanner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        mBanner.setImages(arrayList);
+        //设置banner动画效果
+        mBanner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+        //        mBanner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        mBanner.isAutoPlay(true);
+        //设置轮播时间
+        mBanner.setDelayTime(5000);
+        //设置指示器位置（当banner模式中有指示器时）
+        mBanner.setIndicatorGravity(BannerConfig.CENTER);
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.start();
 
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(mContext, "banner点击了" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
