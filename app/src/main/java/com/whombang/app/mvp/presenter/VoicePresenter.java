@@ -78,9 +78,10 @@ public class VoicePresenter {
 
                     @Override
                     public void onSuccess(DefaultAddressEntity entity) {
-                        if (!TextUtils.isEmpty(entity.getUserDefaultAddress().getUserAddressContactPeople()))
+                        if (null!=entity.getUserDefaultAddress())
                             activity.updataAddress(entity);
                     }
                 });
+
     }
 }

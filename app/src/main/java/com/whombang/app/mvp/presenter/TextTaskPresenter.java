@@ -79,8 +79,8 @@ public class TextTaskPresenter {
 
                     @Override
                     public void onSuccess(DefaultAddressEntity entity) {
-                        if (!TextUtils.isEmpty(entity.getUserDefaultAddress().getUserAddressContactPeople()))
-                           activity.updataAddress(entity);
+                        if (null!=entity.getUserDefaultAddress())
+                            activity.updataAddress(entity);
                     }
                 });
     }

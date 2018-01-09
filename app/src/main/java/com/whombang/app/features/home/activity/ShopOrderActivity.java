@@ -17,7 +17,10 @@ import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.common.view.selectview.AnimShopButton;
+import com.whombang.app.common.view.selectview.IOnAddDelListener;
 import com.whombang.app.common.view.spinner.NiceSpinner;
+import com.whombang.app.entity.GroupingDesEntity;
 import com.whombang.app.entity.UserLocalData;
 
 import org.json.JSONObject;
@@ -50,6 +53,10 @@ public class ShopOrderActivity extends BaseActivity {
     TextView tvPresent;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
+    @BindView(R.id.btnEle)
+    AnimShopButton animShopButton;
+    int goodsGroupSellId;
+int goodsGroupSellOrderAmount;
     @Override
     protected int bindLayout() {
         return R.layout.wb_shoporder_layout;
@@ -62,7 +69,7 @@ public class ShopOrderActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle bundle) {
-
+      goodsGroupSellId=bundle.getInt("goodsGroupSellId");
     }
 
     @Override
@@ -72,6 +79,7 @@ public class ShopOrderActivity extends BaseActivity {
         niceSpinner.attachDataSource(dataset);
         List<String> dataset2 = new LinkedList<>(Arrays.asList("站主配送", "到站自提"));
         niceSpinner2.attachDataSource(dataset2);
+        requestSellInfo();
     }
 
     @Override
@@ -115,6 +123,29 @@ public class ShopOrderActivity extends BaseActivity {
                 }
             }
         });
+       animShopButton.setOnAddDelListener(new IOnAddDelListener() {
+           @Override
+           public void onAddSuccess(int count) {
+               goodsGroupSellOrderAmount=count;
+               Log.i("qazx", "onAddSuccess: "+goodsGroupSellOrderAmount);
+           }
+
+           @Override
+           public void onAddFailed(int count, FailType failType) {
+
+           }
+
+           @Override
+           public void onDelSuccess(int count) {
+               goodsGroupSellOrderAmount=count;
+               Log.i("qazx", "onAddSuccess: "+goodsGroupSellOrderAmount);
+           }
+
+           @Override
+           public void onDelFaild(int count, FailType failType) {
+
+           }
+       });
     }
 
     @OnClick(R.id.no_address)
@@ -132,8 +163,8 @@ public class ShopOrderActivity extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
         params.put("userId",UserLocalData.getUserInfo(this).getUserInfo().getUserId() );
-        params.put("goodsGroupSellId", 1);
-        params.put("goodsGroupSellOrderAmount",5);
+        params.put("goodsGroupSellId", goodsGroupSellId);
+        params.put("goodsGroupSellOrderAmount",goodsGroupSellOrderAmount);
         params.put("goodsGroupSellOrderDeliverMode", 1);
         params.put("goodsGroupSellPayMode", 1);
         params.put("goodsGroupSellReceiverTel","18611766105" );
@@ -158,4 +189,34 @@ public class ShopOrderActivity extends BaseActivity {
                 });
 
     }
+
+    private void requestSellInfo(){
+        Map<String, Object> params = new HashMap<>();
+        params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
+        params.put("goodsGroupSellId", goodsGroupSellId);
+
+        EasyHttp.post("createNewGoodsGroupSellOrder")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<GroupingDesEntity>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(GroupingDesEntity entity) {
+                        if(entity.getAmountOrdered()==entity.getGoodsGroupRequiredCount()){
+                            animShopButton.setReplenish(true);
+                        }else{
+                            //animShopButton.setReplenish(true);
+                           animShopButton.setCount(1);
+                           animShopButton.setMaxCount(entity.getGoodsGroupRequiredCount()-entity.getAmountOrdered());
+                        }
+
+                    }
+                });
+
+    }
+
 }

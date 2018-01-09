@@ -54,7 +54,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 /**
  * 商品详情：item1 商品介绍
  */
-public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayout.OnSlideDetailsListener{
+public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayout.OnSlideDetailsListener {
     private int goodsSellId;
     @BindView(R.id.banner)
     Banner mBanner;
@@ -71,20 +71,22 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
     @BindView(R.id.sv_switch)
     SlideDetailsLayout sv_switch;
     @BindView(R.id.sv_goods_info)
-    ScrollView  sv_goods_info;
+    ScrollView sv_goods_info;
     CommodityDetailsActivity activity;
     public GoodsInfoWebFragment goodsInfoWebFragment;
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
+    public   int goodsGroupSellId;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity= (CommodityDetailsActivity) context;
+        activity = (CommodityDetailsActivity) context;
     }
 
     @Override
     public void initData(Bundle bundle) {
-        goodsSellId=bundle.getInt("goodsSellId",0);
+        goodsSellId = bundle.getInt("goodsSellId", 0);
     }
 
     @Override
@@ -101,18 +103,18 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
     public void initView(Bundle savedInstanceState, View view) {
         requestNetData();
         sv_switch.setOnSlideDetailsListener(this);
-       fab_up_slide.hide();
+        fab_up_slide.hide();
     }
 
     @Override
     public void doBusiness() {
-         fab_up_slide.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 sv_goods_info.smoothScrollTo(0, 0);
-                 sv_switch.smoothClose(true);
-             }
-         });
+        fab_up_slide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sv_goods_info.smoothScrollTo(0, 0);
+                sv_switch.smoothClose(true);
+            }
+        });
     }
 
     /**
@@ -144,11 +146,12 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
 
     /**
      * 图片详情
+     *
      * @param goodsDetailImgInfos
      */
     private void initImgDetails(List<GoodsDetailEntity.GoodsDetailImgInfosBean> goodsDetailImgInfos) {
-        Bundle bundle=new Bundle();
-        bundle.putString("url",goodsDetailImgInfos.get(0).getGoodsDetailImgUrl());
+        Bundle bundle = new Bundle();
+        bundle.putString("url", goodsDetailImgInfos.get(0).getGoodsDetailImgUrl());
         goodsInfoWebFragment = new GoodsInfoWebFragment();
         goodsInfoWebFragment.setArguments(bundle);
         fragmentManager = getChildFragmentManager();
@@ -158,6 +161,7 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
 
     /**
      * 初始化头部banner
+     *
      * @param goodsImgInfos
      */
     private void initBanner(List<GoodsDetailEntity.GoodsImgInfosBean> goodsImgInfos) {
@@ -194,14 +198,16 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
 
     /**
      * 初始化团购商品基本信息
+     *
      * @param goodsGroupSellInfo
      */
     private void initGoodsInfo(GoodsDetailEntity.GoodsGroupSellInfoBean goodsGroupSellInfo) {
-        tvTitile.setText(goodsGroupSellInfo.getGoodsGroupSellName()+" "+goodsGroupSellInfo.getGoodsGroupSellUnit());
-        tvSellPrice.setText("团购价￥"+goodsGroupSellInfo.getGoodsGroupSellPrice());
-        tvOldPrice.setText("原价￥"+goodsGroupSellInfo.getGoodsGroupSellOrigPrice());
+        goodsGroupSellId = goodsGroupSellInfo.getGoodsGroupSellId();
+        tvTitile.setText(goodsGroupSellInfo.getGoodsGroupSellName() + " " + goodsGroupSellInfo.getGoodsGroupSellUnit());
+        tvSellPrice.setText("团购价￥" + goodsGroupSellInfo.getGoodsGroupSellPrice());
+        tvOldPrice.setText("原价￥" + goodsGroupSellInfo.getGoodsGroupSellOrigPrice());
         tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        tvTip.setText("本商品"+goodsGroupSellInfo.getGoodsGroupOriginalCount()+"件成团");
+        tvTip.setText("本商品" + goodsGroupSellInfo.getGoodsGroupOriginalCount() + "件成团");
     }
 
     @Override

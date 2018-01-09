@@ -685,13 +685,13 @@ public class AnimShopButton extends View {
         mLineWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2f, getResources().getDisplayMetrics());
         mTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14.5f, getResources().getDisplayMetrics());
 
-        mHintText = "加入购物车";
+        mHintText = "选择购买数量";
         mHintBgColor = mAddEnableBgColor;
         mHintFgColor = mAddEnableFgColor;
         mHingTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics());
         mHintBgRoundValue = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, context.getResources().getDisplayMetrics());
 
-        mReplenishText = "补货中";
+        mReplenishText = "已成团";
         mReplenishTextColor = 0xfff32d3b;
         mReplenishTextSize = mHingTextSize;
 

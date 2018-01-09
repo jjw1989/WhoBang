@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-               android:src="@mipmap/peisongdianji" />
+                android:src="@mipmap/peisongdianji" />
 
             <TextView
                 android:id="@+id/tv_present"
@@ -105,16 +105,115 @@
                 android:textColor="@color/orange1" />
         </RelativeLayout>
     </LinearLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:padding="@dimen/dp_10"
-    android:gravity="center"
-    android:textSize="16sp"
-    android:text="核对信息"
-    android:layout_height="wrap_content" />
-   <Button
-       android:layout_width="match_parent"
-       android:id="@+id/btn_submit"
-       android:text="提交订单"
-       android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/bg"
+        android:layout_height="1dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="核对信息"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/bg"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:text="商品数量" />
+        <com.whombang.app.common.view.selectview.AnimShopButton
+            android:id="@+id/btnEle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            app:addEnableBgColor="#3190E8"
+            app:addEnableFgColor="#ffffff"
+            app:hintBgColor="#3190E8"
+            app:hintBgRoundValue="15dp"
+            app:hintFgColor="#ffffff"
+            app:ignoreHintArea="true"
+            app:maxCount="99"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/bg"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:text="商品金额" />
+
+        <TextView
+            android:id="@+id/tv_unit_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:text="单价" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/bg"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_total_prices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/red"
+            android:text="总价：500" />
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:text="提交订单" />
 </LinearLayout>

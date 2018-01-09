@@ -42,13 +42,14 @@ public class CommodityDetailsActivity extends BaseActivity {
     @BindView(R.id.psts_tabs)
     PagerSlidingTabStrip tabStrip;
     @BindView(R.id.vp_content)
- public    NoScrollViewPager viewPager;
+    public NoScrollViewPager viewPager;
     private List<Fragment> fragmentList;
-
+    GoodsInfoFragment goodsInfoFragment;
     Bundle bundle;
+
     @Override
     public void initData(Bundle bundle) {
-        this.bundle=bundle;
+        this.bundle = bundle;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class CommodityDetailsActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setVisibility(View.GONE);
         fragmentList = new ArrayList<>();
-        GoodsInfoFragment goodsInfoFragment=new GoodsInfoFragment();
+        goodsInfoFragment = new GoodsInfoFragment();
         goodsInfoFragment.setArguments(bundle);
         fragmentList.add(goodsInfoFragment);
         fragmentList.add(new GoodsDetailFragment());
@@ -77,15 +78,16 @@ public class CommodityDetailsActivity extends BaseActivity {
 
 
     @OnClick(R.id.imgBack)
-    public void onImageViewBack(){
+    public void onImageViewBack() {
         finish();
     }
 
 
     @OnClick(R.id.tv_submit)
-    public void onSubmit(){
-        ARouter.getInstance().build("/shop/order").navigation();
+    public void onSubmit() {
+        ARouter.getInstance().build("/shop/order").withInt("goodsGroupSellId",goodsInfoFragment.goodsGroupSellId).navigation(this);
     }
+
     @Override
     public void doBusiness() {
 
