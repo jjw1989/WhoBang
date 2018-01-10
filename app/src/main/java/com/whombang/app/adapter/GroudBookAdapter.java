@@ -25,9 +25,9 @@ public class GroudBookAdapter extends BaseQuickAdapter<GroudBookEntity.GoodsInfo
         helper.setText(R.id.tv_station_name,item.getStationName());
         helper.setText(R.id.tv_service_status,item.getOrderStatus());
         helper.setText(R.id.tv_goods_name,item.getGoodsName());
-        helper.setText(R.id.tv_unit_price,item.getPrice()+"");
-        helper.setText(R.id.tv_goods_num,item.getAmount()+"");
-        helper.setText(R.id.tv_total_prices,item.getSumPrice());
+        helper.setText(R.id.tv_unit_price,"￥"+item.getPrice());
+        helper.setText(R.id.tv_goods_num,"x"+item.getAmount());
+        helper.setText(R.id.tv_total_prices,"共"+item.getAmount()+"件商品 合计：￥"+item.getSumPrice());
         helper.setText(R.id.tv_goods_des,item.getGroupingDes());
      //   helper.setText(R.id.tv_goods_des,item.)
         Log.i("wwww", "convert: "+position);

@@ -1,11 +1,14 @@
 package com.whombang.app.features.home.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.view.selectview.AnimShopButton;
 import com.whombang.app.common.view.selectview.IOnAddDelListener;
 import com.whombang.app.common.view.spinner.NiceSpinner;
+import com.whombang.app.entity.DefaultAddressEntity;
 import com.whombang.app.entity.GroupingDesEntity;
 import com.whombang.app.entity.UserLocalData;
 
@@ -35,7 +39,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *团购下单
+ * 团购下单
  */
 @Route(path = "/shop/order")
 public class ShopOrderActivity extends BaseActivity {
@@ -55,8 +59,36 @@ public class ShopOrderActivity extends BaseActivity {
     Button btnSubmit;
     @BindView(R.id.btnEle)
     AnimShopButton animShopButton;
+    String address;
+    @BindView(R.id.tv_consignee)
+    TextView tvConsignee;
+    @BindView(R.id.tv_consignee_address)
+    TextView tvConsigneeAddress;
+    @BindView(R.id.tv_consignee_phone)
+    TextView tvConsigneePhone;
+
+    @BindView(R.id.tv_station_name)
+    TextView tvStationName;
+    @BindView(R.id.tv_station_address)
+    TextView tvStationAddress;
+    @BindView(R.id.tv_station_phone)
+    TextView tvStationPhone;
+    @BindView(R.id.address1)
+    RelativeLayout rltAddress;
+    @BindView(R.id.no_address)
+    RelativeLayout rltNoAddress;
+    @BindView(R.id.tv_unit_price)
+    TextView tvUnitPrice;
+    @BindView(R.id.tv_total_prices)
+     TextView tvTotalPrices;
     int goodsGroupSellId;
-int goodsGroupSellOrderAmount;
+    double goodsGroupSellPrice;
+    int goodsGroupSellOrderAmount;
+    int goodsGroupSellOrderDeliverMode;
+    String goodsGroupSellReceiverTel = "";
+    String goodsGroupSellReceiverAddress = "";
+    String goodsGroupSellReceiverName = "";
+
     @Override
     protected int bindLayout() {
         return R.layout.wb_shoporder_layout;
@@ -69,7 +101,8 @@ int goodsGroupSellOrderAmount;
 
     @Override
     public void initData(Bundle bundle) {
-      goodsGroupSellId=bundle.getInt("goodsGroupSellId");
+        goodsGroupSellId = bundle.getInt("goodsGroupSellId");
+        goodsGroupSellPrice = bundle.getDouble("goodsGroupSellPrice");
     }
 
     @Override
@@ -80,6 +113,10 @@ int goodsGroupSellOrderAmount;
         List<String> dataset2 = new LinkedList<>(Arrays.asList("站主配送", "到站自提"));
         niceSpinner2.attachDataSource(dataset2);
         requestSellInfo();
+        getUserDefaultAddress();
+        updateView();
+        tvUnitPrice.setText("单价:"+goodsGroupSellPrice);
+        tvTotalPrices.setText("总价："+goodsGroupSellPrice);
     }
 
     @Override
@@ -89,8 +126,8 @@ int goodsGroupSellOrderAmount;
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                      imgPayWay.setImageResource(R.mipmap.xianxia);
-                      tvPayWay.setText("线下支付");
+                        imgPayWay.setImageResource(R.mipmap.xianxia);
+                        tvPayWay.setText("线下支付");
                         break;
                     case 1:
                         imgPayWay.setImageResource(R.mipmap.wx);
@@ -115,63 +152,84 @@ int goodsGroupSellOrderAmount;
                     case 0:
                         imgPresent.setImageResource(R.mipmap.peisongdianji);
                         tvPresent.setText("站主配送");
+                        goodsGroupSellOrderDeliverMode = 2;
                         break;
                     case 1:
                         imgPresent.setImageResource(R.mipmap.ziquyidianji);
                         tvPresent.setText("到站自提");
+                        goodsGroupSellOrderDeliverMode = 1;
                         break;
                 }
             }
         });
-       animShopButton.setOnAddDelListener(new IOnAddDelListener() {
-           @Override
-           public void onAddSuccess(int count) {
-               goodsGroupSellOrderAmount=count;
-               Log.i("qazx", "onAddSuccess: "+goodsGroupSellOrderAmount);
-           }
+        animShopButton.setOnAddDelListener(new IOnAddDelListener() {
+            @Override
+            public void onAddSuccess(int count) {
+                goodsGroupSellOrderAmount = count;
+                Log.i("qazx", "onAddSuccess: " + goodsGroupSellOrderAmount);
+                tvTotalPrices.setText("总价："+goodsGroupSellPrice*goodsGroupSellOrderAmount);
+            }
 
-           @Override
-           public void onAddFailed(int count, FailType failType) {
+            @Override
+            public void onAddFailed(int count, FailType failType) {
 
-           }
+            }
 
-           @Override
-           public void onDelSuccess(int count) {
-               goodsGroupSellOrderAmount=count;
-               Log.i("qazx", "onAddSuccess: "+goodsGroupSellOrderAmount);
-           }
+            @Override
+            public void onDelSuccess(int count) {
+                goodsGroupSellOrderAmount = count;
+                if (count==0){
+                    animShopButton.setCount(1);
+                    goodsGroupSellOrderAmount=1;
+                }
 
-           @Override
-           public void onDelFaild(int count, FailType failType) {
+                Log.i("qazx", "onAddSuccess: " + goodsGroupSellOrderAmount);
+                tvTotalPrices.setText("总价："+goodsGroupSellPrice*goodsGroupSellOrderAmount);
+            }
 
-           }
-       });
+            @Override
+            public void onDelFaild(int count, FailType failType) {
+
+            }
+        });
     }
 
-    @OnClick(R.id.no_address)
-    public void addAddress(){
-        ARouter.getInstance().build("/address/newly").withBoolean("isEdite",false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+    @OnClick({R.id.no_address,R.id.address1})
+    public void addAddress(View view) {
+        switch (view.getId()){
+            case R.id.no_address:
+                ARouter.getInstance().build("/address/newly").withBoolean("isEdite", false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                break;
+            case R.id.address1:
+                ARouter.getInstance().build("/address/manager").navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                break;
+        }
+
     }
 
     @OnClick(R.id.address2)
-    public void jumpMap(){
+    public void jumpMap() {
         ARouter.getInstance().build("/service/map").navigation();
     }
 
     @OnClick(R.id.btn_submit)
-    public void onSubmit(){
+    public void onSubmit() {
+        if (TextUtils.isEmpty(goodsGroupSellReceiverTel)) {
+            Toast.makeText(ShopOrderActivity.this, "请添加地址", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Map<String, Object> params = new HashMap<>();
         params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
-        params.put("userId",UserLocalData.getUserInfo(this).getUserInfo().getUserId() );
+        params.put("userId", UserLocalData.getUserInfo(this).getUserInfo().getUserId());
         params.put("goodsGroupSellId", goodsGroupSellId);
-        params.put("goodsGroupSellOrderAmount",goodsGroupSellOrderAmount);
-        params.put("goodsGroupSellOrderDeliverMode", 1);
+        params.put("goodsGroupSellOrderAmount", goodsGroupSellOrderAmount);
+        params.put("goodsGroupSellOrderDeliverMode", goodsGroupSellOrderDeliverMode);
         params.put("goodsGroupSellPayMode", 1);
-        params.put("goodsGroupSellReceiverTel","18611766105" );
-        params.put("goodsGroupSellReceiverAddress","18611766105" );
-        params.put("goodsGroupSellReceiverName","张三" );
-        params.put("goodsGroupSellStationMasterName","牛魔王" );
-        params.put("goodsGroupSellStationTel","13126556729" );
+        params.put("goodsGroupSellReceiverTel", goodsGroupSellReceiverTel);
+        params.put("goodsGroupSellReceiverAddress", goodsGroupSellReceiverAddress);
+        params.put("goodsGroupSellReceiverName", "张三");
+        params.put("goodsGroupSellStationMasterName", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerName());
+        params.put("goodsGroupSellStationTel", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerTel());
         EasyHttp.post("createNewGoodsGroupSellOrder")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<String>() {
@@ -184,18 +242,22 @@ int goodsGroupSellOrderAmount;
                     @Override
                     public void onSuccess(String entity) {
                         Log.i("www", "data=" + entity);
+                        ARouter.getInstance().build("/main/tab").navigation();
                         finish();
                     }
                 });
 
     }
 
-    private void requestSellInfo(){
+    /**
+     * 请求成团数量
+     */
+    private void requestSellInfo() {
         Map<String, Object> params = new HashMap<>();
         params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
         params.put("goodsGroupSellId", goodsGroupSellId);
 
-        EasyHttp.post("createNewGoodsGroupSellOrder")
+        EasyHttp.post("getGroupedAmountByStation")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<GroupingDesEntity>() {
 
@@ -206,12 +268,12 @@ int goodsGroupSellOrderAmount;
 
                     @Override
                     public void onSuccess(GroupingDesEntity entity) {
-                        if(entity.getAmountOrdered()==entity.getGoodsGroupRequiredCount()){
+                        if (entity.getAmountOrdered() == entity.getGoodsGroupRequiredCount()) {
                             animShopButton.setReplenish(true);
-                        }else{
+                        } else {
                             //animShopButton.setReplenish(true);
-                           animShopButton.setCount(1);
-                           animShopButton.setMaxCount(entity.getGoodsGroupRequiredCount()-entity.getAmountOrdered());
+                            animShopButton.setCount(1);
+                            animShopButton.setMaxCount(entity.getGoodsGroupRequiredCount() - entity.getAmountOrdered());
                         }
 
                     }
@@ -219,4 +281,58 @@ int goodsGroupSellOrderAmount;
 
     }
 
+    /**
+     * 获取默认地址
+     */
+    public void getUserDefaultAddress() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", UserLocalData.getUserInfo(this).getUserInfo().getUserId());
+
+        EasyHttp.post("getUserDefaultAddress")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<DefaultAddressEntity>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(DefaultAddressEntity entity) {
+                        if (null != entity.getUserDefaultAddress())
+                            updataAddress(entity);
+                    }
+                });
+
+    }
+
+    private void updataAddress(DefaultAddressEntity entity) {
+        address = entity.getUserDefaultAddress().getUserAddressDetail();
+        goodsGroupSellReceiverTel = entity.getUserDefaultAddress().getUserAddressContactTel();
+        goodsGroupSellReceiverAddress = entity.getUserDefaultAddress().getUserAddressDetail();
+        goodsGroupSellReceiverName = entity.getUserDefaultAddress().getUserAddressContactPeople();
+        Log.i("qazx", "updataAddress: " + address);
+        Log.i("qazx", "updataAddress: " + goodsGroupSellReceiverTel);
+        rltNoAddress.setVisibility(View.GONE);
+        rltAddress.setVisibility(View.VISIBLE);
+        tvConsignee.setText("收货人：" + entity.getUserDefaultAddress().getUserAddressContactPeople());
+        tvConsigneeAddress.setText("收货地址：" + entity.getUserDefaultAddress().getUserAddressDetail());
+        tvConsigneePhone.setText(entity.getUserDefaultAddress().getUserAddressContactTel());
+    }
+
+    private void updateView() {
+        tvStationName.setText("站主姓名：" + UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
+        tvStationAddress.setText("站主地址：" + UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerAddress());
+        tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Contents.REQUEST_CONSIGNEE_ADR) {
+            if (resultCode == RESULT_OK) {
+                getUserDefaultAddress();
+            }
+        }
+    }
 }

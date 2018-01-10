@@ -36,7 +36,7 @@
                     app:corner_radius_bottom_left="10dp"
                     app:corner_radius_top_left="10dp" />
                 <EditText
-                    android:id="@+id/et_new_password1"
+                    android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
@@ -68,7 +68,7 @@
             app:cardElevation="0dp">
 
             <EditText
-                android:id="@+id/et_new_password"
+                android:id="@+id/et_new_sms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"

@@ -69,9 +69,9 @@ public class CommodityDetailsActivity extends BaseActivity {
         goodsInfoFragment = new GoodsInfoFragment();
         goodsInfoFragment.setArguments(bundle);
         fragmentList.add(goodsInfoFragment);
-        fragmentList.add(new GoodsDetailFragment());
-        fragmentList.add(new GoodsCommentFragment());
-        viewPager.setAdapter(new ItemTitlePagerAdapter1(getSupportFragmentManager(), fragmentList, new String[]{"商品", "详情", "评价"}));
+       // fragmentList.add(new GoodsDetailFragment());
+       // fragmentList.add(new GoodsCommentFragment());
+        viewPager.setAdapter(new ItemTitlePagerAdapter1(getSupportFragmentManager(), fragmentList, new String[]{"商品"}));//, "详情", "评价"
         viewPager.setOffscreenPageLimit(3);
         tabStrip.setViewPager(viewPager);
     }
@@ -85,7 +85,7 @@ public class CommodityDetailsActivity extends BaseActivity {
 
     @OnClick(R.id.tv_submit)
     public void onSubmit() {
-        ARouter.getInstance().build("/shop/order").withInt("goodsGroupSellId",goodsInfoFragment.goodsGroupSellId).navigation(this);
+        ARouter.getInstance().build("/shop/order").withInt("goodsGroupSellId",goodsInfoFragment.goodsGroupSellId).withDouble("goodsGroupSellPrice",goodsInfoFragment.goodsGroupSellPrice).navigation(this);
     }
 
     @Override

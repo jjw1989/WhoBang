@@ -77,7 +77,7 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
     public   int goodsGroupSellId;
-
+    public   double goodsGroupSellPrice;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -203,6 +203,7 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
      */
     private void initGoodsInfo(GoodsDetailEntity.GoodsGroupSellInfoBean goodsGroupSellInfo) {
         goodsGroupSellId = goodsGroupSellInfo.getGoodsGroupSellId();
+        goodsGroupSellPrice=goodsGroupSellInfo.getGoodsGroupSellPrice();
         tvTitile.setText(goodsGroupSellInfo.getGoodsGroupSellName() + " " + goodsGroupSellInfo.getGoodsGroupSellUnit());
         tvSellPrice.setText("团购价￥" + goodsGroupSellInfo.getGoodsGroupSellPrice());
         tvOldPrice.setText("原价￥" + goodsGroupSellInfo.getGoodsGroupSellOrigPrice());

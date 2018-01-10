@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.whombang.app.R;
@@ -34,6 +35,10 @@ import io.reactivex.functions.Consumer;
 public class ForgetActivity extends BaseActivity implements KeyboardWatcher.SoftKeyboardStateListener {
     @BindView(R.id.img_logo_forget)
     ImageView imgLogo;
+    @BindView(R.id.et_forget_phone)
+    EditText etPhone;
+    @BindView(R.id.et_forget_code)
+    EditText etCode;
     @BindView(R.id.et_new_password)
     EditText etNewPassWord;
     @BindView(R.id.et_affirm_password)
@@ -48,7 +53,6 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
     KeyboardLayout keyboardLayout;
     @Inject
     ForgetPresenter presenter;
-    private float scale = 0.2f; //logo缩放比例
     private int screenHeight = 0;//屏幕高度
     private KeyboardWatcher keyboardWatcher;
 
@@ -117,7 +121,12 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
                 onSmsCode();
                 break;
             case R.id.btn_register_code:
-
+                if (etAffirmPassWord.getText().toString().equals(etNewPassWord.getText().toString())) {
+                    presenter.requestPassword(etPhone.getText().toString(), etCode.getText().toString(), etNewPassWord.getText().toString());
+                    finish();
+                }else{
+                    Toast.makeText(mContext,"密码不一致",Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
