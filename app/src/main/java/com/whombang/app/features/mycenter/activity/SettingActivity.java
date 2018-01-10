@@ -66,6 +66,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.btn_logout:
                 PreferenceUtil.clear();
+                appManager.finishAllActivity();
                 ARouter.getInstance().build("/user/login").navigation();
                 finish();
                 break;
@@ -82,7 +83,6 @@ public class SettingActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode== Contents.SET_NICKNAME){
             if(resultCode==RESULT_OK){
-                Log.i("qwert", "onActivityResult: "+UserLocalData.getUserInfo(mContext).getUserInfo().getUserNickName());
                 etNickName.setText(UserLocalData.getUserInfo(mContext).getUserInfo().getUserNickName());
             }
         }

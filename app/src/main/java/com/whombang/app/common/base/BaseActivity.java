@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.githang.statusbar.StatusBarCompat;
 import com.whombang.app.R;
+import com.whombang.app.common.manager.AppManager;
 import com.whombang.app.common.view.TitleBar;
 
 import butterknife.BindView;
@@ -29,8 +30,10 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
     public View rootView;
     protected Activity mActivity;
     protected Context mContext;
+    public AppManager appManager;
     @BindView(R.id.common_titleBar)
-   public TitleBar titleBar;
+    public TitleBar titleBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +48,14 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
         initView(savedInstanceState, rootView);
         initCommonTitiebar();
         doBusiness();
-
+        appManager = AppManager.getAppManager();
+        appManager.addActivity(this);
     }
 
     /**
      * 初始化通用的titlebar
      */
-    protected  void initCommonTitiebar(){
+    protected void initCommonTitiebar() {
         titleBar.setImmersive(false);
         titleBar.setBackgroundColor(Color.parseColor("#ffffff"));
         titleBar.setLeftImageResource(R.mipmap.back_icon);
@@ -71,6 +75,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
      */
     @LayoutRes
     protected abstract int bindLayout();
+
     /**
      * Dagger 注入
      */
