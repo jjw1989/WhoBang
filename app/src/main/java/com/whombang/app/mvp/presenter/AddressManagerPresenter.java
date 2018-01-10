@@ -1,5 +1,6 @@
 package com.whombang.app.mvp.presenter;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.whombang.app.common.net.EasyHttp;
@@ -79,6 +80,7 @@ public class AddressManagerPresenter {
      * @param item
      */
     public void setDefaultAddress(ConsigneeEntity.UserAddressInfosBean item){
+        Log.i("qazx", "setDefaultAddress:= "+item.getUserAddressContactPeople());
         Map<String, String> params = new HashMap<>();
         params.put("userAddressInfoId", item.getUserAddressInfoId());
         EasyHttp.post("setDefaltAddress")

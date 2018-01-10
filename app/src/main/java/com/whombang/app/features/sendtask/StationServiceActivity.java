@@ -22,6 +22,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonSharePoint;
 import com.bumptech.glide.Glide;
+import com.koushikdutta.ion.Ion;
 import com.whombang.amaplibrary.clustering.Cluster;
 import com.whombang.amaplibrary.clustering.ClusterItem;
 import com.whombang.amaplibrary.clustering.ClusterManager;
@@ -240,6 +241,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             markerInfo.setMarkerLon(Double.parseDouble(item.getStationLongitude()));
             markerInfo.setMarkerId(item.getStationId()+"");
             markerInfo.setMarkerName(item.getStationName());
+            markerInfoList.add(markerInfo);
         }
         List<MarkerItem> markerItemLists = markerItemLogic(markerInfoList);
         mClusterManager.addItems(markerItemLists);
@@ -309,8 +311,8 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
         public BitmapDescriptor getBitmapDescriptor() {
             if (markerIconUrl != null) {
                 try {
-                    return BitmapDescriptorFactory.fromBitmap(Glide.with(StationServiceActivity.this)
-                            .load(markerIconUrl).asBitmap().centerCrop().into(50,50).get());
+                    return BitmapDescriptorFactory.fromBitmap(Ion.with(mContext)
+                            .load(markerIconUrl).asBitmap().get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

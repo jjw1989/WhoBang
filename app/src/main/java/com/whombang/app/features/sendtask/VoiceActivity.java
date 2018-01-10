@@ -150,11 +150,18 @@ public class VoiceActivity extends BaseActivity {
     public void doBusiness() {
 
     }
-    @OnClick(R.id.no_address)
-    public void addAddress(){
-        ARouter.getInstance().build("/address/newly").withBoolean("isEdite",false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
-    }
+    @OnClick({R.id.no_address,R.id.address1})
+    public void addAddress(View view) {
+        switch (view.getId()){
+            case R.id.no_address:
+                ARouter.getInstance().build("/address/newly").withBoolean("isEdite", false).withBoolean("isDefault",true).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                break;
+            case R.id.address1:
+                ARouter.getInstance().build("/address/manager").navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                break;
+        }
 
+    }
     @OnClick(R.id.address2)
     public void jumpMap(){
         ARouter.getInstance().build("/service/map").navigation();

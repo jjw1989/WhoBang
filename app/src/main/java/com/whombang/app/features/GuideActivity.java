@@ -54,7 +54,7 @@ public class GuideActivity extends BaseActivity {
             @Override
             public void onClickEnterOrSkip() {
                 PreferenceUtil.putBoolean(mContext, Contents.GUIDE, false);
-                ARouter.getInstance().build("/user/login").withTransition(R.anim.push_left_in, R.anim.push_right_out).navigation(mActivity);
+                ARouter.getInstance().build("/user/login").withTransition(R.anim.push_right_in, R.anim.push_left_out).navigation(mActivity);
 //                Intent intent=new Intent(GuideActivity.this, LoginActivity.class);
 //                   startActivity(intent);
 //                   overridePendingTransition();

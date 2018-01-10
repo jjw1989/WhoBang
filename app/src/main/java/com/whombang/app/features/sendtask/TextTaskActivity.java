@@ -1,7 +1,9 @@
 package com.whombang.app.features.sendtask;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -12,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.entity.DefaultAddressEntity;
 import com.whombang.app.entity.UserLocalData;
@@ -98,7 +101,31 @@ public class TextTaskActivity extends BaseActivity {
     public void doBusiness() {
 
     }
+    @OnClick({R.id.no_address,R.id.address1})
+    public void addAddress(View view) {
+        switch (view.getId()){
+            case R.id.no_address:
+                ARouter.getInstance().build("/address/newly").withBoolean("isEdite", false).withBoolean("isDefault",true).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                break;
+            case R.id.address1:
+                ARouter.getInstance().build("/address/manager").navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                break;
+        }
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode== Contents.REQUEST_CONSIGNEE_ADR){
+            if(resultCode==RESULT_OK){
+                presenter.getUserDefaultAddress();
+            }
+        }else if(requestCode==Contents.REQUEST_STATION_ADDRESS){
+            if(resultCode==RESULT_OK){
+                Log.i("wwww", "onActivityResult: 22222222222222222222222222");
+            }
+        }
+    }
     @OnClick(R.id.address2)
     public void jumpMap(){
         ARouter.getInstance().build("/service/map").navigation();

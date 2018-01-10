@@ -83,7 +83,7 @@ public class ShopOrderActivity extends BaseActivity {
      TextView tvTotalPrices;
     int goodsGroupSellId;
     double goodsGroupSellPrice;
-    int goodsGroupSellOrderAmount;
+    int goodsGroupSellOrderAmount=1;
     int goodsGroupSellOrderDeliverMode;
     String goodsGroupSellReceiverTel = "";
     String goodsGroupSellReceiverAddress = "";
@@ -166,7 +166,6 @@ public class ShopOrderActivity extends BaseActivity {
             @Override
             public void onAddSuccess(int count) {
                 goodsGroupSellOrderAmount = count;
-                Log.i("qazx", "onAddSuccess: " + goodsGroupSellOrderAmount);
                 tvTotalPrices.setText("总价："+goodsGroupSellPrice*goodsGroupSellOrderAmount);
             }
 
@@ -182,8 +181,6 @@ public class ShopOrderActivity extends BaseActivity {
                     animShopButton.setCount(1);
                     goodsGroupSellOrderAmount=1;
                 }
-
-                Log.i("qazx", "onAddSuccess: " + goodsGroupSellOrderAmount);
                 tvTotalPrices.setText("总价："+goodsGroupSellPrice*goodsGroupSellOrderAmount);
             }
 
@@ -241,7 +238,6 @@ public class ShopOrderActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(String entity) {
-                        Log.i("www", "data=" + entity);
                         ARouter.getInstance().build("/main/tab").navigation();
                         finish();
                     }
@@ -311,8 +307,6 @@ public class ShopOrderActivity extends BaseActivity {
         goodsGroupSellReceiverTel = entity.getUserDefaultAddress().getUserAddressContactTel();
         goodsGroupSellReceiverAddress = entity.getUserDefaultAddress().getUserAddressDetail();
         goodsGroupSellReceiverName = entity.getUserDefaultAddress().getUserAddressContactPeople();
-        Log.i("qazx", "updataAddress: " + address);
-        Log.i("qazx", "updataAddress: " + goodsGroupSellReceiverTel);
         rltNoAddress.setVisibility(View.GONE);
         rltAddress.setVisibility(View.VISIBLE);
         tvConsignee.setText("收货人：" + entity.getUserDefaultAddress().getUserAddressContactPeople());

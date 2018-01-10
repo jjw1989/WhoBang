@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.whombang.app.common.baseadapter.loadmore.LoadMoreView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +89,10 @@ public abstract class BaseAdapter<T , H extends BaseViewHolder> extends Recycler
         mDatas.clear();
 
     }
-
+    public void setNewData(List<T> data) {
+        this.mDatas = data == null ? new ArrayList<T>() : data;
+         notifyDataSetChanged();
+    }
     public void addData(List<T> data){
 
         mDatas.addAll(mDatas.size() , data ) ;

@@ -111,16 +111,9 @@ public class AddressManagerActivity extends BaseActivity {
         adapter.setOnItemClickListener(new BaseAdapter.onItemClickListener() {
             @Override
             public void onClick(View view, int position) throws Exception {
+                Log.i("whom", "onClick: "+position);
                 if (view.getId() == R.id.radio_selected && !addressAll.get(position).getUserAddressDefault()) {
-                    for (int i = 0; i < addressAll.size() ; i++) {
-                        if (addressAll.get(i).getUserAddressDefault()){
-                             //设置默认地址
-                             //刷数据
-                             presenter.setDefaultAddress(addressAll.get(i));
-                            return;
-                        }
-                    }
-                    //
+                    presenter.setDefaultAddress(addressAll.get(position));
                 }else if(view.getId()==R.id.delete_address){
                     presenter.deleteAddress(addressAll.get(position).getUserAddressInfoId());
                     Log.i("qwert","delete_address..............");
@@ -156,10 +149,11 @@ public class AddressManagerActivity extends BaseActivity {
     }
 
     public void setDefaultAddress(List<ConsigneeEntity.UserAddressInfosBean> addressList){
+        addressAll.clear();
+        addressAll.addAll(addressList);
         if(addressList!=null && addressList.size()>0){
-            orderItem(addressList);
+            orderItem(addressAll);
         }
-        adapter.cleanData();
-        adapter.addData(addressList);
+        adapter.setNewData(addressAll);
     }
 }

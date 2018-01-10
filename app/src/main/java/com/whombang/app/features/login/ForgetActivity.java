@@ -32,7 +32,7 @@ import io.reactivex.functions.Consumer;
  * 忘记密码
  */
 @Route(path = "/user/forget")
-public class ForgetActivity extends BaseActivity implements KeyboardWatcher.SoftKeyboardStateListener {
+public class ForgetActivity extends BaseActivity {
     @BindView(R.id.img_logo_forget)
     ImageView imgLogo;
     @BindView(R.id.et_forget_phone)
@@ -54,7 +54,6 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
     @Inject
     ForgetPresenter presenter;
     private int screenHeight = 0;//屏幕高度
-    private KeyboardWatcher keyboardWatcher;
 
     @Override
     protected int bindLayout() {
@@ -75,8 +74,6 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle(getString(R.string.tv_title));
         screenHeight = this.getResources().getDisplayMetrics().heightPixels; //获取屏幕高度
-        keyboardWatcher = new KeyboardWatcher(findViewById(Window.ID_ANDROID_CONTENT));
-        keyboardWatcher.addSoftKeyboardStateListener(this);
         HideIMEUtil.wrap(this);
         keyboardLayout.setKeyboardListener(new KeyboardLayout.KeyboardLayoutListener() {
             @Override
@@ -95,7 +92,7 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
 
             @Override
             public void run() {
-                scrollView.smoothScrollTo(0, 0);//scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mContext)
+                scrollView.smoothScrollTo(0, scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mActivity));//scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mContext)
             }
         }, 100);
 
@@ -103,16 +100,6 @@ public class ForgetActivity extends BaseActivity implements KeyboardWatcher.Soft
     @Override
     public void doBusiness() {
 
-    }
-
-    @Override
-    public void onSoftKeyboardOpened(int keyboardSize) {
-        presenter.onSoftKeyboardOpened(keyboardSize, body, imgLogo, screenHeight);
-    }
-
-    @Override
-    public void onSoftKeyboardClosed() {
-        presenter.onSoftKeyboardClosed(body, imgLogo);
     }
     @OnClick({R.id.btn_affirm,R.id.btn_forget_code})
     public void requestCode(View v) {

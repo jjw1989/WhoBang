@@ -17,6 +17,7 @@ import com.whombang.app.common.view.KeyboardWatcher;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.common.view.hideime.HideIMEUtil;
 import com.whombang.app.common.view.keyboard.KeyboardLayout;
+import com.whombang.app.common.view.keyboard.SoftKeyInputHidWidget;
 import com.whombang.app.entity.UserLocalData;
 import com.whombang.app.mvp.component.DaggerModifyPwdComponent;
 import com.whombang.app.mvp.module.ModifyPwdModule;
@@ -30,7 +31,7 @@ import butterknife.BindView;
  * 修改密码
  */
 @Route(path = "/set/modifypwd")
-public class ModifyPwdActivity extends BaseActivity implements KeyboardWatcher.SoftKeyboardStateListener {
+public class ModifyPwdActivity extends BaseActivity  {
     @Inject
     ModifyPwdPresenter presenter;
     @BindView(R.id.img_logo_forget)
@@ -49,9 +50,6 @@ public class ModifyPwdActivity extends BaseActivity implements KeyboardWatcher.S
     ScrollView scrollView;
     @BindView(R.id.main_ll)
     KeyboardLayout keyboardLayout;
-    private int screenHeight = 0;//屏幕高度
-    private KeyboardWatcher keyboardWatcher;
-
     @Override
     protected int bindLayout() {
         return R.layout.wb_modify_pwd_layout;
@@ -84,10 +82,6 @@ public class ModifyPwdActivity extends BaseActivity implements KeyboardWatcher.S
 
             }
         });
-        screenHeight = this.getResources().getDisplayMetrics().heightPixels; //获取屏幕高度
-        keyboardWatcher = new KeyboardWatcher(findViewById(Window.ID_ANDROID_CONTENT));
-        keyboardWatcher.addSoftKeyboardStateListener(this);
-        HideIMEUtil.wrap(this);
         keyboardLayout.setKeyboardListener(new KeyboardLayout.KeyboardLayoutListener() {
             @Override
             public void onKeyboardStateChanged(boolean isActive, int keyboardHeight) {
@@ -106,7 +100,7 @@ public class ModifyPwdActivity extends BaseActivity implements KeyboardWatcher.S
 
             @Override
             public void run() {
-                scrollView.smoothScrollTo(0, 0);//scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mContext)
+                scrollView.smoothScrollTo(0, scrollView.getBottom() + SoftKeyInputHidWidget.getStatusBarHeight(mActivity));//
             }
         }, 100);
 
@@ -117,15 +111,5 @@ public class ModifyPwdActivity extends BaseActivity implements KeyboardWatcher.S
 
     }
 
-    @Override
-    public void onSoftKeyboardOpened(int keyboardSize) {
-        presenter.onSoftKeyboardOpened(keyboardSize, body, imgLogo, screenHeight);
-    }
 
-    @Override
-    public void onSoftKeyboardClosed() {
-        {
-            presenter.onSoftKeyboardClosed(body, imgLogo);
-        }
-    }
 }

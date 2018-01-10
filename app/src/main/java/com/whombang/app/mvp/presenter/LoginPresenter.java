@@ -25,7 +25,7 @@ public class LoginPresenter {
 
 
     public void onSoftKeyboardOpened(int keyboardSize,View body, ImageView imgLogo,int screenHeight){
-        keyboardSize+=100;
+        keyboardSize+=250;
         int[] location = new int[2];
         body.getLocationOnScreen(location); //获取body在屏幕中的坐标,控件左上角
         int x = location[0];
