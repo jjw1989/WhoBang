@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -20,6 +21,7 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.GroudBookAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.base.LazyFragment;
+import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
@@ -38,7 +40,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 /**
  * 我的拼团：等待收货
  */
-public class AwaitHarvestFragment extends LazyFragment implements OnRefreshListener, OnLoadmoreListener {
+public class AwaitHarvestFragment extends LazyFragment implements OnRefreshListener, OnLoadmoreListener ,BaseQuickAdapter.OnItemClickListener{
     RecyclerView mRecyclerView;
     RefreshLayout mRefreshLayout;
     GroudBookAdapter adapter;
@@ -52,6 +54,7 @@ public class AwaitHarvestFragment extends LazyFragment implements OnRefreshListe
         mRefreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
 
         adapter = new GroudBookAdapter();
+        adapter.setOnItemClickListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(context, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -129,5 +132,11 @@ public class AwaitHarvestFragment extends LazyFragment implements OnRefreshListe
                         pageNum++;
                     }
                 });
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        GroudBookEntity.GoodsInfoListBean item= (GroudBookEntity.GoodsInfoListBean) adapter.getData().get(position);
+        ARouter.getInstance().build("/order/details").navigation();
     }
 }
