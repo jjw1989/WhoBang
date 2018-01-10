@@ -43,8 +43,9 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
         ButterKnife.bind(this);
         initInjector();
         initView(savedInstanceState, rootView);
-        doBusiness();
         initCommonTitiebar();
+        doBusiness();
+
     }
 
     /**

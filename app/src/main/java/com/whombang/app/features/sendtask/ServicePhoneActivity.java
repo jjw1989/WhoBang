@@ -38,7 +38,7 @@ public class ServicePhoneActivity extends BaseActivity implements OnRefreshListe
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
-    RefreshLayout mRefreshLayout;
+  public   RefreshLayout mRefreshLayout;
     private int pageNum = 1;
     ServicePhoneAdapter adapter;
     @Inject

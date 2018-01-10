@@ -38,6 +38,7 @@ public class ServicePhonePresenter {
 
                     @Override
                     public void onError(ApiException e) {
+                        activity.mRefreshLayout.finishRefresh();
                         Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
 
@@ -59,6 +60,7 @@ public class ServicePhonePresenter {
 
                     @Override
                     public void onError(ApiException e) {
+                        activity.mRefreshLayout.finishLoadmore();
                         Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
 

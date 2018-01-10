@@ -3,12 +3,14 @@ package com.whombang.app.features.mycenter.activity;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -64,6 +66,7 @@ public class NewlyAddressActivity extends BaseActivity {
     @Override
     public void initData(Bundle bundle) {
         isEdit=bundle.getBoolean("isEdite",false);
+        defaultAddress=bundle.getBoolean("isDefault",false);
     }
 
     @Override
@@ -82,6 +85,22 @@ public class NewlyAddressActivity extends BaseActivity {
         titleBar.addAction(new TitleBar.TextAction("完成") {
             @Override
             public void performAction(View view) {
+                if (TextUtils.isEmpty(etName.getText().toString())){
+                    Toast.makeText(mContext,"收件人不能为空",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty( etPhone.getText().toString())){
+                    Toast.makeText(mContext,"联系方式",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(etContactAddress.getText().toString())){
+                    Toast.makeText(mContext,"联系地址",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty( etAddress.getText().toString())){
+                    Toast.makeText(mContext,"详细地址",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 presenter.addAddress(etName.getText().toString(), etPhone.getText().toString(), etContactAddress.getText().toString(), etAddress.getText().toString(),defaultAddress);
             }
         });

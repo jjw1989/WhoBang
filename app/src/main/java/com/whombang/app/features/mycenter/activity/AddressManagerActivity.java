@@ -1,5 +1,6 @@
 package com.whombang.app.features.mycenter.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,7 +71,13 @@ public class AddressManagerActivity extends BaseActivity {
 
     @Override
     public void doBusiness() {
-
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        });
     }
 
     @Override

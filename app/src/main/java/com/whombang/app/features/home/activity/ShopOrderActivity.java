@@ -198,7 +198,7 @@ public class ShopOrderActivity extends BaseActivity {
     public void addAddress(View view) {
         switch (view.getId()){
             case R.id.no_address:
-                ARouter.getInstance().build("/address/newly").withBoolean("isEdite", false).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
+                ARouter.getInstance().build("/address/newly").withBoolean("isEdite", false).withBoolean("isDefault",true).navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
                 break;
             case R.id.address1:
                 ARouter.getInstance().build("/address/manager").navigation(mActivity, Contents.REQUEST_CONSIGNEE_ADR);
@@ -227,7 +227,7 @@ public class ShopOrderActivity extends BaseActivity {
         params.put("goodsGroupSellPayMode", 1);
         params.put("goodsGroupSellReceiverTel", goodsGroupSellReceiverTel);
         params.put("goodsGroupSellReceiverAddress", goodsGroupSellReceiverAddress);
-        params.put("goodsGroupSellReceiverName", "张三");
+        params.put("goodsGroupSellReceiverName",goodsGroupSellReceiverName);
         params.put("goodsGroupSellStationMasterName", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerName());
         params.put("goodsGroupSellStationTel", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerTel());
         EasyHttp.post("createNewGoodsGroupSellOrder")
