@@ -129,7 +129,6 @@
                 android:id="@+id/tv_total_prices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/img_goods"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/tv_goods_num"
                 android:layout_marginRight="15dp"

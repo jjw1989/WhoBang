@@ -13,27 +13,18 @@ import com.whombang.app.entity.OfferServiceEntity;
 public class OfferServiceAdapter extends BaseQuickAdapter<OfferServiceEntity.ServiceOrderListBean, BaseViewHolder>{
 
         public OfferServiceAdapter() {
-            super(R.layout.wb_await_service_item_layout);
+            super(R.layout.wb_offer_service_item_layout);
         }
         @Override
         protected void convert(BaseViewHolder helper, OfferServiceEntity.ServiceOrderListBean item, int position) {
-
             helper.setText(R.id.tv_station_name,item.getStationName());
             helper.setText(R.id.tv_service_status,getServiceStation(item.getServiceOrderStatus()));
-            helper.setText(R.id.tv_station_owner_name,item.getStationManagerName());
-            helper.setText(R.id.tv_station_owner_phone,item.getStationManagerTel());
-            helper.setText(R.id.tv_service_brief,item.getIndividuationServiceDesc());
-            helper.setText(R.id.tv_server_name,item.getUserRealName());
-            helper.setText(R.id.tv_server_phone,item.getPhone());
-            helper.setText(R.id.tv_order_time,item.getIndividuationServiceAddTime());
-            if(item.getServiceOrderStatus()==1){
-                helper.setVisible(R.id.rlt_service, false);
 
-            }else{
-                helper.setVisible(R.id.rlt_service, true);
-                helper.setText(R.id.tv_server_name,item.getUserRealName());
-                helper.setText(R.id.tv_server_phone,item.getPhone());
-            }
+            helper.setText(R.id.tv_server_name,"服务者:"+item.getStationManagerName());
+            helper.setText(R.id.tv_server_phone,"电话:"+item.getStationManagerTel());
+            helper.setText(R.id.tv_send_name,"被服务者:"+item.getDemanderName());
+            helper.setText(R.id.tv_send_phone,"电话:"+item.getContact());
+            helper.setText(R.id.tv_order_time,"下单时间:"+item.getIndividuationServiceAddTime());
         }
 
     /**

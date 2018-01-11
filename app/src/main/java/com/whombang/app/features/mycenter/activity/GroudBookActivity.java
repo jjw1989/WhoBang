@@ -1,8 +1,10 @@
 package com.whombang.app.features.mycenter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -37,6 +39,7 @@ public class GroudBookActivity extends BaseActivity {
     @BindView(R.id.vp_common)
     ViewPager viewPager;
     private List<Fragment> fragmentList;
+    ItemTitlePagerAdapter adapter;
     @Override
     public void initData(Bundle bundle) {
 
@@ -62,7 +65,8 @@ public class GroudBookActivity extends BaseActivity {
         fragmentList.add(new AwaitHarvestFragment());
         fragmentList.add(new GoodsFinishFragment());
         tabStrip.setTabTitles(new String[]{"拼团中","待收货","已完成"});//"全部",
-        tabStrip.setViewPage(viewPager, new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList));
+        adapter=new ItemTitlePagerAdapter(getSupportFragmentManager(), fragmentList);
+        tabStrip.setViewPage(viewPager,adapter);
         tabStrip.setOnTabClickListener(new EasyIndicator.onTabClickListener() {
             @Override
             public void onTabClick(String title, int position) {
@@ -75,4 +79,6 @@ public class GroudBookActivity extends BaseActivity {
     public void doBusiness() {
 
     }
+
+
 }

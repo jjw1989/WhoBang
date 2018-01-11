@@ -5,57 +5,24 @@
     android:layout_height="wrap_content"
     android:background="@color/bg"
     android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10"/>
+        android:layout_height="@dimen/dp_10" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:background="@color/white">
+
+
 
         <RelativeLayout
             android:id="@+id/rlt_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="13dp"
-                android:layout_marginStart="13dp"
-                app:srcCompat="@mipmap/tubiao" />
-
-            <TextView
-                android:id="@+id/tv_station_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/imageView11"
-                android:layout_marginLeft="14dp"
-                android:layout_marginStart="14dp"
-                android:layout_toEndOf="@+id/imageView11"
-                android:layout_toRightOf="@+id/imageView11"
-                android:text="站主名字" />
-
-            <TextView
-                android:id="@+id/tv_service_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/tv_station_name"
-                android:layout_marginEnd="11dp"
-                android:layout_marginRight="11dp"
-                android:text="服务状态" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlt_top">
+            android:layout_marginBottom="@dimen/dp_10"
+            >
 
             <com.whombang.app.common.view.imageview.ExpandImageView
                 android:id="@+id/img_goods"
@@ -64,26 +31,24 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginLeft="18dp"
-                android:layout_marginStart="18dp"
-                />
+                android:layout_marginStart="18dp" />
 
             <TextView
                 android:id="@+id/tv_goods_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/img_goods"
                 android:layout_marginEnd="12dp"
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="@dimen/dp_10"
                 android:layout_toEndOf="@+id/img_goods"
                 android:layout_toLeftOf="@+id/tv_unit_price"
                 android:layout_toRightOf="@+id/img_goods"
                 android:layout_toStartOf="@+id/tv_unit_price"
-                android:text="TextView1111111111111111111111111"
-                android:textSize="12sp" />
+                android:text="TextView1"
+                android:textSize="16sp" />
             <!---->
 
             <TextView
@@ -91,12 +56,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/tv_goods_name"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_goods_des"
@@ -105,11 +70,11 @@
                 android:layout_alignLeft="@+id/tv_goods_name"
                 android:layout_alignStart="@+id/tv_goods_name"
                 android:layout_below="@+id/tv_goods_name"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_toLeftOf="@+id/tv_unit_price"
                 android:layout_toStartOf="@+id/tv_unit_price"
-                android:text="TextView111111111111111111111111111111111111"
-                android:textSize="12sp" />
+                android:text="TextView11"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_goods_num"
@@ -118,18 +83,48 @@
                 android:layout_alignLeft="@+id/tv_unit_price"
                 android:layout_alignStart="@+id/tv_unit_price"
                 android:layout_alignTop="@+id/tv_goods_des"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_total_prices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/img_goods"
-                android:layout_toEndOf="@+id/tv_goods_des"
-                android:layout_toRightOf="@+id/tv_goods_des"
-                android:text="TextView" />
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_goods_num"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:text="TextView"
+                android:textSize="16sp" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_below="@+id/rlt_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
+            <TextView
+                android:id="@+id/tv_send_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:text="发起日期：2017-12-6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/tv_send_time"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:text="订单状态"
+                android:textColor="@color/red"
+                android:textSize="16sp" />
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

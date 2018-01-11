@@ -22,12 +22,12 @@ public class OfferGoodsAdapter extends BaseQuickAdapter<OfferGoodsEntity.GoodsIn
     @Override
     protected void convert(BaseViewHolder helper, OfferGoodsEntity.GoodsInfoListBean item, int position) {
         ((ExpandImageView)helper.getView(R.id.img_goods)).setImageURI(item.getImgUrl());
-        helper.setText(R.id.tv_station_name,item.getStationName());
-        helper.setText(R.id.tv_service_status,item.getOrderStatus());
+        helper.setText(R.id.tv_send_time,item.getOrderTime());
+        helper.setText(R.id.tv_order_status,item.getOrderStatus());
         helper.setText(R.id.tv_goods_name,item.getGoodsName());
-        helper.setText(R.id.tv_unit_price,item.getPrice()+"");
-        helper.setText(R.id.tv_goods_num,item.getAmount()+"");
-        helper.setText(R.id.tv_total_prices,item.getSumPrice());
-       // helper.setText(R.id.tv_goods_des,item.getGroupingDes());
+        helper.setText(R.id.tv_unit_price,"￥"+item.getPrice());
+        helper.setText(R.id.tv_goods_num,"x"+item.getAmount());
+        helper.setText(R.id.tv_total_prices,"共"+item.getAmount()+"件商品 合计：￥"+item.getSumPrice());
+        helper.setText(R.id.tv_goods_des,item.getSellUnit());
     }
 }

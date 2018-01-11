@@ -1,6 +1,7 @@
 package com.whombang.app.features.mycenter.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,11 +23,13 @@ import com.whombang.app.adapter.GroudBookAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.base.LazyFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.entity.GroudBookEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.features.mycenter.activity.GoodsOrderDetailsActivity;
 
 import org.json.JSONObject;
 
@@ -137,6 +140,21 @@ public class AwaitHarvestFragment extends LazyFragment implements OnRefreshListe
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         GroudBookEntity.GoodsInfoListBean item= (GroudBookEntity.GoodsInfoListBean) adapter.getData().get(position);
-        ARouter.getInstance().build("/order/details").navigation();
+        Bundle bundle=new Bundle();
+        bundle.putInt("tag",1);
+        bundle.putString("goodsGroupSellOrderId",item.getGoodsSellOrderId());
+        Intent intent=new Intent(getActivity(), GoodsOrderDetailsActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Contents.REQUEST_STATION_GOODS,bundle);
+       // ARouter.getInstance().build("/order/details").withInt("tag",1).withString("goodsGroupSellOrderId", item.getGoodsSellOrderId()).navigation(getActivity(), Contents.REQUEST_STATION_GOODS);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Contents.REQUEST_STATION_GOODS) {
+            mRefreshLayout.autoRefresh();
+        }
+
     }
 }

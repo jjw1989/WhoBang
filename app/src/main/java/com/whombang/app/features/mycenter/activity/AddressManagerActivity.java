@@ -58,7 +58,7 @@ public class AddressManagerActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        titleBar.setTitle("地址管理");
+        titleBar.setTitle("收货地址管理");
         titleBar.addAction(new TitleBar.ImageAction(R.mipmap.add) {
             @Override
             public void performAction(View view) {
