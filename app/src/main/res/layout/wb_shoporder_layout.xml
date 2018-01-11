@@ -160,7 +160,7 @@
                     app:hintBgRoundValue="15dp"
                     app:hintFgColor="#ffffff"
                     app:ignoreHintArea="true"
-                    app:maxCount="99"/>
+                    app:maxCount="999999999"/>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"

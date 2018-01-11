@@ -268,7 +268,7 @@ public class ShopOrderActivity extends BaseActivity {
                         } else {
                             //animShopButton.setReplenish(true);
                             animShopButton.setCount(1);
-                            animShopButton.setMaxCount(5000);
+                            animShopButton.setMaxCount(500000);
                         }
 
                     }

@@ -47,16 +47,41 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
     @Override
     public void initData(Bundle bundle) {
 
-            serviceOrderId = bundle.getString("serviceOrderId","");
-            Log.i("wwww", "initData: " + serviceOrderId);
+        serviceOrderId = bundle.getString("serviceOrderId", "");
+        Log.i("wwww", "initData: " + serviceOrderId);
 
     }
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("订单详情");
+        requestOrderDetails();
+    }
 
+    /**
+     * 获取订单详情
+     */
+    private void requestOrderDetails() {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("serviceOrderId", serviceOrderId);
+        params.put("userId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
 
+        EasyHttp.post("getUserOrderServiceDetail")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<String>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onSuccess(String entity) {
+                        Log.i(
+                                "wwww", "onSuccess: " + entity);
+                    }
+                });
     }
 
     @OnClick(R.id.btn_order)
