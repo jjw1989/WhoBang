@@ -183,6 +183,9 @@ public class VoiceActivity extends BaseActivity {
             mIatDialog.setListener(mRecognizerDialogListener);
             mIatDialog.show();
             showTip(getString(R.string.text_begin));
+            //获取字体所在的控件，设置为"",隐藏字体，
+            TextView txt = (TextView)mIatDialog.getWindow().getDecorView().findViewWithTag("textlink");
+            txt.setText("互帮服务平台");
         } else {
             // 不显示听写对话框
             ret = mIat.startListening(mRecognizerListener);

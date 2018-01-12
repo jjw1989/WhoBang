@@ -13,6 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.utils.JsonUtil;
 import com.whombang.app.common.utils.PreferenceUtil;
 import com.whombang.app.entity.UserLocalData;
 
@@ -52,7 +53,7 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rlt_address,R.id.rlt_nickname,R.id.rlt_feedback,R.id.btn_logout,R.id.rlt_modify_pwd})
+    @OnClick({R.id.rlt_address,R.id.rlt_nickname,R.id.rlt_feedback,R.id.btn_logout,R.id.rlt_modify_pwd,R.id.rlt_modify_sex})
     public void onClickView(View v){
         switch (v.getId()){
             case R.id.rlt_address:
@@ -65,13 +66,16 @@ public class SettingActivity extends BaseActivity {
                 ARouter.getInstance().build("/set/name").navigation(mActivity,Contents.SET_NICKNAME);
                 break;
             case R.id.btn_logout:
-                PreferenceUtil.clear();
+                PreferenceUtil.putString(mContext, Contents.USER_JSON, "");
                 appManager.finishAllActivity();
                 ARouter.getInstance().build("/user/login").navigation();
                 finish();
                 break;
             case R.id.rlt_modify_pwd:
                 ARouter.getInstance().build("/set/modifypwd").navigation();
+                break;
+            case R.id.rlt_modify_sex:
+                ARouter.getInstance().build("/set/modifysex").navigation();
                 break;
         }
 

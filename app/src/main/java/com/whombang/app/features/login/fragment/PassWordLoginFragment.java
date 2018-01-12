@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.enctypt.DESUtil;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.ProgressDialogCallBack;
 import com.whombang.app.common.net.callback.SimpleCallBack;
@@ -81,6 +82,8 @@ public class PassWordLoginFragment extends BaseFragment {
                 }
             };
             Map<String, String> params = new HashMap<>();
+          //  String phone1 = DESUtil.encrypt(etPhone.getText().toString(), "80f37a994f8d426c85e5b4d2a5f30350");
+           // Log.i("qazxc", "onStartLogin: "+phone1);
             params.put("userTel", etPhone.getText().toString());
             params.put("userPassword", etPassWord.getText().toString());
             EasyHttp.post("userLoginByPassword")
@@ -108,6 +111,7 @@ public class PassWordLoginFragment extends BaseFragment {
 
     /**
      * 登录校验
+     *
      * @param phone
      * @param password
      * @return

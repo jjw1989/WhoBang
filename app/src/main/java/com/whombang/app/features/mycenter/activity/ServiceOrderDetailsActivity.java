@@ -31,9 +31,6 @@ import butterknife.OnClick;
 public class ServiceOrderDetailsActivity extends BaseActivity {
     String serviceOrderId;
 
-    @BindView(R.id.btn_order)
-    Button btnOrder;
-
     @Override
     protected int bindLayout() {
         return R.layout.wb_service_order_details_layout;
@@ -84,28 +81,28 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
                 });
     }
 
-    @OnClick(R.id.btn_order)
-    public void onStartOrder() {
-        final Map<String, Object> params = new HashMap<>();
-        params.put("serviceOrderId", serviceOrderId);
-        params.put("inUserId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
-
-        EasyHttp.post("userAcceptOrderService")
-                .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<String>() {
-
-                    @Override
-                    public void onError(ApiException e) {
-                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onSuccess(String entity) {
-                        Log.i("wwww", "onSuccess: " + entity);
-                    }
-                });
-    }
+//    @OnClick(R.id.btn_order)
+//    public void onStartOrder() {
+//        final Map<String, Object> params = new HashMap<>();
+//        params.put("serviceOrderId", serviceOrderId);
+//        params.put("inUserId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
+//
+//        EasyHttp.post("userAcceptOrderService")
+//                .upJson(new JSONObject(params).toString())
+//                .execute(new SimpleCallBack<String>() {
+//
+//                    @Override
+//                    public void onError(ApiException e) {
+//                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(String entity) {
+//                        Log.i("wwww", "onSuccess: " + entity);
+//                    }
+//                });
+//    }
 
     @Override
     public void doBusiness() {

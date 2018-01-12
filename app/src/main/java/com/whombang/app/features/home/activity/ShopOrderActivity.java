@@ -107,7 +107,7 @@ public class ShopOrderActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("确认订单");
-        List<String> dataset = new LinkedList<>(Arrays.asList("线下支付", "微信支付", "支付宝", "银联支付"));
+        List<String> dataset = new LinkedList<>(Arrays.asList("线下支付"));//, "微信支付", "支付宝", "银联支付"
         niceSpinner.attachDataSource(dataset);
         List<String> dataset2 = new LinkedList<>(Arrays.asList("站主配送", "到站自提"));
         niceSpinner2.attachDataSource(dataset2);
@@ -237,6 +237,7 @@ public class ShopOrderActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(String entity) {
+                        Toast.makeText(mContext,"下单成功",Toast.LENGTH_SHORT).show();
                         ARouter.getInstance().build("/main/tab").navigation();
                         finish();
                     }

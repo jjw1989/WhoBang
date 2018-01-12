@@ -107,7 +107,7 @@ public class ForgetActivity extends BaseActivity {
             case R.id.btn_forget_code:
                 onSmsCode();
                 break;
-            case R.id.btn_register_code:
+            case R.id.btn_affirm:
                 if (etAffirmPassWord.getText().toString().equals(etNewPassWord.getText().toString())) {
                     presenter.requestPassword(etPhone.getText().toString(), etCode.getText().toString(), etNewPassWord.getText().toString());
                     finish();
