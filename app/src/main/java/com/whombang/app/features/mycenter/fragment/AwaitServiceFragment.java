@@ -1,5 +1,6 @@
 package com.whombang.app.features.mycenter.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,11 +19,14 @@ import com.whombang.app.adapter.GroudBookAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.base.LazyFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.entity.MyServiceEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.features.mycenter.activity.MyServiceOrderDetailsActivity;
+import com.whombang.app.features.mycenter.activity.ServiceOrderDetailsActivity;
 
 import org.json.JSONObject;
 
@@ -125,6 +129,20 @@ public class AwaitServiceFragment extends LazyFragment implements OnRefreshListe
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         MyServiceEntity.ServiceOrderListBean item= (MyServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
-        ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",item.getServiceOrderId()).navigation();
+        Bundle bundle=new Bundle();
+        bundle.putString("serviceOrderId",item.getServiceOrderId());
+        bundle.putString("userId",item.getUserId());
+        Intent intent=new Intent(getActivity(), MyServiceOrderDetailsActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Contents.REQUEST_STATION_GOODS,bundle);
+       // ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",item.getServiceOrderId()).withString("userId",item.getUserId()).navigation();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Contents.REQUEST_STATION_GOODS) {
+            mRefreshLayout.autoRefresh();
+        }
+
     }
 }

@@ -134,10 +134,10 @@ public class ForgetActivity extends BaseActivity {
         RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
+                String content=String.format(getString(R.string.residue),aLong);
                 if(aLong==0){
                     btnCode.setEnabled(true);
                 }
-                String content=String.format(getString(R.string.residue),aLong);
                 btnCode.setText(content);
             }
         });

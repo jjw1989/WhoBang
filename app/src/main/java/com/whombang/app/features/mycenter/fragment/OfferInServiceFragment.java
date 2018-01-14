@@ -1,6 +1,7 @@
 package com.whombang.app.features.mycenter.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,11 +19,14 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.OfferServiceAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.entity.OfferServiceEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.features.mycenter.activity.GoodsOrderDetailsActivity;
+import com.whombang.app.features.mycenter.activity.ServiceOrderDetailsActivity;
 
 import org.json.JSONObject;
 
@@ -148,6 +152,12 @@ public class OfferInServiceFragment extends BaseFragment implements OnRefreshLis
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         OfferServiceEntity.ServiceOrderListBean item=serviceOrderList.get(position);
         String serviceOrderId=item.getServiceOrderId();
+        Bundle bundle=new Bundle();
+        bundle.putString("serviceOrderId",serviceOrderId);
+        bundle.putString("userId",item.getUserId());
+        Intent intent=new Intent(getActivity(), ServiceOrderDetailsActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Contents.REQUEST_STATION_GOODS,bundle);
         Log.i("wwww", "onItemClick: "+serviceOrderId);
        // ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",serviceOrderId).navigation(mActivity);
     }

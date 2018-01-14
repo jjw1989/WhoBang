@@ -120,6 +120,7 @@ public class FinishFragment extends LazyFragment implements OnRefreshListener,On
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        ARouter.getInstance().build("/myservice/orderdetails").navigation();
+        MyServiceEntity.ServiceOrderListBean item= (MyServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
+        ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",item.getServiceOrderId()).withString("userId",item.getUserId()).navigation();
     }
 }

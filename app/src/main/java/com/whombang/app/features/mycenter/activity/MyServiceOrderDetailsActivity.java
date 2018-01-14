@@ -1,6 +1,5 @@
 package com.whombang.app.features.mycenter.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +14,6 @@ import com.whombang.app.common.entity.BaseEntity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
-import com.whombang.app.common.view.imageview.ExpandImageView;
-import com.whombang.app.entity.MyServiceEntity;
 import com.whombang.app.entity.ServiceDetailsEntity;
 import com.whombang.app.entity.UserLocalData;
 
@@ -31,8 +28,8 @@ import butterknife.OnClick;
 /**
  * 服务订单详情
  */
-@Route(path = "/offerservice/orderdetails")
-public class ServiceOrderDetailsActivity extends BaseActivity {
+@Route(path = "/myservice/orderdetails")
+public class MyServiceOrderDetailsActivity extends BaseActivity {
     @BindView(R.id.tv_consignee_address)
     TextView tvAddress;
     @BindView(R.id.tv_consignee)
@@ -56,7 +53,7 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
     String userId;
     @Override
     protected int bindLayout() {
-        return R.layout.wb_service_order_details_layout;
+        return R.layout.wb_my_service_order_details_layout;
     }
 
     @Override
@@ -98,9 +95,7 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(ServiceDetailsEntity entity) {
-                        if (entity.getUserorderserviceInfo().getUserId().equals(UserLocalData.getUserInfo(mContext).getUserInfo().getUserId())){
-                            btnOrder.setVisibility(View.GONE);
-                        }
+
                        upView(entity.getUserorderserviceInfo());
                     }
                 });

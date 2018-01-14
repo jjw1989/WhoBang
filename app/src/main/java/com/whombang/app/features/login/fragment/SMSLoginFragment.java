@@ -154,8 +154,8 @@ public class SMSLoginFragment extends BaseFragment {
                 if (aLong==0){
                     btnCode.setEnabled(true);
                 }
-                String content=String.format(getString(R.string.residue),aLong);
-                btnCode.setText(content);
+                btnCode.setText("还剩余"+aLong+"秒");
+
             }
         });
     }

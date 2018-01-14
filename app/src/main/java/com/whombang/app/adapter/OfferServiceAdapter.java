@@ -20,8 +20,8 @@ public class OfferServiceAdapter extends BaseQuickAdapter<OfferServiceEntity.Ser
             helper.setText(R.id.tv_station_name,item.getStationName());
             helper.setText(R.id.tv_service_status,getServiceStation(item.getServiceOrderStatus()));
 
-            helper.setText(R.id.tv_server_name,"服务者:"+item.getStationManagerName());
-            helper.setText(R.id.tv_server_phone,"电话:"+item.getStationManagerTel());
+          //  helper.setText(R.id.tv_server_name,"服务者:"+item.getStationManagerName());
+           // helper.setText(R.id.tv_server_phone,"电话:"+item.getStationManagerTel());
             helper.setText(R.id.tv_send_name,"被服务者:"+item.getDemanderName());
             helper.setText(R.id.tv_send_phone,"电话:"+item.getContact());
             helper.setText(R.id.tv_order_time,"下单时间:"+item.getIndividuationServiceAddTime());
