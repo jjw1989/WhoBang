@@ -55,6 +55,8 @@ public class TextTaskActivity extends BaseActivity {
     RelativeLayout rltNoAddress;
 
     String address="";
+    String name="";
+    String phone="";
     @Override
     public void initData(Bundle bundle) {
 
@@ -78,7 +80,7 @@ public class TextTaskActivity extends BaseActivity {
             public void performAction(View view) {
                 if (!TextUtils.isEmpty(address)) {
                     if (!TextUtils.isEmpty(etContent.getText().toString())) {
-                        presenter.sendTaskSerivce(etContent.getText().toString(), address);
+                        presenter.sendTaskSerivce(etContent.getText().toString(), address,phone,name);
                     }else{
                         Toast.makeText(mContext,"请添加内容",Toast.LENGTH_SHORT).show();
                     }
@@ -133,6 +135,8 @@ public class TextTaskActivity extends BaseActivity {
 
     public void updataAddress(DefaultAddressEntity entity) {
         address=entity.getUserDefaultAddress().getUserAddressDetail();
+        name=entity.getUserDefaultAddress().getUserAddressContactPeople();
+        phone=entity.getUserDefaultAddress().getUserAddressContactTel();
         rltNoAddress.setVisibility(View.GONE);
         rltAddress.setVisibility(View.VISIBLE);
         tvConsignee.setText("收货人："+entity.getUserDefaultAddress().getUserAddressContactPeople());

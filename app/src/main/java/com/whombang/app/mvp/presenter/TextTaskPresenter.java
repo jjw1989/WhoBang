@@ -31,18 +31,18 @@ public class TextTaskPresenter {
         this.activity=activity;
     }
 
-    public void sendTaskSerivce(String individuationServiceDesc,String address){
+    public void sendTaskSerivce(String individuationServiceDesc,String address,String phone,String name){
         Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(activity).getUserInfo().getUserId());
-        params.put("stationId", UserLocalData.getUserInfo(activity).getStationInfo().getStationId());
+        params.put("stationId", UserLocalData.getUserInfo(activity).getStationInfo().getStationId());//选择返回的id
         params.put("individuationServiceDesc", individuationServiceDesc);
-        params.put("contact", UserLocalData.getUserInfo(activity).getUserInfo().getUserTel());
-        params.put("userInvitationUserId", UserLocalData.getUserInfo(activity).getStationManagerInfo().getStationId());
+        params.put("contact", phone);
+        params.put("userInvitationUserId", UserLocalData.getUserInfo(activity).getStationManagerInfo().getStationId());//登录默认id
         params.put("type", 3);
         params.put("longitude", "114.00000");
         params.put("latitude", "32.000000");
         params.put("currentLocation", address);
-        params.put("demanderName", UserLocalData.getUserInfo(activity).getUserInfo().getUserRealName());
+        params.put("demanderName", name);
 
         EasyHttp.post("startAService")
                 .upJson(new JSONObject(params).toString())

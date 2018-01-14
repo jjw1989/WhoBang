@@ -105,11 +105,11 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
      */
     private void upView(ServiceDetailsEntity.UserorderserviceInfoBean entity) {
         tvConsignee.setText("服务需求者："+entity.getDemanderName());
-       // tvAddress.setText("服务需求者地址："+entity.get);
+        tvAddress.setText("服务需求者地址："+entity.getCurrentLocation());
         tvConsigneePhone.setText(entity.getContact());
 
-        tvStationName.setText("站主姓名："+entity.getStationName());
-        tvServiceNeed.setText("站主地址："+entity.getIndividuationServiceDesc());
+        tvStationName.setText("站主名称："+entity.getStationName());
+        tvServiceNeed.setText("服务需求："+entity.getIndividuationServiceDesc());
         tvOrderCode.setText("订单编号:" + entity.getOrderId());
         tvOrderTime.setText("下单时间:" + entity.getIndividuationServiceAddTime());
     }

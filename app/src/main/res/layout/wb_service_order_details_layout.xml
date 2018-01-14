@@ -111,6 +111,7 @@
         android:id="@+id/tv_service_need"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="服务需求:需要一名服务者修改冰箱柜和空调马桶的议题的服务"
@@ -134,9 +135,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingLeft="20dp"
-        android:layout_marginTop="10dp"
         android:text="订单时间："
-        android:layout_marginBottom="5dp"
         android:textSize="15sp" />
     <View
         android:layout_width="match_parent"

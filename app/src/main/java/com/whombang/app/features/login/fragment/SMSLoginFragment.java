@@ -139,6 +139,7 @@ public class SMSLoginFragment extends BaseFragment {
                 ARouter.getInstance().build("/user/forget").navigation();
                 break;
             case R.id.btn_sms_code:
+                btnCode.setEnabled(false);
                 onSmsCode();
                 break;
 
@@ -150,7 +151,9 @@ public class SMSLoginFragment extends BaseFragment {
        RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-
+                if (aLong==0){
+                    btnCode.setEnabled(true);
+                }
                 String content=String.format(getString(R.string.residue),aLong);
                 btnCode.setText(content);
             }

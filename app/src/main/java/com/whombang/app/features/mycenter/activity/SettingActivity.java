@@ -67,6 +67,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.btn_logout:
                 PreferenceUtil.putString(mContext, Contents.USER_JSON, "");
+                PreferenceUtil.putBoolean(mActivity, Contents.LOGIN, false);
                 appManager.finishAllActivity();
                 ARouter.getInstance().build("/user/login").navigation();
                 finish();

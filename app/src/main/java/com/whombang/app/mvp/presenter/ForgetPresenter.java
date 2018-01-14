@@ -57,7 +57,7 @@ public class ForgetPresenter {
         params.put("userTel",phone);
         params.put("smsCode",code);
         params.put("passWord",password);
-        EasyHttp.post("alterUserPassword")
+        EasyHttp.post("forgetUserPassword")
                 .upJson(new JSONObject(params).toString())
                 .execute(new ProgressDialogCallBack<UserInfoEntity>(mProgressDialog,true,true) {
 

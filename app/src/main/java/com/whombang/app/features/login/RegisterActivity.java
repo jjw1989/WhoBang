@@ -113,6 +113,7 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
     public void onClickView(View v) {
         switch (v.getId()){
             case R.id.btn_register_code:
+                btnCode.setEnabled(false);
                 onSmsCode();
                 break;
             case R.id.btn_register:
@@ -128,6 +129,9 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
             @Override
             public void accept(Long aLong) throws Exception {
                 String content=String.format(getString(R.string.residue),aLong);
+                if(aLong==0){
+                    btnCode.setEnabled(true);
+                }
                 btnCode.setText(content);
             }
         });
