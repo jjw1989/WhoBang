@@ -32,6 +32,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:visibility="invisible"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:src="@mipmap/pencil" />
@@ -76,65 +77,45 @@
         android:layout_height="1dp"
         />
     <RelativeLayout
-        android:background="@color/white"
-        android:id="@+id/address2"
+        android:id="@+id/rlt_top"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@+id/address1"
-        >
+        android:background="@color/white"
+        android:layout_height="50dp">
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="32dp"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            android:src="@mipmap/shopping" />
-
-        <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@mipmap/pencil" />
-
-        <TextView
-            android:id="@+id/tv_station_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/imageView5"
-            android:layout_toLeftOf="@+id/imageView4"
-            android:layout_toRightOf="@+id/imageView5"
-            android:layout_toStartOf="@+id/imageView4"
-            android:text="详情地址： 北京市昌平区回龙观龙禧苑三区北店嘉园1000楼五单元303室" />
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            app:srcCompat="@mipmap/tubiao" />
 
         <TextView
             android:id="@+id/tv_station_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_station_address"
-            android:layout_alignStart="@+id/tv_station_address"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_below="@+id/tv_station_address"
-            android:text="收货人：超跑" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/imageView11"
+            android:layout_toRightOf="@+id/imageView11"
+            android:text="站主名字"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_station_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_station_name"
-            android:layout_alignBottom="@+id/tv_station_name"
-            android:layout_toLeftOf="@+id/imageView4"
-            android:layout_toStartOf="@+id/imageView4"
-            android:text="18611766104" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_service_need"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="服务需求:需要一名服务者修改冰箱柜和空调马桶的议题的服务"
+        android:textSize="15sp" />
+
     <TextView
         android:id="@+id/tv_order_code"
         android:layout_width="match_parent"
@@ -153,10 +134,14 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
         android:text="订单时间："
         android:layout_marginBottom="5dp"
         android:textSize="15sp" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/white"

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.BoolRes;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,13 +16,17 @@ import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.entity.BaseEntity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.ProgressDialogCallBack;
+import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.net.subsciber.IProgressDialog;
+import com.whombang.app.common.utils.DESUtil;
 import com.whombang.app.common.utils.PreferenceUtil;
 import com.whombang.app.common.utils.RxJavaUtil;
 import com.whombang.app.common.utils.Validator;
+import com.whombang.app.entity.ServiceDetailsEntity;
 import com.whombang.app.entity.UserInfoEntity;
 import com.whombang.app.entity.UserLocalData;
 
@@ -141,13 +146,36 @@ public class SMSLoginFragment extends BaseFragment {
     }
 
     private void onSmsCode() {
+        requestSms();
        RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
+
                 String content=String.format(getString(R.string.residue),aLong);
                 btnCode.setText(content);
             }
         });
+    }
+
+    private void requestSms() {
+        String telNumEncrypted = DESUtil.encrypt(etPhone.getText().toString().trim(), "80f37a994f8d426c85e5b4d2a5f30350");
+        Map<String, String> params = new HashMap<>();
+        params.put("userTel", telNumEncrypted);
+        EasyHttp.post("sendSMS")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<BaseEntity>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseEntity entity) {
+                       // Log.i("qazx", "onSuccess: sms="+entity);
+                    }
+                });
     }
 
 

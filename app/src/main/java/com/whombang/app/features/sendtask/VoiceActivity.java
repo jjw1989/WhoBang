@@ -424,7 +424,7 @@ public class VoiceActivity extends BaseActivity {
 
 
     public void updataAddress(DefaultAddressEntity entity) {
-        address=entity.getUserDefaultAddress().getUserAddressContactPeople();
+        address=entity.getUserDefaultAddress().getUserAddressDetail();
         rltNoAddress.setVisibility(View.GONE);
         rltAddress.setVisibility(View.VISIBLE);
         tvConsignee.setText("收货人："+entity.getUserDefaultAddress().getUserAddressContactPeople());

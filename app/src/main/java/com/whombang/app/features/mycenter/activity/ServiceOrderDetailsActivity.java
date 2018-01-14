@@ -16,6 +16,7 @@ import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.common.view.imageview.ExpandImageView;
 import com.whombang.app.entity.MyServiceEntity;
+import com.whombang.app.entity.ServiceDetailsEntity;
 import com.whombang.app.entity.UserLocalData;
 
 import org.json.JSONObject;
@@ -37,6 +38,13 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
     TextView tvConsignee;
     @BindView(R.id.tv_consignee_phone)
     TextView tvConsigneePhone;
+
+    @BindView(R.id.tv_station_name)
+    TextView tvStationName;
+    @BindView(R.id.tv_service_need)
+    TextView tvServiceNeed;
+
+
     @BindView(R.id.tv_order_code)
     TextView tvOrderCode;
     @BindView(R.id.tv_order_time)
@@ -55,7 +63,6 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle bundle) {
-
         serviceOrderId = bundle.getString("serviceOrderId", "");
         Log.i("wwww", "initData: " + serviceOrderId);
 
@@ -73,11 +80,11 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
     private void requestOrderDetails() {
         final Map<String, Object> params = new HashMap<>();
         params.put("serviceOrderId", serviceOrderId);
-        params.put("userId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
+        params.put("userId",UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
 
         EasyHttp.post("getUserOrderServiceDetail")
                 .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<String>() {
+                .execute(new SimpleCallBack<ServiceDetailsEntity>() {
 
                     @Override
                     public void onError(ApiException e) {
@@ -86,11 +93,25 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onSuccess(String entity) {
-                        Log.i(
-                                "wwww", "onSuccess: " + entity);
+                    public void onSuccess(ServiceDetailsEntity entity) {
+                       upView(entity.getUserorderserviceInfo());
                     }
                 });
+    }
+
+    /**
+     * 更新view
+     * @param
+     */
+    private void upView(ServiceDetailsEntity.UserorderserviceInfoBean entity) {
+        tvConsignee.setText("服务需求者："+entity.getDemanderName());
+       // tvAddress.setText("服务需求者地址："+entity.get);
+        tvConsigneePhone.setText(entity.getContact());
+
+        tvStationName.setText("站主姓名："+entity.getStationName());
+        tvServiceNeed.setText("站主地址："+entity.getIndividuationServiceDesc());
+        tvOrderCode.setText("订单编号:" + entity.getOrderId());
+        tvOrderTime.setText("下单时间:" + entity.getIndividuationServiceAddTime());
     }
 
 //    @OnClick(R.id.btn_order)

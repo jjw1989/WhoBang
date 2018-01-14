@@ -3,13 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WhoBang.iml" filepath="$PROJECT_DIR$/WhoBang.iml" />
-      <module fileurl="file://D:\WhoBang\WhoBang.iml" filepath="D:\WhoBang\WhoBang.iml" />
       <module fileurl="file://$PROJECT_DIR$/amaplibrary/amaplibrary.iml" filepath="$PROJECT_DIR$/amaplibrary/amaplibrary.iml" />
-      <module fileurl="file://D:\WhoBang\amaplibrary\amaplibrary.iml" filepath="D:\WhoBang\amaplibrary\amaplibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\WhoBang\app\app.iml" filepath="D:\WhoBang\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/xflibrary/xflibrary.iml" filepath="$PROJECT_DIR$/xflibrary/xflibrary.iml" />
-      <module fileurl="file://D:\WhoBang\xflibrary\xflibrary.iml" filepath="D:\WhoBang\xflibrary\xflibrary.iml" />
     </modules>
   </component>
 </project>
