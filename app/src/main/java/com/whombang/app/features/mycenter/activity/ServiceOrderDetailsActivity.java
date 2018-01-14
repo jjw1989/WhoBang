@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,6 +14,7 @@ import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.common.view.imageview.ExpandImageView;
 import com.whombang.app.entity.MyServiceEntity;
 import com.whombang.app.entity.UserLocalData;
 
@@ -29,6 +31,16 @@ import butterknife.OnClick;
  */
 @Route(path = "/myservice/orderdetails")
 public class ServiceOrderDetailsActivity extends BaseActivity {
+    @BindView(R.id.tv_consignee_address)
+    TextView tvAddress;
+    @BindView(R.id.tv_consignee)
+    TextView tvConsignee;
+    @BindView(R.id.tv_consignee_phone)
+    TextView tvConsigneePhone;
+    @BindView(R.id.tv_order_code)
+    TextView tvOrderCode;
+    @BindView(R.id.tv_order_time)
+    TextView tvOrderTime;
     String serviceOrderId;
 
     @Override
