@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.constants.Contents;
-import com.whombang.app.common.enctypt.DESUtil;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.ProgressDialogCallBack;
 import com.whombang.app.common.net.callback.SimpleCallBack;
