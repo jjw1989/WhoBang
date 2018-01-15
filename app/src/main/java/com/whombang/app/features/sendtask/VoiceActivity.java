@@ -128,7 +128,7 @@ public class VoiceActivity extends BaseActivity {
         });
         presenter.getUserDefaultAddress();
         initVoice();
-
+        updateStationView();
     }
 
     private void initVoice() {
@@ -424,7 +424,11 @@ public class VoiceActivity extends BaseActivity {
         }
     }
 
-
+    private void updateStationView() {
+        tvStationName.setText("收货人："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
+        tvStationAddress.setText( "站点详情地址："+UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
+        tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
+    }
     public void updataAddress(DefaultAddressEntity entity) {
         address=entity.getUserDefaultAddress().getUserAddressDetail();
         phone=entity.getUserDefaultAddress().getUserAddressContactTel();

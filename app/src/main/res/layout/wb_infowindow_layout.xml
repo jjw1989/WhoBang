@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="50dp">
+
+
+        <TextView
+            android:id="@+id/tv_station_map_name"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_height="wrap_content"
+            android:text="站点的名字" />
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+             android:layout_marginLeft="200dp"
+            app:srcCompat="@mipmap/img_close" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_station_map_address"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:padding="@dimen/dp_10"
+        android:text="详情地址：北京市昌平区回龙观werqwasdasdasdasdfasdfasdfasdfasdfasdfasdfadfasdfsadfasdfasd" />
+
+    <TextView
+        android:id="@+id/tv_station_map_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_station_map_address"
+        android:padding="@dimen/dp_10"
+        android:text="联系电话:18611766105" />
+
+    <Button
+        android:id="@+id/btn_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_station_map_address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:text="切换站主" />
+
+
+</RelativeLayout>

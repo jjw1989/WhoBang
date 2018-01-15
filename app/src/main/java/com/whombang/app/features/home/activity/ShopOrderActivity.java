@@ -112,7 +112,7 @@ public class ShopOrderActivity extends BaseActivity {
         niceSpinner.attachDataSource(dataset);
         List<String> dataset2 = new LinkedList<>(Arrays.asList("站主配送", "到站自提"));
         niceSpinner2.attachDataSource(dataset2);
-        requestSellInfo();
+      //  requestSellInfo();
         getUserDefaultAddress();
         updateView();
         tvUnitPrice.setText("单价:"+goodsGroupSellPrice);
@@ -317,7 +317,7 @@ public class ShopOrderActivity extends BaseActivity {
 
     private void updateView() {
         tvStationName.setText("站主姓名：" + UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
-        tvStationAddress.setText("站主地址：" + UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerAddress());
+        tvStationAddress.setText("站主地址：" + UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
         tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
     }
 

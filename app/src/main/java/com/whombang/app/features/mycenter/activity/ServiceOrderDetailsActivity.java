@@ -126,9 +126,10 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
             btnOrder.setText("接单");
         } else if (entity.getServiceOrderStatus() == 2) {
             btnOrder.setText("确认完成");
-        }else if (entity.getServiceOrderStatus()==3){
+        }else if (entity.getServiceOrderStatus()==4){
             btnOrder.setVisibility(View.GONE);
         }
+
     }
 
     @OnClick(R.id.btn_order)

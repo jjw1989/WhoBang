@@ -94,8 +94,8 @@ public class TextTaskActivity extends BaseActivity {
     }
 
     private void updateView() {
-        tvStationName.setText("站主姓名："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
-        tvStationAddress.setText("站主地址："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerAddress());
+        tvStationName.setText("收货人："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
+        tvStationAddress.setText( "站点详情地址："+UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
         tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
     }
 

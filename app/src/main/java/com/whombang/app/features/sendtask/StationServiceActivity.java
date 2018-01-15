@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -167,6 +169,32 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                     }
                 }
                 return false;
+            }
+        });
+        aMap.setInfoWindowAdapter(new AMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(final Marker marker) {
+                View mView=getLayoutInflater().inflate(R.layout.wb_infowindow_layout,null);
+                ImageView imgClose=mView.findViewById(R.id.img_close);
+                Button btnSwitch=mView.findViewById(R.id.btn_switch);
+                btnSwitch.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("qazxc", "onClick: 122222222222222222222222222222");
+                    }
+                });
+                imgClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        marker.hideInfoWindow();
+                    }
+                });
+                return mView;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
             }
         });
     }

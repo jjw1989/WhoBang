@@ -154,12 +154,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="30dp"
                     android:layout_marginRight="30dp"
+                    app:count="1"
                     app:addEnableBgColor="#3190E8"
                     app:addEnableFgColor="#ffffff"
                     app:hintBgColor="#3190E8"
+                    app:gapBetweenCircle="40dp"
                     app:hintBgRoundValue="15dp"
                     app:hintFgColor="#ffffff"
-                    app:ignoreHintArea="true"
                     app:maxCount="999999999"/>
             </RelativeLayout>
             <View
