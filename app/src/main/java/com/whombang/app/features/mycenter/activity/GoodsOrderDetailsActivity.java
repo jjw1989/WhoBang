@@ -62,6 +62,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
     @BindView(R.id.btn_sales_return)
     Button btnSalesReturn;
     String goodsGroupSellOrderId;
+    String userId;
     GoodsGroupDetailsEntity itemInfo;
     int tag;
 
@@ -78,6 +79,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
     @Override
     public void initData(Bundle bundle) {
         goodsGroupSellOrderId = bundle.getString("goodsGroupSellOrderId", "");
+        userId=bundle.getString("userId","");
         tag = bundle.getInt("tag", -1);
     }
 

@@ -8,12 +8,18 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gxz.PagerSlidingTabStrip;
 import com.whombang.app.R;
 import com.whombang.app.adapter.ItemTitlePagerAdapter;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.entity.BaseEntity;
+import com.whombang.app.common.net.EasyHttp;
+import com.whombang.app.common.net.callback.SimpleCallBack;
+import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.common.utils.DESUtil;
 import com.whombang.app.common.utils.RxJavaUtil;
 import com.whombang.app.common.view.EasyIndicator;
 import com.whombang.app.common.view.KeyboardWatcher;
@@ -28,8 +34,12 @@ import com.whombang.app.mvp.component.DaggerRegisterActivityComponent;
 import com.whombang.app.mvp.module.RegisterActivityModule;
 import com.whombang.app.mvp.presenter.RegisterPresenter;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -48,8 +58,8 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
     View body;
     @BindView(R.id.btn_register_code)
     Button btnCode;
-    @BindView(R.id.et_register_password)
-    EditText etPassWord;
+    @BindView(R.id.et_register_phone)
+    EditText etPhone;
     @BindView(R.id.et_register_new_password)
     EditText etNewPassword;
     @BindView(R.id.et_invitation_code)
@@ -103,24 +113,48 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
     public void onClickView(View v) {
         switch (v.getId()){
             case R.id.btn_register_code:
+                btnCode.setEnabled(false);
                 onSmsCode();
                 break;
             case R.id.btn_register:
-                presenter.registerUser(etPassWord.getText().toString(),etNewPassword.getText().toString(),etInvitationCode.getText().toString());
+                presenter.registerUser(etPhone.getText().toString(),etNewPassword.getText().toString(),etInvitationCode.getText().toString());
                 break;
         }
 
     }
 
     private void onSmsCode() {
+        requestSms();
         RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
                 String content=String.format(getString(R.string.residue),aLong);
+                if(aLong==0){
+                    btnCode.setEnabled(true);
+                }
                 btnCode.setText(content);
             }
         });
     }
 
+    private void requestSms() {
+        String telNumEncrypted = DESUtil.encrypt(etPhone.getText().toString().trim(), "80f37a994f8d426c85e5b4d2a5f30350");
+        Map<String, String> params = new HashMap<>();
+        params.put("userTel", telNumEncrypted);
+        EasyHttp.post("sendSMS")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<BaseEntity>() {
 
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseEntity entity) {
+                        // Log.i("qazx", "onSuccess: sms="+entity);
+                    }
+                });
+    }
 }

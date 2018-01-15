@@ -16,6 +16,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.entity.BaseEntity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
@@ -228,7 +229,7 @@ public class ShopOrderActivity extends BaseActivity {
         params.put("goodsGroupSellStationTel", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerTel());
         EasyHttp.post("createNewGoodsGroupSellOrder")
                 .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<String>() {
+                .execute(new SimpleCallBack<BaseEntity>() {
 
                     @Override
                     public void onError(ApiException e) {
@@ -236,7 +237,7 @@ public class ShopOrderActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onSuccess(String entity) {
+                    public void onSuccess(BaseEntity entity) {
                         Toast.makeText(mContext,"下单成功",Toast.LENGTH_SHORT).show();
                         ARouter.getInstance().build("/main/tab").navigation();
                         finish();

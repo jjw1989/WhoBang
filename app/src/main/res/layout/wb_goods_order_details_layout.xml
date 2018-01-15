@@ -10,14 +10,15 @@
     <RelativeLayout
         android:id="@+id/address1"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="32dp"
-            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_height="32dp"
             android:padding="5dp"
             android:src="@mipmap/shouhuodizhi" />
 
@@ -54,6 +55,7 @@
             android:layout_alignLeft="@+id/tv_consignee_address"
             android:layout_alignStart="@+id/tv_consignee_address"
             android:layout_below="@+id/tv_consignee_address"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="@dimen/dp_10"
             android:text="收货人：超跑" />
 
@@ -130,6 +132,7 @@
                 android:id="@+id/img_goods"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:scaleType="fitXY"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"

@@ -54,6 +54,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content">
 
         <TextView
@@ -90,6 +91,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:textSize="15sp"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:text="发布服务者" />
@@ -100,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:textSize="15sp"
             android:layout_alignTop="@+id/tv_send_name"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
