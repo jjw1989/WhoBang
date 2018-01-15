@@ -27,7 +27,7 @@ public class AwaitServiceAdapter extends BaseQuickAdapter<MyServiceEntity.Servic
         helper.setText(R.id.tv_service_need,"服务需求:"+item.getIndividuationServiceDesc());
         helper.setText(R.id.tv_order_time,"下单时间:"+item.getIndividuationServiceAddTime());
         if (item.getServiceOrderStatus()==3){
-            helper.getView(R.id.btn_evaluate).setVisibility(View.VISIBLE);
+            helper.getView(R.id.btn_evaluate).setVisibility(View.GONE);
         }else{
             helper.getView(R.id.btn_evaluate).setVisibility(View.GONE);
         }
@@ -44,8 +44,6 @@ public class AwaitServiceAdapter extends BaseQuickAdapter<MyServiceEntity.Servic
         }else if (station==2){
             return "服务中";
         }else if(station==3){
-            return "待评价";
-        }else if(station==4){
             return "已完成";
         }
         return "";

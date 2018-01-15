@@ -54,6 +54,7 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
             Button btnOrder;
     String serviceOrderId;
     String userId;
+    ServiceDetailsEntity serviceDetailsEntity;
     @Override
     protected int bindLayout() {
         return R.layout.wb_service_order_details_layout;
@@ -98,6 +99,7 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(ServiceDetailsEntity entity) {
+                        serviceDetailsEntity=entity;
                         if (entity.getUserorderserviceInfo().getUserId().equals(UserLocalData.getUserInfo(mContext).getUserInfo().getUserId())){
                             btnOrder.setVisibility(View.GONE);
                         }
@@ -119,30 +121,60 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
         tvServiceNeed.setText("服务需求："+entity.getIndividuationServiceDesc());
         tvOrderCode.setText("订单编号:" + entity.getOrderId());
         tvOrderTime.setText("下单时间:" + entity.getIndividuationServiceAddTime());
+
+        if (entity.getServiceOrderStatus() == 1) {
+            btnOrder.setText("接单");
+        } else if (entity.getServiceOrderStatus() == 2) {
+            btnOrder.setText("确认完成");
+        }else if (entity.getServiceOrderStatus()==3){
+            btnOrder.setVisibility(View.GONE);
+        }
     }
 
     @OnClick(R.id.btn_order)
     public void onStartOrder() {
-        final Map<String, Object> params = new HashMap<>();
-        params.put("serviceOrderId", serviceOrderId);
-        params.put("inUserId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
+        if(serviceDetailsEntity.getUserorderserviceInfo().getServiceOrderStatus()==1){
+            final Map<String, Object> params = new HashMap<>();
+            params.put("serviceOrderId", serviceOrderId);
+            params.put("inUserId", UserLocalData.getUserInfo(mContext).getUserInfo().getUserId());
 
-        EasyHttp.post("userAcceptOrderService")
-                .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<BaseEntity>() {
+            EasyHttp.post("userAcceptOrderService")
+                    .upJson(new JSONObject(params).toString())
+                    .execute(new SimpleCallBack<BaseEntity>() {
 
-                    @Override
-                    public void onError(ApiException e) {
-                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onError(ApiException e) {
+                            Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }
+                        }
 
-                    @Override
-                    public void onSuccess(BaseEntity entity) {
-                        setResult(RESULT_OK);
-                        finish();
-                    }
-                });
+                        @Override
+                        public void onSuccess(BaseEntity entity) {
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    });
+        }else if (serviceDetailsEntity.getUserorderserviceInfo().getServiceOrderStatus()==2){
+            final Map<String, Object> params = new HashMap<>();
+            params.put("serviceOrderId", serviceOrderId);
+            EasyHttp.post("finishUserUpdateOrderService")
+                    .upJson(new JSONObject(params).toString())
+                    .execute(new SimpleCallBack<BaseEntity>() {
+
+                        @Override
+                        public void onError(ApiException e) {
+                            Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onSuccess(BaseEntity entity) {
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    });
+        }
+
     }
 
     @Override

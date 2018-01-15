@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.constants.Contents;
+import com.whombang.app.common.entity.BaseEntity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
@@ -150,7 +151,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
             params.put("goodsGroupSellOrderId", goodsGroupSellOrderId);
             EasyHttp.post("goodsCancel")
                     .upJson(new JSONObject(params).toString())
-                    .execute(new SimpleCallBack<String>() {
+                    .execute(new SimpleCallBack<BaseEntity>() {
 
                         @Override
                         public void onError(ApiException e) {
@@ -159,7 +160,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onSuccess(String entity) {
+                        public void onSuccess(BaseEntity entity) {
                             setResult(RESULT_OK);
                             finish();
                         }
@@ -169,7 +170,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
             params.put("goodsGroupSellOrderId", goodsGroupSellOrderId);
             EasyHttp.post("confirmGoodsRecieved")
                     .upJson(new JSONObject(params).toString())
-                    .execute(new SimpleCallBack<String>() {
+                    .execute(new SimpleCallBack<BaseEntity>() {
 
                         @Override
                         public void onError(ApiException e) {
@@ -178,7 +179,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onSuccess(String entity) {
+                        public void onSuccess(BaseEntity entity) {
                             setResult(RESULT_OK);
                             finish();
                         }
@@ -188,7 +189,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
             params.put("goodsGroupSellOrderId", goodsGroupSellOrderId);
             EasyHttp.post("askForGoodsReturn")
                     .upJson(new JSONObject(params).toString())
-                    .execute(new SimpleCallBack<String>() {
+                    .execute(new SimpleCallBack<BaseEntity>() {
 
                         @Override
                         public void onError(ApiException e) {
@@ -197,7 +198,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onSuccess(String entity) {
+                        public void onSuccess(BaseEntity entity) {
                             setResult(RESULT_OK);
                             finish();
                         }

@@ -52,15 +52,19 @@
             android:textColor="@color/orange1"
             android:textSize="16sp" />
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tv_service_need"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="服务需求:需要一名服务者修改冰箱柜和空调马桶的议题的服务"
-        android:textSize="15sp" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_service_need"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="42dp"
+            android:paddingRight="42dp"
+            android:text="服务需求:需要一名服务者修改冰箱柜和空调马桶的议题的服务"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,8 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingBottom="@dimen/dp_10"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="42dp"
+            android:paddingRight="42dp"
             android:paddingTop="@dimen/dp_10"
             android:text="下单时间：2017-12-21"
             android:textSize="15sp" />

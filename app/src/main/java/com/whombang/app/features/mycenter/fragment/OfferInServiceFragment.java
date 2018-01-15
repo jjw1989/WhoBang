@@ -161,4 +161,12 @@ public class OfferInServiceFragment extends BaseFragment implements OnRefreshLis
         Log.i("wwww", "onItemClick: "+serviceOrderId);
        // ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",serviceOrderId).navigation(mActivity);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Contents.REQUEST_STATION_GOODS) {
+            mRefreshLayout.autoRefresh();
+        }
+
+    }
 }

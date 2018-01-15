@@ -130,6 +130,7 @@ public class AwaitServiceFragment extends LazyFragment implements OnRefreshListe
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         MyServiceEntity.ServiceOrderListBean item= (MyServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
         Bundle bundle=new Bundle();
+        bundle.putInt("tag",1);
         bundle.putString("serviceOrderId",item.getServiceOrderId());
         bundle.putString("userId",item.getUserId());
         Intent intent=new Intent(getActivity(), MyServiceOrderDetailsActivity.class);

@@ -106,24 +106,30 @@
             android:textSize="16sp" />
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tv_service_need"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="服务需求:需要一名服务者修改冰箱柜和空调马桶的议题的服务"
-        android:textSize="15sp" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_service_need"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="服务需求:需要一名服务者修改冰箱柜和空调马桶的议题的服务"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_order_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="40dp"
         android:paddingBottom="@dimen/dp_10"
         android:text="订单编号："
         android:textSize="15sp" />
@@ -134,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingLeft="20dp"
+        android:paddingLeft="40dp"
         android:text="订单时间："
         android:textSize="15sp" />
     <View
@@ -172,5 +178,8 @@
             android:layout_toStartOf="@+id/btn_cancel"
             android:text="退货" />
     </RelativeLayout>
-
+<View
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"/>
 </LinearLayout>

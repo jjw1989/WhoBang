@@ -1,5 +1,6 @@
 package com.whombang.app.features.mycenter.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -17,11 +18,13 @@ import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.common.base.BaseFragment;
 import com.whombang.app.common.base.LazyFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
+import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.entity.MyServiceEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.features.mycenter.activity.MyServiceOrderDetailsActivity;
 
 import org.json.JSONObject;
 
@@ -48,6 +51,7 @@ public class FinishFragment extends LazyFragment implements OnRefreshListener,On
         mRefreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
 
         adapter = new AwaitServiceAdapter();
+        adapter.setOnItemClickListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(context, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -121,6 +125,22 @@ public class FinishFragment extends LazyFragment implements OnRefreshListener,On
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         MyServiceEntity.ServiceOrderListBean item= (MyServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
-        ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",item.getServiceOrderId()).withString("userId",item.getUserId()).navigation();
+        Bundle bundle=new Bundle();
+        bundle.putInt("tag",3);
+        bundle.putString("serviceOrderId",item.getServiceOrderId());
+        bundle.putString("userId",item.getUserId());
+        Intent intent=new Intent(getActivity(), MyServiceOrderDetailsActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Contents.REQUEST_STATION_GOODS,bundle);
+//        MyServiceEntity.ServiceOrderListBean item= (MyServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
+//        ARouter.getInstance().build("/myservice/orderdetails").withString("serviceOrderId",item.getServiceOrderId()).withString("userId",item.getUserId()).navigation();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Contents.REQUEST_STATION_GOODS) {
+            mRefreshLayout.autoRefresh();
+        }
+
     }
 }
