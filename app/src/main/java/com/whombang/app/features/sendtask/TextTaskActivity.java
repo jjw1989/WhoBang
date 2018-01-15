@@ -22,6 +22,9 @@ import com.whombang.app.mvp.component.DaggerTextTaskComponent;
 import com.whombang.app.mvp.module.TextTaskModule;
 import com.whombang.app.mvp.presenter.TextTaskPresenter;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -74,6 +77,7 @@ public class TextTaskActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        EventBus.getDefault().register(this);
         titleBar.setTitle(getString(R.string.issue_service));
         titleBar.addAction(new TitleBar.TextAction(getString(R.string.issue)) {
             @Override
@@ -92,7 +96,7 @@ public class TextTaskActivity extends BaseActivity {
         presenter.getUserDefaultAddress();
         updateView();
     }
-
+    @Subscribe
     private void updateView() {
         tvStationName.setText("收货人："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
         tvStationAddress.setText( "站点详情地址："+UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());

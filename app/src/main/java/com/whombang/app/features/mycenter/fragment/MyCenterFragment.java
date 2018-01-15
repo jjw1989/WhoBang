@@ -66,7 +66,7 @@ public class MyCenterFragment extends BaseFragment {
 
             @Override
             public void onClick(View v) {
-                ARouter.getInstance().build("/user/login").navigation();
+               // ARouter.getInstance().build("/user/login").navigation();
             }
         };
         BaseDelegateAdapter headAdapter = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper() , R.layout.item_work_banner, 1, ViewType.VIEW_TYPE_HEAD) {

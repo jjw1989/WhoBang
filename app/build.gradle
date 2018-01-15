@@ -95,5 +95,6 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.koushikdutta.ion:ion:2.1.9'
     compile 'com.alibaba:fastjson:1.2.44'
+    compile 'org.greenrobot:eventbus:3.1.1'
 
 }

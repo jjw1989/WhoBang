@@ -3,6 +3,7 @@ package com.whombang.app.features.sendtask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,12 +39,14 @@ import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
 import com.whombang.app.entity.StationEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.entity.event.EventAddress;
 import com.whombang.app.mvp.component.DaggerServicePhoneComponent;
 import com.whombang.app.mvp.component.DaggerStationServiceComponent;
 import com.whombang.app.mvp.module.ServicePhoneModule;
 import com.whombang.app.mvp.module.StationServiceModule;
 import com.whombang.app.mvp.presenter.StationServicePresenter;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -194,7 +197,9 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                         bundle.putString("stationName", item.getStationName());
                         bundle.putString("stationAddress", item.getStationAddress());
                         bundle.putString("stationPhone", item.getStationManagerTel());
-                        setResult(RESULT_OK);
+                        EventAddress eventAddress=new EventAddress(item.getStationName(),item.getStationAddress(),item.getStationManagerTel());
+                        EventBus.getDefault().post(eventAddress);
+                       // setResult(RESULT_OK);
                         finish();
                     }
                 });
