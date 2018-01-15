@@ -1,11 +1,13 @@
 package com.whombang.app.features.sendtask;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -60,8 +62,8 @@ import okhttp3.RequestBody;
  * 站点显示和选择
  */
 @Route(path = "/service/map")
-public class StationServiceActivity extends BaseActivity implements AMapLocationListener{
-   @BindView(R.id.service_map)
+public class StationServiceActivity extends BaseActivity implements AMapLocationListener {
+    @BindView(R.id.service_map)
     MapView mapView;
     private AMap aMap;
 
@@ -78,6 +80,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     //地图热点和热点列表同时存在的情况下和列表联动的MarkerItemMap
     private Map<Integer, MarkerItem> mMarkerItemMap = new HashMap<>();
     private int mLastClickPosition = -1;
+
     @Override
     public void initData(Bundle bundle) {
 
@@ -96,9 +99,9 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         titleBar.setTitle("选择站主");
-         mapView.onCreate(savedInstanceState);
-         initMapView();
-         presenter.requestStationInfo();
+        mapView.onCreate(savedInstanceState);
+        initMapView();
+        presenter.requestStationInfo();
     }
 
     private void initMapView() {
@@ -119,6 +122,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
         aMap.getUiSettings().setTiltGesturesEnabled(false);
         aMap.getUiSettings().setRotateGesturesEnabled(false);
     }
+
     /**
      * 获取定位坐标
      */
@@ -148,7 +152,6 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     }
 
 
-
     @Override
     public void doBusiness() {
         mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MarkerItem>() {
@@ -174,13 +177,25 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
         aMap.setInfoWindowAdapter(new AMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(final Marker marker) {
-                View mView=getLayoutInflater().inflate(R.layout.wb_infowindow_layout,null);
-                ImageView imgClose=mView.findViewById(R.id.img_close);
-                Button btnSwitch=mView.findViewById(R.id.btn_switch);
+                final MarkerItem item = mMarkerItemMap.get(mLastClickPosition);
+                View mView = getLayoutInflater().inflate(R.layout.wb_infowindow_layout, null);
+                ImageView imgClose = mView.findViewById(R.id.img_close);
+                Button btnSwitch = mView.findViewById(R.id.btn_switch);
+                TextView tvStationMapName = mView.findViewById(R.id.tv_station_map_name);
+                tvStationMapName.setText("站点的名字:" + item.getStationName());
+                TextView tvStationMapAddress = mView.findViewById(R.id.tv_station_map_address);
+                tvStationMapAddress.setText("站点的详情地址:" + item.getStationAddress());
+                TextView tvPhone = mView.findViewById(R.id.tv_station_map_phone);
+                tvPhone.setText("站点的电话:" + item.getStationManagerTel());
                 btnSwitch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.i("qazxc", "onClick: 122222222222222222222222222222");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("stationName", item.getStationName());
+                        bundle.putString("stationAddress", item.getStationAddress());
+                        bundle.putString("stationPhone", item.getStationManagerTel());
+                        setResult(RESULT_OK);
+                        finish();
                     }
                 });
                 imgClose.setOnClickListener(new View.OnClickListener() {
@@ -198,6 +213,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             }
         });
     }
+
     /**
      * 聚合点击
      */
@@ -236,44 +252,49 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
-        if(null != mlocationClient){
+        if (null != mlocationClient) {
             mlocationClient.onDestroy();
         }
     }
 
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
-            if (amapLocation != null
-                    && amapLocation.getErrorCode() == 0) {
-                LatLng latLng = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
-                //展示自定义定位小蓝点
-                if(locationMarker == null) {
-                    //首次定位
-                    locationMarker = aMap.addMarker(new MarkerOptions().position(latLng)
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_marker))
-                            .anchor(0.5f, 0.5f));
+        if (amapLocation != null
+                && amapLocation.getErrorCode() == 0) {
+            LatLng latLng = new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude());
+            //展示自定义定位小蓝点
+            if (locationMarker == null) {
+                //首次定位
+                locationMarker = aMap.addMarker(new MarkerOptions().position(latLng)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_marker))
+                        .anchor(0.5f, 0.5f));
 
-                    //首次定位,选择移动到地图中心点并修改级别到15级
-                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                }
+                //首次定位,选择移动到地图中心点并修改级别到15级
+                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            }
 
         }
     }
-    public void refreshStationToMap(List<StationEntity.StationInfoBean> entitys){
+
+    public void refreshStationToMap(List<StationEntity.StationInfoBean> entitys) {
         markerInfoList = new ArrayList<>();
-        for (StationEntity.StationInfoBean item:entitys){
+        for (StationEntity.StationInfoBean item : entitys) {
             String iconPath = "http://47.104.105.135:8080/WhomBangServer/static/station/station-icon.png";
             MarkerInfo markerInfo = new MarkerInfo();
             markerInfo.setMarkerIcon(iconPath);
             markerInfo.setMarkerLat(Double.parseDouble(item.getStationLatitude()));
             markerInfo.setMarkerLon(Double.parseDouble(item.getStationLongitude()));
-            markerInfo.setMarkerId(item.getStationId()+"");
+            markerInfo.setMarkerId(item.getStationId() + "");
             markerInfo.setMarkerName(item.getStationName());
+            markerInfo.setStationName(item.getStationName());
+            markerInfo.setStationAddress(item.getStationAddress());
+            markerInfo.setStationManagerTel(item.getStationManagerTel());
             markerInfoList.add(markerInfo);
         }
         List<MarkerItem> markerItemLists = markerItemLogic(markerInfoList);
         mClusterManager.addItems(markerItemLists);
     }
+
     /**
      * 组装高德需要的item
      */
@@ -286,6 +307,9 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             MarkerItem markerItem = new MarkerItem(latLng);
             markerItem.setMarkerIconUrl(markerInfo.getMarkerIcon());
             markerItem.setTitle(markerInfo.getMarkerName());
+            markerItem.setStationName(markerInfo.getStationName());
+            markerItem.setStationAddress(markerInfo.getStationAddress());
+            markerItem.setStationManagerTel(markerInfo.getStationManagerTel());
             items.add(markerItem);
             mMarkerItemMap.put(i, markerItem);
             builder.include(markerItem.getPosition());
@@ -300,10 +324,13 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
     public class MarkerItem implements ClusterItem {
         private final LatLng mPosition;
         private String markerIconUrl;
-        private int markerIconResource=-1;
-        private float markerIconDefault=0.0F;
+        private int markerIconResource = -1;
+        private float markerIconDefault = 0.0F;
         private String title;
         private String snippet;
+        private String stationName;
+        private String stationAddress;
+        private String stationManagerTel;
 
         public MarkerItem(LatLng latLng) {
             mPosition = latLng;
@@ -328,6 +355,30 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
 
         public void setSnippet(String snippet) {
             this.snippet = snippet;
+        }
+
+        public String getStationName() {
+            return stationName;
+        }
+
+        public void setStationName(String stationName) {
+            this.stationName = stationName;
+        }
+
+        public String getStationAddress() {
+            return stationAddress;
+        }
+
+        public void setStationAddress(String stationAddress) {
+            this.stationAddress = stationAddress;
+        }
+
+        public String getStationManagerTel() {
+            return stationManagerTel;
+        }
+
+        public void setStationManagerTel(String stationManagerTel) {
+            this.stationManagerTel = stationManagerTel;
         }
 
         @Override
