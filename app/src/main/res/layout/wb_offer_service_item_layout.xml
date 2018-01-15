@@ -81,7 +81,6 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_height="wrap_content">
 
         <TextView
@@ -92,8 +91,8 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
             android:text="发布服务者" />
 
         <TextView
@@ -118,8 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingBottom="@dimen/dp_10"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="45dp"
+            android:paddingRight="45dp"
             android:paddingTop="@dimen/dp_10"
             android:text="下单时间：2017-12-21"
             android:textSize="15sp" />
