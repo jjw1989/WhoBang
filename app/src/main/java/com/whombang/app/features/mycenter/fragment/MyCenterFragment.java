@@ -82,7 +82,7 @@ public class MyCenterFragment extends BaseFragment {
                  imgSet.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View view) {
-                        // ARouter.getInstance().build("/my/userset").navigation();
+                         ARouter.getInstance().build("/my/userset").navigation();
                      }
                  });
             }

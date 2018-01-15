@@ -96,7 +96,6 @@ public class OfferAwaitServiceFragment extends BaseFragment implements OnRefresh
         params.put("orderStatus", 1);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
-
         EasyHttp.post("getProviderUserOrderServiceList")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<OfferServiceEntity>() {

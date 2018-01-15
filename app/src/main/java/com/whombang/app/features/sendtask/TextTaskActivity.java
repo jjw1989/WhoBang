@@ -18,6 +18,7 @@ import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.entity.DefaultAddressEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.entity.event.EventAddress;
 import com.whombang.app.mvp.component.DaggerTextTaskComponent;
 import com.whombang.app.mvp.module.TextTaskModule;
 import com.whombang.app.mvp.presenter.TextTaskPresenter;
@@ -96,11 +97,16 @@ public class TextTaskActivity extends BaseActivity {
         presenter.getUserDefaultAddress();
         updateView();
     }
-    @Subscribe
     private void updateView() {
         tvStationName.setText("收货人："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
         tvStationAddress.setText( "站点详情地址："+UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
         tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
+    }
+    @Subscribe
+    public void updateMapStation(EventAddress eventAddress) {
+        tvStationName.setText("收货人："+eventAddress.stationName);
+        tvStationAddress.setText( "站点详情地址："+eventAddress.stationAddress);
+        tvStationPhone.setText(eventAddress.stationPhone);
     }
 
     @Override

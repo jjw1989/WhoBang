@@ -94,7 +94,7 @@ public class OfferInServiceFragment extends BaseFragment implements OnRefreshLis
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mActivity).getStationInfo().getStationId());
+        params.put("inuserId", UserLocalData.getUserInfo(mActivity).getUserInfo().getUserId());
         params.put("orderStatus", 2);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//

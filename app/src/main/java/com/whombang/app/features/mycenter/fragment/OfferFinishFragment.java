@@ -91,7 +91,7 @@ public class OfferFinishFragment extends BaseFragment implements OnRefreshListen
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mActivity).getStationInfo().getStationId());
+        params.put("inUserId", UserLocalData.getUserInfo(mActivity).getUserInfo().getUserId());
         params.put("orderStatus", 3);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
@@ -119,7 +119,7 @@ public class OfferFinishFragment extends BaseFragment implements OnRefreshListen
     public void onRefresh(RefreshLayout refreshlayout) {
         pageNum = 1;
         final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mActivity).getStationInfo().getStationId());
+        params.put("inUserId", UserLocalData.getUserInfo(mActivity).getUserInfo().getUserId());
         params.put("orderStatus", 3);
         params.put("pageSize", 20);
         params.put("currentPageNum", 1);//

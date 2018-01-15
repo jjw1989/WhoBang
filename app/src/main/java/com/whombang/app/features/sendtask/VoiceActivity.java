@@ -34,10 +34,13 @@ import com.whombang.app.common.utils.JsonParser;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.entity.DefaultAddressEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.entity.event.EventAddress;
 import com.whombang.app.mvp.component.DaggerVoiceComponent;
 import com.whombang.app.mvp.module.VoiceModule;
 import com.whombang.app.mvp.presenter.VoicePresenter;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -129,6 +132,7 @@ public class VoiceActivity extends BaseActivity {
         presenter.getUserDefaultAddress();
         initVoice();
         updateStationView();
+        EventBus.getDefault().register(this);
     }
 
     private void initVoice() {
@@ -428,6 +432,12 @@ public class VoiceActivity extends BaseActivity {
         tvStationName.setText("收货人："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
         tvStationAddress.setText( "站点详情地址："+UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
         tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
+    }
+    @Subscribe
+    public void updateMapStation(EventAddress eventAddress) {
+        tvStationName.setText("收货人："+eventAddress.stationName);
+        tvStationAddress.setText( "站点详情地址："+eventAddress.stationAddress);
+        tvStationPhone.setText(eventAddress.stationPhone);
     }
     public void updataAddress(DefaultAddressEntity entity) {
         address=entity.getUserDefaultAddress().getUserAddressDetail();

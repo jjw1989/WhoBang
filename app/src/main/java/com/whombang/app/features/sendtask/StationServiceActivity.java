@@ -193,10 +193,6 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                 btnSwitch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("stationName", item.getStationName());
-                        bundle.putString("stationAddress", item.getStationAddress());
-                        bundle.putString("stationPhone", item.getStationManagerTel());
                         EventAddress eventAddress=new EventAddress(item.getStationName(),item.getStationAddress(),item.getStationManagerTel());
                         EventBus.getDefault().post(eventAddress);
                        // setResult(RESULT_OK);
@@ -291,7 +287,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             markerInfo.setMarkerLon(Double.parseDouble(item.getStationLongitude()));
             markerInfo.setMarkerId(item.getStationId() + "");
             markerInfo.setMarkerName(item.getStationName());
-            markerInfo.setStationName(item.getStationName());
+            markerInfo.setStationName(item.getStationManagerName());
             markerInfo.setStationAddress(item.getStationAddress());
             markerInfo.setStationManagerTel(item.getStationManagerTel());
             markerInfoList.add(markerInfo);

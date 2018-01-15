@@ -26,7 +26,10 @@ import com.whombang.app.common.view.spinner.NiceSpinner;
 import com.whombang.app.entity.DefaultAddressEntity;
 import com.whombang.app.entity.GroupingDesEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.entity.event.EventAddress;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -88,7 +91,8 @@ public class ShopOrderActivity extends BaseActivity {
     String goodsGroupSellReceiverTel = "";
     String goodsGroupSellReceiverAddress = "";
     String goodsGroupSellReceiverName = "";
-
+    String goodsGroupSellStationMasterName="";
+    String goodsGroupSellStationTel="";
     @Override
     protected int bindLayout() {
         return R.layout.wb_shoporder_layout;
@@ -117,6 +121,9 @@ public class ShopOrderActivity extends BaseActivity {
         updateView();
         tvUnitPrice.setText("单价:"+goodsGroupSellPrice);
         tvTotalPrices.setText("总价："+goodsGroupSellPrice);
+        EventBus.getDefault().register(this);
+        goodsGroupSellStationMasterName=UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerName();
+        goodsGroupSellStationTel=UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerTel();
     }
 
     @Override
@@ -225,8 +232,8 @@ public class ShopOrderActivity extends BaseActivity {
         params.put("goodsGroupSellReceiverTel", goodsGroupSellReceiverTel);
         params.put("goodsGroupSellReceiverAddress", goodsGroupSellReceiverAddress);
         params.put("goodsGroupSellReceiverName",goodsGroupSellReceiverName);
-        params.put("goodsGroupSellStationMasterName", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerName());
-        params.put("goodsGroupSellStationTel", UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerTel());
+        params.put("goodsGroupSellStationMasterName", goodsGroupSellStationMasterName);
+        params.put("goodsGroupSellStationTel", goodsGroupSellStationTel);
         EasyHttp.post("createNewGoodsGroupSellOrder")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<BaseEntity>() {
@@ -320,7 +327,14 @@ public class ShopOrderActivity extends BaseActivity {
         tvStationAddress.setText("站主地址：" + UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
         tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
     }
-
+    @Subscribe
+    public void updateMapStation(EventAddress eventAddress) {
+        goodsGroupSellStationMasterName=eventAddress.stationName;
+        goodsGroupSellStationTel=eventAddress.stationPhone;
+        tvStationName.setText("收货人："+eventAddress.stationName);
+        tvStationAddress.setText( "站点详情地址："+eventAddress.stationAddress);
+        tvStationPhone.setText(eventAddress.stationPhone);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
