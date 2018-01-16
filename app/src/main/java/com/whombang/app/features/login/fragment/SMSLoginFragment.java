@@ -153,6 +153,7 @@ public class SMSLoginFragment extends BaseFragment {
             public void accept(Long aLong) throws Exception {
                 if (aLong==0){
                     btnCode.setEnabled(true);
+                    btnCode.setText("获取验证码");
                 }
                 btnCode.setText("还剩余"+aLong+"秒");
 

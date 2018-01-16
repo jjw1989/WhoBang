@@ -131,6 +131,7 @@ public class RegisterActivity extends BaseActivity implements KeyboardWatcher.So
                 String content=String.format(getString(R.string.residue),aLong);
                 if(aLong==0){
                     btnCode.setEnabled(true);
+                    btnCode.setText("获取验证码");
                 }
                 btnCode.setText(content);
             }

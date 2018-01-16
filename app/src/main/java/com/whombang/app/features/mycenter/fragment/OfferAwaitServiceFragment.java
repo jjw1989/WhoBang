@@ -50,7 +50,6 @@ public class OfferAwaitServiceFragment extends LazyFragment implements OnRefresh
     RefreshLayout mRefreshLayout;
     private int pageNum=1;
     private OfferServiceAdapter adapter;
-    private List<OfferServiceEntity.ServiceOrderListBean> serviceOrderList=new ArrayList<>();
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {
         super.onCreateViewLazy(savedInstanceState);
@@ -125,7 +124,6 @@ public class OfferAwaitServiceFragment extends LazyFragment implements OnRefresh
 
                     @Override
                     public void onSuccess(OfferServiceEntity entity) {
-                        serviceOrderList.addAll(entity.getServiceOrderList());
                         adapter.setNewData(entity.getServiceOrderList());
                         mRefreshLayout.finishRefresh();
                         pageNum++;
@@ -136,7 +134,7 @@ public class OfferAwaitServiceFragment extends LazyFragment implements OnRefresh
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        OfferServiceEntity.ServiceOrderListBean item=serviceOrderList.get(position);
+        OfferServiceEntity.ServiceOrderListBean item= (OfferServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
         String serviceOrderId=item.getServiceOrderId();
         Bundle bundle=new Bundle();
         bundle.putString("serviceOrderId",serviceOrderId);

@@ -135,10 +135,12 @@ public class ForgetActivity extends BaseActivity {
             @Override
             public void accept(Long aLong) throws Exception {
                 String content=String.format(getString(R.string.residue),aLong);
+                btnCode.setText(content);
                 if(aLong==0){
                     btnCode.setEnabled(true);
+                    btnCode.setText("获取验证码");
                 }
-                btnCode.setText(content);
+
             }
         });
     }

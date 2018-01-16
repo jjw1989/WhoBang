@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,17 +44,24 @@ public class MyServiceOrderDetailsActivity extends BaseActivity {
     @BindView(R.id.tv_service_need)
     TextView tvServiceNeed;
 
-
     @BindView(R.id.tv_order_code)
     TextView tvOrderCode;
     @BindView(R.id.tv_order_time)
     TextView tvOrderTime;
     @BindView(R.id.btn_order)
     Button btnOrder;
+    @BindView(R.id.rlt_service)
+    RelativeLayout rltService;
+    @BindView(R.id.tv_server_name)
+    TextView tvServiceName;
+    @BindView(R.id.tv_server_phone)
+    TextView tvServicePhone;
+
     String serviceOrderId;
     String userId;
     int tag;
     ServiceDetailsEntity.UserorderserviceInfoBean infoBean;
+
     @Override
     protected int bindLayout() {
         return R.layout.wb_my_service_order_details_layout;
@@ -108,7 +116,7 @@ public class MyServiceOrderDetailsActivity extends BaseActivity {
      * @param
      */
     private void upView(ServiceDetailsEntity.UserorderserviceInfoBean entity) {
-        this.infoBean=entity;
+        this.infoBean = entity;
         tvConsignee.setText("服务需求者：" + entity.getDemanderName());
         tvAddress.setText("服务需求者地址：" + entity.getCurrentLocation());
         tvConsigneePhone.setText(entity.getContact());
@@ -120,16 +128,23 @@ public class MyServiceOrderDetailsActivity extends BaseActivity {
 
         if (entity.getServiceOrderStatus() == 1) {
             btnOrder.setText("取消订单");
+            rltService.setVisibility(View.GONE);
         } else if (entity.getServiceOrderStatus() == 2) {
             btnOrder.setText("确认完成");
-        }else if(entity.getServiceOrderStatus()==3){
+            rltService.setVisibility(View.VISIBLE);
+            tvServiceName.setText("服务者:"+entity.getUserRealName());
+            tvServicePhone.setText(entity.getPhone());
+        } else if (entity.getServiceOrderStatus() == 3) {
             btnOrder.setVisibility(View.GONE);
+            rltService.setVisibility(View.VISIBLE);
+            tvServiceName.setText("服务者:"+entity.getUserRealName());
+            tvServicePhone.setText(entity.getPhone());
         }
     }
 
     @OnClick(R.id.btn_order)
     public void onStartOrder() {
-        if (infoBean.getServiceOrderStatus()==1){
+        if (infoBean.getServiceOrderStatus() == 1) {
             final Map<String, Object> params = new HashMap<>();
             params.put("serviceOrderId", serviceOrderId);
             EasyHttp.post("userCancelOrderService")
@@ -148,7 +163,7 @@ public class MyServiceOrderDetailsActivity extends BaseActivity {
                             finish();
                         }
                     });
-        }else if(infoBean.getServiceOrderStatus()==2){
+        } else if (infoBean.getServiceOrderStatus() == 2) {
             final Map<String, Object> params = new HashMap<>();
             params.put("serviceOrderId", serviceOrderId);
             EasyHttp.post("finishUserUpdateOrderService")
@@ -167,8 +182,8 @@ public class MyServiceOrderDetailsActivity extends BaseActivity {
                             finish();
                         }
                     });
-        }else if (infoBean.getServiceOrderStatus()==3){
-            ARouter.getInstance().build("/server/evalute").withString("userId",infoBean.getUserId()).withString("serviceOrderId",infoBean.getServiceOrderId()).navigation(mContext);
+        } else if (infoBean.getServiceOrderStatus() == 3) {
+            ARouter.getInstance().build("/server/evalute").withString("userId", infoBean.getUserId()).withString("serviceOrderId", infoBean.getServiceOrderId()).navigation(mContext);
             setResult(RESULT_OK);
             finish();
         }

@@ -19,6 +19,7 @@ import com.whombang.app.common.view.imageview.ExpandImageView;
 import com.whombang.app.entity.MyServiceEntity;
 import com.whombang.app.entity.ServiceDetailsEntity;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.features.login.LoginActivity;
 
 import org.json.JSONObject;
 
@@ -84,6 +85,8 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
      */
     private void requestOrderDetails() {
         final Map<String, Object> params = new HashMap<>();
+        Log.i("qwas", "requestOrderDetails:serviceOrderId= "+serviceOrderId);
+        Log.i("qwas", "requestOrderDetails:userId= "+userId);
         params.put("serviceOrderId", serviceOrderId);
         params.put("userId",userId);
 
@@ -126,7 +129,7 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
             btnOrder.setText("接单");
         } else if (entity.getServiceOrderStatus() == 2) {
             btnOrder.setText("确认完成");
-        }else if (entity.getServiceOrderStatus()==4){
+        }else if (entity.getServiceOrderStatus()==3){
             btnOrder.setVisibility(View.GONE);
         }
 

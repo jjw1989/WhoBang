@@ -49,8 +49,6 @@ public class OfferFinishFragment extends LazyFragment implements OnRefreshListen
     RefreshLayout mRefreshLayout;
     private int pageNum=1;
     private OfferServiceAdapter adapter;
-    private List<OfferServiceEntity.ServiceOrderListBean> serviceOrderList=new ArrayList<>();
-
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {
         super.onCreateViewLazy(savedInstanceState);
@@ -85,7 +83,7 @@ public class OfferFinishFragment extends LazyFragment implements OnRefreshListen
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
 
-        EasyHttp.post("getProviderUserOrderServiceList")
+        EasyHttp.post("getProviderUserOrderServiceByStatusList")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<OfferServiceEntity>() {
 
@@ -113,7 +111,7 @@ public class OfferFinishFragment extends LazyFragment implements OnRefreshListen
         params.put("pageSize", 20);
         params.put("currentPageNum", 1);//
 
-        EasyHttp.post("getProviderUserOrderServiceList")
+        EasyHttp.post("getProviderUserOrderServiceByStatusList")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<OfferServiceEntity>() {
 
@@ -125,7 +123,6 @@ public class OfferFinishFragment extends LazyFragment implements OnRefreshListen
 
                     @Override
                     public void onSuccess(OfferServiceEntity entity) {
-                        serviceOrderList.addAll(entity.getServiceOrderList());
                         adapter.setNewData(entity.getServiceOrderList());
                         mRefreshLayout.finishRefresh();
                         pageNum++;
@@ -136,7 +133,7 @@ public class OfferFinishFragment extends LazyFragment implements OnRefreshListen
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        OfferServiceEntity.ServiceOrderListBean item=serviceOrderList.get(position);
+        OfferServiceEntity.ServiceOrderListBean item= (OfferServiceEntity.ServiceOrderListBean) adapter.getData().get(position);
         String serviceOrderId=item.getServiceOrderId();
         Bundle bundle=new Bundle();
         bundle.putString("serviceOrderId",serviceOrderId);

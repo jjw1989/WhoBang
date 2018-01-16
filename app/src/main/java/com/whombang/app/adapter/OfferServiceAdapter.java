@@ -37,7 +37,7 @@ public class OfferServiceAdapter extends BaseQuickAdapter<OfferServiceEntity.Ser
             return "等待接单";
         }else if (station==2){
             return "服务中";
-        }else if(station==4){
+        }else if(station==3){
             return "已完成";
         }
         return "";
