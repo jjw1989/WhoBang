@@ -96,6 +96,7 @@
             android:drawableLeft="@mipmap/icon_edit_32"
             android:gravity="center"
             android:paddingLeft="10dp"
+            android:visibility="invisible"
             android:paddingRight="10dp"
             android:text="  编辑"
             android:textSize="14sp" />
