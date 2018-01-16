@@ -58,6 +58,7 @@ import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -125,7 +126,19 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
         aMap.getUiSettings().setTiltGesturesEnabled(false);
         aMap.getUiSettings().setRotateGesturesEnabled(false);
     }
+    /**
+     * 点击开始定位
+     */
+    @OnClick(R.id.img_position)
+    public void locationPosition() {
+      Toast.makeText(mContext,"正在定位中....",Toast.LENGTH_SHORT).show();
+        if (mlocationClient == null) {
+            initLocation();
+        } else {
+            mlocationClient.startLocation();
+        }
 
+    }
     /**
      * 获取定位坐标
      */
@@ -270,9 +283,9 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                         .anchor(0.5f, 0.5f));
 
                 //首次定位,选择移动到地图中心点并修改级别到15级
-                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+              //  aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
             }
-
+            aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         }
     }
 
