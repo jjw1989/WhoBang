@@ -93,6 +93,7 @@ public class ShopOrderActivity extends BaseActivity {
     String goodsGroupSellReceiverName = "";
     String goodsGroupSellStationMasterName="";
     String goodsGroupSellStationTel="";
+    int stationId;
     @Override
     protected int bindLayout() {
         return R.layout.wb_shoporder_layout;
@@ -124,6 +125,7 @@ public class ShopOrderActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         goodsGroupSellStationMasterName=UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerName();
         goodsGroupSellStationTel=UserLocalData.getUserInfo(this).getStationManagerInfo().getStationManagerTel();
+        stationId=UserLocalData.getUserInfo(mContext).getStationInfo().getStationId();
     }
 
     @Override
@@ -329,6 +331,7 @@ public class ShopOrderActivity extends BaseActivity {
     }
     @Subscribe
     public void updateMapStation(EventAddress eventAddress) {
+        stationId=eventAddress.stationId;
         goodsGroupSellStationMasterName=eventAddress.stationName;
         goodsGroupSellStationTel=eventAddress.stationPhone;
         tvStationName.setText("收货人："+eventAddress.stationName);

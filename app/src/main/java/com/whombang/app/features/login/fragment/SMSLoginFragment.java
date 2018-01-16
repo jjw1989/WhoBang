@@ -54,6 +54,7 @@ public class SMSLoginFragment extends BaseFragment {
     EditText etPhone;
     @BindView(R.id.et_new_sms)
     EditText etSms;
+
     @Override
     protected int bindLayout() {
         return R.layout.wb_smslogin_layout;
@@ -78,8 +79,9 @@ public class SMSLoginFragment extends BaseFragment {
     public void doBusiness() {
 
     }
+
     @OnClick(R.id.btn_login)
-    public void onStartLogin(){
+    public void onStartLogin() {
         String phone = etPhone.getText().toString();
         String sms = etSms.getText().toString();
         if (login(phone)) {
@@ -115,11 +117,13 @@ public class SMSLoginFragment extends BaseFragment {
                     });
         }
     }
-        /**
-         * 登录校验
-         * @param phone
-         * @return
-         */
+
+    /**
+     * 登录校验
+     *
+     * @param phone
+     * @return
+     */
     private boolean login(String phone) {
         if (!Validator.isMobile(phone)) {
             Toast.makeText(mActivity, "请输入正确格式的手机号", Toast.LENGTH_SHORT).show();
@@ -129,9 +133,10 @@ public class SMSLoginFragment extends BaseFragment {
 
         return true;
     }
-    @OnClick({R.id.tv_register,R.id.tv_forget,R.id.btn_sms_code})
-    public void onAllClick(View v){
-        switch (v.getId()){
+
+    @OnClick({R.id.tv_register, R.id.tv_forget, R.id.btn_sms_code})
+    public void onAllClick(View v) {
+        switch (v.getId()) {
             case R.id.tv_register:
                 ARouter.getInstance().build("/user/register").navigation();
                 break;
@@ -148,15 +153,14 @@ public class SMSLoginFragment extends BaseFragment {
 
     private void onSmsCode() {
         requestSms();
-       RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
+        RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                if (aLong==0){
+                btnCode.setText("还剩余" + aLong + "秒");
+                if (aLong == 0) {
                     btnCode.setEnabled(true);
                     btnCode.setText("获取验证码");
                 }
-                btnCode.setText("还剩余"+aLong+"秒");
-
             }
         });
     }
@@ -177,7 +181,7 @@ public class SMSLoginFragment extends BaseFragment {
 
                     @Override
                     public void onSuccess(BaseEntity entity) {
-                       // Log.i("qazx", "onSuccess: sms="+entity);
+                        // Log.i("qazx", "onSuccess: sms="+entity);
                     }
                 });
     }
