@@ -57,4 +57,12 @@
         <item name="colorControlActivated">@color/orange1</item>
         <item name="colorControlNormal">@color/color_999999</item>
     </style>
+
+    <style name="myRatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:minHeight">50dip</item>
+        <item name="android:maxHeight">50dip</item>
+        <item name="android:thumb">@null</item>
+        <item name="android:isIndicator">true</item>
+    </style>
 </resources>

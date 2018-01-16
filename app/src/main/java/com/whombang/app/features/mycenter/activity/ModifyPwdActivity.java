@@ -11,21 +11,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.entity.BaseEntity;
+import com.whombang.app.common.net.EasyHttp;
+import com.whombang.app.common.net.callback.SimpleCallBack;
+import com.whombang.app.common.net.exception.ApiException;
+import com.whombang.app.common.utils.DESUtil;
+import com.whombang.app.common.utils.RxJavaUtil;
 import com.whombang.app.common.view.KeyboardWatcher;
 import com.whombang.app.common.view.TitleBar;
 import com.whombang.app.common.view.hideime.HideIMEUtil;
 import com.whombang.app.common.view.keyboard.KeyboardLayout;
 import com.whombang.app.common.view.keyboard.SoftKeyInputHidWidget;
 import com.whombang.app.entity.UserLocalData;
+import com.whombang.app.features.login.ForgetActivity;
 import com.whombang.app.mvp.component.DaggerModifyPwdComponent;
 import com.whombang.app.mvp.module.ModifyPwdModule;
 import com.whombang.app.mvp.presenter.ModifyPwdPresenter;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 /**
  * 修改密码
@@ -50,6 +65,8 @@ public class ModifyPwdActivity extends BaseActivity  {
     ScrollView scrollView;
     @BindView(R.id.main_ll)
     KeyboardLayout keyboardLayout;
+    @BindView(R.id.btn_forget_code)
+    Button btnCode;
     @Override
     protected int bindLayout() {
         return R.layout.wb_modify_pwd_layout;
@@ -110,6 +127,49 @@ public class ModifyPwdActivity extends BaseActivity  {
     public void doBusiness() {
 
     }
+    @OnClick(R.id.btn_forget_code)
+    public void requestCode(View v) {
+        switch (v.getId()){
+            case R.id.btn_forget_code:
+                btnCode.setEnabled(false);
+                onSmsCode();
+                break;
+        }
+    }
+    private void onSmsCode() {
+        requestSms();
+        RxJavaUtil.countdown(59).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                String content=String.format(getString(R.string.residue),aLong);
+                if(aLong==0){
+                    btnCode.setEnabled(true);
+                }
+                btnCode.setText(content);
+            }
+        });
+    }
 
+    private void requestSms() {
+        String telNumEncrypted = DESUtil.encrypt(etPhone.getText().toString().trim(), "80f37a994f8d426c85e5b4d2a5f30350");
+        Map<String, String> params = new HashMap<>();
+        params.put("userTel", telNumEncrypted);
+        EasyHttp.post("sendSMS")
+                .upJson(new JSONObject(params).toString())
+                .execute(new SimpleCallBack<BaseEntity>() {
+
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseEntity entity) {
+                        // Log.i("qazx", "onSuccess: sms="+entity);
+                        ARouter.getInstance().build("/user/login").withTransition(R.anim.push_left_in, R.anim.push_right_out).navigation(ModifyPwdActivity.this);
+                    }
+                });
+    }
 
 }

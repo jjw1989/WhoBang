@@ -137,6 +137,7 @@
     <RelativeLayout
         android:id="@+id/rlt_modify_sex"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:background="@color/white"
         android:layout_height="50dp">
 

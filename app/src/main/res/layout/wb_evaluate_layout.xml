@@ -3,23 +3,152 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/bg"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     android:orientation="vertical"
     tools:context="com.whombang.app.features.mycenter.activity.EvaluateActivity">
 
-    <include layout="@layout/wb_titlebar_layout"
-        android:id="@+id/top"/>
+    <include
+        android:id="@+id/top"
+        layout="@layout/wb_titlebar_layout" />
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_margin="@dimen/dp_10"
-        android:layout_below="@+id/top"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
+        android:layout_below="@+id/top"
+        android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rlt_top"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginStart="13dp"
+                    app:srcCompat="@mipmap/tubiao" />
+
+                <TextView
+                    android:id="@+id/tv_station_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_toEndOf="@+id/imageView11"
+                    android:layout_toRightOf="@+id/imageView11"
+                    android:text="站主名字"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_service_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/tv_station_name"
+                    android:layout_marginEnd="11dp"
+                    android:visibility="gone"
+                    android:layout_marginRight="11dp"
+                    android:text="服务状态"
+                    android:textColor="@color/orange1"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlt_top"
+                android:layout_marginBottom="@dimen/dp_10">
+
+                <com.whombang.app.common.view.imageview.ExpandImageView
+                    android:id="@+id/img_goods"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginStart="18dp"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tv_goods_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_toEndOf="@+id/img_goods"
+                    android:layout_toLeftOf="@+id/tv_unit_price"
+                    android:layout_toRightOf="@+id/img_goods"
+                    android:layout_toStartOf="@+id/tv_unit_price"
+                    android:text="TextView1"
+                    android:textSize="16sp" />
+                <!---->
+
+                <TextView
+                    android:id="@+id/tv_unit_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/tv_goods_name"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="TextView"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_goods_des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_goods_name"
+                    android:layout_alignStart="@+id/tv_goods_name"
+                    android:layout_below="@+id/tv_goods_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@+id/tv_unit_price"
+                    android:layout_toStartOf="@+id/tv_unit_price"
+                    android:text="TextView11"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_goods_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_unit_price"
+                    android:layout_alignStart="@+id/tv_unit_price"
+                    android:layout_alignTop="@+id/tv_goods_des"
+                    android:text="TextView"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_prices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/img_goods"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_goods_num"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="TextView"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
@@ -35,14 +164,14 @@
 
     <EditText
         android:id="@+id/et_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_below="@+id/ratingBar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBar"
         android:layout_margin="30dp"
-        android:hint="说说你的感受！"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/edittext_bg"
-        android:minHeight="200dp"
         android:gravity="top|left"
-        android:layout_height="wrap_content" />
+        android:hint="说说你的感受！"
+        android:minHeight="200dp" />
 
 </RelativeLayout>

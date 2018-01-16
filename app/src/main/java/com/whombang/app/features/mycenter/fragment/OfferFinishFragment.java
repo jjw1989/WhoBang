@@ -45,9 +45,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
  * 公共服务列表：已完成
  */
 public class OfferFinishFragment extends LazyFragment implements OnRefreshListener,OnLoadmoreListener,BaseQuickAdapter.OnItemClickListener{
-    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     private int pageNum=1;
     private OfferServiceAdapter adapter;
@@ -57,6 +55,8 @@ public class OfferFinishFragment extends LazyFragment implements OnRefreshListen
     protected void onCreateViewLazy(Bundle savedInstanceState) {
         super.onCreateViewLazy(savedInstanceState);
         setContentView(R.layout.wb_offer_finish_layout);
+        mRecyclerView= (RecyclerView) findViewById(R.id.recyclerView);
+        mRefreshLayout= (RefreshLayout) findViewById(R.id.refreshLayout);
         initView();
     }
 

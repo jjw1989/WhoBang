@@ -1,12 +1,14 @@
 package com.whombang.app.features.mycenter.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
 import com.whombang.app.common.entity.BaseEntity;
@@ -35,6 +37,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
     TextView tvConsignee;
     @BindView(R.id.tv_consignee_phone)
     TextView tvConsigneePhone;
+
     @BindView(R.id.img_goods)
     ExpandImageView expandImageView;
     @BindView(R.id.tv_goods_name)
@@ -110,6 +113,7 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
         tvAddress.setText("详情地址:" + entity.getGoodsGroupSellReceiverAddress());
         tvConsignee.setText("收货人:" + entity.getGoodsGroupSellReceiverName());
         tvConsigneePhone.setText(entity.getGoodsGroupSellReceiverTel());
+
         expandImageView.setImageURI(entity.getGoodsGroupSellTitleImgUrl());
         tvGoodsName.setText(entity.getStationName());
         tvServiceStatus.setText(entity.getStatusStr());
@@ -119,13 +123,15 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
         tvTotalPrices.setText("共" + entity.getGoodsGroupSellOrderAmount() + "件商品 合计：￥" + entity.getGoodsGroupSellPayTotalMoney());
         tvOrderCode.setText("订单编号:" + entity.getOrderId());
         tvOrderTime.setText("下单时间:" + entity.getGoodsGroupSellOrderTime());
+        Log.i("qazxc", "upView: ="+entity.getGoodsGroupSellOrderStatus());
         if (entity.getGoodsGroupSellOrderStatus() == 1) {
             btnCancel.setText("取消订单");
         } else if (entity.getGoodsGroupSellOrderStatus() == 8) {
             btnCancel.setText("确认收货");
         }else if (entity.getGoodsGroupSellOrderStatus()==3){
             btnCancel.setText("退货");
-           // btnSalesReturn.setVisibility(View.VISIBLE);
+            btnSalesReturn.setText("去评论");
+            btnSalesReturn.setVisibility(View.VISIBLE);
         }
         if (entity.getGoodsGroupSellOrderStatus() == 1 || entity.getGoodsGroupSellOrderStatus() == 8|| entity.getGoodsGroupSellOrderStatus()==3) {
             btnCancel.setVisibility(View.VISIBLE);
@@ -199,5 +205,10 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
                         }
                     });
         }
+    }
+
+    @OnClick(R.id.btn_sales_return)
+    public void sendEvaluate(){
+        ARouter.getInstance().build("/server/evalute").withString("goodsGroupSellOrderId",goodsGroupSellOrderId).withString("userId",userId).navigation(mContext);
     }
 }
