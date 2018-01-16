@@ -167,7 +167,6 @@ public class ModifyPwdActivity extends BaseActivity  {
                     @Override
                     public void onSuccess(BaseEntity entity) {
                         // Log.i("qazx", "onSuccess: sms="+entity);
-                        ARouter.getInstance().build("/user/login").withTransition(R.anim.push_left_in, R.anim.push_right_out).navigation(ModifyPwdActivity.this);
                     }
                 });
     }

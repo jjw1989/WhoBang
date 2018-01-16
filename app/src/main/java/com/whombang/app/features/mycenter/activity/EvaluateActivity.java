@@ -2,6 +2,7 @@ package com.whombang.app.features.mycenter.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -50,7 +51,7 @@ public class EvaluateActivity extends BaseActivity {
     RatingBar ratingBar;
     String userId;
     String goodsGroupSellOrderId;
-
+    int commentStarLevel=1;
     @Override
     protected int bindLayout() {
         return R.layout.wb_evaluate_layout;
@@ -115,10 +116,10 @@ public class EvaluateActivity extends BaseActivity {
 
     private void addEvaluate() {
         final Map<String, Object> params = new HashMap<>();
-        params.put("userId", userId);
         params.put("goodsGroupSellOrderId", goodsGroupSellOrderId);
-        params.put("evaluationContent ", etContent.getText().toString());
-        EasyHttp.post("addServiceOrderEvaluationInfo")
+        params.put("commentContent", etContent.getText().toString());
+        params.put("commentStarLevel",commentStarLevel );
+        EasyHttp.post("createGoodsComment")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<BaseEntity>() {
 
@@ -137,6 +138,12 @@ public class EvaluateActivity extends BaseActivity {
 
     @Override
     public void doBusiness() {
-
+         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+             @Override
+             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                 commentStarLevel= (int) rating;
+                 Log.i("qazxc", "onRatingChanged: ="+commentStarLevel);
+             }
+         });
     }
 }

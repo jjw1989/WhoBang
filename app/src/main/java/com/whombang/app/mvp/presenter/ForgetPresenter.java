@@ -53,7 +53,6 @@ public class ForgetPresenter {
             }
         };
         Map<String,String> params=new HashMap<>();
-        params.put("userId", UserLocalData.getUserInfo(forgetActivity).getUserInfo().getUserId());
         params.put("userTel",phone);
         params.put("smsCode",code);
         params.put("passWord",password);
@@ -63,7 +62,7 @@ public class ForgetPresenter {
 
                     @Override
                     public void onSuccess(UserInfoEntity userInfoEntity) {
-                        ARouter.getInstance().build("/user/login").withTransition(R.anim.push_left_in, R.anim.push_right_out).navigation(forgetActivity);
+                        ARouter.getInstance().build("/user/login").withTransition(R.anim.push_right_in, R.anim.push_left_out).navigation(forgetActivity);
                     }
 
                     @Override
