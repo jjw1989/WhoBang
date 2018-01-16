@@ -19,6 +19,7 @@ import com.whombang.app.R;
 import com.whombang.app.adapter.AwaitServiceAdapter;
 import com.whombang.app.adapter.OfferServiceAdapter;
 import com.whombang.app.common.base.BaseFragment;
+import com.whombang.app.common.base.LazyFragment;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
 import com.whombang.app.common.constants.Contents;
 import com.whombang.app.common.net.EasyHttp;
@@ -44,7 +45,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 /**
  * 提供服务列表：等待服务
  */
-public class OfferAwaitServiceFragment extends BaseFragment implements OnRefreshListener,OnLoadmoreListener,BaseQuickAdapter.OnItemClickListener{
+public class OfferAwaitServiceFragment extends LazyFragment implements OnRefreshListener,OnLoadmoreListener,BaseQuickAdapter.OnItemClickListener{
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
@@ -53,35 +54,23 @@ public class OfferAwaitServiceFragment extends BaseFragment implements OnRefresh
     private OfferServiceAdapter adapter;
     private List<OfferServiceEntity.ServiceOrderListBean> serviceOrderList=new ArrayList<>();
     @Override
-    protected int bindLayout() {
-        return R.layout.wb_offer_await_layout;
+    protected void onCreateViewLazy(Bundle savedInstanceState) {
+        super.onCreateViewLazy(savedInstanceState);
+        setContentView(R.layout.wb_offer_await_layout);
+        initView();
     }
 
-    @Override
-    protected void initInjector() {
 
-    }
-
-    @Override
-    public void initData(Bundle bundle) {
-
-    }
-
-    @Override
-    public void initView(Bundle savedInstanceState, View view) {
+    public void initView() {
         adapter=new OfferServiceAdapter();
         adapter.setOnItemClickListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, VERTICAL));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(context, VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
         initRefreshView();
     }
 
-    @Override
-    public void doBusiness() {
-
-    }
     private void initRefreshView() {
         mRefreshLayout.autoRefresh();
         mRefreshLayout.setOnRefreshListener(this);
@@ -92,7 +81,7 @@ public class OfferAwaitServiceFragment extends BaseFragment implements OnRefresh
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mActivity).getStationInfo().getStationId());
+        params.put("stationId", UserLocalData.getUserInfo(context).getStationInfo().getStationId());
         params.put("orderStatus", 1);
         params.put("pageSize", 20);
         params.put("currentPageNum", pageNum);//
@@ -102,7 +91,7 @@ public class OfferAwaitServiceFragment extends BaseFragment implements OnRefresh
 
                     @Override
                     public void onError(ApiException e) {
-                        Toast.makeText(mActivity,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                         mRefreshLayout.finishLoadmore();
                     }
 
@@ -119,7 +108,7 @@ public class OfferAwaitServiceFragment extends BaseFragment implements OnRefresh
     public void onRefresh(RefreshLayout refreshlayout) {
         pageNum = 1;
         final Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(mActivity).getStationInfo().getStationId());
+        params.put("stationId", UserLocalData.getUserInfo(context).getStationInfo().getStationId());
         params.put("orderStatus", 1);
         params.put("pageSize", 20);
         params.put("currentPageNum", 1);//
@@ -130,7 +119,7 @@ public class OfferAwaitServiceFragment extends BaseFragment implements OnRefresh
 
                     @Override
                     public void onError(ApiException e) {
-                        Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         mRefreshLayout.finishLoadmore();
                     }
 

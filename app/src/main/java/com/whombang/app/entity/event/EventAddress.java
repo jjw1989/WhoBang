@@ -8,10 +8,11 @@ public class EventAddress {
     public String stationName;
     public String stationAddress;
     public String stationPhone;
-
-    public EventAddress(String stationName, String stationAddress, String stationPhone) {
+    public int stationId;
+    public EventAddress(String stationName, String stationAddress, String stationPhone,int stationId) {
         this.stationName = stationName;
         this.stationAddress = stationAddress;
         this.stationPhone = stationPhone;
+        this.stationId=stationId;
     }
 }

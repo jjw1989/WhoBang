@@ -30,10 +30,10 @@ public class VoicePresenter {
         this.activity=activity;
     }
 
-    public void sendTaskSerivce(String individuationServiceDesc,String address,String phone,String name){
+    public void sendTaskSerivce(String individuationServiceDesc,String address,String phone,String name,int stationId){
         Map<String, Object> params = new HashMap<>();
         params.put("userId", UserLocalData.getUserInfo(activity).getUserInfo().getUserId());
-        params.put("stationId", UserLocalData.getUserInfo(activity).getStationInfo().getStationId());//选择返回的id
+        params.put("stationId", stationId);//选择返回的id
         params.put("individuationServiceDesc", individuationServiceDesc);
         params.put("contact", phone);
         params.put("userInvitationUserId", UserLocalData.getUserInfo(activity).getStationManagerInfo().getStationId());//登录默认id

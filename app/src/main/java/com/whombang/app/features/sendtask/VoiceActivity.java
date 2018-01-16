@@ -97,6 +97,7 @@ public class VoiceActivity extends BaseActivity {
     String address="";
     String phone="";
     String name="";
+    int stationId;
     @Override
     public void initData(Bundle bundle) {
 
@@ -120,7 +121,7 @@ public class VoiceActivity extends BaseActivity {
             public void performAction(View view) {
                 if (!TextUtils.isEmpty(address)) {
                     if (!TextUtils.isEmpty(mResultText.getText().toString())) {
-                        presenter.sendTaskSerivce(mResultText.getText().toString(), address,phone,name);
+                        presenter.sendTaskSerivce(mResultText.getText().toString(), address,phone,name,stationId);
                     }else{
                         Toast.makeText(mContext,"请添加内容",Toast.LENGTH_SHORT).show();
                     }
@@ -429,12 +430,14 @@ public class VoiceActivity extends BaseActivity {
     }
 
     private void updateStationView() {
+        stationId=UserLocalData.getUserInfo(mContext).getStationInfo().getStationId();
         tvStationName.setText("收货人："+UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerName());
         tvStationAddress.setText( "站点详情地址："+UserLocalData.getUserInfo(mContext).getStationInfo().getStationAddress());
         tvStationPhone.setText(UserLocalData.getUserInfo(mContext).getStationManagerInfo().getStationManagerTel());
     }
     @Subscribe
     public void updateMapStation(EventAddress eventAddress) {
+        stationId=eventAddress.stationId;
         tvStationName.setText("收货人："+eventAddress.stationName);
         tvStationAddress.setText( "站点详情地址："+eventAddress.stationAddress);
         tvStationPhone.setText(eventAddress.stationPhone);

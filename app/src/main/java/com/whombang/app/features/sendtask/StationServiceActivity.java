@@ -193,9 +193,8 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
                 btnSwitch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EventAddress eventAddress=new EventAddress(item.getStationName(),item.getStationAddress(),item.getStationManagerTel());
+                        EventAddress eventAddress = new EventAddress(item.getStationName(), item.getStationAddress(), item.getStationManagerTel(), item.getStationId());
                         EventBus.getDefault().post(eventAddress);
-                       // setResult(RESULT_OK);
                         finish();
                     }
                 });
@@ -290,6 +289,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             markerInfo.setStationName(item.getStationManagerName());
             markerInfo.setStationAddress(item.getStationAddress());
             markerInfo.setStationManagerTel(item.getStationManagerTel());
+            markerInfo.setStationId(item.getStationId());
             markerInfoList.add(markerInfo);
         }
         List<MarkerItem> markerItemLists = markerItemLogic(markerInfoList);
@@ -311,6 +311,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
             markerItem.setStationName(markerInfo.getStationName());
             markerItem.setStationAddress(markerInfo.getStationAddress());
             markerItem.setStationManagerTel(markerInfo.getStationManagerTel());
+            markerItem.setStationId(markerInfo.getStationId());
             items.add(markerItem);
             mMarkerItemMap.put(i, markerItem);
             builder.include(markerItem.getPosition());
@@ -332,6 +333,7 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
         private String stationName;
         private String stationAddress;
         private String stationManagerTel;
+        private int stationId;
 
         public MarkerItem(LatLng latLng) {
             mPosition = latLng;
@@ -380,6 +382,14 @@ public class StationServiceActivity extends BaseActivity implements AMapLocation
 
         public void setStationManagerTel(String stationManagerTel) {
             this.stationManagerTel = stationManagerTel;
+        }
+
+        public int getStationId() {
+            return stationId;
+        }
+
+        public void setStationId(int stationId) {
+            this.stationId = stationId;
         }
 
         @Override

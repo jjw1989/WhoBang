@@ -14,7 +14,7 @@ public class MarkerInfo {
     private String stationName;
     private String stationAddress;
     private String stationManagerTel;
-
+    private int stationId;
     public String getMarkerId() {
         return markerId;
     }
@@ -77,5 +77,13 @@ public class MarkerInfo {
 
     public void setStationManagerTel(String stationManagerTel) {
         this.stationManagerTel = stationManagerTel;
+    }
+
+    public int getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(int stationId) {
+        this.stationId = stationId;
     }
 }
