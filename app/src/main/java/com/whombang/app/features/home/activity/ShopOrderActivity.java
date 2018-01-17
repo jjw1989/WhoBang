@@ -32,6 +32,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -175,7 +176,8 @@ public class ShopOrderActivity extends BaseActivity {
             @Override
             public void onAddSuccess(int count) {
                 goodsGroupSellOrderAmount = count;
-                tvTotalPrices.setText("总价："+goodsGroupSellPrice*goodsGroupSellOrderAmount);
+                DecimalFormat df   =new   DecimalFormat("#.00");
+                tvTotalPrices.setText("总价："+  df.format(goodsGroupSellPrice*goodsGroupSellOrderAmount));
             }
 
             @Override
@@ -190,7 +192,8 @@ public class ShopOrderActivity extends BaseActivity {
                     animShopButton.setCount(1);
                     goodsGroupSellOrderAmount=1;
                 }
-                tvTotalPrices.setText("总价："+goodsGroupSellPrice*goodsGroupSellOrderAmount);
+                DecimalFormat df   =new   DecimalFormat("#.00");
+                tvTotalPrices.setText("总价："+ df.format(goodsGroupSellPrice*goodsGroupSellOrderAmount));
             }
 
             @Override

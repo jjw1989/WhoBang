@@ -191,7 +191,7 @@ public class GoodsInfoFragment extends BaseFragment implements SlideDetailsLayou
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                Toast.makeText(mActivity, "banner点击了" + position, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(mActivity, "banner点击了" + position, Toast.LENGTH_SHORT).show();
             }
         });
     }

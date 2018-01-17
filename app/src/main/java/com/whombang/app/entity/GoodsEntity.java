@@ -74,8 +74,8 @@ public class GoodsEntity {
             public String imageUrl;
             public String clickUrl;
             public String index;
-            public String jumpType;
-            public String jumpId;
+            public int jumpType;
+            public int jumpId;
             public int originalPrice;
             public double sellPrice;
             public String sellUnit;

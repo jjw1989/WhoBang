@@ -235,10 +235,10 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener, OnL
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
-            Log.i("wwww","城市="+aMapLocation.getCity());
-            Log.i("wwww","唯独="+aMapLocation.getLatitude());
-            Log.i("wwww","精度="+aMapLocation.getLongitude());
-            Log.i("wwww","地址="+aMapLocation.getAddress());
+//            Log.i("wwww","城市="+aMapLocation.getCity());
+//            Log.i("wwww","唯独="+aMapLocation.getLatitude());
+//            Log.i("wwww","精度="+aMapLocation.getLongitude());
+//            Log.i("wwww","地址="+aMapLocation.getAddress());
 
             tvAddress.setText(aMapLocation.getCity());
         }

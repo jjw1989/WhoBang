@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.whombang.app.R;
 import com.whombang.app.common.baseadapter.BaseMultiItemQuickAdapter;
 import com.whombang.app.common.baseadapter.BaseQuickAdapter;
@@ -89,7 +90,7 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
 
     }
 
-    private void bindAnnouncementData(BaseViewHolder helper, GoodsEntity.DataBean item, int position) {
+    private void bindAnnouncementData(BaseViewHolder helper, final GoodsEntity.DataBean item, int position) {
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0; i < item.itemContentList.size(); i++) {
             arrayList.add(item.itemContentList.get(i).imageUrl);
@@ -118,7 +119,14 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                Toast.makeText(mContext, "banner点击了" + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "banner点击了" + position, Toast.LENGTH_SHORT).show();
+                if (item.itemContentList.get(position).jumpType==1){//内联
+                    ARouter.getInstance().build("/jump/web").withString("url",item.itemContentList.get(position).clickUrl).navigation(mContext);
+                }else if (item.itemContentList.get(position).jumpType==2) {//外链
+                    ARouter.getInstance().build("/jump/web").withString("url",item.itemContentList.get(position).clickUrl).navigation(mContext);
+                }else {
+                    ARouter.getInstance().build("/shop/details").withInt("goodsSellId", item.itemContentList.get(position).jumpId).navigation(mContext);
+                }
             }
         });
     }
@@ -159,7 +167,14 @@ public class HomeMultipleRecycleAdapter extends BaseMultiItemQuickAdapter<GoodsE
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                Toast.makeText(mContext, "banner点击了" + position, Toast.LENGTH_SHORT).show();
+                if (item.itemContentList.get(position).jumpType==1){//内联
+                    ARouter.getInstance().build("/jump/web").withString("url",item.itemContentList.get(position).clickUrl).navigation(mContext);
+                }else if (item.itemContentList.get(position).jumpType==2) {//外链
+                    ARouter.getInstance().build("/jump/web").withString("url",item.itemContentList.get(position).clickUrl).navigation(mContext);
+                }else {
+                    ARouter.getInstance().build("/shop/details").withInt("goodsSellId", item.itemContentList.get(position).jumpId).navigation(mContext);
+                }
+
             }
         });
     }
