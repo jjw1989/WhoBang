@@ -30,6 +30,5 @@ public class GroudBookAdapter extends BaseQuickAdapter<GroudBookEntity.GoodsInfo
         helper.setText(R.id.tv_total_prices,"共"+item.getAmount()+"件商品 合计：￥"+item.getSumPrice());
         helper.setText(R.id.tv_goods_des,item.getGroupingDes());
      //   helper.setText(R.id.tv_goods_des,item.)
-        Log.i("wwww", "convert: "+position);
     }
 }

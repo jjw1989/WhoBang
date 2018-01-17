@@ -106,9 +106,11 @@ public class AddServerActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    showPhone = 1;
-                } else {
                     showPhone = 2;
+                    Log.i("qazx", "onCheckedChanged: "+showPhone);
+                } else {
+                    showPhone = 1;
+                    Log.i("qazx", "onCheckedChanged: "+showPhone);
                 }
             }
         });

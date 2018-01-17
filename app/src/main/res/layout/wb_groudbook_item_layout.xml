@@ -18,7 +18,7 @@
         <RelativeLayout
             android:id="@+id/rlt_top"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -49,10 +49,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/tv_station_name"
-                android:layout_marginEnd="11dp"
-                android:layout_marginRight="11dp"
+                android:layout_below="@+id/tv_station_name"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:text="服务状态"
+                android:layout_marginBottom="5dp"
                 android:textColor="@color/orange1"
                 android:textSize="16sp" />
         </RelativeLayout>

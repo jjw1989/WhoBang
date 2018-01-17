@@ -88,7 +88,7 @@ public class ShopOrderActivity extends BaseActivity {
     int goodsGroupSellId;
     double goodsGroupSellPrice;
     int goodsGroupSellOrderAmount=1;
-    int goodsGroupSellOrderDeliverMode;
+    int goodsGroupSellOrderDeliverMode=2;
     String goodsGroupSellReceiverTel = "";
     String goodsGroupSellReceiverAddress = "";
     String goodsGroupSellReceiverName = "";
@@ -337,8 +337,8 @@ public class ShopOrderActivity extends BaseActivity {
         stationId=eventAddress.stationId;
         goodsGroupSellStationMasterName=eventAddress.stationName;
         goodsGroupSellStationTel=eventAddress.stationPhone;
-        tvStationName.setText("收货人："+eventAddress.stationName);
-        tvStationAddress.setText( "站点详情地址："+eventAddress.stationAddress);
+        tvStationName.setText("站主姓名："+eventAddress.stationName);
+        tvStationAddress.setText( "站主地址："+eventAddress.stationAddress);
         tvStationPhone.setText(eventAddress.stationPhone);
     }
     @Override
