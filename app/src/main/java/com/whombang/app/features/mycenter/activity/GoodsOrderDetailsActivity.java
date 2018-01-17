@@ -123,7 +123,6 @@ public class GoodsOrderDetailsActivity extends BaseActivity {
         tvTotalPrices.setText("共" + entity.getGoodsGroupSellOrderAmount() + "件商品 合计：￥" + entity.getGoodsGroupSellPayTotalMoney());
         tvOrderCode.setText("订单编号:" + entity.getOrderId());
         tvOrderTime.setText("下单时间:" + entity.getGoodsGroupSellOrderTime());
-        Log.i("qazxc", "upView: ="+entity.getGoodsGroupSellOrderStatus());
         if (entity.getGoodsGroupSellOrderStatus() == 1) {
             btnCancel.setText("取消订单");
         } else if (entity.getGoodsGroupSellOrderStatus() == 8) {

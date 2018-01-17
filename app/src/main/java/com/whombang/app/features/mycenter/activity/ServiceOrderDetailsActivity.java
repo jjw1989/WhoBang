@@ -70,8 +70,6 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
     public void initData(Bundle bundle) {
         serviceOrderId = bundle.getString("serviceOrderId", "");
         userId=bundle.getString("userId","");
-        Log.i("wwww", "initData: " + serviceOrderId);
-
     }
 
     @Override
@@ -85,11 +83,8 @@ public class ServiceOrderDetailsActivity extends BaseActivity {
      */
     private void requestOrderDetails() {
         final Map<String, Object> params = new HashMap<>();
-        Log.i("qwas", "requestOrderDetails:serviceOrderId= "+serviceOrderId);
-        Log.i("qwas", "requestOrderDetails:userId= "+userId);
         params.put("serviceOrderId", serviceOrderId);
         params.put("userId",userId);
-
         EasyHttp.post("getUserOrderServiceDetail")
                 .upJson(new JSONObject(params).toString())
                 .execute(new SimpleCallBack<ServiceDetailsEntity>() {

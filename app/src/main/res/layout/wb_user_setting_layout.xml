@@ -208,6 +208,7 @@
         android:id="@+id/rlt_cache"
         android:layout_width="match_parent"
         android:background="@color/white"
+        android:visibility="gone"
         android:layout_height="50dp">
 
         <TextView

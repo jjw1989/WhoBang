@@ -225,7 +225,7 @@ public class ShopOrderActivity extends BaseActivity {
             return;
         }
         Map<String, Object> params = new HashMap<>();
-        params.put("stationId", UserLocalData.getUserInfo(this).getStationInfo().getStationId());
+        params.put("stationId", stationId);
         params.put("userId", UserLocalData.getUserInfo(this).getUserInfo().getUserId());
         params.put("goodsGroupSellId", goodsGroupSellId);
         params.put("goodsGroupSellOrderAmount", goodsGroupSellOrderAmount);

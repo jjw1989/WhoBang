@@ -121,7 +121,7 @@ public class MyServiceOrderDetailsActivity extends BaseActivity {
         tvAddress.setText("服务需求者地址：" + entity.getCurrentLocation());
         tvConsigneePhone.setText(entity.getContact());
 
-        tvStationName.setText("站主名称：" + entity.getStationName());
+        tvStationName.setText("站点名称：" + entity.getStationName());
         tvServiceNeed.setText("服务需求：" + entity.getIndividuationServiceDesc());
         tvOrderCode.setText("订单编号:" + entity.getOrderId());
         tvOrderTime.setText("下单时间:" + entity.getIndividuationServiceAddTime());
