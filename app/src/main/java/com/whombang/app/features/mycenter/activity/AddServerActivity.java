@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.whombang.app.R;
 import com.whombang.app.common.base.BaseActivity;
+import com.whombang.app.common.entity.BaseEntity;
 import com.whombang.app.common.net.EasyHttp;
 import com.whombang.app.common.net.callback.SimpleCallBack;
 import com.whombang.app.common.net.exception.ApiException;
@@ -102,15 +103,15 @@ public class AddServerActivity extends BaseActivity {
             }
         });
         initTagView();
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.i("qazx", "onCheckedChanged: ="+isChecked);
                 if (isChecked) {
-                    showPhone = 2;
-                    Log.i("qazx", "onCheckedChanged: "+showPhone);
-                } else {
                     showPhone = 1;
-                    Log.i("qazx", "onCheckedChanged: "+showPhone);
+                } else {
+                    showPhone = 2;
                 }
             }
         });
@@ -160,7 +161,7 @@ public class AddServerActivity extends BaseActivity {
         params.put("withinPhoneList", showPhone);
         EasyHttp.post("addServiceProviderUserInfo")
                 .upJson(new JSONObject(params).toString())
-                .execute(new SimpleCallBack<String>() {
+                .execute(new SimpleCallBack<BaseEntity>() {
 
                     @Override
                     public void onError(ApiException e) {
@@ -168,8 +169,8 @@ public class AddServerActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onSuccess(String entity) {
-                        Log.i("www", "data=" + entity);
+                    public void onSuccess(BaseEntity entity) {
+                        Toast.makeText(mContext,"服务者添加成功",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

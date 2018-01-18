@@ -42,6 +42,13 @@
                 android:layout_toRightOf="@+id/imageView11"
                 android:text="站主名字"
                 android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlt_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlt_top">
 
             <TextView
                 android:id="@+id/tv_service_status"
@@ -49,11 +56,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/tv_station_name"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:text="服务状态"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/orange1"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -61,8 +68,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:layout_below="@+id/rlt_top">
+            android:layout_below="@+id/rlt_center"
+            android:layout_marginBottom="@dimen/dp_10">
 
             <com.whombang.app.common.view.imageview.ExpandImageView
                 android:id="@+id/img_goods"
